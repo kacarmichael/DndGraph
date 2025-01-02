@@ -1,0 +1,11 @@
+C:\Users\kacar\RiderProjects\DnD_CA\DnD.Infrastructure\bin\Debug\net9.0\DnD.Infrastructure.deps.json
+C:\Users\kacar\RiderProjects\DnD_CA\DnD.Infrastructure\bin\Debug\net9.0\DnD.Infrastructure.dll
+C:\Users\kacar\RiderProjects\DnD_CA\DnD.Infrastructure\bin\Debug\net9.0\DnD.Infrastructure.pdb
+C:\Users\kacar\RiderProjects\DnD_CA\DnD.Infrastructure\obj\Debug\net9.0\DnD.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kacar\RiderProjects\DnD_CA\DnD.Infrastructure\obj\Debug\net9.0\DnD.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\kacar\RiderProjects\DnD_CA\DnD.Infrastructure\obj\Debug\net9.0\DnD.Infrastructure.AssemblyInfo.cs
+C:\Users\kacar\RiderProjects\DnD_CA\DnD.Infrastructure\obj\Debug\net9.0\DnD.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\kacar\RiderProjects\DnD_CA\DnD.Infrastructure\obj\Debug\net9.0\DnD.Infrastructure.dll
+C:\Users\kacar\RiderProjects\DnD_CA\DnD.Infrastructure\obj\Debug\net9.0\refint\DnD.Infrastructure.dll
+C:\Users\kacar\RiderProjects\DnD_CA\DnD.Infrastructure\obj\Debug\net9.0\DnD.Infrastructure.pdb
+C:\Users\kacar\RiderProjects\DnD_CA\DnD.Infrastructure\obj\Debug\net9.0\ref\DnD.Infrastructure.dll

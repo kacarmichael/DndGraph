@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\DnD.Web.props" />
+</Project>

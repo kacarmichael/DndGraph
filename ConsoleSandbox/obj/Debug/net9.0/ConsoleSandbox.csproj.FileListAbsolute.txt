@@ -1,0 +1,14 @@
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\ConsoleSandbox.exe
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\ConsoleSandbox.deps.json
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\ConsoleSandbox.runtimeconfig.json
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\ConsoleSandbox.dll
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\ConsoleSandbox.pdb
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandbox.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandbox.AssemblyInfoInputs.cache
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandbox.AssemblyInfo.cs
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandbox.csproj.CoreCompileInputs.cache
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandbox.dll
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\refint\ConsoleSandbox.dll
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandbox.pdb
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandbox.genruntimeconfig.cache
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ref\ConsoleSandbox.dll
