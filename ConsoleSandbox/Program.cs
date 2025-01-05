@@ -1,77 +1,78 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System.ComponentModel;
+using ConsoleSandbox.Characters;
+using ConsoleSandbox.Rolls;
 
 namespace ConsoleSandbox;
 
-public class Dice
+internal class Program
 {
-    private readonly int _numSides;
-
-    public Dice(int numSides)
+    //Scenario: Theodred rolls a wisdom save, and follows up with an eldritch blast
+    public static void Main(string[] args)
     {
-        if (Constants.DiceSideValues.Contains(numSides))
+        Character theodred = new Character("Theodred", 6,
+            new CharacterStats(
+                10,
+                15,
+                8,
+                16,
+                16,
+                17,
+                2,
+                3,
+                6,
+                3,
+                3,
+                3,
+                3,
+                6,
+                6,
+                3,
+                3,
+                3,
+                3,
+                3,
+                6,
+                2,
+                2,
+                6,
+                [
+                    "Wisdom",
+                    "Charisma",
+                    "Arcana",
+                    "Athletics",
+                    "Intimidation",
+                    "Investigation",
+                    "Religion",
+                    "Survival"
+                ]),
+            Constants.Classes["Warlock"]);
+        int wis_dc = 10;
+        int wisSave = theodred.SavingThrow("Wisdom");
+        if (wisSave >= wis_dc)
         {
-            _numSides = numSides;
+            Console.WriteLine($"Theodred passes a DC 10 wisdom save with a {wisSave}!");
         }
         else
         {
-            throw new ArgumentException();
+            Console.WriteLine($"Theodred fails a DC 10 wisdom save with a {wisSave}!");
         }
-    }
-    
-    public int Roll() => new Random().Next(1, _numSides + 1);
-}
 
-public class DiceSet
-{
-    public int NumDice { get; set; }
-    public int NumSides { get; set; }
-    
-    public DiceSet(int numDice, int numSides)
-    {
-        NumDice = numDice;
-        NumSides = numSides;
-    }
-    
-    public int Roll()
-    {
-        var total = 0;
-        for (int i = 0; i < NumDice; i++)
+        Console.WriteLine("Theodred casts an eldritch blast (3 blasts)");
+        int ac = 15;
+        int numBlasts = 3;
+        for (int i = 0; i < numBlasts; i++)
         {
-            total += new Dice(NumSides).Roll();
-        }
-        return total;
-    }
-}
-
-public class DiceSimulation
-{
-    public DiceSet SimDice { get; set; }
-    
-    public Dictionary<int, int> Results { get; set; } = new Dictionary<int, int>();
-    
-    public DiceSimulation(DiceSet simDice, int trials)
-    {
-        SimDice = simDice;
-        for (int i = 0; i < trials; i++)
-        {
-            int res = SimDice.Roll();
-            if (!Results.TryAdd(res, 1))
+            int attackRoll = theodred.SpellAttack();
+            if (attackRoll >= ac)
             {
-                Results[res] += 1;
+                int dmg = new DamageRoll(1, 10, 3).Roll();
+                Console.WriteLine($"Theodred hits for {dmg} damage!");
+            }
+            else
+            {
+                Console.WriteLine("Miss");
             }
         }
-    }
-    
-    public string GetResults() => string.Join(", ", Results);
-}
-
-internal class Program
-{
-    public static void Main(string[] args)
-    {
-        DiceSimulation sim = new DiceSimulation(new DiceSet(4, 12), 100000);
-        Console.WriteLine(sim.GetResults());
     }
 }

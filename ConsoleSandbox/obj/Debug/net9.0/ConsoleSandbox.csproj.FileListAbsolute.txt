@@ -12,3 +12,4 @@ C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\refint\Conso
 C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandbox.pdb
 C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandbox.genruntimeconfig.cache
 C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ref\ConsoleSandbox.dll
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandbox.sourcelink.json
