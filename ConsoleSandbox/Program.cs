@@ -1,7 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using ConsoleSandbox.Characters;
-using ConsoleSandbox.Rolls;
+using Dnd.Core;
+using Dnd.Core.Characters;
+using Dnd.Core.Rolls;
 
 namespace ConsoleSandbox;
 

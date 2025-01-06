@@ -1,0 +1,8 @@
+C:\Users\kacar\RiderProjects\DnD_CA\Dnd.Roll.API\obj\Debug\net9.0\Dnd.Roll.API.csproj.AssemblyReference.cache
+C:\Users\kacar\RiderProjects\DnD_CA\Dnd.Roll.API\obj\Debug\net9.0\Dnd.Roll.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kacar\RiderProjects\DnD_CA\Dnd.Roll.API\obj\Debug\net9.0\Dnd.Roll.API.AssemblyInfoInputs.cache
+C:\Users\kacar\RiderProjects\DnD_CA\Dnd.Roll.API\obj\Debug\net9.0\Dnd.Roll.API.AssemblyInfo.cs
+C:\Users\kacar\RiderProjects\DnD_CA\Dnd.Roll.API\obj\Debug\net9.0\Dnd.Roll.API.csproj.CoreCompileInputs.cache
+C:\Users\kacar\RiderProjects\DnD_CA\Dnd.Roll.API\obj\Debug\net9.0\Dnd.Roll.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\kacar\RiderProjects\DnD_CA\Dnd.Roll.API\obj\Debug\net9.0\Dnd.Roll.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\kacar\RiderProjects\DnD_CA\Dnd.Roll.API\obj\Debug\net9.0\Dnd.Roll.API.sourcelink.json

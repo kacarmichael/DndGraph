@@ -13,3 +13,7 @@ C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandb
 C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandbox.genruntimeconfig.cache
 C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ref\ConsoleSandbox.dll
 C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandbox.sourcelink.json
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandbox.csproj.AssemblyReference.cache
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Dnd.Core.dll
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Dnd.Core.pdb
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleS.2CE08E87.Up2Date
