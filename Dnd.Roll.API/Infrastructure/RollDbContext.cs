@@ -1,5 +1,4 @@
-﻿using Dnd.Roll.API.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Dnd.Roll.API.Infrastructure;
 
@@ -9,5 +8,5 @@ public class RollDbContext : DbContext
     {
     }
 
-    public DbSet<DiceRoll> Rolls { get; set; } = null!;
+    //public DbSet<DiceRollDto> Rolls { get; set; } = null!;
 }

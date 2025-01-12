@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dnd.Core\Dnd.Core.csproj"/>
+        <ProjectReference Include="..\Dnd.Roll.API\Dnd.Roll.API.csproj"/>
     </ItemGroup>
 
 </Project>

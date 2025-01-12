@@ -17,3 +17,17 @@ C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleSandb
 C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Dnd.Core.dll
 C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Dnd.Core.pdb
 C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\obj\Debug\net9.0\ConsoleS.2CE08E87.Up2Date
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Dnd.Roll.API.deps.json
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Dnd.Roll.API.runtimeconfig.json
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\appsettings.Development.json
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\appsettings.json
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Dnd.Roll.API.staticwebassets.endpoints.json
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Dnd.Roll.API.exe
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Microsoft.OpenApi.dll
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Dnd.Roll.API.dll
+C:\Users\kacar\RiderProjects\DnD_CA\ConsoleSandbox\bin\Debug\net9.0\Dnd.Roll.API.pdb

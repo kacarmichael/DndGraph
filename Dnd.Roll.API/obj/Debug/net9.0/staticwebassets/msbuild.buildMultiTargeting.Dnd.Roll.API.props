@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Dnd.Roll.API.props" />
+</Project>
