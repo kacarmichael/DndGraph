@@ -1,3 +1,4 @@
+using Dnd.Roll.API.Extensions;
 using Dnd.Roll.API.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,10 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
 
-builder.Services.AddDbContext<RollDbContext>(options =>
+builder.Services.AddDbContext<CharacterDbContext>(options =>
     options.UseInMemoryDatabase("RollDb"));
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -22,7 +25,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
+
+app.Services.SaveSwaggerJson();
+
+app.UseSwagger();
+
+app.UseSwaggerUI();
 
 app.MapControllers();
 

@@ -2,17 +2,22 @@
 
 public class CharacterStats
 {
-    public Dictionary<string, int> AbilityScores { get; set; }
+    
+    public Character? Character { get; set; }
+    public Dictionary<string, int>? AbilityScores { get; set; }
 
-    public Dictionary<string, int> AbilityModifiers { get; set; }
-    public Dictionary<string, int> SkillModifiers { get; set; }
+    public Dictionary<string, int>? AbilityModifiers { get; set; }
+    
+    public Dictionary<string, int>? SkillModifiers { get; set; }
 
-    public List<string> Proficiencies { get; set; }
+    public List<string>? Proficiencies { get; set; }
+
+    public CharacterStats() { }
 
     public CharacterStats(int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma,
         int acrobatics, int animalHandling, int arcana, int athletics, int deception, int history, int insight,
         int intimidation, int investigation, int medicine, int nature, int perception, int performance, int persuasion,
-        int religion, int sleightOfHand, int stealth, int survival, List<string> proficiencies)
+        int religion, int sleightOfHand, int stealth, int survival, List<string>? proficiencies)
     {
         AbilityScores = new Dictionary<string, int>()
         {

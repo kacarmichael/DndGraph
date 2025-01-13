@@ -2,11 +2,18 @@
 
 public class Class
 {
-    public string SpellcastingAbility { get; set; }
+    
+    public int Id { get; set; }
+    
+    public string? SpellcastingAbility { get; set; }
 
-    public string Name { get; set; }
+    public string? Name { get; set; }
+    
+    public List<Character>? Characters { get; set; }
 
-    public Class(string spellcastingAbility, string name)
+    public Class() { }
+
+    public Class(string? spellcastingAbility, string? name, List<Character>? characters)
     {
         Name = name;
         if (!Constants.AbilityNames.Contains(spellcastingAbility))
@@ -15,5 +22,7 @@ public class Class
         }
 
         SpellcastingAbility = spellcastingAbility;
+        
+        Characters = characters;
     }
 }

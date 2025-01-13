@@ -1,6 +1,4 @@
-@Dnd.Roll.API_HostAddress = http://localhost:5218
-
-GET {{Dnd.Roll.API_HostAddress}}/weatherforecast/
+GET localhost:5218/api/Characters/
 Accept: application/json
 
 ###
