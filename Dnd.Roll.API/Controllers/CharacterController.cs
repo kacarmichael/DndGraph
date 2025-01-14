@@ -24,15 +24,17 @@ public class CharacterController : ControllerBase
     }
     
     [HttpGet("{id:int}")]
-    public async Task<IActionResult> GetCharacter(int id)
+    public async Task<ActionResult<CharacterResponseDto>> GetCharacter(int id)
     {
         var character = await _context.Characters.FirstOrDefaultAsync(x => x.Id == id);
-        return character == null ? NotFound() : Ok(character);                                          
+        return character == null ? NotFound() : Ok(new CharacterResponseDto(character));                                          
     }
     
     [HttpPost]
     public async Task<ActionResult<CharacterResponseDto>> PostCharacter([FromBody] CharacterRequestDto req)
     {
+        if (await _context.Characters.FirstOrDefaultAsync(x => x.Name == req.Name) != null)
+            return BadRequest("Character name already exists");
         Character c = req.DtoToCharacter();
         _context.Characters.Add(c);
         await _context.SaveChangesAsync();
