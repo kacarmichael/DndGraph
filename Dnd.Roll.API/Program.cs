@@ -35,4 +35,11 @@ app.UseSwaggerUI();
 
 app.MapControllers();
 
+// using (var scope = app.Services.CreateScope())
+// {
+    // var dbContext = scope.ServiceProvider.GetService<CharacterDbContext>();
+    // dbContext.Database.EnsureCreated();
+    // dbContext.Populate();
+// }
+
 app.Run();

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Dnd.Roll.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d298b32f19bf143770528d784b1dce498444479d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a2ec73d867de7583ad24ffe0f28e8daf11d3d70f")]
 [assembly: System.Reflection.AssemblyProductAttribute("Dnd.Roll.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Dnd.Roll.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

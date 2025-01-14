@@ -3,7 +3,6 @@
 public class CharacterStats
 {
     
-    public Character? Character { get; set; }
     public Dictionary<string, int>? AbilityScores { get; set; }
 
     public Dictionary<string, int>? AbilityModifiers { get; set; }

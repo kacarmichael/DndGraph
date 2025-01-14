@@ -82,3 +82,4 @@ C:\Users\Aaron\RiderProjects\DnD_CA\Dnd.Roll.API\obj\Debug\net9.0\ref\Dnd.Roll.A
 C:\Users\Aaron\RiderProjects\DnD_CA\Dnd.Roll.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Aaron\RiderProjects\DnD_CA\Dnd.Roll.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Aaron\RiderProjects\DnD_CA\Dnd.Roll.API\bin\Debug\net9.0\swagger.json
+C:\Users\Aaron\RiderProjects\DnD_CA\Dnd.Roll.API\bin\Debug\net9.0\characters.json

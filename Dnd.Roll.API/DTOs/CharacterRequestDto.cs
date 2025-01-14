@@ -1,0 +1,65 @@
+﻿using Dnd.Roll.API.Models.Characters;
+
+namespace Dnd.Roll.API.DTOs;
+
+public class CharacterRequestDto
+{
+    public Dictionary<string, int> AbilityScores { get; set; }
+    public Dictionary<string, int> SkillModifiers { get; set; }
+    
+    public List<string> Proficiencies { get; set; }
+    
+    public string Name { get; set; }
+    public Dictionary<string, int> Classes { get; set; }
+    public int Ac { get; set; }
+    
+    public int Level { get; set; }
+    
+    public CharacterRequestDto(Dictionary<string, int> abilityScores, 
+        Dictionary<string, int> skillModifiers, 
+        List<string> proficiencies, 
+        string name, 
+        Dictionary<string, int> classes, 
+        int ac)
+    {
+        AbilityScores = abilityScores;
+        SkillModifiers = skillModifiers;
+        Proficiencies =  proficiencies;
+        Name = name;
+        Classes = classes;
+        Ac = ac;
+        Level = classes.Values.Sum();
+    }
+    
+    public Character DtoToCharacter()
+    {
+        CharacterStats stats = new CharacterStats(
+            AbilityScores["Strength"],
+            AbilityScores["Dexterity"],
+            AbilityScores["Constitution"],
+            AbilityScores["Intelligence"],
+            AbilityScores["Wisdom"],
+            AbilityScores["Charisma"],
+            SkillModifiers["Acrobatics"],
+            SkillModifiers["AnimalHandling"],
+            SkillModifiers["Arcana"],
+            SkillModifiers["Athletics"],
+            SkillModifiers["Deception"],
+            SkillModifiers["History"],
+            SkillModifiers["Insight"],
+            SkillModifiers["Intimidation"],
+            SkillModifiers["Investigation"],
+            SkillModifiers["Medicine"],
+            SkillModifiers["Nature"],
+            SkillModifiers["Perception"],
+            SkillModifiers["Performance"],
+            SkillModifiers["Persuasion"],
+            SkillModifiers["Religion"],
+            SkillModifiers["SleightOfHand"],
+            SkillModifiers["Stealth"],
+            SkillModifiers["Survival"],
+            Proficiencies);
+        
+        return new Character(Name, Level, stats, Ac, Classes);
+    }
+}
