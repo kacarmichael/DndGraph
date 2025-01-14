@@ -1,19 +1,17 @@
-﻿namespace Dnd.Roll.API.Models.Characters;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
+namespace Dnd.Roll.API.Models.Characters;
+
+[NotMapped]
 public class Class
 {
-    
-    public int Id { get; set; }
-    
     public string? SpellcastingAbility { get; set; }
 
     public string? Name { get; set; }
-    
-    public List<Character>? Characters { get; set; }
 
     public Class() { }
 
-    public Class(string? spellcastingAbility, string? name, List<Character>? characters)
+    public Class(string? spellcastingAbility, string? name)
     {
         Name = name;
         if (!Constants.AbilityNames.Contains(spellcastingAbility))
@@ -22,7 +20,5 @@ public class Class
         }
 
         SpellcastingAbility = spellcastingAbility;
-        
-        Characters = characters;
     }
 }
