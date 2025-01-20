@@ -5,24 +5,28 @@ namespace Dnd.Roll.API.Models.Rolls;
 
 public class SpellAttackRoll : DiceRollBase
 {
-    public Character Roller { get; }
-    
-    public Class ClassUsed { get; }
+    public Class ClassUsed { get; set; }
 
-    public void Initialize() => Value = Roll();
+    public string RollType => "spellAttack";
+
+    private readonly DiceSet _diceSet;
+    
+    public SpellAttackRoll() { }
 
     public SpellAttackRoll(Character character, Class classUsed)
     {
         Roller = character;
         ClassUsed = classUsed;
-        Initialize();
+        Value = Roll();
+        _diceSet = new DiceSet(1, 20);
+        
     }
 
     public override string Describe() => "Spell Attack";
 
     public override int Roll()
     {
-        return new DiceSet(1, 20).Roll() + Roller.Stats.AbilityModifiers[ClassUsed.SpellcastingAbility] +
+        return _diceSet.Roll() + Roller.Stats.AbilityModifiers[ClassUsed.SpellcastingAbility] +
                Roller.ProficiencyModifier;
     }
 }

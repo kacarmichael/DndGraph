@@ -5,15 +5,19 @@ namespace Dnd.Roll.API.Models.Rolls;
 
 public class SavingThrowRoll : DiceRollBase
 {
-    public Character Roller { get; }
-    public string Ability { get; }
-    public void Initialize() => Value = Roll();
+    
+    public string Ability { get; set; }
 
-    public SavingThrowRoll(string Ability, Character character)
+    public SavingThrowRoll()
     {
-        Ability = Ability;
+    }
+
+    public SavingThrowRoll(string ability, Character character)
+    {
+        Ability = ability;
         Roller = character;
-        Initialize();
+        RollType = "savingThrow";
+        Value = Roll();
     }
 
     public override string Describe() => "Saving Throw";

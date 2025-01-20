@@ -5,15 +5,20 @@ namespace Dnd.Roll.API.Models.Rolls;
 
 public class AbilityCheckRoll : DiceRollBase
 {
-    public Character Roller { get; }
+    public Character Roller { get; set;  }
 
-    public string Ability { get; }
-    public void Initialize() => Value = Roll();
+    public string Ability { get; set;  }
+    
+    //public void Initialize() => Value = Roll();
+    
+    public AbilityCheckRoll() { }
 
     public AbilityCheckRoll(string ability, Character character)
     {
-        ability = ability;
+        Ability = ability;
         Roller = character;
+        RollType = "abilityCheck";
+        Value = Roll();
     }
 
     public override int Roll()

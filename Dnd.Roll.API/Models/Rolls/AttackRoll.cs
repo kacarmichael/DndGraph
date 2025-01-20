@@ -5,14 +5,18 @@ namespace Dnd.Roll.API.Models.Rolls;
 
 public class MeleeAttackRoll : DiceRollBase
 {
-    public Character Roller { get; }
+    //public void Initialize() => Value = Roll();
 
-    public void Initialize() => Value = Roll();
+    public MeleeAttackRoll()
+    {
+    }
 
     public MeleeAttackRoll(Character character)
     {
         Roller = character;
-        Initialize();
+        RollType = "attackRollMelee";
+        //Initialize();
+        Value = Roll();
     }
 
     public override int Roll()
@@ -25,14 +29,16 @@ public class MeleeAttackRoll : DiceRollBase
 
 public class RangedAttackRoll : DiceRollBase
 {
-    public Character Roller { get; }
-
-    public void Initialize() => Value = Roll();
+    //public void Initialize() => Value = Roll();
+    
+    public RangedAttackRoll() { }
 
     public RangedAttackRoll(Character character)
     {
         Roller = character;
-        Initialize();
+        RollType = "attackRollRanged";
+        //Initialize();
+        Value = Roll();
     }
 
     public override int Roll()
@@ -41,5 +47,5 @@ public class RangedAttackRoll : DiceRollBase
                Roller.ProficiencyModifier;
     }
 
-    public override string Describe() => Roller.Name + " Melee Attack";
+    public override string Describe() => Roller.Name + " Ranged Attack";
 }

@@ -5,11 +5,15 @@ namespace Dnd.Roll.API.Models.Rolls;
 
 public abstract class DiceRollBase
 {
+    
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
+    
     public Character? Roller { get; set; }
-    public int Value;
+    public int Value { get; set; }
+    
+    public string RollType { get; set; }
 
     protected DiceRollBase()
     {

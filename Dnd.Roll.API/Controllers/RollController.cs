@@ -1,7 +1,10 @@
 ﻿using Dnd.Roll.API.DTOs;
 using Dnd.Roll.API.Infrastructure;
 using Dnd.Roll.API.Models.Characters;
+using Dnd.Roll.API.Models.Rolls;
+using Dnd.Roll.API.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dnd.Roll.API.Controllers;
 
@@ -9,27 +12,17 @@ namespace Dnd.Roll.API.Controllers;
 [Route("api/[controller]")]
 public class RollController : ControllerBase
 {
-    private readonly RollDbContext _rollContext;
+    private readonly IRollRepository _rollRepository;
 
-    private readonly CharacterDbContext _characterContext;
-    
-    
-    public RollController(RollDbContext rollContext, CharacterDbContext characterContext)
+    public RollController(IRollRepository rollRepository)
     {
-        _rollContext = rollContext;
-        _characterContext = characterContext;
+        _rollRepository = rollRepository;
     }
-    
-    public Character IdToCharacter(int id) => _characterContext.Characters.FirstOrDefault(x => x.Id == id);
     
     [HttpPost]
     public async Task<ActionResult<RollResponseDto>> PostRoll([FromBody] RollRequestDto req)
     {
-        Character character = IdToCharacter(req.CharacterId ?? 0);
-        Roll roll = RollRequestDto.DtoToRoll(req, character);
-        _rollContext.Rolls.Add(roll);
-        await _rollContext.SaveChangesAsync();
-        RollResponseDto resp = new RollResponseDto(roll);
-        return Ok(resp);
+        await _rollRepository.AddRoll(req);
+        return NoContent();
     }
 }

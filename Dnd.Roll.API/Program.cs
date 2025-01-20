@@ -1,5 +1,6 @@
 using Dnd.Roll.API.Extensions;
 using Dnd.Roll.API.Infrastructure;
+using Dnd.Roll.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,8 +13,14 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<CharacterDbContext>(options =>
     options.UseInMemoryDatabase("RollDb"));
 
+builder.Services.AddDbContext<RollDbContext>(options =>
+    options.UseInMemoryDatabase("RollDb"));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddTransient<ICharacterRepository, CharacterRepository>();
+builder.Services.AddTransient<IRollRepository, RollRepository>();
 
 var app = builder.Build();
 

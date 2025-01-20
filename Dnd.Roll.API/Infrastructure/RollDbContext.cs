@@ -9,5 +9,17 @@ public class RollDbContext : DbContext
     {
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<DiceRollBase>()
+            .HasDiscriminator<string>("RollType")
+            .HasValue<AbilityCheckRoll>("abilityCheck")
+            .HasValue<SavingThrowRoll>("savingThrow")
+            .HasValue<MeleeAttackRoll>("attackRollMelee")
+            .HasValue<RangedAttackRoll>("attackRollRanged")
+            .HasValue<DamageRoll>("damageRoll")
+            .HasValue<SpellAttackRoll>("spellAttackRoll");
+    }
+
     public DbSet<DiceRollBase> Rolls { get; set; }
 }
