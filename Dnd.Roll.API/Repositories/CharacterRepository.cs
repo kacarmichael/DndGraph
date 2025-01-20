@@ -1,20 +1,26 @@
 ﻿using Dnd.Roll.API.Infrastructure;
 using Dnd.Roll.API.Models.Characters;
-using Microsoft.EntityFrameworkCore;
 
 namespace Dnd.Roll.API.Repositories;
 
 public class CharacterRepository : ICharacterRepository
 {
-    private readonly CharacterDbContext _characterContext;
+    private readonly CharacterDbContext _context;
 
-    public CharacterRepository(CharacterDbContext characterContext)
+    public CharacterRepository(CharacterDbContext context)
     {
-        _characterContext = characterContext;
+        _context = context;
     }
     
-    public async Task<Character> GetCharacterById(int id)
-    {
-        return await _characterContext.Characters.FirstOrDefaultAsync(x => x.Id == id) ?? null!;
-    }
+    public void AddCharacter(Character character) => _context.Characters.Add(character);
+    
+    public IEnumerable<Character> GetAllCharacters() => _context.Characters;
+    
+    public Character GetCharacter(int id) => _context.Characters.FirstOrDefault(x => x.Id == id);
+    
+    public void DeleteCharacter(int id) => _context.Characters.Remove(GetCharacter(id));
+    
+    public void UpdateCharacter(Character character) => _context.Characters.Update(character);
+    
+    
 }
