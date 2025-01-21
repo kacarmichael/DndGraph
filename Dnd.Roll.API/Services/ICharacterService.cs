@@ -6,5 +6,6 @@ public interface ICharacterService
 {
     IEnumerable<Character> GetAllCharacters();
     IEnumerable<Character> GetCurrentCharacters();
-    Character GetCharacterDetails(int id);
+    Character GetCharacterById(int id);
+    Class GetClassUsed(string className);
 }

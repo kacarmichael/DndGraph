@@ -4,7 +4,7 @@ public class DiceSimulation
 {
     public DiceSet SimDice { get; set; }
     public int Trials { get; set; }
-    public int DC { get; set; }
+    public int? DC { get; set; }
 
     public Dictionary<int, int> Results { get; set; } = new();
 

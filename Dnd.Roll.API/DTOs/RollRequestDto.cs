@@ -11,23 +11,14 @@ public class RollRequestDto
     public string? Ability { get; set; }
     
     public int? CharacterId { get; set; }
-
-    // public static DiceRollBase DtoToRoll(RollRequestDto req)
-    // {
-    //     switch (req.RollType)
-    //     {
-    //         case "abilityCheck":
-    //             return new AbilityCheckRoll(req.Ability, req.character);
-    //         case "savingThrow":
-    //             return new SavingThrowRoll(req.Ability, req.character);
-    //         case "attackRollMelee":
-    //             return new MeleeAttackRoll(req.character);
-    //         case "attackRollRanged":
-    //             return new RangedAttackRoll(req.character);
-    //         default:
-    //             throw new ArgumentException("Invalid Roll Type");
-    //     }
-    // }
+    
+    public int? Modifier { get; set; } 
+    
+    public int? NumDice { get; set; }
+    
+    public int? NumSides { get; set; }
+    
+    public string? ClassUsed { get; set; }
     
     [JsonIgnore]
     public Character? character { get; set; }

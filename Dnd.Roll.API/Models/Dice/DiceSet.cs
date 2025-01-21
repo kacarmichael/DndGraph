@@ -1,5 +1,7 @@
 ﻿namespace Dnd.Roll.API.Models.Dice;
 
+
+
 public class DiceSet
 {
     public int NumDice { get; set; }
@@ -16,7 +18,7 @@ public class DiceSet
         var total = 0;
         for (int i = 0; i < NumDice; i++)
         {
-            total += new Dice(NumSides).Roll();
+            total += Constants.DiceTypeSides[NumSides].Roll();
         }
 
         return total;

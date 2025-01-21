@@ -11,10 +11,12 @@ public class CharacterService : ICharacterService
     {
         _repository = repository;
     }
-    
-    public Character GetCharacterDetails(int id) => _repository.GetCharacter(id);
-    
+
+    public Character GetCharacterById(int id) => _repository.GetCharacter(id);
+
     public IEnumerable<Character> GetAllCharacters() => _repository.GetAllCharacters();
 
     public IEnumerable<Character> GetCurrentCharacters() => throw new NotImplementedException();
+    
+    public Class GetClassUsed(string className) => Constants.Classes[className];
 }
