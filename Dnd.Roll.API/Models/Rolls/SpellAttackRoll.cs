@@ -8,8 +8,6 @@ public class SpellAttackRoll : DiceRollBase
     public Class ClassUsed { get; set; }
 
     public string RollType => "spellAttack";
-
-    private readonly DiceSet _diceSet;
     
     public SpellAttackRoll() { }
 
@@ -18,7 +16,7 @@ public class SpellAttackRoll : DiceRollBase
         Roller = character;
         ClassUsed = classUsed;
         Value = Roll();
-        _diceSet = new DiceSet(1, 20);
+        DiceRolled = new DiceSet(1, 20);
         
     }
 
@@ -26,7 +24,7 @@ public class SpellAttackRoll : DiceRollBase
 
     public override int Roll()
     {
-        return _diceSet.Roll() + Roller.Stats.AbilityModifiers[ClassUsed.SpellcastingAbility] +
+        return DiceRolled.Roll() + Roller.Stats.AbilityModifiers[ClassUsed.SpellcastingAbility] +
                Roller.ProficiencyModifier;
     }
 }

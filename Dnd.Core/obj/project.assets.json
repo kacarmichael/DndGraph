@@ -8,23 +8,23 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Aaron\\.nuget\\packages\\": {},
+    "C:\\Users\\acarmichael\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Aaron\\RiderProjects\\DnD_CA\\Dnd.Core\\Dnd.Core.csproj",
+      "projectUniqueName": "C:\\Users\\acarmichael\\RiderProjects\\DnD_CA\\Dnd.Core\\Dnd.Core.csproj",
       "projectName": "Dnd.Core",
-      "projectPath": "C:\\Users\\Aaron\\RiderProjects\\DnD_CA\\Dnd.Core\\Dnd.Core.csproj",
-      "packagesPath": "C:\\Users\\Aaron\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Aaron\\RiderProjects\\DnD_CA\\Dnd.Core\\obj\\",
+      "projectPath": "C:\\Users\\acarmichael\\RiderProjects\\DnD_CA\\Dnd.Core\\Dnd.Core.csproj",
+      "packagesPath": "C:\\Users\\acarmichael\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\acarmichael\\RiderProjects\\DnD_CA\\Dnd.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Aaron\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\acarmichael\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -50,7 +50,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "all"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -71,7 +72,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\Aaron\\.dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\acarmichael\\.dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

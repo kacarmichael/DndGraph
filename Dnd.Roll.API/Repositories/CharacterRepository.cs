@@ -1,5 +1,8 @@
 ﻿using Dnd.Roll.API.Infrastructure;
 using Dnd.Roll.API.Models.Characters;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dnd.Roll.API.Repositories;
 
@@ -12,9 +15,17 @@ public class CharacterRepository : ICharacterRepository
         _context = context;
     }
 
-    public void AddCharacter(Character character) => _context.Characters.Add(character);
+    public async void AddCharacter(Character character)
+    {
+        _context.Characters.Add(character);
+        await _context.SaveChangesAsync();
+    }
 
-    public IEnumerable<Character> GetAllCharacters() => _context.Characters;
+    public async Task<IActionResult> GetAllCharacters()
+    {
+        //await _context.Characters.FirstOrDefaultAsync();
+        return ok(await _context.Characters.ToListAsync());
+    }
 
     public Character GetCharacter(int id) => _context.Characters.FirstOrDefault(x => x.Id == id);
 

@@ -18,6 +18,7 @@ public class SavingThrowRoll : DiceRollBase
         Roller = character;
         RollType = "savingThrow";
         Value = Roll();
+        DiceRolled = new DiceSet(1, 20);
     }
 
     public override string Describe() => "Saving Throw";

@@ -8,20 +8,22 @@ public class RollService : IRollService
 {
     private readonly ICharacterRepository _characterRepository;
     private readonly IRollRepository _rollRepository;
-    private readonly RollMapper _mapper;
+    private readonly IRollMapperService _rollMapperService;
 
-    public RollService(ICharacterRepository characterRepository, IRollRepository rollRepository, RollMapper mapper)
+    public RollService(ICharacterRepository characterRepository, IRollRepository rollRepository, IRollMapperService rollMapperService)
     {
         _characterRepository = characterRepository;
         _rollRepository = rollRepository;
-        _mapper = mapper;
+        _rollMapperService = rollMapperService;
     }
 
-    public void Roll(RollRequestDto req)
+    public RollResponseDto Roll(RollRequestDto req)
     {
         var character = _characterRepository.GetCharacter((int)req.CharacterId);
-        var roll = _mapper.Map(req);
+        var roll = _rollMapperService.Map(req);
         _rollRepository.AddRoll(roll);
+        var resp = _rollMapperService.Map(roll);
+        return resp;
     }
 
     public int Roll(int numSides)

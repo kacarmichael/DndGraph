@@ -10,16 +10,19 @@ namespace Dnd.Roll.API.Controllers;
 public class RollController : ControllerBase
 {
     private readonly IRollService _rollService;
+    //private readonly IRollMapperService _rollMapperService;
 
-    public RollController(IRollService rollService)
+    public RollController(IRollService rollService, IRollMapperService rollMapperService)
     {
         _rollService = rollService;
+        //_rollMapperService = rollMapperService;
     }
     
     [HttpPost]
     public async Task<ActionResult<RollResponseDto>> PostRoll([FromBody] RollRequestDto req)
     {
-        //await _rollRepository.AddRoll(req);
-        return NoContent();
+        //var roll = _rollMapperService.Map(req); //The mapping process instantiates the roll object, which actually performs the roll
+        return Ok(_rollService.Roll(req));
+
     }
 }

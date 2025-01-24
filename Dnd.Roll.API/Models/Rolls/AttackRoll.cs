@@ -17,11 +17,12 @@ public class MeleeAttackRoll : DiceRollBase
         RollType = "attackRollMelee";
         //Initialize();
         Value = Roll();
+        DiceRolled = new DiceSet(1, 20);
     }
 
     public override int Roll()
     {
-        return new DiceSet(1, 20).Roll() + Roller.Stats.AbilityModifiers["Strength"] + Roller.ProficiencyModifier;
+        return DiceRolled.Roll() + Roller.Stats.AbilityModifiers["Strength"] + Roller.ProficiencyModifier;
     }
 
     public override string Describe() => Roller.Name + " Melee Attack";
@@ -43,7 +44,7 @@ public class RangedAttackRoll : DiceRollBase
 
     public override int Roll()
     {
-        return new DiceSet(1, 20).Roll() + Roller.Stats.AbilityModifiers["Dexterity"] +
+        return DiceRolled.Roll() + Roller.Stats.AbilityModifiers["Dexterity"] +
                Roller.ProficiencyModifier;
     }
 

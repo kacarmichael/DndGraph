@@ -19,6 +19,7 @@ public class AbilityCheckRoll : DiceRollBase
         Roller = character;
         RollType = "abilityCheck";
         Value = Roll();
+        DiceRolled = new DiceSet(1, 20);
     }
 
     public override int Roll()

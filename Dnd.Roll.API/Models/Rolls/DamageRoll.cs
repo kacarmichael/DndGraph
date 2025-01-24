@@ -1,4 +1,4 @@
-﻿using Dnd.Core.Dice;
+﻿using Dnd.Roll.API.Models.Dice;
 using Dnd.Roll.API.Models.Characters;
 
 namespace Dnd.Roll.API.Models.Rolls;
@@ -8,8 +8,6 @@ public class DamageRoll : DiceRollBase
     public int Modifier { get; set; }
     public int NumDice { get; set; }
     public int NumSides { get; set; }
-
-    private readonly DiceSet _diceSet;
 
     public DamageRoll()
     {
@@ -23,7 +21,7 @@ public class DamageRoll : DiceRollBase
         NumSides = numSides;
         Modifier = modifier;
 
-        _diceSet = new DiceSet(numDice, numSides);
+        DiceRolled = new DiceSet(numDice, numSides);
         Value = Roll();
     }
 
@@ -34,5 +32,5 @@ public class DamageRoll : DiceRollBase
 
     public override string Describe() => "Damage Roll";
 
-    public override int Roll() => _diceSet.Roll() + Modifier;
+    public override int Roll() => DiceRolled.Roll() + Modifier;
 }
