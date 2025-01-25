@@ -11,12 +11,15 @@ public class CharacterService : ICharacterService
     {
         _repository = repository;
     }
+    
+    public async Task<Character> GetCharacterAsync(int id) => await _repository.GetCharacterAsync(id);
 
-    public Character GetCharacterById(int id) => _repository.GetCharacter(id);
-
-    public IEnumerable<Character> GetAllCharacters() => _repository.GetAllCharacters();
+    public async Task<IEnumerable<Character>> GetAllCharactersAsync()
+    {
+        return await _repository.GetAllCharactersAsync();
+    }
 
     public IEnumerable<Character> GetCurrentCharacters() => throw new NotImplementedException();
-    
+
     public Class GetClassUsed(string className) => Constants.Classes[className];
 }

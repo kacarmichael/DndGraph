@@ -25,6 +25,12 @@ public class RollRepository : IRollRepository
         _rollDbContext.Rolls.Add(roll);
         await _rollDbContext.SaveChangesAsync();
     }
+    
+    public async Task AddRollAsync(DiceRollBase roll)
+    {
+        _rollDbContext.Rolls.Add(roll);
+        await _rollDbContext.SaveChangesAsync();
+    }
 
     public async Task UpdateRoll(DiceRollBase roll)
     {

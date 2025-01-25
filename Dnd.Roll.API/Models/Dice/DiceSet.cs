@@ -1,7 +1,5 @@
 ﻿namespace Dnd.Roll.API.Models.Dice;
 
-
-
 public class DiceSet
 {
     public int NumDice { get; set; }

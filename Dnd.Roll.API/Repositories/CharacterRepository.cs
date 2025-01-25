@@ -1,7 +1,5 @@
 ﻿using Dnd.Roll.API.Infrastructure;
 using Dnd.Roll.API.Models.Characters;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dnd.Roll.API.Repositories;
@@ -20,16 +18,26 @@ public class CharacterRepository : ICharacterRepository
         _context.Characters.Add(character);
         await _context.SaveChangesAsync();
     }
+    
+    public async Task<IEnumerable<Character>> GetAllCharactersAsync() => await _context.Characters.ToListAsync();
 
-    public async Task<IActionResult> GetAllCharacters()
+    
+    public async Task<Character> GetCharacterAsync(int characterId)
     {
-        //await _context.Characters.FirstOrDefaultAsync();
-        return ok(await _context.Characters.ToListAsync());
+        return await _context.Characters.FirstOrDefaultAsync(x => x.Id == characterId);
     }
 
-    public Character GetCharacter(int id) => _context.Characters.FirstOrDefault(x => x.Id == id);
+    public async Task<Task> DeleteCharacterAsync(int id)
+    {
+        var c = await GetCharacterAsync(id);
+        if (c != null)
+        {
+            _context.Characters.Remove(c);
+            await _context.SaveChangesAsync();
+        }
 
-    public void DeleteCharacter(int id) => _context.Characters.Remove(GetCharacter(id));
+        return Task.CompletedTask;
+    } 
 
     public void UpdateCharacter(Character character) => _context.Characters.Update(character);
 }

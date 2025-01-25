@@ -1,0 +1,44 @@
+﻿# Ignore Visual Studio files
+.vs/
+.vscode/
+*.suo
+*.ntvs*
+*.nupkg
+*.vspscc
+
+# Ignore build results
+/bin/
+/obj/
+
+# Ignore NuGet packages
+/packages/
+
+# Ignore .NET Core runtime files
+/runtime/
+
+# Ignore user-specific files
+*.user
+*.userosscache
+
+# Ignore Resharper files
+*.resharper
+*_ReSharper.*
+
+# Ignore TeamCity files
+_TeamCity*
+
+# Ignore dotCover files
+*.dotCover
+
+# Ignore NUnit files
+*.nunit
+
+# Ignore .NET Core SDK files
+sdk/
+
+# Ignore .NET Core publish profiles
+*.pubxml
+*.pubxml.user
+
+# Ignore node_modules (if using Node.js for frontend)
+node_modules/

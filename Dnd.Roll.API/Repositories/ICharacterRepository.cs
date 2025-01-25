@@ -5,9 +5,10 @@ namespace Dnd.Roll.API.Repositories;
 
 public interface ICharacterRepository
 {
-    Task<IActionResult> GetAllCharacters();
-    Character GetCharacter(int id);
+    Task<Character> GetCharacterAsync(int characterId);
+    
+    Task<IEnumerable<Character>> GetAllCharactersAsync();
     void AddCharacter(Character character);
     void UpdateCharacter(Character character);
-    void DeleteCharacter(int id);
+    Task<Task> DeleteCharacterAsync(int id);
 }

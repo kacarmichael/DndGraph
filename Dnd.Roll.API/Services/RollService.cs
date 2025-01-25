@@ -17,56 +17,17 @@ public class RollService : IRollService
         _rollMapperService = rollMapperService;
     }
 
-    public RollResponseDto Roll(RollRequestDto req)
+    public async Task<RollResponseDto> Roll(RollRequestDto req)
     {
-        var character = _characterRepository.GetCharacter((int)req.CharacterId);
-        var roll = _rollMapperService.Map(req);
-        _rollRepository.AddRoll(roll);
+        var character = await _characterRepository.GetCharacterAsync((int)req.CharacterId);
+        var roll = await _rollMapperService.Map(req);
+        await _rollRepository.AddRollAsync(roll);
         var resp = _rollMapperService.Map(roll);
         return resp;
     }
-
-    public int Roll(int numSides)
+    
+    public Task<DiceSimulation> Simulate(DiceSet set, int trials)
     {
-        if (Constants.DiceSideValues.Contains(numSides))
-        {
-            return Constants.DiceTypeSides[numSides].Roll();
-        }
-        throw new ArgumentException();
-    }
-
-    public int Roll(int numSides, int numDice)
-    {
-        if (Constants.DiceSideValues.Contains(numSides))
-        {
-            return Enumerable.Range(0, numDice)
-                .Aggregate(0, (sum, _) => 
-                    sum + Constants.DiceTypeSides[numSides].Roll());
-        }
-        throw new ArgumentException();
-    }
-
-    public int Roll(DiceSet dice, int modifier = 0)
-    {
-        return dice.Roll() + modifier;
-    }
-
-    public DiceSimulation Simulate(int numDice, int numSides, int trials)
-    {
-        return new DiceSimulation(
-            new DiceSet(numDice, numSides), 
-            trials);
-    }
-
-    public DiceSimulation Simulate(DiceSet set, int trials)
-    {
-        return new DiceSimulation(set, trials);
-    }
-
-    public DiceSimulation Simulate(int numSides, int trials)
-    {
-        return new DiceSimulation(
-            new DiceSet(1, numSides),
-            trials);
+        return Task.FromResult(new DiceSimulation(set, trials));
     }
 }

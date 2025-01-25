@@ -5,7 +5,6 @@ namespace Dnd.Roll.API.Services;
 
 public interface IRollMapperService
 {
-    public DiceRollBase Map(RollRequestDto req);
-    
-    public RollResponseDto Map(DiceRollBase diceRoll);
+    public Task<DiceRollBase> Map(RollRequestDto req);
+    public RollResponseDto Map(DiceRollBase roll);
 }

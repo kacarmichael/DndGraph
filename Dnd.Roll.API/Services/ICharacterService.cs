@@ -4,8 +4,8 @@ namespace Dnd.Roll.API.Services;
 
 public interface ICharacterService
 {
-    IEnumerable<Character> GetAllCharacters();
+    Task<IEnumerable<Character>> GetAllCharactersAsync();
     IEnumerable<Character> GetCurrentCharacters();
-    Character GetCharacterById(int id);
+    Task<Character> GetCharacterAsync(int id);
     Class GetClassUsed(string className);
 }

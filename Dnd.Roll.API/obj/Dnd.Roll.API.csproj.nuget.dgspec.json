@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\acarmichael\\RiderProjects\\DnD_CA\\Dnd.Roll.API\\Dnd.Roll.API.csproj": {}
+    "C:\\Users\\kacar\\RiderProjects\\DnD_CA\\Dnd.Roll.API\\Dnd.Roll.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\acarmichael\\RiderProjects\\DnD_CA\\Dnd.Core\\Dnd.Core.csproj": {
+    "C:\\Users\\kacar\\RiderProjects\\DnD_CA\\Dnd.Core\\Dnd.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\acarmichael\\RiderProjects\\DnD_CA\\Dnd.Core\\Dnd.Core.csproj",
+        "projectUniqueName": "C:\\Users\\kacar\\RiderProjects\\DnD_CA\\Dnd.Core\\Dnd.Core.csproj",
         "projectName": "Dnd.Core",
-        "projectPath": "C:\\Users\\acarmichael\\RiderProjects\\DnD_CA\\Dnd.Core\\Dnd.Core.csproj",
-        "packagesPath": "C:\\Users\\acarmichael\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\acarmichael\\RiderProjects\\DnD_CA\\Dnd.Core\\obj\\",
+        "projectPath": "C:\\Users\\kacar\\RiderProjects\\DnD_CA\\Dnd.Core\\Dnd.Core.csproj",
+        "packagesPath": "C:\\Users\\kacar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kacar\\RiderProjects\\DnD_CA\\Dnd.Core\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\acarmichael\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\kacar\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -42,9 +36,8 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+          "auditMode": "direct"
+        }
       },
       "frameworks": {
         "net9.0": {
@@ -65,40 +58,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\acarmichael\\.dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\acarmichael\\RiderProjects\\DnD_CA\\Dnd.Roll.API\\Dnd.Roll.API.csproj": {
+    "C:\\Users\\kacar\\RiderProjects\\DnD_CA\\Dnd.Roll.API\\Dnd.Roll.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\acarmichael\\RiderProjects\\DnD_CA\\Dnd.Roll.API\\Dnd.Roll.API.csproj",
+        "projectUniqueName": "C:\\Users\\kacar\\RiderProjects\\DnD_CA\\Dnd.Roll.API\\Dnd.Roll.API.csproj",
         "projectName": "Dnd.Roll.API",
-        "projectPath": "C:\\Users\\acarmichael\\RiderProjects\\DnD_CA\\Dnd.Roll.API\\Dnd.Roll.API.csproj",
-        "packagesPath": "C:\\Users\\acarmichael\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\acarmichael\\RiderProjects\\DnD_CA\\Dnd.Roll.API\\obj\\",
+        "projectPath": "C:\\Users\\kacar\\RiderProjects\\DnD_CA\\Dnd.Roll.API\\Dnd.Roll.API.csproj",
+        "packagesPath": "C:\\Users\\kacar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kacar\\RiderProjects\\DnD_CA\\Dnd.Roll.API\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\acarmichael\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\kacar\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\acarmichael\\RiderProjects\\DnD_CA\\Dnd.Core\\Dnd.Core.csproj": {
-                "projectPath": "C:\\Users\\acarmichael\\RiderProjects\\DnD_CA\\Dnd.Core\\Dnd.Core.csproj"
+              "C:\\Users\\kacar\\RiderProjects\\DnD_CA\\Dnd.Core\\Dnd.Core.csproj": {
+                "projectPath": "C:\\Users\\kacar\\RiderProjects\\DnD_CA\\Dnd.Core\\Dnd.Core.csproj"
               }
             }
           }
@@ -111,9 +98,8 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+          "auditMode": "direct"
+        }
       },
       "frameworks": {
         "net9.0": {
@@ -171,7 +157,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\acarmichael\\.dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

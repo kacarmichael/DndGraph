@@ -6,7 +6,7 @@ namespace Dnd.Roll.API;
 public static class Constants
 {
     public static readonly List<int> DiceSideValues = [4, 6, 8, 10, 12, 20, 100];
-    
+
     public static Dictionary<int, Die> DiceTypeSides = new()
     {
         { 4, Dice.D4 },
