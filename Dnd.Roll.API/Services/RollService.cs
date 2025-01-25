@@ -10,7 +10,8 @@ public class RollService : IRollService
     private readonly IRollRepository _rollRepository;
     private readonly IRollMapperService _rollMapperService;
 
-    public RollService(ICharacterRepository characterRepository, IRollRepository rollRepository, IRollMapperService rollMapperService)
+    public RollService(ICharacterRepository characterRepository, IRollRepository rollRepository,
+        IRollMapperService rollMapperService)
     {
         _characterRepository = characterRepository;
         _rollRepository = rollRepository;
@@ -25,7 +26,7 @@ public class RollService : IRollService
         var resp = _rollMapperService.Map(roll);
         return resp;
     }
-    
+
     public Task<DiceSimulation> Simulate(DiceSet set, int trials)
     {
         return Task.FromResult(new DiceSimulation(set, trials));

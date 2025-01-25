@@ -1,6 +1,5 @@
 ﻿using Dnd.Roll.API.DTOs;
 using Dnd.Roll.API.Models.Rolls;
-using Dnd.Roll.API.Repositories;
 
 namespace Dnd.Roll.API.Services;
 
@@ -66,7 +65,7 @@ public class RollMapperService : IRollMapperService
                 throw new ArgumentException("Invalid Roll Type " + req.RollType);
         }
     }
-    
+
     public RollResponseDto Map(DiceRollBase roll)
     {
         throw new NotImplementedException();

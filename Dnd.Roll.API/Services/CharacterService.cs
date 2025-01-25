@@ -11,7 +11,7 @@ public class CharacterService : ICharacterService
     {
         _repository = repository;
     }
-    
+
     public async Task<Character> GetCharacterAsync(int id) => await _repository.GetCharacterAsync(id);
 
     public async Task<IEnumerable<Character>> GetAllCharactersAsync()

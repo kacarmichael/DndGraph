@@ -1,12 +1,11 @@
 ﻿using Dnd.Roll.API.Models.Characters;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Dnd.Roll.API.Repositories;
 
 public interface ICharacterRepository
 {
     Task<Character> GetCharacterAsync(int characterId);
-    
+
     Task<IEnumerable<Character>> GetAllCharactersAsync();
     void AddCharacter(Character character);
     void UpdateCharacter(Character character);

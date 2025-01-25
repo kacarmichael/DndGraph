@@ -18,10 +18,10 @@ public class CharacterRepository : ICharacterRepository
         _context.Characters.Add(character);
         await _context.SaveChangesAsync();
     }
-    
+
     public async Task<IEnumerable<Character>> GetAllCharactersAsync() => await _context.Characters.ToListAsync();
 
-    
+
     public async Task<Character> GetCharacterAsync(int characterId)
     {
         return await _context.Characters.FirstOrDefaultAsync(x => x.Id == characterId);
@@ -37,7 +37,7 @@ public class CharacterRepository : ICharacterRepository
         }
 
         return Task.CompletedTask;
-    } 
+    }
 
     public void UpdateCharacter(Character character) => _context.Characters.Update(character);
 }

@@ -11,26 +11,26 @@ namespace Dnd.Roll.API.Controllers;
 public class CharacterController : ControllerBase
 {
     private readonly CharacterDbContext _context;
-    
+
     public CharacterController(CharacterDbContext context)
     {
         _context = context;
     }
-    
+
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<CharacterResponseDto>>> GetCharacters()                                                                                                                            
+    public async Task<ActionResult<IEnumerable<CharacterResponseDto>>> GetCharacters()
     {
         var chars = await _context.Characters.ToListAsync();
         return chars.Select(x => new CharacterResponseDto(x)).ToList();
     }
-    
+
     [HttpGet("{id:int}")]
     public async Task<ActionResult<CharacterResponseDto>> GetCharacter(int id)
     {
         var character = await _context.Characters.FirstOrDefaultAsync(x => x.Id == id);
-        return character == null ? NotFound() : Ok(new CharacterResponseDto(character));                                          
+        return character == null ? NotFound() : Ok(new CharacterResponseDto(character));
     }
-    
+
     [HttpPost]
     public async Task<ActionResult<CharacterResponseDto>> PostCharacter([FromBody] CharacterRequestDto req)
     {

@@ -6,7 +6,6 @@ namespace Dnd.Roll.API.Services;
 public interface IRollService
 {
     Task<RollResponseDto> Roll(RollRequestDto req);
-    
+
     Task<DiceSimulation> Simulate(DiceSet set, int trials);
-    
 }
