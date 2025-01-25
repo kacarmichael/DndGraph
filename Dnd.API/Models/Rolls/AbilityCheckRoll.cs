@@ -5,13 +5,15 @@ namespace Dnd.Roll.API.Models.Rolls;
 
 public class AbilityCheckRoll : DiceRollBase
 {
-    public Character Roller { get; set;  }
+    public Character Roller { get; set; }
 
-    public string Ability { get; set;  }
-    
+    public string Ability { get; set; }
+
     //public void Initialize() => Value = Roll();
-    
-    public AbilityCheckRoll() { }
+
+    public AbilityCheckRoll()
+    {
+    }
 
     public AbilityCheckRoll(string ability, Character character)
     {
@@ -35,8 +37,7 @@ public class AbilityCheckRoll : DiceRollBase
 
             return res;
         }
-        
-        
+
 
         if (Constants.SkillNames.Contains(Ability))
         {

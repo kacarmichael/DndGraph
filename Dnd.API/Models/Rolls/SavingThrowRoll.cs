@@ -5,7 +5,6 @@ namespace Dnd.Roll.API.Models.Rolls;
 
 public class SavingThrowRoll : DiceRollBase
 {
-    
     public string Ability { get; set; }
 
     public SavingThrowRoll()

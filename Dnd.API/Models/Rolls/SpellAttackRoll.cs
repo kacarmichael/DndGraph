@@ -8,8 +8,10 @@ public class SpellAttackRoll : DiceRollBase
     public Class ClassUsed { get; set; }
 
     public string RollType => "spellAttack";
-    
-    public SpellAttackRoll() { }
+
+    public SpellAttackRoll()
+    {
+    }
 
     public SpellAttackRoll(Character character, Class classUsed)
     {
@@ -17,7 +19,6 @@ public class SpellAttackRoll : DiceRollBase
         ClassUsed = classUsed;
         Value = Roll();
         DiceRolled = new DiceSet(1, 20);
-        
     }
 
     public override string Describe() => "Spell Attack";

@@ -1,5 +1,4 @@
-﻿using Dnd.Roll.API.Models.Characters;
-using Dnd.Roll.API.Models.Rolls;
+﻿using Dnd.Roll.API.Models.Rolls;
 
 namespace Dnd.Roll.API.DTOs;
 

@@ -1,6 +1,7 @@
 using Dnd.Roll.API.Extensions;
 using Dnd.Roll.API.Infrastructure;
 using Dnd.Roll.API.Repositories;
+using Dnd.Roll.API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<ICharacterRepository, CharacterRepository>();
 builder.Services.AddTransient<IRollRepository, RollRepository>();
+builder.Services.AddTransient<IRollMapperService, RollMapperService>();
+builder.Services.AddTransient<IRollService, RollService>();
+builder.Services.AddTransient<IClassMapperService, ClassMapperService>();
 
 var app = builder.Build();
 
@@ -44,9 +48,9 @@ app.MapControllers();
 
 // using (var scope = app.Services.CreateScope())
 // {
-    // var dbContext = scope.ServiceProvider.GetService<CharacterDbContext>();
-    // dbContext.Database.EnsureCreated();
-    // dbContext.Populate();
+// var dbContext = scope.ServiceProvider.GetService<CharacterDbContext>();
+// dbContext.Database.EnsureCreated();
+// dbContext.Populate();
 // }
 
 app.Run();

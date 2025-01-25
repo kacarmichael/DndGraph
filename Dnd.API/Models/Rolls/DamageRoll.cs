@@ -1,5 +1,5 @@
-﻿using Dnd.Roll.API.Models.Dice;
-using Dnd.Roll.API.Models.Characters;
+﻿using Dnd.Roll.API.Models.Characters;
+using Dnd.Roll.API.Models.Dice;
 
 namespace Dnd.Roll.API.Models.Rolls;
 

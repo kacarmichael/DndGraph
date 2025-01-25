@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Extensions;
+﻿using Microsoft.OpenApi;
+using Microsoft.OpenApi.Extensions;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -10,7 +11,7 @@ public static class SwaggerExtensions
     {
         ISwaggerProvider sw = provider.GetRequiredService<ISwaggerProvider>();
         OpenApiDocument doc = sw.GetSwagger("v1", null, "/");
-        string swaggerFile = doc.SerializeAsJson(Microsoft.OpenApi.OpenApiSpecVersion.OpenApi3_0);
+        string swaggerFile = doc.SerializeAsJson(OpenApiSpecVersion.OpenApi3_0);
         File.WriteAllText("swagger.json", swaggerFile);
     }
 }

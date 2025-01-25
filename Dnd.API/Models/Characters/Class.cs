@@ -9,7 +9,9 @@ public class Class
 
     public string? Name { get; set; }
 
-    public Class() { }
+    public Class()
+    {
+    }
 
     public Class(string? spellcastingAbility, string? name)
     {

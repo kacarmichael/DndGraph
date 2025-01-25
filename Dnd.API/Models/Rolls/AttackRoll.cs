@@ -31,8 +31,10 @@ public class MeleeAttackRoll : DiceRollBase
 public class RangedAttackRoll : DiceRollBase
 {
     //public void Initialize() => Value = Roll();
-    
-    public RangedAttackRoll() { }
+
+    public RangedAttackRoll()
+    {
+    }
 
     public RangedAttackRoll(Character character)
     {

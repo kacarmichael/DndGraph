@@ -10,7 +10,7 @@ public class CharacterResponseDto
     List<string> Proficiencies { get; set; }
     int Level { get; set; }
     int Ac { get; set; }
-    
+
     public CharacterResponseDto(Character character)
     {
         Name = character.Name;
