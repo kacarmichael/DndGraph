@@ -11,6 +11,8 @@ public class CharacterResponseDto
     int Level { get; set; }
     int Ac { get; set; }
 
+    Dictionary<string, int> Classes { get; set; }
+
     public CharacterResponseDto(Character character)
     {
         Name = character.Name;
@@ -18,5 +20,17 @@ public class CharacterResponseDto
         Proficiencies = character.Stats.Proficiencies;
         Level = character.Level;
         Ac = character.AC;
+        Classes = character.Classes;
+    }
+
+    public Character DtoToCharacter()
+    {
+        return new Character(
+            name: Name,
+            level: Level,
+            stats: Stats,
+            ac: Ac,
+            charClass: Classes
+        );
     }
 }

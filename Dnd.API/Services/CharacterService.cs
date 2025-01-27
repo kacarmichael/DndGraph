@@ -22,4 +22,9 @@ public class CharacterService : ICharacterService
     public IEnumerable<Character> GetCurrentCharacters() => throw new NotImplementedException();
 
     public Class GetClassUsed(string className) => Constants.Classes[className];
+
+    public async Task<Character> AddCharacterAsync(Character character)
+    {
+        return await _repository.AddCharacter(character);
+    }
 }

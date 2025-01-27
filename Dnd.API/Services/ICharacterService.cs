@@ -8,4 +8,5 @@ public interface ICharacterService
     IEnumerable<Character> GetCurrentCharacters();
     Task<Character> GetCharacterAsync(int id);
     Class GetClassUsed(string className);
+    Task<Character> AddCharacterAsync(Character character);
 }

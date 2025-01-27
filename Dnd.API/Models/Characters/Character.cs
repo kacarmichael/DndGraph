@@ -48,6 +48,24 @@ public class Character
         Classes = charClass;
     }
 
+    public bool Equals(Character? other)
+    {
+        if (other is null) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return Id == other.Id &&
+               Name == other.Name &&
+               Level == other.Level &&
+               AC == other.AC &&
+               Classes.Count == other.Classes.Count &&
+               !Classes.Except(other.Classes).Any() &&
+               Stats.Equals(other.Stats);
+    }
+
+    public static bool Compare(Character character1, Character character2)
+    {
+        return character1.Equals(character2);
+    }
+
 //     public int Check(string ability) => new AbilityCheckRoll(ability, this).Roll();
 //
 //     public int SavingThrow(string ability) => new SavingThrowRoll(ability, this).Roll();

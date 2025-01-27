@@ -13,10 +13,11 @@ public class CharacterRepository : ICharacterRepository
         _context = context;
     }
 
-    public async void AddCharacter(Character character)
+    public async Task<Character> AddCharacter(Character character)
     {
         _context.Characters.Add(character);
         await _context.SaveChangesAsync();
+        return character;
     }
 
     public async Task<IEnumerable<Character>> GetAllCharactersAsync() => await _context.Characters.ToListAsync();

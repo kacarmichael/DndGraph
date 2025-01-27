@@ -1,31 +1,78 @@
-﻿using Dnd.Roll.API.Controllers;
-using Dnd.Roll.API.Infrastructure;
+﻿using Castle.Core.Logging;
+using Dnd.Roll.API.Controllers;
 using Dnd.Roll.API.Models.Characters;
-using Dnd.Roll.API.Repositories;
-using Microsoft.AspNetCore.Mvc;
+using Dnd.Roll.API.Services;
 using Moq;
-using Xunit;
 
 namespace Dnd.Tests;
 
 public class CharacterControllerTests
 {
-    [Fact]
-    public async Task GetCharacter_ReturnsOk_WithCharacter()
+    private readonly Mock<ICharacterService> _characterServiceMock;
+
+    private List<Character> GetTestCharacters()
     {
-        var characterId = 1;
-        var character = new Character("Test Character", 1, new CharacterStats(), 10, new Dictionary<string, int>());
-        var characterRepositoryMock = new Mock<ICharacterRepository>();
-        var characterDbContextMock = new Mock<CharacterDbContext>();
-        characterRepositoryMock.Setup(x => x.GetCharacterAsync(characterId)).ReturnsAsync(character);
+        var characters = new List<Character>()
+        {
+            new Character(
+                name: "Theodred",
+                level: 6,
+                stats: new CharacterStats(
+                    strength: 10,
+                    dexterity: 10,
+                    intelligence: 10,
+                    constitution: 10,
+                    wisdom: 10,
+                    charisma: 10,
+                    acrobatics: 0,
+                    animalHandling: 0,
+                    arcana: 0,
+                    athletics: 0,
+                    deception: 0,
+                    history: 0,
+                    insight: 0,
+                    intimidation: 0,
+                    investigation: 0,
+                    medicine: 0,
+                    nature: 0,
+                    perception: 0,
+                    performance: 0,
+                    persuasion: 0,
+                    religion: 0,
+                    sleightOfHand: 0,
+                    stealth: 0,
+                    survival: 0,
+                    proficiencies: new List<string>()
+                    {
+                        "Arcana"
+                    }),
+                ac: 14,
+                charClass: new Dictionary<string, int>()
+                {
+                    { "Warlock", 6}
+                })
+        };
+        return characters;
+    }
 
-        var controller = new CharacterController(characterDbContextMock.Object);
+    public CharacterControllerTests()
+    {
+        _characterServiceMock = new Mock<ICharacterService>();
+    }
 
-        var result = await controller.GetCharacter(characterId);
+    [Fact]
+    public void GetCharacterList_ReturnsAllCharacters()
+    {
+        var characters = GetTestCharacters();
+        _characterServiceMock.Setup(x => x.GetAllCharactersAsync()).ReturnsAsync(characters);
 
-        var okResult = result as OkObjectResult;
+        var characterController = new CharacterController(_characterServiceMock.Object);
 
-        Assert.NotNull(okResult);
-        Assert.Equal(character, okResult.Value);
+        var result = characterController.GetCharacters().Result.Value.Select(x => x.DtoToCharacter()).ToList();
+
+        Assert.NotNull(result);
+        Assert.Equal(GetTestCharacters().Count(), result.Count());
+        Assert.True(characters.All(x => result.Any(y => Character.Compare(y, x))));
+        
     }
 }

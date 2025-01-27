@@ -7,7 +7,7 @@ public interface ICharacterRepository
     Task<Character> GetCharacterAsync(int characterId);
 
     Task<IEnumerable<Character>> GetAllCharactersAsync();
-    void AddCharacter(Character character);
+    Task<Character> AddCharacter(Character character);
     void UpdateCharacter(Character character);
     Task<Task> DeleteCharacterAsync(int id);
 }

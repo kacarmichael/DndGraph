@@ -63,4 +63,19 @@ public class CharacterStats
             { "Survival", survival }
         };
     }
+
+    public bool Equals(CharacterStats other)
+    {
+        return AbilityScores.Count == other.AbilityScores.Count &&
+               !AbilityScores.Except(other.AbilityScores).Any() &&
+               AbilityModifiers.Count == other.AbilityModifiers.Count &&
+               !AbilityModifiers.Except(other.AbilityModifiers).Any() &&
+               SkillModifiers.Count == other.SkillModifiers.Count &&
+               !SkillModifiers.Except(other.SkillModifiers).Any();
+    }
+
+    public static bool Compare(CharacterStats character1, CharacterStats character2)
+    {
+        return character1.Equals(character2);
+    }
 }
