@@ -31,6 +31,17 @@ public class CharacterRequestDto
         Level = classes.Values.Sum();
     }
 
+    public CharacterRequestDto(Character character)
+    {
+        AbilityScores = character.Stats.AbilityScores;
+        SkillModifiers = character.Stats.SkillModifiers;
+        Proficiencies = character.Stats.Proficiencies;
+        Name = character.Name;
+        Classes = character.Classes;
+        Ac = character.AC;
+        Level = character.Level;
+    }
+
     public Character DtoToCharacter()
     {
         CharacterStats stats = new CharacterStats(
@@ -41,7 +52,7 @@ public class CharacterRequestDto
             AbilityScores["Wisdom"],
             AbilityScores["Charisma"],
             SkillModifiers["Acrobatics"],
-            SkillModifiers["AnimalHandling"],
+            SkillModifiers["Animal Handling"],
             SkillModifiers["Arcana"],
             SkillModifiers["Athletics"],
             SkillModifiers["Deception"],
@@ -55,7 +66,7 @@ public class CharacterRequestDto
             SkillModifiers["Performance"],
             SkillModifiers["Persuasion"],
             SkillModifiers["Religion"],
-            SkillModifiers["SleightOfHand"],
+            SkillModifiers["Sleight of Hand"],
             SkillModifiers["Stealth"],
             SkillModifiers["Survival"],
             Proficiencies);

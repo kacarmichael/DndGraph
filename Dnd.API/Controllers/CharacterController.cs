@@ -37,8 +37,11 @@ public class CharacterController : ControllerBase
     public async Task<ActionResult<CharacterResponseDto>> PostCharacter([FromBody] CharacterRequestDto req)
     {
         var chars = await GetCharacters();
-        if (chars.Value.Select(x => x.DtoToCharacter()).Contains(req.DtoToCharacter()))
-            return BadRequest("Character name already exists");
+        if (chars.Result != null)
+        {
+            if (chars.Value.Select(x => x.DtoToCharacter()).Contains(req.DtoToCharacter()))
+                return BadRequest("Character name already exists");
+        }
         Character c = req.DtoToCharacter();
         _characterService.AddCharacterAsync(c);
         CharacterResponseDto resp = new CharacterResponseDto(c);

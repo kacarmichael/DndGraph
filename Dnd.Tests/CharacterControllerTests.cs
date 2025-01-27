@@ -92,4 +92,19 @@ public class CharacterControllerTests
         Assert.NotNull(result);
         Assert.True(character.Equals(result_char));
     }
+
+    [Fact]
+    public void PostCharacter_ReturnsRequest()
+    {
+        var character = GetTestCharacters().First();
+        _characterServiceMock.Setup(x => x.AddCharacterAsync(It.IsAny<Character>())).ReturnsAsync(character);
+        var characterController = new CharacterController(_characterServiceMock.Object);
+        
+        var result = characterController.PostCharacter(new CharacterRequestDto(character));
+
+        var result_conv = ((CharacterResponseDto)((OkObjectResult)result.Result.Result).Value).DtoToCharacter();
+        
+        Assert.NotNull(result);
+        Assert.True(character.Equals(result_conv));
+    }
 }
