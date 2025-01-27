@@ -1,7 +1,9 @@
 ﻿using Castle.Core.Logging;
 using Dnd.Roll.API.Controllers;
+using Dnd.Roll.API.DTOs;
 using Dnd.Roll.API.Models.Characters;
 using Dnd.Roll.API.Services;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 
 namespace Dnd.Tests;
@@ -84,9 +86,10 @@ public class CharacterControllerTests
         var characterController = new CharacterController(_characterServiceMock.Object);
 
         var result = characterController.GetCharacter(0);
-        var result_conv = result.Result.Value.DtoToCharacter();
+        var result_conv = (CharacterResponseDto)((OkObjectResult)result.Result.Result).Value;
+        var result_char = result_conv.DtoToCharacter();
         
         Assert.NotNull(result);
-        Assert.Equal(GetTestCharacters().First(), result_conv);
+        Assert.True(character.Equals(result_char));
     }
 }
