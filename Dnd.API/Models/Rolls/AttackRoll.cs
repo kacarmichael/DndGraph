@@ -16,8 +16,9 @@ public class MeleeAttackRoll : DiceRollBase
         Roller = character;
         RollType = "attackRollMelee";
         //Initialize();
-        Value = Roll();
         DiceRolled = new DiceSet(1, 20);
+        Value = Roll();
+        
     }
 
     public override int Roll()

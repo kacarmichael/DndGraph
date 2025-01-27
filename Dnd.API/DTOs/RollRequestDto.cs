@@ -19,5 +19,16 @@ public class RollRequestDto
 
     public string? ClassUsed { get; set; }
 
-    [JsonIgnore] public Character? character { get; set; }
+    // [JsonIgnore] public Character? character { get; set; }
+
+    public RollRequestDto(string rollType, string ability, int characterId, int? modifier, int? numDice, int? numSides, string? classUsed)
+    {
+        RollType = rollType;
+        Ability = ability;
+        CharacterId = characterId;
+        Modifier = modifier;
+        NumDice = numDice;
+        NumSides = numSides;
+        ClassUsed = classUsed;
+    }
 }
