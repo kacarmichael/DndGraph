@@ -1,0 +1,9 @@
+﻿###
+POST localhost:5218/api/Roll
+Accept: application/json
+Content-Type: application/json
+
+{
+  "rollTYpe": "attackRollMelee",
+  "characterId": 2
+}

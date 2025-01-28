@@ -1,6 +1,8 @@
-﻿namespace Dnd.Roll.API.Models.Dice;
+﻿using Dnd.API.Models.Dice.Interfaces;
 
-public class Die
+namespace Dnd.API.Models.Dice.Implementations;
+
+public class Die : IDice
 {
     private readonly int _minValue;
     private readonly int _maxValue;

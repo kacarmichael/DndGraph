@@ -1,14 +1,16 @@
-﻿namespace Dnd.Roll.API.Models.Dice;
+﻿using Dnd.API.Models.Dice.Interfaces;
 
-public class DiceSimulation
+namespace Dnd.API.Models.Dice.Implementations;
+
+public class DiceSimulation : IDiceSimulation
 {
-    public DiceSet SimDice { get; set; }
+    public IDiceSet SimDice { get; set; }
     public int Trials { get; set; }
     public int? DC { get; set; }
 
     public Dictionary<int, int> Results { get; set; } = new();
 
-    public DiceSimulation(DiceSet simDice, int trials)
+    public DiceSimulation(IDiceSet simDice, int trials)
     {
         SimDice = simDice;
         Trials = trials;

@@ -1,7 +1,9 @@
-﻿using Dnd.Roll.API.Models.Characters;
-using Dnd.Roll.API.Models.Dice;
+﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Interfaces;
+using Dnd.API.Models.Dice;
+using Dnd.API.Models.Dice.Interfaces;
 
-namespace Dnd.Roll.API.Models.Rolls;
+namespace Dnd.API.Models.Rolls.Implementations;
 
 public class DamageRoll : DiceRollBase
 {
@@ -13,15 +15,15 @@ public class DamageRoll : DiceRollBase
     {
     }
 
-    public DamageRoll(int numDice, int numSides, int modifier, Character character)
+    public DamageRoll(int modifier, ICharacter character, IDiceSet diceRolled)
     {
+        DiceRolled = diceRolled;
         Roller = character;
         RollType = "damageRoll";
-        NumDice = numDice;
-        NumSides = numSides;
+        NumDice = diceRolled.NumDice;
+        NumSides = diceRolled.NumSides;
         Modifier = modifier;
-
-        DiceRolled = new DiceSet(numDice, numSides);
+        
         Value = Roll();
     }
 

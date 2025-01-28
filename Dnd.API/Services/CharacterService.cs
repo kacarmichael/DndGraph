@@ -1,7 +1,9 @@
-﻿using Dnd.Roll.API.Models.Characters;
-using Dnd.Roll.API.Repositories;
+﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Implementations;
+using Dnd.API.Models.Characters.Interfaces;
+using Dnd.API.Repositories;
 
-namespace Dnd.Roll.API.Services;
+namespace Dnd.API.Services;
 
 public class CharacterService : ICharacterService
 {
@@ -12,18 +14,18 @@ public class CharacterService : ICharacterService
         _repository = repository;
     }
 
-    public async Task<Character> GetCharacterAsync(int id) => await _repository.GetCharacterAsync(id);
+    public async Task<ICharacter> GetCharacterAsync(int id) => await _repository.GetCharacterAsync(id);
 
-    public async Task<IEnumerable<Character>> GetAllCharactersAsync()
+    public async Task<IEnumerable<ICharacter>> GetAllCharactersAsync()
     {
         return await _repository.GetAllCharactersAsync();
     }
 
-    public IEnumerable<Character> GetCurrentCharacters() => throw new NotImplementedException();
+    public IEnumerable<ICharacter> GetCurrentCharacters() => throw new NotImplementedException();
 
-    public Class GetClassUsed(string className) => Constants.Classes[className];
+    public IClass GetClassUsed(string className) => Constants.Classes[className];
 
-    public async Task<Character> AddCharacterAsync(Character character)
+    public async Task<ICharacter> AddCharacterAsync(ICharacter character)
     {
         return await _repository.AddCharacter(character);
     }

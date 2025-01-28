@@ -1,11 +1,9 @@
-﻿using Dnd.Roll.API.DTOs;
-using Dnd.Roll.API.Infrastructure;
-using Dnd.Roll.API.Models.Characters;
-using Dnd.Roll.API.Services;
+﻿using Dnd.API.DTOs;
+using Dnd.API.Models.Characters;
+using Dnd.API.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
-namespace Dnd.Roll.API.Controllers;
+namespace Dnd.API.Controllers;
 
 [ApiController]
 [Route("api/Characters")]

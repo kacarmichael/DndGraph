@@ -4,7 +4,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>Dnd.Roll.API</RootNamespace>
+        <RootNamespace>Dnd.API</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

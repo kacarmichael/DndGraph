@@ -1,6 +1,8 @@
-﻿using Dnd.Roll.API.Models.Characters;
+﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Implementations;
+using Dnd.API.Models.Characters.Interfaces;
 
-namespace Dnd.Roll.API.DTOs;
+namespace Dnd.API.DTOs;
 
 public class CharacterRequestDto
 {
@@ -31,7 +33,7 @@ public class CharacterRequestDto
         Level = classes.Values.Sum();
     }
 
-    public CharacterRequestDto(Character character)
+    public CharacterRequestDto(ICharacter character)
     {
         AbilityScores = character.Stats.AbilityScores;
         SkillModifiers = character.Stats.SkillModifiers;

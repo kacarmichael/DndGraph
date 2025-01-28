@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Dnd.API.Models.Characters.Interfaces;
 
-namespace Dnd.Roll.API.Models.Characters;
+namespace Dnd.API.Models.Characters.Implementations;
 
 [NotMapped]
-public class Class
+public class Class : IClass
 {
     public string? SpellcastingAbility { get; set; }
 

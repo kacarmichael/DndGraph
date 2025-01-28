@@ -3,10 +3,11 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dnd.API.Models.Characters.Interfaces;
 
-namespace Dnd.Roll.API.Models.Characters;
+namespace Dnd.API.Models.Characters.Implementations;
 
-public class Character
+public class Character : ICharacter
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
@@ -48,7 +49,7 @@ public class Character
         Classes = charClass;
     }
 
-    public bool Equals(Character? other)
+    public bool Equals(ICharacter? other)
     {
         if (other is null) return false;
         if (ReferenceEquals(this, other)) return true;
@@ -61,7 +62,7 @@ public class Character
                Stats.Equals(other.Stats);
     }
 
-    public static bool Compare(Character character1, Character character2)
+    public static bool Compare(ICharacter character1, ICharacter character2)
     {
         return character1.Equals(character2);
     }

@@ -1,7 +1,9 @@
-﻿using Dnd.Roll.API.Models.Characters;
-using Dnd.Roll.API.Models.Dice;
+﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Interfaces;
+using Dnd.API.Models.Dice;
+using Dnd.API.Models.Dice.Interfaces;
 
-namespace Dnd.Roll.API.Models.Rolls;
+namespace Dnd.API.Models.Rolls.Implementations;
 
 public class AbilityCheckRoll : DiceRollBase
 {
@@ -11,13 +13,13 @@ public class AbilityCheckRoll : DiceRollBase
     {
     }
 
-    public AbilityCheckRoll(string ability, Character character)
+    public AbilityCheckRoll(string ability, ICharacter character, IDiceSet diceRolled)
     {
         Ability = ability;
         Roller = character;
         RollType = "abilityCheck";
         Value = Roll();
-        DiceRolled = new DiceSet(1, 20);
+        DiceRolled = diceRolled;
     }
 
     public override int Roll()
@@ -25,7 +27,7 @@ public class AbilityCheckRoll : DiceRollBase
         int res = 0;
         if (Constants.AbilityNames.Contains(Ability))
         {
-            res = new DiceSet(1, 20).Roll() + Roller.Stats.AbilityModifiers[Ability];
+            res = DiceRolled.Roll() + Roller.Stats.AbilityModifiers[Ability];
             if (Roller.Stats.Proficiencies.Contains(Ability))
             {
                 res += Roller.ProficiencyModifier;
@@ -37,7 +39,7 @@ public class AbilityCheckRoll : DiceRollBase
 
         if (Constants.SkillNames.Contains(Ability))
         {
-            res = new DiceSet(1, 20).Roll() + Roller.Stats.SkillModifiers[Ability];
+            res =  DiceRolled.Roll() + Roller.Stats.SkillModifiers[Ability];
             if (Roller.Stats.Proficiencies.Contains(Ability))
             {
                 res += Roller.ProficiencyModifier;

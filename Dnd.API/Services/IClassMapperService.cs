@@ -1,8 +1,9 @@
-﻿using Dnd.Roll.API.Models.Characters;
+﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Interfaces;
 
-namespace Dnd.Roll.API.Services;
+namespace Dnd.API.Services;
 
 public interface IClassMapperService
 {
-    public Class Map(String className);
+    public IClass Map(String className);
 }

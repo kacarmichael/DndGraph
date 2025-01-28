@@ -1,8 +1,9 @@
-﻿using Dnd.Roll.API.Infrastructure;
-using Dnd.Roll.API.Models.Rolls;
+﻿using Dnd.API.Infrastructure;
+using Dnd.API.Models.Rolls;
+using Dnd.API.Models.Rolls.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dnd.Roll.API.Repositories;
+namespace Dnd.API.Repositories;
 
 public class RollRepository : IRollRepository
 {
@@ -15,24 +16,24 @@ public class RollRepository : IRollRepository
         _characterRepository = characterRepository;
     }
 
-    public async Task<DiceRollBase> GetRollById(int id)
+    public async Task<IDiceRoll> GetRollById(int id)
     {
         return await _rollDbContext.Rolls.FirstOrDefaultAsync(x => x.Id == id) ?? null!;
     }
 
-    public async Task AddRoll(DiceRollBase roll)
+    public async Task AddRoll(IDiceRoll roll)
     {
         _rollDbContext.Rolls.Add(roll);
         await _rollDbContext.SaveChangesAsync();
     }
 
-    public async Task AddRollAsync(DiceRollBase roll)
+    public async Task AddRollAsync(IDiceRoll roll)
     {
         _rollDbContext.Rolls.Add(roll);
         await _rollDbContext.SaveChangesAsync();
     }
 
-    public async Task UpdateRoll(DiceRollBase roll)
+    public async Task UpdateRoll(IDiceRoll roll)
     {
         _rollDbContext.Rolls.Update(roll);
         await _rollDbContext.SaveChangesAsync();

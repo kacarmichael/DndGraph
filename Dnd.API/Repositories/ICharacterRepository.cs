@@ -1,13 +1,15 @@
-﻿using Dnd.Roll.API.Models.Characters;
+﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Implementations;
+using Dnd.API.Models.Characters.Interfaces;
 
-namespace Dnd.Roll.API.Repositories;
+namespace Dnd.API.Repositories;
 
 public interface ICharacterRepository
 {
-    Task<Character> GetCharacterAsync(int characterId);
+    Task<ICharacter> GetCharacterAsync(int characterId);
 
-    Task<IEnumerable<Character>> GetAllCharactersAsync();
-    Task<Character> AddCharacter(Character character);
-    void UpdateCharacter(Character character);
+    Task<IEnumerable<ICharacter>> GetAllCharactersAsync();
+    Task<ICharacter> AddCharacter(ICharacter character);
+    void UpdateCharacter(ICharacter character);
     Task<Task> DeleteCharacterAsync(int id);
 }

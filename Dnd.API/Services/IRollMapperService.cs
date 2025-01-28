@@ -1,10 +1,11 @@
-﻿using Dnd.Roll.API.DTOs;
-using Dnd.Roll.API.Models.Rolls;
+﻿using Dnd.API.DTOs;
+using Dnd.API.Models.Rolls;
+using Dnd.API.Models.Rolls.Interfaces;
 
-namespace Dnd.Roll.API.Services;
+namespace Dnd.API.Services;
 
 public interface IRollMapperService
 {
-    public Task<DiceRollBase> Map(RollRequestDto req);
-    public RollResponseDto Map(DiceRollBase roll);
+    public Task<IDiceRoll> Map(RollRequestDto req);
+    public RollResponseDto Map(IDiceRoll roll);
 }

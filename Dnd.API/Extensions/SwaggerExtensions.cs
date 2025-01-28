@@ -3,7 +3,7 @@ using Microsoft.OpenApi.Extensions;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace Dnd.Roll.API.Extensions;
+namespace Dnd.API.Extensions;
 
 public static class SwaggerExtensions
 {

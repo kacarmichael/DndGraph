@@ -1,12 +1,14 @@
-﻿using Dnd.Roll.API.Models.Characters;
+﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Implementations;
+using Dnd.API.Models.Characters.Interfaces;
 
-namespace Dnd.Roll.API.Services;
+namespace Dnd.API.Services;
 
 public interface ICharacterService
 {
-    Task<IEnumerable<Character>> GetAllCharactersAsync();
-    IEnumerable<Character> GetCurrentCharacters();
-    Task<Character> GetCharacterAsync(int id);
-    Class GetClassUsed(string className);
-    Task<Character> AddCharacterAsync(Character character);
+    Task<IEnumerable<ICharacter>> GetAllCharactersAsync();
+    IEnumerable<ICharacter> GetCurrentCharacters();
+    Task<ICharacter> GetCharacterAsync(int id);
+    IClass GetClassUsed(string className);
+    Task<ICharacter> AddCharacterAsync(ICharacter character);
 }

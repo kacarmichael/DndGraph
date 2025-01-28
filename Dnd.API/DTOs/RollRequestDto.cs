@@ -1,7 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using Dnd.Roll.API.Models.Characters;
-
-namespace Dnd.Roll.API.DTOs;
+﻿namespace Dnd.API.DTOs;
 
 public class RollRequestDto
 {

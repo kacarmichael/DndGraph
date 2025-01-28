@@ -1,7 +1,10 @@
-﻿using Dnd.Roll.API.DTOs;
-using Dnd.Roll.API.Models.Rolls;
+﻿using Dnd.API.DTOs;
+using Dnd.API.Models.Dice.Implementations;
+using Dnd.API.Models.Rolls;
+using Dnd.API.Models.Rolls.Implementations;
+using Dnd.API.Models.Rolls.Interfaces;
 
-namespace Dnd.Roll.API.Services;
+namespace Dnd.API.Services;
 
 public class RollMapperService : IRollMapperService
 {
@@ -14,7 +17,7 @@ public class RollMapperService : IRollMapperService
         _classMapper = classMapper;
     }
 
-    public async Task<DiceRollBase> Map(RollRequestDto req)
+    public async Task<IDiceRoll> Map(RollRequestDto req)
     {
         var c = await _characterService.GetCharacterAsync((int)req.CharacterId);
         switch (req.RollType)
@@ -24,24 +27,28 @@ public class RollMapperService : IRollMapperService
                 if (req.CharacterId == null) throw new ArgumentException("CharacterId cannot be null");
                 return new AbilityCheckRoll(
                     ability: req.Ability,
-                    character: c);
+                    character: c,
+                    new DiceSet(1, 20));
 
             case "savingThrow":
                 if (req.Ability == null) throw new ArgumentException("Ability cannot be null");
                 if (req.CharacterId == null) throw new ArgumentException("CharacterId cannot be null");
                 return new SavingThrowRoll(
                     ability: req.Ability,
-                    character: c);
+                    character: c,
+                    new DiceSet(1, 20));
 
             case "attackRollMelee":
                 if (req.CharacterId == null) throw new ArgumentException("CharacterId cannot be null");
                 return new MeleeAttackRoll(
-                    c);
+                    c,
+                    new DiceSet(1, 20));
 
             case "attackRollRanged":
                 if (req.CharacterId == null) throw new ArgumentException("CharacterId cannot be null");
                 return new RangedAttackRoll(
-                    c);
+                    c,
+                    new DiceSet(1, 20));
 
             case "damageRoll":
                 if (req.CharacterId == null) throw new ArgumentException("CharacterId cannot be null");
@@ -49,8 +56,7 @@ public class RollMapperService : IRollMapperService
                 if (req.NumSides == null) throw new ArgumentException("NumSides cannot be null");
                 if (req.Modifier == null) throw new ArgumentException("Modifier cannot be null");
                 return new DamageRoll(
-                    numDice: (int)req.NumDice,
-                    numSides: (int)req.NumSides,
+                    diceRolled: new DiceSet((int)req.NumDice, (int)req.NumSides),
                     modifier: (int)req.Modifier,
                     character: c);
 
@@ -59,14 +65,15 @@ public class RollMapperService : IRollMapperService
                 if (req.ClassUsed == null) throw new ArgumentException("ClassUsed cannot be null");
                 return new SpellAttackRoll(
                     character: c,
-                    classUsed: _classMapper.Map(req.ClassUsed));
+                    classUsed: _classMapper.Map(req.ClassUsed),
+                    new DiceSet(1, 20));
 
             default:
                 throw new ArgumentException("Invalid Roll Type " + req.RollType);
         }
     }
 
-    public RollResponseDto Map(DiceRollBase roll)
+    public RollResponseDto Map(IDiceRoll roll)
     {
         throw new NotImplementedException();
     }

@@ -1,6 +1,7 @@
-﻿using Dnd.Roll.API.Models.Rolls;
+﻿using Dnd.API.Models.Rolls;
+using Dnd.API.Models.Rolls.Interfaces;
 
-namespace Dnd.Roll.API.DTOs;
+namespace Dnd.API.DTOs;
 
 public class RollResponseDto
 {
@@ -9,7 +10,7 @@ public class RollResponseDto
     public int? CharacterId { get; set; }
     public string? CharacterName { get; set; }
 
-    public RollResponseDto(DiceRollBase Roll)
+    public RollResponseDto(IDiceRoll Roll)
     {
         RollType = Roll.RollType;
         RollValue = Roll.Value;

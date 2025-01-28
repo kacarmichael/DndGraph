@@ -1,11 +1,12 @@
-﻿using Dnd.Roll.API.DTOs;
-using Dnd.Roll.API.Models.Dice;
+﻿using Dnd.API.DTOs;
+using Dnd.API.Models.Dice;
+using Dnd.API.Models.Dice.Interfaces;
 
-namespace Dnd.Roll.API.Services;
+namespace Dnd.API.Services;
 
 public interface IRollService
 {
     Task<RollResponseDto> Roll(RollRequestDto req);
 
-    Task<DiceSimulation> Simulate(DiceSet set, int trials);
+    Task<IDiceSimulation> Simulate(IDiceSet set, int trials);
 }

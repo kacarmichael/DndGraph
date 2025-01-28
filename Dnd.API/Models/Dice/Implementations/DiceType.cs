@@ -1,4 +1,4 @@
-﻿namespace Dnd.Roll.API.Models.Dice;
+﻿namespace Dnd.API.Models.Dice.Implementations;
 
 public enum DiceType
 {

@@ -1,6 +1,8 @@
-﻿namespace Dnd.Roll.API.Models.Characters;
+﻿using Dnd.API.Models.Characters.Interfaces;
 
-public class CharacterStats
+namespace Dnd.API.Models.Characters.Implementations;
+
+public class CharacterStats : ICharacterStats
 {
     public Dictionary<string, int>? AbilityScores { get; set; }
 
@@ -64,7 +66,7 @@ public class CharacterStats
         };
     }
 
-    public bool Equals(CharacterStats other)
+    public bool Equals(ICharacterStats other)
     {
         return AbilityScores.Count == other.AbilityScores.Count &&
                !AbilityScores.Except(other.AbilityScores).Any() &&
@@ -74,7 +76,7 @@ public class CharacterStats
                !SkillModifiers.Except(other.SkillModifiers).Any();
     }
 
-    public static bool Compare(CharacterStats character1, CharacterStats character2)
+    public static bool Compare(ICharacterStats character1, ICharacterStats character2)
     {
         return character1.Equals(character2);
     }

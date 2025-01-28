@@ -1,8 +1,8 @@
-﻿using Dnd.Roll.API.DTOs;
-using Dnd.Roll.API.Services;
+﻿using Dnd.API.DTOs;
+using Dnd.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Dnd.Roll.API.Controllers;
+namespace Dnd.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

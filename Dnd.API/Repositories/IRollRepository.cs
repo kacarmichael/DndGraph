@@ -1,9 +1,10 @@
-﻿using Dnd.Roll.API.Models.Rolls;
+﻿using Dnd.API.Models.Rolls;
+using Dnd.API.Models.Rolls.Interfaces;
 
-namespace Dnd.Roll.API.Repositories;
+namespace Dnd.API.Repositories;
 
 public interface IRollRepository
 {
-    public Task AddRoll(DiceRollBase roll);
-    public Task AddRollAsync(DiceRollBase roll);
+    public Task AddRoll(IDiceRoll roll);
+    public Task AddRollAsync(IDiceRoll roll);
 }

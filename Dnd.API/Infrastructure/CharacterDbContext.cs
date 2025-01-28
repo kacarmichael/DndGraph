@@ -1,7 +1,9 @@
-﻿using Dnd.Roll.API.Models.Characters;
+﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Implementations;
+using Dnd.API.Models.Characters.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dnd.Roll.API.Infrastructure;
+namespace Dnd.API.Infrastructure;
 
 public class CharacterDbContext : DbContext
 {
@@ -9,5 +11,5 @@ public class CharacterDbContext : DbContext
     {
     }
 
-    public DbSet<Character> Characters { get; set; }
+    public DbSet<ICharacter> Characters { get; set; }
 }

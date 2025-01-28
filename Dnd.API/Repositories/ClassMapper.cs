@@ -1,10 +1,11 @@
-﻿using Dnd.Roll.API.Models.Characters;
+﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Interfaces;
 
-namespace Dnd.Roll.API.Repositories;
+namespace Dnd.API.Repositories;
 
 public class ClassMapper
 {
-    public Class Map(string className)
+    public IClass Map(string className)
     {
         return Constants.Classes[className];
     }

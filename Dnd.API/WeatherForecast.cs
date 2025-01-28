@@ -1,4 +1,4 @@
-namespace Dnd.Roll.API;
+namespace Dnd.API;
 
 public class WeatherForecast
 {

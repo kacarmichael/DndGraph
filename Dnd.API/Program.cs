@@ -1,7 +1,7 @@
-using Dnd.Roll.API.Extensions;
-using Dnd.Roll.API.Infrastructure;
-using Dnd.Roll.API.Repositories;
-using Dnd.Roll.API.Services;
+using Dnd.API.Extensions;
+using Dnd.API.Infrastructure;
+using Dnd.API.Repositories;
+using Dnd.API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

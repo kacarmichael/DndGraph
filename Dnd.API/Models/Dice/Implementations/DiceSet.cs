@@ -1,6 +1,8 @@
-﻿namespace Dnd.Roll.API.Models.Dice;
+﻿using Dnd.API.Models.Dice.Interfaces;
 
-public class DiceSet
+namespace Dnd.API.Models.Dice.Implementations;
+
+public class DiceSet : IDiceSet
 {
     public int NumDice { get; set; }
     public int NumSides { get; set; }

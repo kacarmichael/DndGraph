@@ -1,7 +1,9 @@
-﻿using Dnd.Roll.API.Models.Rolls;
+﻿using Dnd.API.Models.Rolls;
+using Dnd.API.Models.Rolls.Implementations;
+using Dnd.API.Models.Rolls.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dnd.Roll.API.Infrastructure;
+namespace Dnd.API.Infrastructure;
 
 public class RollDbContext : DbContext
 {
@@ -11,7 +13,7 @@ public class RollDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<DiceRollBase>()
+        modelBuilder.Entity<IDiceRoll>()
             .HasDiscriminator<string>("RollType")
             .HasValue<AbilityCheckRoll>("abilityCheck")
             .HasValue<SavingThrowRoll>("savingThrow")
@@ -21,5 +23,5 @@ public class RollDbContext : DbContext
             .HasValue<SpellAttackRoll>("spellAttackRoll");
     }
 
-    public DbSet<DiceRollBase> Rolls { get; set; }
+    public DbSet<IDiceRoll> Rolls { get; set; }
 }

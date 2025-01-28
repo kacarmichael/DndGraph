@@ -1,8 +1,8 @@
-﻿using Dnd.Roll.API.Models.Characters;
+﻿using Dnd.API.Models.Characters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Dnd.Roll.API.Infrastructure.EntityConfigurations;
+namespace Dnd.API.Infrastructure.EntityConfigurations;
 
 public class CharacterEntityConfiguration : IEntityTypeConfiguration<Character>
 {

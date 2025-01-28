@@ -1,7 +1,9 @@
-﻿using Dnd.Roll.API.Models.Characters;
-using Dnd.Roll.API.Models.Dice;
+﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Interfaces;
+using Dnd.API.Models.Dice;
+using Dnd.API.Models.Dice.Interfaces;
 
-namespace Dnd.Roll.API.Models.Rolls;
+namespace Dnd.API.Models.Rolls.Implementations;
 
 public class SavingThrowRoll : DiceRollBase
 {
@@ -11,13 +13,13 @@ public class SavingThrowRoll : DiceRollBase
     {
     }
 
-    public SavingThrowRoll(string ability, Character character)
+    public SavingThrowRoll(string ability, ICharacter character, IDiceSet diceRolled)
     {
         Ability = ability;
         Roller = character;
         RollType = "savingThrow";
         Value = Roll();
-        DiceRolled = new DiceSet(1, 20);
+        DiceRolled = diceRolled;
     }
 
     public override string Describe() => "Saving Throw";
@@ -29,7 +31,7 @@ public class SavingThrowRoll : DiceRollBase
             throw new ArgumentException("Invalid Ability");
         }
 
-        int res = new DiceSet(1, 20).Roll() + Roller.Stats.AbilityModifiers[Ability];
+        int res = DiceRolled.Roll() + Roller.Stats.AbilityModifiers[Ability];
         if (Roller.Stats.Proficiencies.Contains(Ability))
         {
             res += Roller.ProficiencyModifier;

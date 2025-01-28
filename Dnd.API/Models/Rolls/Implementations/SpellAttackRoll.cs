@@ -1,11 +1,14 @@
-﻿using Dnd.Roll.API.Models.Characters;
-using Dnd.Roll.API.Models.Dice;
+﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Implementations;
+using Dnd.API.Models.Characters.Interfaces;
+using Dnd.API.Models.Dice;
+using Dnd.API.Models.Dice.Interfaces;
 
-namespace Dnd.Roll.API.Models.Rolls;
+namespace Dnd.API.Models.Rolls.Implementations;
 
 public class SpellAttackRoll : DiceRollBase
 {
-    public Class ClassUsed { get; set; }
+    public IClass ClassUsed { get; set; }
 
     public string RollType => "spellAttack";
 
@@ -13,12 +16,12 @@ public class SpellAttackRoll : DiceRollBase
     {
     }
 
-    public SpellAttackRoll(Character character, Class classUsed)
+    public SpellAttackRoll(ICharacter character, IClass classUsed, IDiceSet diceRolled)
     {
         Roller = character;
         ClassUsed = classUsed;
         Value = Roll();
-        DiceRolled = new DiceSet(1, 20);
+        DiceRolled = diceRolled;
     }
 
     public override string Describe() => "Spell Attack";

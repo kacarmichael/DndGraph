@@ -1,7 +1,10 @@
-﻿using Dnd.Roll.API.Models.Characters;
-using Dnd.Roll.API.Models.Dice;
+﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Implementations;
+using Dnd.API.Models.Characters.Interfaces;
+using Dnd.API.Models.Dice;
+using Dnd.API.Models.Dice.Interfaces;
 
-namespace Dnd.Roll.API.Models.Rolls;
+namespace Dnd.API.Models.Rolls.Implementations;
 
 public class MeleeAttackRoll : DiceRollBase
 {
@@ -11,12 +14,12 @@ public class MeleeAttackRoll : DiceRollBase
     {
     }
 
-    public MeleeAttackRoll(Character character)
+    public MeleeAttackRoll(ICharacter character, IDiceSet diceRolled)
     {
         Roller = character;
         RollType = "attackRollMelee";
         //Initialize();
-        DiceRolled = new DiceSet(1, 20);
+        DiceRolled = diceRolled;
         Value = Roll();
         
     }
@@ -37,11 +40,12 @@ public class RangedAttackRoll : DiceRollBase
     {
     }
 
-    public RangedAttackRoll(Character character)
+    public RangedAttackRoll(ICharacter character, IDiceSet diceRolled)
     {
         Roller = character;
         RollType = "attackRollRanged";
         //Initialize();
+        DiceRolled = diceRolled;
         Value = Roll();
     }
 

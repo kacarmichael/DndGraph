@@ -1,7 +1,10 @@
-﻿using Dnd.Roll.API.Models.Characters;
-using Dnd.Roll.API.Models.Dice;
+﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Implementations;
+using Dnd.API.Models.Characters.Interfaces;
+using Dnd.API.Models.Dice;
+using Dnd.API.Models.Dice.Implementations;
 
-namespace Dnd.Roll.API;
+namespace Dnd.API;
 
 public static class Constants
 {
@@ -31,15 +34,15 @@ public static class Constants
         "Sleight of Hand", "Stealth", "Survival"
     ];
 
-    public static readonly Dictionary<string, Class?> Classes = new Dictionary<string, Class?>()
+    public static readonly Dictionary<string, IClass?> Classes = new Dictionary<string, IClass?>()
     {
-        ["Bard"] = new("Charisma", "Bard"),
-        ["Cleric"] = new("Wisdom", "Cleric"),
-        ["Druid"] = new("Wisdom", "Druid"),
-        ["Paladin"] = new("Charisma", "Paladin"),
-        ["Ranger"] = new("Dexterity", "Ranger"),
-        ["Sorcerer"] = new("Charisma", "Sorcerer"),
-        ["Warlock"] = new("Charisma", "Warlock"),
-        ["Wizard"] = new("Intelligence", "Wizard"),
+        ["Bard"] = new Class("Charisma", "Bard"),
+        ["Cleric"] = new Class("Wisdom", "Cleric"),
+        ["Druid"] = new Class("Wisdom", "Druid"),
+        ["Paladin"] = new Class("Charisma", "Paladin"),
+        ["Ranger"] = new Class("Dexterity", "Ranger"),
+        ["Sorcerer"] = new Class("Charisma", "Sorcerer"),
+        ["Warlock"] = new Class("Charisma", "Warlock"),
+        ["Wizard"] = new Class("Intelligence", "Wizard"),
     };
 }

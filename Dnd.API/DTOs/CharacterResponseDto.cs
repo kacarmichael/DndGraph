@@ -1,7 +1,9 @@
-﻿using Dnd.Roll.API.Models.Characters;
-using CharacterStats = Dnd.Roll.API.Models.Characters.CharacterStats;
+﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Implementations;
+using Dnd.API.Models.Characters.Interfaces;
+using CharacterStats = Dnd.API.Models.Characters.CharacterStats;
 
-namespace Dnd.Roll.API.DTOs;
+namespace Dnd.API.DTOs;
 
 public class CharacterResponseDto
 {
@@ -13,7 +15,7 @@ public class CharacterResponseDto
 
     Dictionary<string, int> Classes { get; set; }
 
-    public CharacterResponseDto(Character character)
+    public CharacterResponseDto(ICharacter character)
     {
         Name = character.Name;
         Stats = character.Stats;

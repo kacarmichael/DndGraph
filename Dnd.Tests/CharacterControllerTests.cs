@@ -1,7 +1,7 @@
-﻿using Dnd.Roll.API.Controllers;
-using Dnd.Roll.API.DTOs;
-using Dnd.Roll.API.Models.Characters;
-using Dnd.Roll.API.Services;
+﻿using Dnd.API.Controllers;
+using Dnd.API.DTOs;
+using Dnd.API.Models.Characters;
+using Dnd.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;

@@ -1,21 +1,26 @@
-﻿using Dnd.Roll.API.DTOs;
-using Dnd.Roll.API.Models.Dice;
-using Dnd.Roll.API.Repositories;
+﻿using Dnd.API.DTOs;
+using Dnd.API.Models.Dice;
+using Dnd.API.Models.Dice.Implementations;
+using Dnd.API.Models.Dice.Interfaces;
+using Dnd.API.Models.Rolls.Interfaces;
+using Dnd.API.Repositories;
 
-namespace Dnd.Roll.API.Services;
+namespace Dnd.API.Services;
 
 public class RollService : IRollService
 {
     private readonly ICharacterRepository _characterRepository;
     private readonly IRollRepository _rollRepository;
     private readonly IRollMapperService _rollMapperService;
+    private readonly IDiceSimulationFactory _diceSimulationFactory;
 
     public RollService(ICharacterRepository characterRepository, IRollRepository rollRepository,
-        IRollMapperService rollMapperService)
+        IRollMapperService rollMapperService, IDiceSimulationFactory diceSimulationFactory)
     {
         _characterRepository = characterRepository;
         _rollRepository = rollRepository;
         _rollMapperService = rollMapperService;
+        _diceSimulationFactory = diceSimulationFactory;
     }
 
     public async Task<RollResponseDto> Roll(RollRequestDto req)
@@ -27,8 +32,8 @@ public class RollService : IRollService
         return resp;
     }
 
-    public Task<DiceSimulation> Simulate(DiceSet set, int trials)
+    public Task<IDiceSimulation> Simulate(IDiceSet set, int trials)
     {
-        return Task.FromResult(new DiceSimulation(set, trials));
+        return Task.FromResult(_diceSimulationFactory.CreateSimulation(set, trials));
     }
 }

@@ -1,8 +1,10 @@
-﻿using Dnd.Roll.API.Infrastructure;
-using Dnd.Roll.API.Models.Characters;
+﻿using Dnd.API.Infrastructure;
+using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Implementations;
+using Dnd.API.Models.Characters.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dnd.Roll.API.Repositories;
+namespace Dnd.API.Repositories;
 
 public class CharacterRepository : ICharacterRepository
 {
@@ -13,17 +15,17 @@ public class CharacterRepository : ICharacterRepository
         _context = context;
     }
 
-    public async Task<Character> AddCharacter(Character character)
+    public async Task<ICharacter> AddCharacter(ICharacter character)
     {
         _context.Characters.Add(character);
         await _context.SaveChangesAsync();
         return character;
     }
 
-    public async Task<IEnumerable<Character>> GetAllCharactersAsync() => await _context.Characters.ToListAsync();
+    public async Task<IEnumerable<ICharacter>> GetAllCharactersAsync() => await _context.Characters.ToListAsync();
 
 
-    public async Task<Character> GetCharacterAsync(int characterId)
+    public async Task<ICharacter> GetCharacterAsync(int characterId)
     {
         return await _context.Characters.FirstOrDefaultAsync(x => x.Id == characterId);
     }
@@ -40,5 +42,5 @@ public class CharacterRepository : ICharacterRepository
         return Task.CompletedTask;
     }
 
-    public void UpdateCharacter(Character character) => _context.Characters.Update(character);
+    public void UpdateCharacter(ICharacter character) => _context.Characters.Update(character);
 }
