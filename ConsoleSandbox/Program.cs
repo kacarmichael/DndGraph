@@ -1,9 +1,9 @@
 ﻿// // See https://aka.ms/new-console-template for more information
 //
 // using System.Text.Json;
-// using Dnd.Roll.API;
-// using Dnd.Roll.API.Models.Characters;
-// using Dnd.Roll.API.Models.Rolls;
+// using Dnd.API;
+// using Dnd.API.Models.Characters;
+// using Dnd.API.Models.Rolls;
 //
 // namespace ConsoleSandbox;
 //
@@ -48,7 +48,7 @@
 //         //             "Religion",
 //         //             "Survival"
 //         //         ]),
-//         //     Dnd.Roll.API.Constants.Classes["Warlock"]);
+//         //     Dnd.API.Constants.Classes["Warlock"]);
 //         // int wis_dc = 10;
 //         // int wisSave = theodred.SavingThrow("Wisdom");
 //         // if (wisSave >= wis_dc)

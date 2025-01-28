@@ -5,11 +5,7 @@ namespace Dnd.Roll.API.Models.Rolls;
 
 public class AbilityCheckRoll : DiceRollBase
 {
-    public Character Roller { get; set; }
-
     public string Ability { get; set; }
-
-    //public void Initialize() => Value = Roll();
 
     public AbilityCheckRoll()
     {

@@ -1,10 +1,10 @@
-﻿using Castle.Core.Logging;
-using Dnd.Roll.API.Controllers;
+﻿using Dnd.Roll.API.Controllers;
 using Dnd.Roll.API.DTOs;
 using Dnd.Roll.API.Models.Characters;
 using Dnd.Roll.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using Xunit;
 
 namespace Dnd.Tests;
 
@@ -51,7 +51,7 @@ public class CharacterControllerTests
                 ac: 14,
                 charClass: new Dictionary<string, int>()
                 {
-                    { "Warlock", 6}
+                    { "Warlock", 6 }
                 })
         };
         return characters;
@@ -76,7 +76,7 @@ public class CharacterControllerTests
         Assert.Equal(GetTestCharacters().Count(), result.Count());
         Assert.True(characters.All(x => result.Any(y => Character.Compare(y, x))));
     }
-    
+
     [Fact]
     public void GetCharacterById_ReturnsCharacter()
     {
@@ -88,7 +88,7 @@ public class CharacterControllerTests
         var result = characterController.GetCharacter(0);
         var result_conv = (CharacterResponseDto)((OkObjectResult)result.Result.Result).Value;
         var result_char = result_conv.DtoToCharacter();
-        
+
         Assert.NotNull(result);
         Assert.True(character.Equals(result_char));
     }
@@ -99,11 +99,11 @@ public class CharacterControllerTests
         var character = GetTestCharacters().First();
         _characterServiceMock.Setup(x => x.AddCharacterAsync(It.IsAny<Character>())).ReturnsAsync(character);
         var characterController = new CharacterController(_characterServiceMock.Object);
-        
+
         var result = characterController.PostCharacter(new CharacterRequestDto(character));
 
         var result_conv = ((CharacterResponseDto)((OkObjectResult)result.Result.Result).Value).DtoToCharacter();
-        
+
         Assert.NotNull(result);
         Assert.True(character.Equals(result_conv));
     }

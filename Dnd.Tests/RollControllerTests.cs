@@ -5,6 +5,7 @@ using Dnd.Roll.API.Models.Rolls;
 using Dnd.Roll.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using Xunit;
 
 namespace Dnd.Tests;
 
@@ -53,7 +54,7 @@ public class RollControllerTests
                 ac: 14,
                 charClass: new Dictionary<string, int>()
                 {
-                    { "Warlock", 6}
+                    { "Warlock", 6 }
                 })
         };
         return characters;
@@ -97,10 +98,8 @@ public class RollControllerTests
         var rollController = new RollController(_rollServiceMock.Object, _rollMapperMock.Object);
         var response = rollController.PostRoll(roll);
         var result = (RollResponseDto)((OkObjectResult)response.Result.Result).Value;
-        
+
         Assert.NotNull(result);
         Assert.IsType<int>(result.RollValue);
     }
-    
-    
 }
