@@ -16,6 +16,8 @@ public class CharacterRequestDto
     public int Ac { get; set; }
 
     public int Level { get; set; }
+    
+    public CharacterRequestDto() { }
 
     public CharacterRequestDto(Dictionary<string, int> abilityScores,
         Dictionary<string, int> skillModifiers,

@@ -11,13 +11,14 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
 
-namespace Dnd.Tests;
+namespace Dnd.XUnit;
 
 public class RollControllerTests
 {
     private readonly Mock<IRollService> _rollServiceMock;
     private readonly Mock<IRollMapperService> _rollMapperMock;
     private readonly Mock<ICharacterService> _characterServiceMock;
+    public RollController rollController;
 
     private List<Character> GetTestCharacters()
     {
@@ -78,7 +79,7 @@ public class RollControllerTests
 
     public DiceRollBase GetTestDiceRoll()
     {
-        return new MeleeAttackRoll(GetTestCharacters().First(), new DiceSet(1, 20));
+        return new MeleeAttackRoll(character: GetTestCharacters().First(), new DiceSet(1,20));
     }
 
     public RollResponseDto GetTestRollResponseDto()
@@ -91,15 +92,17 @@ public class RollControllerTests
         _rollServiceMock = new Mock<IRollService>();
         _rollMapperMock = new Mock<IRollMapperService>();
         _characterServiceMock = new Mock<ICharacterService>();
+        _rollServiceMock.Setup(x => x.Roll(It.IsAny<RollRequestDto>())).ReturnsAsync(GetTestRollResponseDto());
+        _rollMapperMock.Setup(x => x.Map(It.IsAny<RollRequestDto>())).ReturnsAsync(GetTestDiceRoll());
+        rollController = new RollController(_rollServiceMock.Object, _rollMapperMock.Object);
     }
 
     [Fact]
     public void PostRoll()
     {
         var roll = GetTestRollRequestDto();
-        _rollServiceMock.Setup(x => x.Roll(It.IsAny<RollRequestDto>())).ReturnsAsync(GetTestRollResponseDto());
-        _rollMapperMock.Setup(x => x.Map(It.IsAny<RollRequestDto>())).ReturnsAsync(GetTestDiceRoll());
-        var rollController = new RollController(_rollServiceMock.Object, _rollMapperMock.Object);
+        
+        
         var response = rollController.PostRoll(roll);
         var result = (RollResponseDto)((OkObjectResult)response.Result.Result).Value;
 

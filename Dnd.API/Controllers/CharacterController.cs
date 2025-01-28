@@ -1,5 +1,6 @@
 ﻿using Dnd.API.DTOs;
 using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Interfaces;
 using Dnd.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +22,8 @@ public class CharacterController : ControllerBase
     public async Task<ActionResult<IEnumerable<CharacterResponseDto>>> GetCharacters()
     {
         var chars = await _characterService.GetAllCharactersAsync();
-        return chars.Select(x => new CharacterResponseDto(x)).ToList();
+        var converted = chars.Select(x => new CharacterResponseDto(character: x)).ToList();
+        return Ok(converted);
     }
 
     [HttpGet("{id:int}")]
@@ -35,12 +37,12 @@ public class CharacterController : ControllerBase
     public async Task<ActionResult<CharacterResponseDto>> PostCharacter([FromBody] CharacterRequestDto req)
     {
         var chars = await GetCharacters();
-        if (chars.Result != null)
+        if (chars.Value != null)
         {
             if (chars.Value.Select(x => x.DtoToCharacter()).Contains(req.DtoToCharacter()))
                 return BadRequest("Character name already exists");
         }
-        Character c = req.DtoToCharacter();
+        ICharacter c = req.DtoToCharacter();
         _characterService.AddCharacterAsync(c);
         CharacterResponseDto resp = new CharacterResponseDto(c);
         return Ok(resp);

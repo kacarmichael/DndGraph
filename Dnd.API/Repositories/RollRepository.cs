@@ -1,19 +1,24 @@
-﻿using Dnd.API.Infrastructure;
+﻿using System.Reflection;
+using Dnd.API.Infrastructure;
 using Dnd.API.Models.Rolls;
+using Dnd.API.Models.Rolls.Implementations;
 using Dnd.API.Models.Rolls.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dnd.API.Repositories;
 
-public class RollRepository : IRollRepository
+public class RollRepository<TRoll> : IRollRepository
+    where TRoll : class, IDiceRoll
 {
     private readonly RollDbContext _rollDbContext;
     private readonly ICharacterRepository _characterRepository;
+    private readonly Type _concreteType;
 
     public RollRepository(RollDbContext rollDbContext, ICharacterRepository characterRepository)
     {
         _rollDbContext = rollDbContext;
         _characterRepository = characterRepository;
+        _concreteType = typeof(TRoll);
     }
 
     public async Task<IDiceRoll> GetRollById(int id)
@@ -23,19 +28,19 @@ public class RollRepository : IRollRepository
 
     public async Task AddRoll(IDiceRoll roll)
     {
-        _rollDbContext.Rolls.Add(roll);
+        _rollDbContext.Rolls.Add((DiceRollBase)roll);
         await _rollDbContext.SaveChangesAsync();
     }
 
     public async Task AddRollAsync(IDiceRoll roll)
     {
-        _rollDbContext.Rolls.Add(roll);
+        _rollDbContext.Rolls.Add((DiceRollBase)roll);
         await _rollDbContext.SaveChangesAsync();
     }
 
     public async Task UpdateRoll(IDiceRoll roll)
     {
-        _rollDbContext.Rolls.Update(roll);
+        _rollDbContext.Rolls.Update((DiceRollBase)roll);
         await _rollDbContext.SaveChangesAsync();
     }
 
@@ -44,7 +49,7 @@ public class RollRepository : IRollRepository
         var roll = await GetRollById(id);
         if (roll != null)
         {
-            _rollDbContext.Rolls.Remove(roll);
+            _rollDbContext.Rolls.Remove((DiceRollBase)roll);
             await _rollDbContext.SaveChangesAsync();
         }
     }

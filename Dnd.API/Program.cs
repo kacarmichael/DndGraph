@@ -1,5 +1,9 @@
 using Dnd.API.Extensions;
 using Dnd.API.Infrastructure;
+using Dnd.API.Models.Characters.Implementations;
+using Dnd.API.Models.Rolls;
+using Dnd.API.Models.Rolls.Implementations;
+using Dnd.API.Models.Rolls.Interfaces;
 using Dnd.API.Repositories;
 using Dnd.API.Services;
 using Microsoft.EntityFrameworkCore;
@@ -20,11 +24,13 @@ builder.Services.AddDbContext<RollDbContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<ICharacterRepository, CharacterRepository>();
-builder.Services.AddTransient<IRollRepository, RollRepository>();
+builder.Services.AddTransient<ICharacterRepository, CharacterRepository<Character>>();
+builder.Services.AddTransient<ICharacterService, CharacterService>(); //<>()
+builder.Services.AddTransient<IRollRepository, RollRepository<DiceRollBase>>();
 builder.Services.AddTransient<IRollMapperService, RollMapperService>();
 builder.Services.AddTransient<IRollService, RollService>();
 builder.Services.AddTransient<IClassMapperService, ClassMapperService>();
+builder.Services.AddTransient<IDiceSimulationFactory, DiceSimulationFactory>();
 
 var app = builder.Build();
 

@@ -13,7 +13,8 @@ public class RollDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<IDiceRoll>()
+        modelBuilder.Entity<DiceRollBase>()
+            //.HasBaseType<IDiceRoll>()
             .HasDiscriminator<string>("RollType")
             .HasValue<AbilityCheckRoll>("abilityCheck")
             .HasValue<SavingThrowRoll>("savingThrow")
@@ -23,5 +24,5 @@ public class RollDbContext : DbContext
             .HasValue<SpellAttackRoll>("spellAttackRoll");
     }
 
-    public DbSet<IDiceRoll> Rolls { get; set; }
+    public DbSet<DiceRollBase> Rolls { get; set; }
 }

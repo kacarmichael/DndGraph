@@ -1,19 +1,21 @@
 ﻿using Dnd.API.Models.Characters;
 using Dnd.API.Models.Characters.Implementations;
 using Dnd.API.Models.Characters.Interfaces;
-using CharacterStats = Dnd.API.Models.Characters.CharacterStats;
+using CharacterStats = Dnd.API.Models.Characters.Implementations.CharacterStats;
 
 namespace Dnd.API.DTOs;
 
 public class CharacterResponseDto
 {
-    string Name { get; set; }
-    CharacterStats Stats { get; set; }
-    List<string> Proficiencies { get; set; }
-    int Level { get; set; }
-    int Ac { get; set; }
+    public string Name { get; set; }
+    public CharacterStats Stats { get; set; }
+    public List<string> Proficiencies { get; set; }
+    public int Level { get; set; }
+    public int Ac { get; set; }
 
-    Dictionary<string, int> Classes { get; set; }
+    public Dictionary<string, int> Classes { get; set; }
+    
+    public CharacterResponseDto() { }
 
     public CharacterResponseDto(ICharacter character)
     {
@@ -25,7 +27,7 @@ public class CharacterResponseDto
         Classes = character.Classes;
     }
 
-    public Character DtoToCharacter()
+    public ICharacter DtoToCharacter()
     {
         return new Character(
             name: Name,

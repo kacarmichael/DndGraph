@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
 
-namespace Dnd.Tests;
+namespace Dnd.XUnit;
 
 public class CharacterControllerTests
 {
     private readonly Mock<ICharacterService> _characterServiceMock;
+    private readonly List<Character> characters;
+    private readonly Character character;
+    public CharacterController characterController;
 
     private List<Character> GetTestCharacters()
     {
@@ -61,28 +64,34 @@ public class CharacterControllerTests
     public CharacterControllerTests()
     {
         _characterServiceMock = new Mock<ICharacterService>();
+        characters = GetTestCharacters();
+        _characterServiceMock.Setup(x => x.GetAllCharactersAsync()).ReturnsAsync(characters);
+        character = GetTestCharacters().First();
+        _characterServiceMock.Setup(x => x.GetCharacterAsync(It.IsAny<int>())).ReturnsAsync(character);
+        _characterServiceMock.Setup(x => x.AddCharacterAsync(It.IsAny<Character>())).ReturnsAsync(character);
+        characterController = new CharacterController(_characterServiceMock.Object);
     }
 
     [Fact]
     public void GetCharacterList_ReturnsAllCharacters()
     {
-        var characters = GetTestCharacters();
-        _characterServiceMock.Setup(x => x.GetAllCharactersAsync()).ReturnsAsync(characters);
+        
 
         var characterController = new CharacterController(_characterServiceMock.Object);
 
-        var result = characterController.GetCharacters().Result.Value.Select(x => x.DtoToCharacter()).ToList();
+        var result = characterController.GetCharacters();
+        var conv = ((OkObjectResult)result.Result.Result).Value;
+        var list = (conv as IEnumerable<CharacterResponseDto>).Select(x => x.DtoToCharacter()).ToList();
 
         Assert.NotNull(result);
-        Assert.Equal(GetTestCharacters().Count(), result.Count());
-        Assert.True(characters.All(x => result.Any(y => Character.Compare(y, x))));
+        Assert.Equal(characters.Count(), list.Count());
+        Assert.True(characters.All(x => list.Any(y => Character.Compare(y, x))));
     }
 
     [Fact]
     public void GetCharacterById_ReturnsCharacter()
     {
-        var character = GetTestCharacters().First();
-        _characterServiceMock.Setup(x => x.GetCharacterAsync(It.IsAny<int>())).ReturnsAsync(character);
+        
         var test = _characterServiceMock.Object.GetCharacterAsync(0);
         var characterController = new CharacterController(_characterServiceMock.Object);
 
@@ -97,10 +106,6 @@ public class CharacterControllerTests
     [Fact]
     public void PostCharacter_ReturnsRequest()
     {
-        var character = GetTestCharacters().First();
-        _characterServiceMock.Setup(x => x.AddCharacterAsync(It.IsAny<Character>())).ReturnsAsync(character);
-        var characterController = new CharacterController(_characterServiceMock.Object);
-
         var result = characterController.PostCharacter(new CharacterRequestDto(character));
 
         var result_conv = ((CharacterResponseDto)((OkObjectResult)result.Result.Result).Value).DtoToCharacter();

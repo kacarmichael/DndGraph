@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Core", "Dnd.Core\Dnd.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.API", "Dnd.API\Dnd.API.csproj", "{DC178E46-ABE6-4EF6-8FC8-8C5088FD5682}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Tests", "Dnd.Tests\Dnd.Tests.csproj", "{EEADD2ED-4FFC-482B-9FF8-535C54DE2B4A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.XUnit", "Dnd.XUnit\Dnd.XUnit.csproj", "{A2FBEB7A-EA63-4844-9AC4-12415DAE41BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,9 +26,9 @@ Global
 		{DC178E46-ABE6-4EF6-8FC8-8C5088FD5682}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC178E46-ABE6-4EF6-8FC8-8C5088FD5682}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC178E46-ABE6-4EF6-8FC8-8C5088FD5682}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEADD2ED-4FFC-482B-9FF8-535C54DE2B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEADD2ED-4FFC-482B-9FF8-535C54DE2B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEADD2ED-4FFC-482B-9FF8-535C54DE2B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEADD2ED-4FFC-482B-9FF8-535C54DE2B4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2FBEB7A-EA63-4844-9AC4-12415DAE41BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2FBEB7A-EA63-4844-9AC4-12415DAE41BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2FBEB7A-EA63-4844-9AC4-12415DAE41BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2FBEB7A-EA63-4844-9AC4-12415DAE41BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,5 @@
 ﻿using Dnd.API.Models.Characters;
+using Dnd.API.Models.Characters.Implementations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

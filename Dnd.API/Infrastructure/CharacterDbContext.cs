@@ -10,6 +10,11 @@ public class CharacterDbContext : DbContext
     public CharacterDbContext(DbContextOptions<CharacterDbContext> options) : base(options)
     {
     }
+    
+    // protected override void OnModelCreating(ModelBuilder modelBuilder)
+    // {
+    //     modelBuilder.Entity<Character>().HasBaseType<ICharacter>();
+    // }
 
-    public DbSet<ICharacter> Characters { get; set; }
+    public DbSet<Character> Characters { get; set; }
 }
