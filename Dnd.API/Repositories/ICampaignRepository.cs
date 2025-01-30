@@ -1,0 +1,13 @@
+﻿using Dnd.API.Models.Campaigns.Interfaces;
+
+namespace Dnd.API.Repositories;
+
+public interface ICampaignRepository
+{
+    Task<ICampaign> GetCampaignByIdAsync(int campaignId);
+    Task<IEnumerable<ICampaign>> GetCampaignsAsync();
+    Task<ICampaign> AddCampaignAsync(ICampaign campaign);
+    Task<ICampaign> UpdateCampaignAsync(ICampaign campaign);
+    Task<ICampaign> DeleteCampaignByIdAsync(int campaignId);
+    Task<ICampaign> DeleteCampaignAsync(ICampaign campaign);
+}

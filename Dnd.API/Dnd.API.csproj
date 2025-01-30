@@ -23,4 +23,8 @@
         <ProjectReference Include="..\Dnd.Core\Dnd.Core.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Models\Users\Implementations\" />
+    </ItemGroup>
+
 </Project>
