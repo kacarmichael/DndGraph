@@ -5,10 +5,9 @@ namespace Dnd.API.Infrastructure;
 
 public class SessionDbContext : DbContext
 {
-    public SessionDbContext(DbContextOptions<SessionDbContext> options)
+    public SessionDbContext(DbContextOptions<SessionDbContext> options) : base(options)
     {
-        
     }
-    
+
     public DbSet<CampaignSession> CampaignSessions { get; set; }
 }

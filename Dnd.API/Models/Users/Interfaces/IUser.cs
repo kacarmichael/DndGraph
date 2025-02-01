@@ -4,6 +4,7 @@ namespace Dnd.API.Models.Users.Interfaces;
 
 public interface IUser
 {
+    int Id { get; }
     string Username { get; }
     List<ICharacter> Characters { get; }
 }
