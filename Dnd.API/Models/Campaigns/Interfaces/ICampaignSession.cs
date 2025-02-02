@@ -3,5 +3,5 @@
 public interface ICampaignSession
 {
     ICampaign Campaign { get; }
-    DateTime SessionDate { get; }
+    DateTime? SessionDate { get; set; }
 }

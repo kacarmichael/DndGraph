@@ -7,13 +7,13 @@ public class CampaignSession : ICampaignSession
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
-    
-    public ICampaign Campaign { get; }
-    public DateTime SessionDate { get; }
 
-    public CampaignSession(ICampaign campaign, DateTime sessionDate)
+    public ICampaign Campaign { get; }
+    public DateTime? SessionDate { get; set; }
+
+    public CampaignSession(ICampaign campaign, DateTime? sessionDate)
     {
         Campaign = campaign;
-        SessionDate = sessionDate;
+        SessionDate = sessionDate ?? null;
     }
 }

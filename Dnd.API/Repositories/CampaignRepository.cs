@@ -19,7 +19,7 @@ public class CampaignRepository<TCampaign> : ICampaignRepository where TCampaign
         return await _context.Campaigns.FindAsync(campaignId);
     }
 
-    public async Task<ICampaign> AddCampaignAsync(ICampaign campaign)
+    public async Task<ICampaign> CreateCampaignAsync(ICampaign campaign)
     {
         _context.Campaigns.Add((Campaign)campaign);
         await _context.SaveChangesAsync();
