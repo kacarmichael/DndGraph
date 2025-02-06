@@ -1,9 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleSandbox", "ConsoleSandbox\ConsoleSandbox.csproj", "{C4CBD97F-6C43-4DA4-B2D5-C1DC31626FCA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Core", "Dnd.Core\Dnd.Core.csproj", "{4169BFBC-118B-4FDE-9A50-6D71A75465E8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.API", "Dnd.API\Dnd.API.csproj", "{DC178E46-ABE6-4EF6-8FC8-8C5088FD5682}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.XUnit", "Dnd.XUnit\Dnd.XUnit.csproj", "{A2FBEB7A-EA63-4844-9AC4-12415DAE41BB}"
@@ -14,14 +10,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C4CBD97F-6C43-4DA4-B2D5-C1DC31626FCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4CBD97F-6C43-4DA4-B2D5-C1DC31626FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4CBD97F-6C43-4DA4-B2D5-C1DC31626FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4CBD97F-6C43-4DA4-B2D5-C1DC31626FCA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4169BFBC-118B-4FDE-9A50-6D71A75465E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4169BFBC-118B-4FDE-9A50-6D71A75465E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4169BFBC-118B-4FDE-9A50-6D71A75465E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4169BFBC-118B-4FDE-9A50-6D71A75465E8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DC178E46-ABE6-4EF6-8FC8-8C5088FD5682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DC178E46-ABE6-4EF6-8FC8-8C5088FD5682}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC178E46-ABE6-4EF6-8FC8-8C5088FD5682}.Release|Any CPU.ActiveCfg = Release|Any CPU

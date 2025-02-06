@@ -1,6 +1,8 @@
 ﻿using Dnd.API.Models.Characters.Implementations;
 using Dnd.API.Models.Characters.Interfaces;
 using Dnd.API.Repositories;
+using Dnd.API.Repositories.Interfaces;
+using Dnd.API.Services.Interfaces;
 
 namespace Dnd.API.Services;
 

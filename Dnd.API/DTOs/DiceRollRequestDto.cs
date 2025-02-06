@@ -1,4 +1,6 @@
-﻿namespace Dnd.API.DTOs;
+﻿using Dnd.API.Models.Dice.Implementations;
+
+namespace Dnd.API.DTOs;
 
 public class DiceRollRequestDto
 {
@@ -20,4 +22,8 @@ public class DiceRollRequestDto
         D20 = d20;
         D100 = d100;
     }
+    
+    public int[] ToArray() => new[] { D4, D6, D8, D10, D12, D20, D100 };
+    
+    public DiceSet[] ToDiceSets() => new[] { new DiceSet(D4, 4), new DiceSet(D6, 6), new DiceSet(D8, 8), new DiceSet(D10, 10), new DiceSet(D12, 12), new DiceSet(D20, 20), new DiceSet(D100, 100) };
 }

@@ -1,6 +1,6 @@
 ﻿using Dnd.API.Models.Campaigns.Interfaces;
 
-namespace Dnd.API.Repositories;
+namespace Dnd.API.Repositories.Interfaces;
 
 public interface ICampaignSessionRepository
 {

@@ -1,6 +1,6 @@
 ﻿using Dnd.API.Models.Campaigns.Interfaces;
 
-namespace Dnd.API.Services;
+namespace Dnd.API.Services.Interfaces;
 
 public interface ICampaignService
 {

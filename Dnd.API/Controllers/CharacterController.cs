@@ -1,6 +1,7 @@
 ﻿using Dnd.API.DTOs;
 using Dnd.API.Models.Characters.Interfaces;
 using Dnd.API.Services;
+using Dnd.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dnd.API.Controllers;

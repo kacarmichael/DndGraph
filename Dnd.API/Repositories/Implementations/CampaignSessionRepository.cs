@@ -1,9 +1,10 @@
 ﻿using Dnd.API.Infrastructure;
 using Dnd.API.Models.Campaigns.Implementations;
 using Dnd.API.Models.Campaigns.Interfaces;
+using Dnd.API.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dnd.API.Repositories;
+namespace Dnd.API.Repositories.Implementations;
 
 public class CampaignSessionRepository : ICampaignSessionRepository
 {

@@ -2,6 +2,7 @@
 using Dnd.API.Models.Dice.Implementations;
 using Dnd.API.Models.Rolls.Implementations;
 using Dnd.API.Models.Rolls.Interfaces;
+using Dnd.API.Services.Interfaces;
 
 namespace Dnd.API.Services;
 

@@ -4,7 +4,10 @@ using Dnd.API.Models.Characters.Implementations;
 using Dnd.API.Models.Rolls.Implementations;
 using Dnd.API.Models.Rolls.Interfaces;
 using Dnd.API.Repositories;
+using Dnd.API.Repositories.Implementations;
+using Dnd.API.Repositories.Interfaces;
 using Dnd.API.Services;
+using Dnd.API.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

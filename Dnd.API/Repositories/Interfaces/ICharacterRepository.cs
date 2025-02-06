@@ -1,6 +1,6 @@
 ﻿using Dnd.API.Models.Characters.Interfaces;
 
-namespace Dnd.API.Repositories;
+namespace Dnd.API.Repositories.Interfaces;
 
 public interface ICharacterRepository
 {

@@ -1,5 +1,6 @@
 ﻿using Dnd.API.Models.Campaigns.Interfaces;
 using Dnd.API.Services;
+using Dnd.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dnd.API.Controllers;

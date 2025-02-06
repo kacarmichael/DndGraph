@@ -3,6 +3,8 @@ using Dnd.API.Models.Dice.Implementations;
 using Dnd.API.Models.Dice.Interfaces;
 using Dnd.API.Models.Rolls.Interfaces;
 using Dnd.API.Repositories;
+using Dnd.API.Repositories.Interfaces;
+using Dnd.API.Services.Interfaces;
 
 namespace Dnd.API.Services;
 
@@ -38,16 +40,6 @@ public class RollService : IRollService
 
     public DiceRollResponseDto DiceRoll(DiceRollRequestDto req)
     {
-        int[] dice = [req.D4, req.D6, req.D8, req.D10, req.D12, req.D20, req.D100];
-        int total = 0;
-        foreach (int numDice in dice)
-        {
-            for (int i = 0; i < numDice; i++)
-            {
-                total += Dice.DiceBySide[numDice].Roll();
-            }
-        }
-
         return new DiceRollResponseDto(
             d4: req.D4,
             d6: req.D6,
@@ -56,6 +48,6 @@ public class RollService : IRollService
             d12: req.D12,
             d20: req.D20,
             d100: req.D100,
-            total: total);
+            total: req.ToDiceSets().Sum(x => x.Roll()));
     }
 }

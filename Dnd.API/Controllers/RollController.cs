@@ -1,5 +1,6 @@
 ﻿using Dnd.API.DTOs;
 using Dnd.API.Services;
+using Dnd.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dnd.API.Controllers;
@@ -23,6 +24,6 @@ public class RollController : ControllerBase
     }
 
     [HttpPost("/dice")]
-    public async Task<ActionResult<DiceRollResponseDto>> PostDiceRoll([FromBody] DiceRollRequestDto req) =>
-        Ok(await _rollService.DiceRoll(req));>
+    public Task<ActionResult<DiceRollResponseDto>> PostDiceRoll([FromBody] DiceRollRequestDto req) =>
+        Task.FromResult<ActionResult<DiceRollResponseDto>>(Ok(_rollService.DiceRoll(req)));
 }

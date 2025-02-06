@@ -1,6 +1,6 @@
 ﻿using Dnd.API.Models.Characters.Interfaces;
 
-namespace Dnd.API.Services;
+namespace Dnd.API.Services.Interfaces;
 
 public interface IClassMapperService
 {

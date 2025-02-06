@@ -1,7 +1,7 @@
 ﻿using Dnd.API.DTOs;
 using Dnd.API.Models.Rolls.Interfaces;
 
-namespace Dnd.API.Services;
+namespace Dnd.API.Services.Interfaces;
 
 public interface IRollMapperService
 {

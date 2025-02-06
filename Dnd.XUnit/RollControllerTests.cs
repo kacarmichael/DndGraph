@@ -4,6 +4,7 @@ using Dnd.API.Models.Characters.Implementations;
 using Dnd.API.Models.Dice.Implementations;
 using Dnd.API.Models.Rolls.Implementations;
 using Dnd.API.Services;
+using Dnd.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 

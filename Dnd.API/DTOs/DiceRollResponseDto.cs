@@ -35,13 +35,4 @@ public class DiceRollResponseDto
         D20 = req.D20;
         D100 = req.D100;
     }
-
-    public int rollDice()
-    {
-        int total = 0;
-        foreach (int diceType in Dice.DiceTypes)
-        {
-            total += Dice.D4.Roll();
-        }
-    }
 }

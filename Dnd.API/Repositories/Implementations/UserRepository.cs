@@ -1,8 +1,9 @@
 ﻿using Dnd.API.Infrastructure;
 using Dnd.API.Models.Users.Implementations;
 using Dnd.API.Models.Users.Interfaces;
+using Dnd.API.Repositories.Interfaces;
 
-namespace Dnd.API.Repositories;
+namespace Dnd.API.Repositories.Implementations;
 
 public class UserRepository : IUserRepository
 {

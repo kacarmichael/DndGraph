@@ -1,5 +1,7 @@
 ﻿using Dnd.API.Models.Users.Interfaces;
 using Dnd.API.Repositories;
+using Dnd.API.Repositories.Interfaces;
+using Dnd.API.Services.Interfaces;
 
 namespace Dnd.API.Services;
 
