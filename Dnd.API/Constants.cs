@@ -1,25 +1,11 @@
-﻿using Dnd.API.Models.Characters;
-using Dnd.API.Models.Characters.Implementations;
+﻿using Dnd.API.Models.Characters.Implementations;
 using Dnd.API.Models.Characters.Interfaces;
-using Dnd.API.Models.Dice;
-using Dnd.API.Models.Dice.Implementations;
 
 namespace Dnd.API;
 
 public static class Constants
 {
     public static readonly List<int> DiceSideValues = [4, 6, 8, 10, 12, 20, 100];
-
-    public static Dictionary<int, Die> DiceTypeSides = new()
-    {
-        { 4, Dice.D4 },
-        { 6, Dice.D6 },
-        { 8, Dice.D8 },
-        { 10, Dice.D10 },
-        { 12, Dice.D12 },
-        { 20, Dice.D20 },
-        { 100, Dice.D100 }
-    };
 
     public static readonly List<string?> AbilityNames =
     [

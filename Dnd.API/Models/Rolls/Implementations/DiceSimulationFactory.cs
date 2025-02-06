@@ -2,7 +2,7 @@
 using Dnd.API.Models.Dice.Interfaces;
 using Dnd.API.Models.Rolls.Interfaces;
 
-namespace Dnd.API.Models.Rolls;
+namespace Dnd.API.Models.Rolls.Implementations;
 
 public class DiceSimulationFactory : IDiceSimulationFactory
 {

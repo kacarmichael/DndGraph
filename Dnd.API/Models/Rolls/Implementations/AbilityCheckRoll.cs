@@ -1,6 +1,4 @@
-﻿using Dnd.API.Models.Characters;
-using Dnd.API.Models.Characters.Interfaces;
-using Dnd.API.Models.Dice;
+﻿using Dnd.API.Models.Characters.Interfaces;
 using Dnd.API.Models.Dice.Interfaces;
 
 namespace Dnd.API.Models.Rolls.Implementations;
@@ -39,7 +37,7 @@ public class AbilityCheckRoll : DiceRollBase
 
         if (Constants.SkillNames.Contains(Ability))
         {
-            res =  DiceRolled.Roll() + Roller.Stats.SkillModifiers[Ability];
+            res = DiceRolled.Roll() + Roller.Stats.SkillModifiers[Ability];
             if (Roller.Stats.Proficiencies.Contains(Ability))
             {
                 res += Roller.ProficiencyModifier;

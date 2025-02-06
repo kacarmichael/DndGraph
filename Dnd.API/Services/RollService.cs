@@ -1,5 +1,4 @@
 ﻿using Dnd.API.DTOs;
-using Dnd.API.Models.Dice;
 using Dnd.API.Models.Dice.Implementations;
 using Dnd.API.Models.Dice.Interfaces;
 using Dnd.API.Models.Rolls.Interfaces;
@@ -35,5 +34,28 @@ public class RollService : IRollService
     public Task<IDiceSimulation> Simulate(IDiceSet set, int trials)
     {
         return Task.FromResult(_diceSimulationFactory.CreateSimulation(set, trials));
+    }
+
+    public DiceRollResponseDto DiceRoll(DiceRollRequestDto req)
+    {
+        int[] dice = [req.D4, req.D6, req.D8, req.D10, req.D12, req.D20, req.D100];
+        int total = 0;
+        foreach (int numDice in dice)
+        {
+            for (int i = 0; i < numDice; i++)
+            {
+                total += Dice.DiceBySide[numDice].Roll();
+            }
+        }
+
+        return new DiceRollResponseDto(
+            d4: req.D4,
+            d6: req.D6,
+            d8: req.D8,
+            d10: req.D10,
+            d12: req.D12,
+            d20: req.D20,
+            d100: req.D100,
+            total: total);
     }
 }

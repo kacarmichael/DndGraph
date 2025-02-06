@@ -1,6 +1,4 @@
-﻿using Dnd.API.Models.Characters;
-using Dnd.API.Models.Characters.Interfaces;
-using Dnd.API.Models.Dice;
+﻿using Dnd.API.Models.Characters.Interfaces;
 using Dnd.API.Models.Dice.Interfaces;
 
 namespace Dnd.API.Models.Rolls.Implementations;
@@ -23,7 +21,7 @@ public class DamageRoll : DiceRollBase
         NumDice = diceRolled.NumDice;
         NumSides = diceRolled.NumSides;
         Modifier = modifier;
-        
+
         Value = Roll();
     }
 

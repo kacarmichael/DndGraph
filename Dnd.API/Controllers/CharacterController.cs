@@ -1,5 +1,4 @@
 ﻿using Dnd.API.DTOs;
-using Dnd.API.Models.Characters;
 using Dnd.API.Models.Characters.Interfaces;
 using Dnd.API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +41,7 @@ public class CharacterController : ControllerBase
             if (chars.Value.Select(x => x.DtoToCharacter()).Contains(req.DtoToCharacter()))
                 return BadRequest("Character name already exists");
         }
+
         ICharacter c = req.DtoToCharacter();
         _characterService.AddCharacterAsync(c);
         CharacterResponseDto resp = new CharacterResponseDto(c);

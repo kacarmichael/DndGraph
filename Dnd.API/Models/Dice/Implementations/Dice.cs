@@ -30,4 +30,26 @@ public static class Dice
     public static readonly Die D12 = new Die(12);
     public static readonly Die D20 = new Die(20);
     public static readonly Die D100 = new Die(100);
+
+    public static readonly List<int> DiceTypes = new()
+    {
+        4,
+        6,
+        8,
+        10,
+        12,
+        20,
+        100
+    };
+
+    public static Dictionary<int, Die> DiceBySide = new()
+    {
+        { 4, D4 },
+        { 6, D6 },
+        { 8, D8 },
+        { 10, D10 },
+        { 12, D12 },
+        { 20, D20 },
+        { 100, D100 }
+    };
 }

@@ -26,7 +26,7 @@ public class CampaignRepository<TCampaign> : ICampaignRepository where TCampaign
         return campaign;
     }
 
-    public async Task<IEnumerable<ICampaign>> GetCampaignsAsync()
+    public async Task<IEnumerable<ICampaign>> GetAllCampaignsAsync()
     {
         return await _context.Campaigns
             .OfType<ICampaign>()

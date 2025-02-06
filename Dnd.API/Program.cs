@@ -1,7 +1,6 @@
 using Dnd.API.Extensions;
 using Dnd.API.Infrastructure;
 using Dnd.API.Models.Characters.Implementations;
-using Dnd.API.Models.Rolls;
 using Dnd.API.Models.Rolls.Implementations;
 using Dnd.API.Models.Rolls.Interfaces;
 using Dnd.API.Repositories;
@@ -32,6 +31,17 @@ builder.Services.AddTransient<IRollService, RollService>();
 builder.Services.AddTransient<IClassMapperService, ClassMapperService>();
 builder.Services.AddTransient<IDiceSimulationFactory, DiceSimulationFactory>();
 
+builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowLocalhost",
+            builder =>
+            {
+                builder.WithOrigins("http://localhost:3002", "https://localhost:3002").AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+    }
+);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -58,5 +68,7 @@ app.MapControllers();
 // dbContext.Database.EnsureCreated();
 // dbContext.Populate();
 // }
+
+app.UseCors("AllowLocalhost");
 
 app.Run();

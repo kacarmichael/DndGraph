@@ -1,4 +1,4 @@
-﻿//using Dnd.API.Models.Rolls;
+﻿//using dnd.apiModels.Rolls;
 
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;

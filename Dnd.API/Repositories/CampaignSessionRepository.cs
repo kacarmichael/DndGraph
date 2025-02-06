@@ -13,7 +13,7 @@ public class CampaignSessionRepository : ICampaignSessionRepository
     {
         _context = context;
     }
-    
+
     public async Task<IEnumerable<ICampaignSession>> GetCampaignSessionsAsync()
     {
         return await _context.CampaignSessions
@@ -65,8 +65,12 @@ public class CampaignSessionRepository : ICampaignSessionRepository
         return await Task.FromResult<IEnumerable<ICampaignSession>>(
             _context.CampaignSessions.Where(
                 x => x.Campaign.Id == campaignId));
-        
     }
-    
-    
+
+    public async Task<ICampaignSession> CreateCampaignSessionAsync(ICampaignSession campaignSession)
+    {
+        _context.CampaignSessions.Add((CampaignSession)campaignSession);
+        await _context.SaveChangesAsync();
+        return campaignSession;
+    }
 }

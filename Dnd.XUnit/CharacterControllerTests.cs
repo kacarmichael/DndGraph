@@ -1,13 +1,11 @@
 ﻿using Dnd.API.Controllers;
 using Dnd.API.DTOs;
-using Dnd.API.Models.Characters;
 using Dnd.API.Models.Characters.Implementations;
 using Dnd.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using Xunit;
 
-namespace Dnd.XUnit;
+namespace dnd.xunit2;
 
 public class CharacterControllerTests
 {
@@ -75,8 +73,6 @@ public class CharacterControllerTests
     [Fact]
     public void GetCharacterList_ReturnsAllCharacters()
     {
-        
-
         var characterController = new CharacterController(_characterServiceMock.Object);
 
         var result = characterController.GetCharacters();
@@ -91,7 +87,6 @@ public class CharacterControllerTests
     [Fact]
     public void GetCharacterById_ReturnsCharacter()
     {
-        
         var test = _characterServiceMock.Object.GetCharacterAsync(0);
         var characterController = new CharacterController(_characterServiceMock.Object);
 

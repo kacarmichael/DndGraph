@@ -1,21 +1,22 @@
-﻿using Dnd.API.Models.Characters;
-using Dnd.API.Models.Characters.Implementations;
+﻿using Dnd.API.Models.Characters.Implementations;
 using Dnd.API.Models.Characters.Interfaces;
-using CharacterStats = Dnd.API.Models.Characters.Implementations.CharacterStats;
+using Characters_Implementations_CharacterStats = Dnd.API.Models.Characters.Implementations.CharacterStats;
 
 namespace Dnd.API.DTOs;
 
 public class CharacterResponseDto
 {
     public string Name { get; set; }
-    public CharacterStats Stats { get; set; }
+    public Characters_Implementations_CharacterStats Stats { get; set; }
     public List<string> Proficiencies { get; set; }
     public int Level { get; set; }
     public int Ac { get; set; }
 
     public Dictionary<string, int> Classes { get; set; }
-    
-    public CharacterResponseDto() { }
+
+    public CharacterResponseDto()
+    {
+    }
 
     public CharacterResponseDto(ICharacter character)
     {

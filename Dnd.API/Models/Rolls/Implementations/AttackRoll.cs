@@ -1,7 +1,4 @@
-﻿using Dnd.API.Models.Characters;
-using Dnd.API.Models.Characters.Implementations;
-using Dnd.API.Models.Characters.Interfaces;
-using Dnd.API.Models.Dice;
+﻿using Dnd.API.Models.Characters.Interfaces;
 using Dnd.API.Models.Dice.Interfaces;
 
 namespace Dnd.API.Models.Rolls.Implementations;
@@ -21,7 +18,6 @@ public class MeleeAttackRoll : DiceRollBase
         //Initialize();
         DiceRolled = diceRolled;
         Value = Roll();
-        
     }
 
     public override int Roll()

@@ -1,5 +1,4 @@
-﻿using Dnd.API.Models.Characters;
-using Dnd.API.Models.Characters.Implementations;
+﻿using Dnd.API.Models.Characters.Implementations;
 using Dnd.API.Models.Characters.Interfaces;
 
 namespace Dnd.API.DTOs;
@@ -16,8 +15,10 @@ public class CharacterRequestDto
     public int Ac { get; set; }
 
     public int Level { get; set; }
-    
-    public CharacterRequestDto() { }
+
+    public CharacterRequestDto()
+    {
+    }
 
     public CharacterRequestDto(Dictionary<string, int> abilityScores,
         Dictionary<string, int> skillModifiers,

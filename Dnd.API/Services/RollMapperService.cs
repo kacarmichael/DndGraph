@@ -1,6 +1,5 @@
 ﻿using Dnd.API.DTOs;
 using Dnd.API.Models.Dice.Implementations;
-using Dnd.API.Models.Rolls;
 using Dnd.API.Models.Rolls.Implementations;
 using Dnd.API.Models.Rolls.Interfaces;
 

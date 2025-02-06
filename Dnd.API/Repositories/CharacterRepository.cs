@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using Dnd.API.Infrastructure;
-using Dnd.API.Models.Characters;
+﻿using Dnd.API.Infrastructure;
 using Dnd.API.Models.Characters.Implementations;
 using Dnd.API.Models.Characters.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +24,7 @@ public class CharacterRepository<TCharacter> : ICharacterRepository
         return character;
     }
 
-    public async Task<IEnumerable<ICharacter>> GetAllCharactersAsync() => 
+    public async Task<IEnumerable<ICharacter>> GetAllCharactersAsync() =>
         await _context.Characters
             .OfType<ICharacter>()
             .ToListAsync();

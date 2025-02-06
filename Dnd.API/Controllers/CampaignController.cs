@@ -36,12 +36,12 @@ public class CampaignController : ControllerBase
     [HttpPost("{id:int}/sessions")]
     public async Task<IActionResult> CreateCampaignSession(int id, [FromBody] ICampaignSession campaignSession)
     {
-        Ok(await _campaignService.CreateCampaignSessionAsync(campaignSession));
+        return Ok(await _campaignService.CreateCampaignSessionAsync(campaignSession));
     }
 
     [HttpDelete("{id:int}/sessions/{sessionId:int}")]
-    public async Task<IActionResult> DeleteCampaignSession(int id, int sessionId) =>
-        Ok(await _campaignService.DeleteCampaignSessionByIdAsync(id, sessionId));
+    public async Task<IActionResult> DeleteCampaignSession(int id) =>
+        Ok(await _campaignService.DeleteCampaignSessionByIdAsync(id));
 
     [HttpPut("{id:int}/sessions/{sessionId:int}")]
     public async Task<IActionResult> UpdateCampaignSession(int id, int sessionId,

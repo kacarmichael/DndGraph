@@ -1,8 +1,8 @@
-﻿// using Dnd.API.Models.Rolls;
+﻿// using Dnd.APIModels.Rolls;
 // using Microsoft.EntityFrameworkCore;
 // using Microsoft.EntityFrameworkCore.Metadata.Builders;
 //
-// namespace Dnd.API.Infrastructure.EntityConfigurations;
+// namespace dDnd.APInfrastructure.EntityConfigurations;
 //
 // public class AbilityCheckRollEntityConfiguration : IEntityTypeConfiguration<AbilityCheckRoll>
 // {

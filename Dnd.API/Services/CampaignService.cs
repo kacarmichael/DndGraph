@@ -68,6 +68,6 @@ public class CampaignService : ICampaignService
 
     public async Task<IEnumerable<ICampaignSession>> GetAllCampaignSessionsAsync()
     {
-        return await _campaignSessionRepository.GetAllCampaignSessionsAsync();
+        return await _campaignSessionRepository.GetCampaignSessionsAsync();
     }
 }

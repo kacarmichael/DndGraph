@@ -1,17 +1,13 @@
 ﻿using Dnd.API.Controllers;
 using Dnd.API.DTOs;
-using Dnd.API.Models.Characters;
 using Dnd.API.Models.Characters.Implementations;
-using Dnd.API.Models.Characters.Interfaces;
 using Dnd.API.Models.Dice.Implementations;
-using Dnd.API.Models.Rolls;
 using Dnd.API.Models.Rolls.Implementations;
 using Dnd.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using Xunit;
 
-namespace Dnd.XUnit;
+namespace dnd.xunit2;
 
 public class RollControllerTests
 {
@@ -79,7 +75,7 @@ public class RollControllerTests
 
     public DiceRollBase GetTestDiceRoll()
     {
-        return new MeleeAttackRoll(character: GetTestCharacters().First(), new DiceSet(1,20));
+        return new MeleeAttackRoll(character: GetTestCharacters().First(), new DiceSet(1, 20));
     }
 
     public RollResponseDto GetTestRollResponseDto()
@@ -101,8 +97,8 @@ public class RollControllerTests
     public void PostRoll()
     {
         var roll = GetTestRollRequestDto();
-        
-        
+
+
         var response = rollController.PostRoll(roll);
         var result = (RollResponseDto)((OkObjectResult)response.Result.Result).Value;
 

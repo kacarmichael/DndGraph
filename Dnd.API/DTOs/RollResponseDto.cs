@@ -1,5 +1,4 @@
-﻿using Dnd.API.Models.Rolls;
-using Dnd.API.Models.Rolls.Interfaces;
+﻿using Dnd.API.Models.Rolls.Interfaces;
 
 namespace Dnd.API.DTOs;
 

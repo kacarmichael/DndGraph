@@ -1,5 +1,4 @@
-﻿using Dnd.API.Models.Characters;
-using Dnd.API.Models.Characters.Implementations;
+﻿using Dnd.API.Models.Characters.Implementations;
 using Dnd.API.Models.Characters.Interfaces;
 using Dnd.API.Repositories;
 
@@ -28,5 +27,10 @@ public class CharacterService : ICharacterService
     public async Task<ICharacter> AddCharacterAsync(ICharacter character)
     {
         return await _repository.AddCharacter(character);
+    }
+
+    public IEnumerable<IClass> GetAllClasses()
+    {
+        return Classes.AllClasses;
     }
 }

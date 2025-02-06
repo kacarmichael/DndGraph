@@ -18,7 +18,7 @@ public class DiceSet : IDiceSet
         var total = 0;
         for (int i = 0; i < NumDice; i++)
         {
-            total += Constants.DiceTypeSides[NumSides].Roll();
+            total += Dice.DiceBySide[NumSides].Roll();
         }
 
         return total;

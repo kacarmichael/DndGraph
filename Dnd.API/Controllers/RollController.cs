@@ -21,4 +21,8 @@ public class RollController : ControllerBase
         var response = await _rollService.Roll(req);
         return Ok(response);
     }
+
+    [HttpPost("/dice")]
+    public async Task<ActionResult<DiceRollResponseDto>> PostDiceRoll([FromBody] DiceRollRequestDto req) =>
+        Ok(await _rollService.DiceRoll(req));>
 }
