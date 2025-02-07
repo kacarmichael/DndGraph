@@ -48,6 +48,7 @@ public class RollService : IRollService
             d12: req.D12,
             d20: req.D20,
             d100: req.D100,
-            total: req.ToDiceSets().Sum(x => x.Roll()));
+            modifier: req.Modifier,
+            total: req.ToDiceSets().Sum(x => x.Roll() + req.Modifier));
     }
 }

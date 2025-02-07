@@ -15,6 +15,11 @@ public class Die : IDice
         _random = new Random();
     }
 
+    public int NumSides()
+    {
+        return _maxValue;
+    }
+
     public int Roll()
     {
         return _random.Next(_minValue, _maxValue + 1);
@@ -52,4 +57,7 @@ public static class Dice
         { 20, D20 },
         { 100, D100 }
     };
+
+    public static Die DiceByIndex(int index) =>
+        new[] { D4, D6, D8, D10, D12, D20, D100 }[index];
 }
