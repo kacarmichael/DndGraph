@@ -8,6 +8,8 @@ public interface IRollService
     Task<RollResponseDto> Roll(RollRequestDto req);
 
     Task<IDiceSimulation> Simulate(IDiceSet set, int trials);
-    
+
+    DiceSimulationResponseDto Simulate(DiceSimulationRequestDto req);
+
     DiceRollResponseDto DiceRoll(DiceRollRequestDto req);
 }

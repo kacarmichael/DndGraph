@@ -33,7 +33,17 @@ public class RollService : IRollService
 
     public Task<IDiceSimulation> Simulate(IDiceSet set, int trials)
     {
-        return Task.FromResult(_diceSimulationFactory.CreateSimulation(set, trials));
+        return Task.FromResult(_diceSimulationFactory.CreateSimulation(set, trials, 0));
+    }
+
+    public DiceSimulationResponseDto Simulate(DiceSimulationRequestDto req)
+    {
+        var sim = _diceSimulationFactory.CreateSimulation(req.ToDiceSet(), req.Trials, req.Modifier);
+        return new DiceSimulationResponseDto(
+            sim.SimDice,
+            req.Modifier,
+            sim.Results,
+            sim.Trials);
     }
 
     public DiceRollResponseDto DiceRoll(DiceRollRequestDto req)

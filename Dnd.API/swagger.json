@@ -563,17 +563,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DiceSimulationResponseDto"
+                "$ref": "#/components/schemas/DiceSimulationRequestDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/DiceSimulationResponseDto"
+                "$ref": "#/components/schemas/DiceSimulationRequestDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/DiceSimulationResponseDto"
+                "$ref": "#/components/schemas/DiceSimulationRequestDto"
               }
             }
           }
@@ -915,6 +915,48 @@
             "format": "int32"
           },
           "d100": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DiceSimulationRequestDto": {
+        "type": "object",
+        "properties": {
+          "d4": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d6": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d8": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d10": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d12": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d20": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d100": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modifier": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trials": {
             "type": "integer",
             "format": "int32"
           }

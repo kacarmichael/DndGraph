@@ -27,6 +27,6 @@ public class RollController : ControllerBase
         Task.FromResult<ActionResult<DiceRollResponseDto>>(Ok(_rollService.DiceRoll(req)));
 
     [HttpPost("dice/simulate")]
-    public Task<ActionResult<DiceSimulationResponseDto>> PostDiceSimulation([FromBody] DiceSimulationResponseDto req) =>
-        throw new NotImplementedException();
+    public Task<ActionResult<DiceSimulationResponseDto>> PostDiceSimulation([FromBody] DiceSimulationRequestDto req) =>
+        Task.FromResult<ActionResult<DiceSimulationResponseDto>>(Ok(_rollService.Simulate(req)));
 }
