@@ -1,4 +1,6 @@
-﻿namespace Dnd.API.DTOs;
+﻿using Dnd.API.Models.Dice.Implementations;
+
+namespace Dnd.API.DTOs;
 
 public class RollRequestDto
 {
@@ -10,22 +12,20 @@ public class RollRequestDto
 
     public int? Modifier { get; set; }
 
-    public int? NumDice { get; set; }
-
-    public int? NumSides { get; set; }
+    public DiceSet DiceRolled { get; set; }
 
     public string? ClassUsed { get; set; }
 
     // [JsonIgnore] public Character? character { get; set; }
 
-    public RollRequestDto(string rollType, string ability, int characterId, int? modifier, int? numDice, int? numSides, string? classUsed)
+    public RollRequestDto(string rollType, string ability, int characterId, int? modifier, DiceSet diceRolled,
+        string? classUsed)
     {
         RollType = rollType;
         Ability = ability;
         CharacterId = characterId;
         Modifier = modifier;
-        NumDice = numDice;
-        NumSides = numSides;
+        DiceRolled = diceRolled;
         ClassUsed = classUsed;
     }
 }

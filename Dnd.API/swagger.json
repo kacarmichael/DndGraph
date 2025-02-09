@@ -458,7 +458,7 @@
         }
       }
     },
-    "/api/Roll": {
+    "/api/roll": {
       "post": {
         "tags": [
           "Roll"
@@ -499,6 +499,102 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RollResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/roll/dice": {
+      "post": {
+        "tags": [
+          "Roll"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiceRollRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiceRollRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiceRollRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiceRollResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiceRollResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiceRollResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/roll/dice/simulate": {
+      "post": {
+        "tags": [
+          "Roll"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiceSimulationResponseDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiceSimulationResponseDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiceSimulationResponseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiceSimulationResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiceSimulationResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiceSimulationResponseDto"
                 }
               }
             }
@@ -711,6 +807,124 @@
         },
         "additionalProperties": false
       },
+      "DiceRollRequestDto": {
+        "type": "object",
+        "properties": {
+          "d4": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d6": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d8": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d10": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d12": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d20": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d100": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modifier": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DiceRollResponseDto": {
+        "type": "object",
+        "properties": {
+          "d4": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d6": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d8": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d10": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d12": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d20": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d100": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modifier": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DiceSet": {
+        "type": "object",
+        "properties": {
+          "d4": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d6": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d8": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d10": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d12": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d20": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d100": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DiceSimulationResponseDto": {
+        "type": "object",
+        "additionalProperties": false
+      },
       "ICampaign": {
         "type": "object",
         "properties": {
@@ -837,15 +1051,8 @@
             "format": "int32",
             "nullable": true
           },
-          "numDice": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "numSides": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
+          "diceRolled": {
+            "$ref": "#/components/schemas/DiceSet"
           },
           "classUsed": {
             "type": "string",

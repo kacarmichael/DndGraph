@@ -1,5 +1,4 @@
 ﻿using Dnd.API.DTOs;
-using Dnd.API.Services;
 using Dnd.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,4 +25,8 @@ public class RollController : ControllerBase
     [HttpPost("dice")]
     public Task<ActionResult<DiceRollResponseDto>> PostDiceRoll([FromBody] DiceRollRequestDto req) =>
         Task.FromResult<ActionResult<DiceRollResponseDto>>(Ok(_rollService.DiceRoll(req)));
+
+    [HttpPost("dice/simulate")]
+    public Task<ActionResult<DiceSimulationResponseDto>> PostDiceSimulation([FromBody] DiceSimulationResponseDto req) =>
+        throw new NotImplementedException();
 }

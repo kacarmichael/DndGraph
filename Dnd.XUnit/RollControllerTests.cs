@@ -3,12 +3,11 @@ using Dnd.API.DTOs;
 using Dnd.API.Models.Characters.Implementations;
 using Dnd.API.Models.Dice.Implementations;
 using Dnd.API.Models.Rolls.Implementations;
-using Dnd.API.Services;
 using Dnd.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
-namespace dnd.xunit2;
+namespace Dnd.XUnit;
 
 public class RollControllerTests
 {
@@ -69,8 +68,7 @@ public class RollControllerTests
             ability: null,
             characterId: 0,
             modifier: 4,
-            numDice: 2,
-            numSides: 6,
+            new DiceSet(d6: 2),
             classUsed: null);
     }
 

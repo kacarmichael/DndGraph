@@ -1,8 +1,6 @@
 ﻿using Dnd.API.DTOs;
-using Dnd.API.Models.Dice.Implementations;
 using Dnd.API.Models.Dice.Interfaces;
 using Dnd.API.Models.Rolls.Interfaces;
-using Dnd.API.Repositories;
 using Dnd.API.Repositories.Interfaces;
 using Dnd.API.Services.Interfaces;
 
@@ -49,6 +47,6 @@ public class RollService : IRollService
             d20: req.D20,
             d100: req.D100,
             modifier: req.Modifier,
-            total: req.ToDiceSets().Sum(x => x.Roll() + req.Modifier));
+            total: req.ToDiceSet().Roll());
     }
 }

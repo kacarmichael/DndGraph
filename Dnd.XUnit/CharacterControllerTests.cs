@@ -1,12 +1,11 @@
 ﻿using Dnd.API.Controllers;
 using Dnd.API.DTOs;
 using Dnd.API.Models.Characters.Implementations;
-using Dnd.API.Services;
 using Dnd.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
-namespace dnd.xunit2;
+namespace Dnd.XUnit;
 
 public class CharacterControllerTests
 {
