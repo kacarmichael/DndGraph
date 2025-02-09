@@ -6,8 +6,7 @@ namespace Dnd.API.Models.Rolls.Implementations;
 public class DamageRoll : DiceRollBase
 {
     public int Modifier { get; set; }
-    public int NumDice { get; set; }
-    public int NumSides { get; set; }
+    public IDiceSet DiceRolled { get; set; }
 
     public DamageRoll()
     {
@@ -18,10 +17,7 @@ public class DamageRoll : DiceRollBase
         DiceRolled = diceRolled;
         Roller = character;
         RollType = "damageRoll";
-        NumDice = diceRolled.NumDice;
-        NumSides = diceRolled.NumSides;
         Modifier = modifier;
-
         Value = Roll();
     }
 

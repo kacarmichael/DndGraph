@@ -1,6 +1,4 @@
-﻿using Dnd.API.Models.Dice.Implementations;
-
-namespace Dnd.API.DTOs;
+﻿namespace Dnd.API.DTOs;
 
 public class DiceRollResponseDto
 {
@@ -12,7 +10,7 @@ public class DiceRollResponseDto
     public int D20 { get; set; }
     public int D100 { get; set; }
     public int Total { get; set; }
-    
+
     public int Modifier { get; set; }
 
     public DiceRollResponseDto(int d4, int d6, int d8, int d10, int d12, int d20, int d100, int modifier, int total)

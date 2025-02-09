@@ -6,8 +6,8 @@ namespace Dnd.API.Models.Rolls.Implementations;
 
 public class DiceSimulationFactory : IDiceSimulationFactory
 {
-    public IDiceSimulation CreateSimulation(IDiceSet diceSet, int numTrials)
+    public IDiceSimulation CreateSimulation(IDiceSet diceSet, int numTrials, int modifier = 0)
     {
-        return new DiceSimulation(simDice: diceSet, trials: numTrials);
+        return new DiceSimulation(simDice: diceSet, trials: numTrials, modifier: modifier);
     }
 }

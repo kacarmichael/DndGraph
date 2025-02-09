@@ -28,7 +28,7 @@ public class RollMapperService : IRollMapperService
                 return new AbilityCheckRoll(
                     ability: req.Ability,
                     character: c,
-                    new DiceSet(1, 20));
+                    new DiceSet(d20: 1));
 
             case "savingThrow":
                 if (req.Ability == null) throw new ArgumentException("Ability cannot be null");
@@ -36,27 +36,26 @@ public class RollMapperService : IRollMapperService
                 return new SavingThrowRoll(
                     ability: req.Ability,
                     character: c,
-                    new DiceSet(1, 20));
+                    new DiceSet(d20: 1));
 
             case "attackRollMelee":
                 if (req.CharacterId == null) throw new ArgumentException("CharacterId cannot be null");
                 return new MeleeAttackRoll(
                     c,
-                    new DiceSet(1, 20));
+                    new DiceSet(d20: 1));
 
             case "attackRollRanged":
                 if (req.CharacterId == null) throw new ArgumentException("CharacterId cannot be null");
                 return new RangedAttackRoll(
                     c,
-                    new DiceSet(1, 20));
+                    new DiceSet(d20: 1));
 
             case "damageRoll":
                 if (req.CharacterId == null) throw new ArgumentException("CharacterId cannot be null");
-                if (req.NumDice == null) throw new ArgumentException("NumDice cannot be null");
-                if (req.NumSides == null) throw new ArgumentException("NumSides cannot be null");
+                if (req.DiceRolled == null) throw new ArgumentException("DiceRolled cannot be null");
                 if (req.Modifier == null) throw new ArgumentException("Modifier cannot be null");
                 return new DamageRoll(
-                    diceRolled: new DiceSet((int)req.NumDice, (int)req.NumSides),
+                    diceRolled: req.DiceRolled,
                     modifier: (int)req.Modifier,
                     character: c);
 
