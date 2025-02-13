@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import {RollTable} from "./components/RollTable.jsx";
 import {CharacterConfig} from "./components/CharacterConfig.jsx";
+import ResultsChart from "./components/ResultsChart.jsx";
 
 function App() {
   const [count, setCount] = useState(0)

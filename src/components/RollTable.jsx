@@ -1,4 +1,7 @@
 ﻿import React, { Component } from 'react'
+import {SimulationResult} from "../classes/SimulationResult.js";
+import PropTypes from "prop-types";
+import ResultsChart from "./ResultsChart.jsx";
 
 export class RollTable extends Component {
 
@@ -13,7 +16,9 @@ export class RollTable extends Component {
             d20: 0,
             d100: 0,
             modifier: 0,
-            result: 0
+            rollResult: 0,
+            simulationResult: {},
+            trials: 1
         };
     }
 
@@ -53,7 +58,49 @@ export class RollTable extends Component {
                     }
                 }
             ).then(
-                data => this.setState({result: data.total})
+                data => this.setState({rollResult: data.total})
+            ).catch(
+                error => console.log(error)
+            )
+        } else {
+            console.log('Missing dice');
+        }
+    }
+
+    onClick_Simulate = () => {
+        console.log(import.meta.env.VITE_API_URL + '/api/roll/dice/simulate');
+
+        const diceState = {
+            d4: this.state.d4,
+            d6: this.state.d6,
+            d8: this.state.d8,
+            d10: this.state.d10,
+            d12: this.state.d12,
+            d20: this.state.d20,
+            d100: this.state.d100,
+            modifier: this.state.modifier,
+            trials: this.state.trials
+        }
+
+        if (Object.values(diceState).every(value => value !== undefined)) {
+            fetch(import.meta.env.VITE_API_URL + '/api/roll/dice/simulate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(diceState)
+            }).then(
+                response => {
+                    if (response.ok) {
+                        return response.json().then(data => new SimulationResult(data))
+                    } else {
+                        throw new Error('Network response was not ok.')
+                    }
+                }
+            ).then(
+                data => this.setState({simulationResult: data})
+            ).then(
+                () => console.log(this.state.simulationResult.results)
             ).catch(
                 error => console.log(error)
             )
@@ -64,14 +111,14 @@ export class RollTable extends Component {
     render() {
         return (
             <div>
-            <table>
-                <thead>
+                <table>
+                    <thead>
                     <tr>
                         <th>Dice</th>
                         <th>Quantity</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr>
                         <td>D4</td>
                         <td>
@@ -120,12 +167,49 @@ export class RollTable extends Component {
                             <input type="number" id="modifierInput" name="modifier" onChange={this.onDiceChange}/>
                         </td>
                     </tr>
-                </tbody>
-            </table>
-            <button onClick={this.onClick_roll}>Roll</button>
+                    <tr>
+                        <td>Trials</td>
+                        <td>
+                            <input type="number" id="trialsInput" name="trials" onChange={this.onDiceChange}/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button onClick={this.onClick_roll}>Roll</button>
                 <h1>ROLL RESULT:</h1>
-                <h2>{this.state.result}</h2>
+                <h2>{this.state.rollResult}</h2>
+                <button onClick={this.onClick_Simulate}> Simulate </button>
+                {/*<h1>SIMULATION RESULT:</h1>*/}
+                {/*{this.state.simulationResult.results && (*/}
+                {/*    <ul>*/}
+                {/*        {this.state.simulationResult.results.map((result) => (*/}
+                {/*            <li key={result.value}>{result.value}: {result.frequency}</li>*/}
+                {/*        ))}*/}
+                {/*    </ul>*/}
+                {/*    )*/}
+                {/*}*/}
+                {this.state.simulationResult.results && (
+                    <ResultsChart data={this.state.simulationResult.results} />
+                )}
+
             </div>
         )
     }
+}
+
+RollTable.propTypes = {
+    d4: PropTypes.number,
+    d6: PropTypes.number,
+    d8: PropTypes.number,
+    d10: PropTypes.number,
+    d12: PropTypes.number,
+    d20: PropTypes.number,
+    d100: PropTypes.number,
+    modifier: PropTypes.number,
+    rollResult: PropTypes.number,
+    simulationResult: PropTypes.shape({
+        Value: PropTypes.number,
+        Frequency: PropTypes.number
+    }),
+    trials: PropTypes.number
 }
