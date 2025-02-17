@@ -1,19 +1,39 @@
-﻿using Dnd.API.Models.Dice.Interfaces;
+﻿using System.Text.Json;
+using Dnd.API.Models.Dice.Interfaces;
+using MathNet.Numerics.Statistics;
 
 namespace Dnd.API.DTOs;
 
 public class DiceSimulationResponseDto
 {
-    public IDiceSet DiceRolled;
-    public int Modifier;
-    public Dictionary<int, int> Results;
-    public int Trials;
+    public IDiceSet DiceRolled { get; set; }
+    public int Modifier { get; set; }
+    public List<ISimResult> Results { get; set; }
+    public int Trials { get; set; }
 
-    public DiceSimulationResponseDto(IDiceSet diceRolled, int modifier, Dictionary<int, int> results, int trials)
+    public DescriptiveStatistics Stats { get; set; }
+
+    public DiceSimulationResponseDto(IDiceSet diceRolled, int modifier, List<ISimResult> results, int trials,
+        DescriptiveStatistics stats)
     {
         DiceRolled = diceRolled;
         Modifier = modifier;
         Results = results;
         Trials = trials;
+        Stats = stats;
+    }
+
+    public DiceSimulationResponseDto(IDiceSimulation sim)
+    {
+        DiceRolled = sim.SimDice;
+        Modifier = sim.Modifier;
+        Results = sim.Results;
+        Trials = sim.Trials;
+        Stats = sim.Stats;
+    }
+
+    public override string ToString()
+    {
+        return JsonSerializer.Serialize(this);
     }
 }

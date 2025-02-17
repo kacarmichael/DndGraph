@@ -807,6 +807,52 @@
         },
         "additionalProperties": false
       },
+      "DescriptiveStatistics": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int64",
+            "readOnly": true
+          },
+          "mean": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "variance": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "standardDeviation": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "skewness": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "kurtosis": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "maximum": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "minimum": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "DiceRollRequestDto": {
         "type": "object",
         "properties": {
@@ -965,6 +1011,29 @@
       },
       "DiceSimulationResponseDto": {
         "type": "object",
+        "properties": {
+          "diceRolled": {
+            "$ref": "#/components/schemas/IDiceSet"
+          },
+          "modifier": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ISimResult"
+            },
+            "nullable": true
+          },
+          "trials": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "stats": {
+            "$ref": "#/components/schemas/DescriptiveStatistics"
+          }
+        },
         "additionalProperties": false
       },
       "ICampaign": {
@@ -1044,6 +1113,54 @@
             "type": "integer",
             "format": "int32",
             "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IDiceSet": {
+        "type": "object",
+        "properties": {
+          "d4": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d6": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d8": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d10": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d12": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d20": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "d100": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ISimResult": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "frequency": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

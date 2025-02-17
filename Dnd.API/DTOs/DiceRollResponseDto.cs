@@ -1,4 +1,6 @@
-﻿namespace Dnd.API.DTOs;
+﻿using System.Text.Json;
+
+namespace Dnd.API.DTOs;
 
 public class DiceRollResponseDto
 {
@@ -37,5 +39,10 @@ public class DiceRollResponseDto
         D100 = req.D100;
         Modifier = req.Modifier;
         Total = 0;
+    }
+
+    public override string ToString()
+    {
+        return JsonSerializer.Serialize(this);
     }
 }

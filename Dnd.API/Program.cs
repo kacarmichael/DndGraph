@@ -3,7 +3,6 @@ using Dnd.API.Infrastructure;
 using Dnd.API.Models.Characters.Implementations;
 using Dnd.API.Models.Rolls.Implementations;
 using Dnd.API.Models.Rolls.Interfaces;
-using Dnd.API.Repositories;
 using Dnd.API.Repositories.Implementations;
 using Dnd.API.Repositories.Interfaces;
 using Dnd.API.Services;
@@ -44,6 +43,13 @@ builder.Services.AddCors(options =>
             });
     }
 );
+
+builder.Services.AddLogging(logging =>
+{
+    logging.AddConsole();
+    logging.AddDebug();
+});
+
 
 var app = builder.Build();
 

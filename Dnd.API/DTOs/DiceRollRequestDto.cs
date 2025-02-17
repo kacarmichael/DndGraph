@@ -1,4 +1,5 @@
-﻿using Dnd.API.Models.Dice.Implementations;
+﻿using System.Text.Json;
+using Dnd.API.Models.Dice.Implementations;
 
 namespace Dnd.API.DTOs;
 
@@ -33,4 +34,9 @@ public class DiceRollRequestDto
 
     public DiceSet ToDiceSet() =>
         new(D4, D6, D8, D10, D12, D20, D100);
+
+    public override string ToString()
+    {
+        return JsonSerializer.Serialize(this);
+    }
 }

@@ -38,12 +38,13 @@ public class RollService : IRollService
 
     public DiceSimulationResponseDto Simulate(DiceSimulationRequestDto req)
     {
-        var sim = _diceSimulationFactory.CreateSimulation(req.ToDiceSet(), req.Trials, req.Modifier);
         return new DiceSimulationResponseDto(
-            sim.SimDice,
-            req.Modifier,
-            sim.Results,
-            sim.Trials);
+            _diceSimulationFactory.CreateSimulation(
+                req.ToDiceSet(),
+                req.Trials,
+                req.Modifier
+            )
+        );
     }
 
     public DiceRollResponseDto DiceRoll(DiceRollRequestDto req)

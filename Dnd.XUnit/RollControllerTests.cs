@@ -5,6 +5,7 @@ using Dnd.API.Models.Dice.Implementations;
 using Dnd.API.Models.Rolls.Implementations;
 using Dnd.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace Dnd.XUnit;
@@ -14,6 +15,7 @@ public class RollControllerTests
     private readonly Mock<IRollService> _rollServiceMock;
     private readonly Mock<IRollMapperService> _rollMapperMock;
     private readonly Mock<ICharacterService> _characterServiceMock;
+    private readonly Mock<ILogger<RollController>> _loggerMock;
     public RollController rollController;
 
     private List<Character> GetTestCharacters()
@@ -87,9 +89,10 @@ public class RollControllerTests
         _rollServiceMock = new Mock<IRollService>();
         _rollMapperMock = new Mock<IRollMapperService>();
         _characterServiceMock = new Mock<ICharacterService>();
+        _loggerMock = new Mock<ILogger<RollController>>();
         _rollServiceMock.Setup(x => x.Roll(It.IsAny<RollRequestDto>())).ReturnsAsync(GetTestRollResponseDto());
         _rollMapperMock.Setup(x => x.Map(It.IsAny<RollRequestDto>())).ReturnsAsync(GetTestDiceRoll());
-        rollController = new RollController(_rollServiceMock.Object, _rollMapperMock.Object);
+        rollController = new RollController(_rollServiceMock.Object, _loggerMock.Object);
     }
 
     [Fact]
