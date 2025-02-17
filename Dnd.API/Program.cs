@@ -7,6 +7,7 @@ using Dnd.API.Repositories.Implementations;
 using Dnd.API.Repositories.Interfaces;
 using Dnd.API.Services;
 using Dnd.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,6 +45,13 @@ builder.Services.AddCors(options =>
     }
 );
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(jwtOptions =>
+    {
+        jwtOptions.Authority = "";
+        jwtOptions.Audience = "";
+    });
+
 builder.Services.AddLogging(logging =>
 {
     logging.AddConsole();
@@ -61,7 +69,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.UseAuthorization();
+app.UseAuthorization();
 
 app.Services.SaveSwaggerJson();
 

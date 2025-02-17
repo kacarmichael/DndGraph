@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.API", "Dnd.API\Dnd.API.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.XUnit", "Dnd.XUnit\Dnd.XUnit.csproj", "{A2FBEB7A-EA63-4844-9AC4-12415DAE41BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Auth", "Dnd.Auth\Dnd.Auth.csproj", "{32036F8F-96CE-4115-A7EB-FAB9909209EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{A2FBEB7A-EA63-4844-9AC4-12415DAE41BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2FBEB7A-EA63-4844-9AC4-12415DAE41BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2FBEB7A-EA63-4844-9AC4-12415DAE41BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32036F8F-96CE-4115-A7EB-FAB9909209EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32036F8F-96CE-4115-A7EB-FAB9909209EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32036F8F-96CE-4115-A7EB-FAB9909209EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32036F8F-96CE-4115-A7EB-FAB9909209EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

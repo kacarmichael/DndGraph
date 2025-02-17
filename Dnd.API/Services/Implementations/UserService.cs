@@ -1,5 +1,4 @@
 ﻿using Dnd.API.Models.Users.Interfaces;
-using Dnd.API.Repositories;
 using Dnd.API.Repositories.Interfaces;
 using Dnd.API.Services.Interfaces;
 
@@ -14,15 +13,15 @@ public class UserService : IUserService
         _repository = repository;
     }
 
-    public Task<IUser> GetUserAsync(string username) => _repository.GetUserAsync(username);
+    public Task<IDomainUser> GetUserAsync(string username) => _repository.GetUserAsync(username);
 
-    public Task<IUser> GetUserByIdAsync(int userId) => _repository.GetUserByIdAsync(userId);
+    public Task<IDomainUser> GetUserByIdAsync(int userId) => _repository.GetUserByIdAsync(userId);
 
-    public Task<IUser> AddUserAsync(IUser user) => _repository.AddUserAsync(user);
+    public Task<IDomainUser> AddUserAsync(IDomainUser domainUser) => _repository.AddUserAsync(domainUser);
 
-    public Task<IUser> UpdateUserAsync(IUser user) => _repository.UpdateUserAsync(user);
+    public Task<IDomainUser> UpdateUserAsync(IDomainUser domainUser) => _repository.UpdateUserAsync(domainUser);
 
-    public Task<IUser> DeleteUserAsync(IUser user) => _repository.DeleteUserAsync(user);
+    public Task<IDomainUser> DeleteUserAsync(IDomainUser domainUser) => _repository.DeleteUserAsync(domainUser);
 
-    public Task<IEnumerable<IUser>> GetAllUsersAsync() => _repository.GetAllUsersAsync();
+    public Task<IEnumerable<IDomainUser>> GetAllUsersAsync() => _repository.GetAllUsersAsync();
 }

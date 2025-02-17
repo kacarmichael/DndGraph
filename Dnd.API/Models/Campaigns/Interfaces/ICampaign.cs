@@ -6,7 +6,7 @@ public interface ICampaign
 {
     int Id { get; }
     string Name { get; }
-    List<IUser> Players { get; set; }
-    IUser Owner { get; }
-    IUser DungeonMaster { get; set; }
+    List<IDomainUser> Players { get; set; }
+    IDomainUser Owner { get; }
+    IDomainUser DungeonMaster { get; set; }
 }

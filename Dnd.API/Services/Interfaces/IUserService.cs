@@ -4,11 +4,11 @@ namespace Dnd.API.Services.Interfaces;
 
 public interface IUserService
 {
-    Task<IUser> GetUserAsync(string username);
-    Task<IUser> GetUserByIdAsync(int userId);
-    Task<IUser> AddUserAsync(IUser user);
-    Task<IUser> UpdateUserAsync(IUser user);
-    Task<IUser> DeleteUserAsync(IUser user);
+    Task<IDomainUser> GetUserAsync(string username);
+    Task<IDomainUser> GetUserByIdAsync(int userId);
+    Task<IDomainUser> AddUserAsync(IDomainUser domainUser);
+    Task<IDomainUser> UpdateUserAsync(IDomainUser domainUser);
+    Task<IDomainUser> DeleteUserAsync(IDomainUser domainUser);
 
-    Task<IEnumerable<IUser>> GetAllUsersAsync();
+    Task<IEnumerable<IDomainUser>> GetAllUsersAsync();
 }

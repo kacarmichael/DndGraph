@@ -2,7 +2,7 @@
 
 namespace Dnd.API.Models.Users.Interfaces;
 
-public interface IUser
+public interface IDomainUser
 {
     int Id { get; }
     string Username { get; }

@@ -4,7 +4,7 @@ using Dnd.API.Models.Users.Interfaces;
 
 namespace Dnd.API.Models.Users.Implementations;
 
-public class User : IUser
+public class DomainUser : IDomainUser
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
@@ -12,7 +12,7 @@ public class User : IUser
     public string Username { get; set; }
     public List<ICharacter> Characters { get; set; }
 
-    public User(string username)
+    public DomainUser(string username)
     {
         Username = username;
         Characters = new List<ICharacter>();

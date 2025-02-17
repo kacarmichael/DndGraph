@@ -1,5 +1,4 @@
 ﻿using Dnd.API.Models.Users.Interfaces;
-using Dnd.API.Services;
 using Dnd.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,11 +23,12 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetAllUsersAsync() => Ok(await _userService.GetAllUsersAsync());
 
     [HttpPost]
-    public async Task<IActionResult> AddUserAsync([FromBody] IUser user) => Ok(await _userService.AddUserAsync(user));
+    public async Task<IActionResult> AddUserAsync([FromBody] IDomainUser domainUser) =>
+        Ok(await _userService.AddUserAsync(domainUser));
 
     [HttpPut]
-    public async Task<IActionResult> UpdateUserAsync([FromBody] IUser user) =>
-        Ok(await _userService.UpdateUserAsync(user));
+    public async Task<IActionResult> UpdateUserAsync([FromBody] IDomainUser domainUser) =>
+        Ok(await _userService.UpdateUserAsync(domainUser));
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteUserAsync(int id)

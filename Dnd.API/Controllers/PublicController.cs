@@ -1,6 +1,6 @@
 ﻿using Dnd.API.DTOs;
-using Dnd.API.Services;
 using Dnd.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dnd.API.Controllers;
@@ -20,6 +20,10 @@ public class PublicController : ControllerBase
 
     [HttpGet("ping")]
     public string Ping() => "pong";
+
+    [Authorize]
+    [HttpGet("secretping")]
+    public string AuthTest() => "Secret Pong";
 
     [HttpGet("classes")]
     public Task<IEnumerable<ClassResponseDto>> GetClasses() =>

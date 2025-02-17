@@ -14,16 +14,20 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public Task<IUser> GetUserByIdAsync(int userId) => Task.FromResult((IUser)_context.Users.Find(userId));
+    public Task<IDomainUser> GetUserByIdAsync(int userId) => Task.FromResult((IDomainUser)_context.Users.Find(userId));
 
-    public Task<IUser> AddUserAsync(IUser user) => Task.FromResult((IUser)_context.Users.Add((User)user).Entity);
+    public Task<IDomainUser> AddUserAsync(IDomainUser domainUser) =>
+        Task.FromResult((IDomainUser)_context.Users.Add((DomainUser)domainUser).Entity);
 
-    public Task<IUser> UpdateUserAsync(IUser user) => Task.FromResult((IUser)_context.Users.Update((User)user).Entity);
+    public Task<IDomainUser> UpdateUserAsync(IDomainUser domainUser) =>
+        Task.FromResult((IDomainUser)_context.Users.Update((DomainUser)domainUser).Entity);
 
-    public Task<IUser> DeleteUserAsync(IUser user) => Task.FromResult((IUser)_context.Users.Remove((User)user).Entity);
+    public Task<IDomainUser> DeleteUserAsync(IDomainUser domainUser) =>
+        Task.FromResult((IDomainUser)_context.Users.Remove((DomainUser)domainUser).Entity);
 
-    public Task<IEnumerable<IUser>> GetAllUsersAsync() => Task.FromResult((IEnumerable<IUser>)_context.Users);
+    public Task<IEnumerable<IDomainUser>> GetAllUsersAsync() =>
+        Task.FromResult((IEnumerable<IDomainUser>)_context.Users);
 
-    public Task<IUser> GetUserAsync(string username) =>
-        Task.FromResult((IUser)_context.Users.FirstOrDefault(x => x.Username == username));
+    public Task<IDomainUser> GetUserAsync(string username) =>
+        Task.FromResult((IDomainUser)_context.Users.FirstOrDefault(x => x.Username == username));
 }
