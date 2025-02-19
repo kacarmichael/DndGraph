@@ -5,6 +5,7 @@ import './App.css'
 import {RollTable} from "./components/RollTable.jsx";
 import {CharacterConfig} from "./components/CharacterConfig.jsx";
 import ResultsChart from "./components/ResultsChart.jsx";
+import {LoginMenu} from "./components/LoginMenu.jsx";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,7 +14,8 @@ function App() {
     <>
       <div>
           {/*<CharacterConfig/>*/}
-          <RollTable/>
+          {/*<RollTable/>*/}
+          <LoginMenu/>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
