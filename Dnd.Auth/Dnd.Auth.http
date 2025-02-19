@@ -1,6 +1,21 @@
 @Dnd.Auth_HostAddress = http://localhost:5033
 
-GET {{Dnd.Auth_HostAddress}}/weatherforecast/
+POST http://localhost:5033/login/
 Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "test",
+  "password": "test"
+}
 
 ###
+
+POST http://localhost:5033/login/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "asdf"
+}

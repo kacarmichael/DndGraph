@@ -9,16 +9,28 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-var app = builder.Build();
 
-builder.Services.AddDbContext<IdentityDbContext>(options =>
+builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseInMemoryDatabase("Identity"));
 
-using (var scope = app.Services.CreateScope())
+builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowLocalhost",
+            builder =>
+            {
+                builder.WithOrigins("http://localhost:3004", "https://localhost:3004").AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+    }
+);
+
+builder.Services.AddLogging(logging =>
 {
-    var context = scope.ServiceProvider.GetService<IdentityDbContext>();
-    DbInit.Initialize(context);
-}
+    logging.AddConsole();
+    logging.AddDebug();
+});
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -31,5 +43,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("AllowLocalhost");
 
 app.Run();
