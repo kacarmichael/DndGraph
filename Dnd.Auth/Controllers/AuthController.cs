@@ -8,14 +8,13 @@ namespace Dnd.Auth.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly ILogger _logger;
-
-    //private readonly IAuthService _authService;
+    private readonly IAuthService _authService;
     private readonly IJwtService _jwtService;
 
-    public AuthController(ILogger<AuthController> logger, IJwtService jwtService)
+    public AuthController(ILogger<AuthController> logger, IAuthService authService, IJwtService jwtService)
     {
         _logger = logger;
-        //_authService = authService;
+        _authService = authService;
         _jwtService = jwtService;
     }
 
@@ -37,5 +36,12 @@ public class AuthController : ControllerBase
         resp.Username = req.Username;
         resp.Token = "";
         return Unauthorized(resp);
+    }
+
+    [HttpPost("/register")]
+    public async Task<ActionResult<RegisterResponseDto>> RegisterAsync([FromBody] RegisterRequestDto req)
+    {
+        _authService.AddUserAsync(req.Username, req.Password);
+        return Ok(new RegisterResponseDto());
     }
 }

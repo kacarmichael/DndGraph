@@ -2,5 +2,5 @@
 
 public interface IAuthService
 {
-    IJwtService Generator { get; set; }
+    public void AddUserAsync(string username, string password);
 }

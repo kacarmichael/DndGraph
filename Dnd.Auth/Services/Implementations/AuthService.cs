@@ -4,10 +4,11 @@ namespace Dnd.Auth.Services.Implementations;
 
 public class AuthService : IAuthService
 {
-    public IJwtService Generator { get; set; }
-
-    public AuthService(IJwtService generator)
+    public AuthService()
     {
-        Generator = generator;
+    }
+
+    public void AddUserAsync(string username, string password)
+    {
     }
 }
