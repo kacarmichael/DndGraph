@@ -1,4 +1,5 @@
 ﻿using Dnd.Auth.DTOs;
+using Dnd.Auth.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dnd.Auth.Controllers;
@@ -8,9 +9,14 @@ public class AuthController : ControllerBase
 {
     private readonly ILogger _logger;
 
-    public AuthController(ILogger<AuthController> logger)
+    //private readonly IAuthService _authService;
+    private readonly IJwtService _jwtService;
+
+    public AuthController(ILogger<AuthController> logger, IJwtService jwtService)
     {
         _logger = logger;
+        //_authService = authService;
+        _jwtService = jwtService;
     }
 
     [HttpPost("/login")]
@@ -23,7 +29,7 @@ public class AuthController : ControllerBase
         {
             resp.Username = req.Username;
             resp.IsSuccess = true;
-            resp.Token = "token";
+            resp.Token = _jwtService.GenerateToken(resp.Username, "User");
             return Ok(resp);
         }
 
