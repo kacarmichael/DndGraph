@@ -13,8 +13,10 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 
+// builder.Services.AddDbContext<AuthDbContext>(options =>
+//     options.UseNpgsql());
 builder.Services.AddDbContext<AuthDbContext>(options =>
-    options.UseInMemoryDatabase("Identity"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
 
 builder.Services.AddCors(options =>
     {

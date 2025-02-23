@@ -6,8 +6,11 @@ namespace Dnd.Auth.Infrastructure;
 
 public class AuthDbContext : DbContext
 {
-    public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
+
+    private readonly IConfiguration _configuration;
+    public AuthDbContext(DbContextOptions<AuthDbContext> options, IConfiguration configuration) : base(options)
     {
+        _configuration = configuration;
     }
 
     public DbSet<IAuthUser> Users;
@@ -15,7 +18,12 @@ public class AuthDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Entity<AuthUser>().HasData(
-            new AuthUser(username: "admin", password: "asdf")
+            new AuthUser(id: 1, username: "admin", password: "asdf", email: "test@localhost", role: "Admin")
         );
+    }
+    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseNpgsql(_configuration.GetConnectionString("Postgres"));
     }
 }

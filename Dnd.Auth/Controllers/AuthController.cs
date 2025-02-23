@@ -21,27 +21,34 @@ public class AuthController : ControllerBase
     [HttpPost("/login")]
     public async Task<ActionResult<LoginResponseDto>> LoginAsync([FromBody] LoginRequestDto req)
     {
-        var requestBody = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
-        _logger.LogInformation($"Request Body: {requestBody}");
-        var resp = new LoginResponseDto();
+        // var requestBody = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
+        // _logger.LogInformation($"Request Body: {requestBody}");
         if (req.Username == "admin" && req.Password == "asdf")
         {
-            resp.Username = req.Username;
-            resp.IsSuccess = true;
-            resp.Token = _jwtService.GenerateToken(resp.Username, "User");
-            return Ok(resp);
+            return Ok(
+                new LoginResponseDto(
+                    username: req.Username,
+                    success: true,
+                    token: _jwtService.GenerateToken(req.Username, "User")));
         }
-
-        resp.IsSuccess = false;
-        resp.Username = req.Username;
-        resp.Token = "";
-        return Unauthorized(resp);
+        
+        return Unauthorized(
+            new LoginResponseDto(
+                    username: req.Username,
+                    success: false,
+                    token: ""));
     }
 
     [HttpPost("/register")]
     public async Task<ActionResult<RegisterResponseDto>> RegisterAsync([FromBody] RegisterRequestDto req)
     {
-        _authService.AddUserAsync(req.Username, req.Password);
-        return Ok(new RegisterResponseDto());
+        await _authService.AddUserAsync(req.DtoToUser());
+        return Ok(new RegisterResponseDto(req.DtoToUser()));
+    }
+    
+    [HttpPost("/reset-password")]
+    public async Task<ActionResult<PasswordResetResponseDto>> ResetPasswordAsync([FromBody] PasswordResetRequestDto req)
+    {
+        return Ok(new PasswordResetResponseDto());
     }
 }
