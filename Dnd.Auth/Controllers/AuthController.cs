@@ -31,12 +31,12 @@ public class AuthController : ControllerBase
                     success: true,
                     token: _jwtService.GenerateToken(req.Username, "User")));
         }
-        
+
         return Unauthorized(
             new LoginResponseDto(
-                    username: req.Username,
-                    success: false,
-                    token: ""));
+                username: req.Username,
+                success: false,
+                token: ""));
     }
 
     [HttpPost("/register")]
@@ -45,7 +45,7 @@ public class AuthController : ControllerBase
         await _authService.AddUserAsync(req.DtoToUser());
         return Ok(new RegisterResponseDto(req.DtoToUser()));
     }
-    
+
     [HttpPost("/reset-password")]
     public async Task<ActionResult<PasswordResetResponseDto>> ResetPasswordAsync([FromBody] PasswordResetRequestDto req)
     {

@@ -3,10 +3,12 @@ using Dnd.Auth.Models.Interfaces;
 
 namespace Dnd.Auth.Models.Implementations;
 
+[Table("AuthUser", Schema = "public")]
 public class AuthUser : IAuthUser
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
+
     public string Username { get; set; }
     public string Password { get; set; }
     public string Role { get; set; }
@@ -29,9 +31,9 @@ public class AuthUser : IAuthUser
         LastLogin = DateTime.UtcNow;
         Locked = false;
         FailedLogins = 0;
-        PasswordResetToken = null;
+        PasswordResetToken = "Not Implemented Yet";
     }
-    
+
     public AuthUser(int id, string username, string password, string email, string role = "User")
     {
         Id = id;

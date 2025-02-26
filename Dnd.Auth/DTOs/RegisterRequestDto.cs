@@ -8,6 +8,6 @@ public class RegisterRequestDto
     public string Password { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string Role { get; set; } = "User";
-    
+
     public AuthUser DtoToUser() => new AuthUser(Username, Password, Email, Role);
 }

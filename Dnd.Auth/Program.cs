@@ -1,5 +1,7 @@
 using Dnd.Auth.Infrastructure;
 using Dnd.Auth.Models.Implementations;
+using Dnd.Auth.Repositories.Implementations;
+using Dnd.Auth.Repositories.Interfaces;
 using Dnd.Auth.Services.Implementations;
 using Dnd.Auth.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +41,8 @@ builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 builder.Services.AddTransient<IJwtService, JwtService>();
+builder.Services.AddTransient<IAuthUserRepository, AuthUserRepository>();
+builder.Services.AddTransient<IAuthService, AuthService>();
 
 // Console.WriteLine("Starting IJwtService Creation");
 // builder.Services.AddTransient<IJwtService>(provider =>
