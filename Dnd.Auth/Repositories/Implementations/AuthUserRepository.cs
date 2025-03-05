@@ -1,4 +1,4 @@
-﻿using Dnd.Auth.Infrastructure;
+﻿using Dnd.Auth.Infrastructure.Database;
 using Dnd.Auth.Models.Implementations;
 using Dnd.Auth.Models.Interfaces;
 using Dnd.Auth.Repositories.Interfaces;

@@ -22,7 +22,8 @@ public class AuthController : ControllerBase
     public async Task<ActionResult<LoginResponseDto>> LoginAsync([FromBody] LoginRequestDto req)
     {
         // var requestBody = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
-        // _logger.LogInformation($"Request Body: {requestBody}");
+        _logger.LogInformation($"Request: {req}");
+        //Console.WriteLine("Console logging test");
         if (req.Username == "admin" && req.Password == "asdf")
         {
             return Ok(

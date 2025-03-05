@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Dnd.Auth.Infrastructure.Security;
 using Dnd.Auth.Models.Interfaces;
 
 namespace Dnd.Auth.Models.Implementations;
@@ -10,7 +11,9 @@ public class AuthUser : IAuthUser
     public int Id { get; set; }
 
     public string Username { get; set; }
-    public string Password { get; set; }
+    public string CurrentSalt { get; set; }
+    public string PreviousSalt { get; set; }
+    public string HashedPassword { get; set; }
     public string Role { get; set; }
     public string Email { get; set; }
     public DateTime Created { get; set; }
@@ -23,7 +26,9 @@ public class AuthUser : IAuthUser
     public AuthUser(string username, string password, string email, string role = "User")
     {
         Username = username;
-        Password = password;
+        CurrentSalt = Convert.ToBase64String(Passwords.GenerateSalt());
+        PreviousSalt = String.Empty;
+        HashedPassword = Passwords.HashPassword(password, CurrentSalt);
         Role = role;
         Email = email;
         Created = DateTime.UtcNow;
@@ -38,7 +43,9 @@ public class AuthUser : IAuthUser
     {
         Id = id;
         Username = username;
-        Password = password;
+        CurrentSalt = Convert.ToBase64String(Passwords.GenerateSalt());
+        PreviousSalt = String.Empty;
+        HashedPassword = Passwords.HashPassword(password, CurrentSalt);
         Role = role;
         Email = email;
         Created = new DateTime(2000, 1, 1).ToUniversalTime();

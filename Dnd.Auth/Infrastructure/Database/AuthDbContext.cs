@@ -1,7 +1,7 @@
 ﻿using Dnd.Auth.Models.Implementations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dnd.Auth.Infrastructure;
+namespace Dnd.Auth.Infrastructure.Database;
 
 public class AuthDbContext : DbContext
 {

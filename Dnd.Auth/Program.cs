@@ -1,4 +1,4 @@
-using Dnd.Auth.Infrastructure;
+using Dnd.Auth.Infrastructure.Database;
 using Dnd.Auth.Models.Implementations;
 using Dnd.Auth.Repositories.Implementations;
 using Dnd.Auth.Repositories.Interfaces;
@@ -25,8 +25,10 @@ builder.Services.AddCors(options =>
         options.AddPolicy("AllowLocalhost",
             builder =>
             {
-                builder.WithOrigins("http://localhost:3004", "https://localhost:3004").AllowAnyHeader()
-                    .AllowAnyMethod();
+                builder.WithOrigins("http://localhost:3002", "https://localhost:3002")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
             });
     }
 );
@@ -57,7 +59,10 @@ builder.Services.AddTransient<IAuthService, AuthService>();
 //     return new JwtService(config["Jwt:Secret"], config["Jwt:Issuer"], config["Jwt:Audience"]);
 // });
 
+builder.Services.AddHostedService<SaltRotationService>();
+
 var app = builder.Build();
+Console.WriteLine("App Initialized");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -69,8 +74,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
-
 app.UseCors("AllowLocalhost");
+
+app.MapControllers();
 
 app.Run();

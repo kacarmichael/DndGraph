@@ -3,7 +3,9 @@
 public interface IAuthUser
 {
     string Username { get; set; }
-    string Password { get; set; }
+    string CurrentSalt { get; set; }
+    string PreviousSalt { get; set; }
+    string HashedPassword { get; set; }
     string Email { get; set; }
     string Role { get; set; }
     DateTime Created { get; set; }

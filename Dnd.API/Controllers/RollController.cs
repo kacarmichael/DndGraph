@@ -1,9 +1,11 @@
 ﻿using Dnd.API.DTOs;
 using Dnd.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dnd.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/roll")]
 public class RollController : ControllerBase

@@ -1,3 +1,4 @@
+using System.Text;
 using Dnd.API.Extensions;
 using Dnd.API.Infrastructure;
 using Dnd.API.Models.Characters.Implementations;
@@ -9,6 +10,7 @@ using Dnd.API.Services;
 using Dnd.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,17 +41,45 @@ builder.Services.AddCors(options =>
         options.AddPolicy("AllowLocalhost",
             builder =>
             {
-                builder.WithOrigins("http://localhost:3004", "https://localhost:3004").AllowAnyHeader()
+                builder.WithOrigins("http://localhost:3002", "https://localhost:3002").AllowAnyHeader()
                     .AllowAnyMethod();
             });
     }
 );
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(jwtOptions =>
+builder.Services.AddAuthentication(options =>
     {
-        jwtOptions.Authority = "";
-        jwtOptions.Audience = "";
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidateAudience = true,
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnTokenValidated = context =>
+            {
+                Console.WriteLine("Token Validation Successful");
+                Console.WriteLine(context.SecurityToken.ToString());
+                return Task.CompletedTask;
+            },
+            OnAuthenticationFailed = context =>
+            {
+                Console.WriteLine("Token Validation Failed");
+                Console.WriteLine(context.Exception.Message);
+                return Task.CompletedTask;
+            }
+        };
     });
 
 builder.Services.AddLogging(logging =>
@@ -70,6 +100,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseAuthentication();
 
 app.Services.SaveSwaggerJson();
 

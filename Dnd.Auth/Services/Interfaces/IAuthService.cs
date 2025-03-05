@@ -10,4 +10,6 @@ public interface IAuthService
 
     public Task<Task> DeleteUserAsync(string username);
     public Task<IAuthUser> UpdateUserAsync(IAuthUser user);
+
+    public Task<IAuthUser> GetUserAsync(string username);
 }

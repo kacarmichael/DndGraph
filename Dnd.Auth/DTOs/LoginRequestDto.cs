@@ -1,4 +1,6 @@
-﻿namespace Dnd.Auth.DTOs;
+﻿using System.Text.Json;
+
+namespace Dnd.Auth.DTOs;
 
 public class LoginRequestDto
 {
@@ -13,5 +15,10 @@ public class LoginRequestDto
     {
         Username = username;
         Password = password;
+    }
+
+    public override string ToString()
+    {
+        return JsonSerializer.Serialize(this);
     }
 }

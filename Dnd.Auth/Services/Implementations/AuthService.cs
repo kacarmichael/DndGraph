@@ -42,4 +42,9 @@ public class AuthService : IAuthService
         await _authUserRepository.UpdateUserAsync(user);
         return user;
     }
+
+    public async Task<IAuthUser> GetUserAsync(string username)
+    {
+        return await _authUserRepository.GetUserAsync(username);
+    }
 }

@@ -6,6 +6,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.XUnit", "Dnd.XUnit\Dnd.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Auth", "Dnd.Auth\Dnd.Auth.csproj", "{32036F8F-96CE-4115-A7EB-FAB9909209EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Caching", "Dnd.Caching\Dnd.Caching.csproj", "{A38E759D-D9CE-4899-A7B9-79763929054C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Caching.API", "Dnd.Caching.API\Dnd.Caching.API.csproj", "{42CAB0FF-2AC8-458A-A3F0-657933CF2146}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Core", "Dnd.Core\Dnd.Core.csproj", "{11E02478-7018-45A2-B157-815972F3487A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Core.API", "Dnd.Core.API\Dnd.Core.API.csproj", "{54A094AB-0BAE-4234-B5F5-254D05B00FE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +32,21 @@ Global
 		{32036F8F-96CE-4115-A7EB-FAB9909209EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32036F8F-96CE-4115-A7EB-FAB9909209EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32036F8F-96CE-4115-A7EB-FAB9909209EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A38E759D-D9CE-4899-A7B9-79763929054C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A38E759D-D9CE-4899-A7B9-79763929054C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A38E759D-D9CE-4899-A7B9-79763929054C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A38E759D-D9CE-4899-A7B9-79763929054C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42CAB0FF-2AC8-458A-A3F0-657933CF2146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42CAB0FF-2AC8-458A-A3F0-657933CF2146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42CAB0FF-2AC8-458A-A3F0-657933CF2146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42CAB0FF-2AC8-458A-A3F0-657933CF2146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11E02478-7018-45A2-B157-815972F3487A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11E02478-7018-45A2-B157-815972F3487A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11E02478-7018-45A2-B157-815972F3487A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11E02478-7018-45A2-B157-815972F3487A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54A094AB-0BAE-4234-B5F5-254D05B00FE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54A094AB-0BAE-4234-B5F5-254D05B00FE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54A094AB-0BAE-4234-B5F5-254D05B00FE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54A094AB-0BAE-4234-B5F5-254D05B00FE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
