@@ -21,4 +21,17 @@
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Controllers\" />
+      <Folder Include="DTOs\" />
+      <Folder Include="Infrastructure\Database\" />
+      <Folder Include="Infrastructure\Security\" />
+      <Folder Include="Models\Implementations\" />
+      <Folder Include="Models\Interfaces\" />
+      <Folder Include="Repositories\Implementations\" />
+      <Folder Include="Repositories\Interfaces\" />
+      <Folder Include="Services\Implementations\" />
+      <Folder Include="Services\Interfaces\" />
+    </ItemGroup>
+
 </Project>

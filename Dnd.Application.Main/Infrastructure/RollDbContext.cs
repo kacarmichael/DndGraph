@@ -1,0 +1,26 @@
+﻿using Dnd.Application.Main.Models.Rolls;
+using Microsoft.EntityFrameworkCore;
+
+namespace Dnd.Application.Main.Infrastructure;
+
+public class RollDbContext : DbContext
+{
+    public RollDbContext(DbContextOptions<RollDbContext> options) : base(options)
+    {
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<DiceRollBase>()
+            //.HasBaseType<IDiceRoll>()
+            .HasDiscriminator<string>("RollType")
+            .HasValue<AbilityCheckRoll>("abilityCheck")
+            .HasValue<SavingThrowRoll>("savingThrow")
+            .HasValue<MeleeAttackRoll>("attackRollMelee")
+            .HasValue<RangedAttackRoll>("attackRollRanged")
+            .HasValue<DamageRoll>("damageRoll")
+            .HasValue<SpellAttackRoll>("spellAttackRoll");
+    }
+
+    public DbSet<DiceRollBase> Rolls { get; set; }
+}

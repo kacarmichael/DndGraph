@@ -1,9 +1,3 @@
-using Dnd.Auth.Infrastructure.Database;
-using Dnd.Auth.Models.Implementations;
-using Dnd.Auth.Repositories.Implementations;
-using Dnd.Auth.Repositories.Interfaces;
-using Dnd.Auth.Services.Implementations;
-using Dnd.Auth.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,7 +1,4 @@
-﻿using Dnd.API.Models.Characters.Implementations;
-using Dnd.API.Models.Characters.Interfaces;
-
-namespace Dnd.API;
+﻿namespace Dnd.API;
 
 public static class Constants
 {
