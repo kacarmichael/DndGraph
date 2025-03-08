@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Dnd.Application.Main.Utils;
 using Dnd.Core.Main.Models.Characters;
 
 namespace Dnd.Application.Main.Models.Characters;

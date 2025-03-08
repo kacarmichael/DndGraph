@@ -1,4 +1,4 @@
-﻿using Dnd.API.Main.DTOs;
+﻿using Dnd.Application.Main.DTOs;
 using Dnd.Core.Main.Models.Characters;
 using Dnd.Core.Main.Services;
 using Microsoft.AspNetCore.Mvc;

@@ -1,8 +1,9 @@
 ﻿using Dnd.Application.Main.Models.Dice;
+using Dnd.Core.Main.Utils;
 
-namespace Dnd.API.Main.DTOs;
+namespace Dnd.Application.Main.DTOs;
 
-public class RollRequestDto
+public class RollRequestDto : DtoBase
 {
     public string RollType { get; set; }
 

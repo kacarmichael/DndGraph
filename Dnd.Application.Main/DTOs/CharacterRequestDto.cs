@@ -1,9 +1,10 @@
 ﻿using Dnd.Application.Main.Models.Characters;
 using Dnd.Core.Main.Models.Characters;
+using Dnd.Core.Main.Utils;
 
-namespace Dnd.API.Main.DTOs;
+namespace Dnd.Application.Main.DTOs;
 
-public class CharacterRequestDto
+public class CharacterRequestDto : IDto
 {
     public Dictionary<string, int> AbilityScores { get; set; }
     public Dictionary<string, int> SkillModifiers { get; set; }

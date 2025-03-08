@@ -9,6 +9,7 @@ using Dnd.Core.Main.Models.Rolls;
 using Dnd.Core.Main.Repositories;
 using Dnd.Core.Main.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);

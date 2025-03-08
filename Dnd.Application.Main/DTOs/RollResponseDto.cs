@@ -1,8 +1,9 @@
 ﻿using Dnd.Core.Main.Models.Rolls;
+using Dnd.Core.Main.Utils;
 
-namespace Dnd.API.Main.DTOs;
+namespace Dnd.Application.Main.DTOs;
 
-public class RollResponseDto
+public class RollResponseDto : DtoBase
 {
     public string RollType { get; set; }
     public int RollValue { get; set; }

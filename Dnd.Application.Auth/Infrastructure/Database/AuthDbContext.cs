@@ -1,5 +1,7 @@
 ﻿using Dnd.Application.Auth.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Npgsql;
 
 namespace Dnd.Application.Auth.Infrastructure.Database;
 
@@ -23,6 +25,6 @@ public class AuthDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql(_configuration.GetConnectionString("Postgres"));
+        optionsBuilder.UseNpgsql(new NpgsqlConnection(_configuration.GetConnectionString("Postgres")));
     }
 }

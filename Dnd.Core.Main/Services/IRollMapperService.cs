@@ -5,6 +5,6 @@ namespace Dnd.Core.Main.Services;
 
 public interface IRollMapperService
 {
-    public Task<IDiceRoll> Map(IDto req);
-    public IDto Map(IDiceRoll roll);
+    public Task<IDiceRoll> Map(DtoBase req);
+    public DtoBase Map(IDiceRoll roll);
 }

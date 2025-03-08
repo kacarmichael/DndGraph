@@ -1,8 +1,9 @@
 ﻿using Dnd.Core.Main.Models.Characters;
+using Dnd.Core.Main.Utils;
 
-namespace Dnd.API.Main.DTOs;
+namespace Dnd.Application.Main.DTOs;
 
-public class ClassResponseDto
+public class ClassResponseDto : IDto
 {
     public string Name { get; set; }
     public string SpellcastingAbility { get; set; }

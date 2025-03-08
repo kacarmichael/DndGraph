@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using Dnd.Core.Auth.Services;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Dnd.Application.Auth.Services;

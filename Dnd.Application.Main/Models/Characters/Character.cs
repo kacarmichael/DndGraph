@@ -21,7 +21,7 @@ public class Character : ICharacter
     [JsonIgnore] public string? ClassesJson { get; set; }
 
     [NotMapped]
-    public CharacterStats? Stats
+    public ICharacterStats? Stats
     {
         get => JsonSerializer.Deserialize<CharacterStats>(StatsJson);
         set => StatsJson = JsonSerializer.Serialize(value);

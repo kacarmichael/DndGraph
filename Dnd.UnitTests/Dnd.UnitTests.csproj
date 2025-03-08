@@ -19,4 +19,10 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\Dnd.API.Main\Dnd.API.Main.csproj"/>
+        <ProjectReference Include="..\Dnd.Application.Main\Dnd.Application.Main.csproj"/>
+        <ProjectReference Include="..\Dnd.Core.Main\Dnd.Core.Main.csproj"/>
+    </ItemGroup>
+
 </Project>

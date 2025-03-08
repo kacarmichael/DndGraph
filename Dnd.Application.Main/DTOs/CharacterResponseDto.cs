@@ -1,9 +1,10 @@
 ﻿using Dnd.Application.Main.Models.Characters;
 using Dnd.Core.Main.Models.Characters;
+using Dnd.Core.Main.Utils;
 
-namespace Dnd.API.Main.DTOs;
+namespace Dnd.Application.Main.DTOs;
 
-public class CharacterResponseDto
+public class CharacterResponseDto : IDto
 {
     public string Name { get; set; }
     public CharacterStats Stats { get; set; }
@@ -20,7 +21,7 @@ public class CharacterResponseDto
     public CharacterResponseDto(ICharacter character)
     {
         Name = character.Name;
-        Stats = character.Stats;
+        Stats = (CharacterStats)character.Stats;
         Proficiencies = character.Stats.Proficiencies;
         Level = character.Level;
         Ac = character.AC;
