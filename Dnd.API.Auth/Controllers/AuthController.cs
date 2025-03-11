@@ -16,6 +16,7 @@ public class AuthController : ControllerBase
         _logger = logger;
         _authService = authService;
         _jwtService = jwtService;
+        _logger.LogInformation("Auth controller created");
     }
 
     [HttpPost("/login")]

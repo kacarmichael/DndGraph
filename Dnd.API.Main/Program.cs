@@ -1,10 +1,12 @@
 using System.Text;
 using Dnd.API.Main.Extensions;
+using Dnd.Application.Logging;
 using Dnd.Application.Main.Infrastructure;
 using Dnd.Application.Main.Models.Characters;
 using Dnd.Application.Main.Models.Rolls;
 using Dnd.Application.Main.Repositories;
 using Dnd.Application.Main.Services;
+using Dnd.Core.Logging;
 using Dnd.Core.Main.Models.Rolls;
 using Dnd.Core.Main.Repositories;
 using Dnd.Core.Main.Services;
@@ -82,11 +84,25 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
-builder.Services.AddLogging(logging =>
-{
-    logging.AddConsole();
-    logging.AddDebug();
-});
+// builder.Services.AddLogging(logging =>
+// {
+//     logging.AddConsole();
+//     logging.AddDebug();
+// });
+
+// builder.Services.AddLogging(logging =>
+// {
+//     logging.AddProvider(new DndLoggerProvider("Dnd.API.Main",
+//             new ConsoleLoggerProvider(
+//                 builder.Services.BuildServiceProvider()
+//                     .GetRequiredService<IOptionsMonitor<ConsoleLoggerOptions>>()
+//             )
+//         )
+//     );
+// });
+
+builder.Services.AddSingleton<ILoggingClient>(
+    new LoggingClient(new LoggerConfig("Dnd.API.Main", null, LogLevel.Information)));
 
 
 var app = builder.Build();

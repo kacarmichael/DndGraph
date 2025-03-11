@@ -20,6 +20,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.API.Auth", "Dnd.API.Aut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Application.Caching", "Dnd.Application.Caching\Dnd.Application.Caching.csproj", "{FCBFE2B1-943F-46B8-AF64-8007F48438AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Core.Logging", "Dnd.Core.Logging\Dnd.Core.Logging.csproj", "{42F030B3-252B-44C8-A997-8FC1A980C1A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Application.Logging", "Dnd.Application.Logging\Dnd.Application.Logging.csproj", "{E57F1D4A-FE08-43A0-AE8F-FCD08777BCDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,5 +70,13 @@ Global
 		{FCBFE2B1-943F-46B8-AF64-8007F48438AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCBFE2B1-943F-46B8-AF64-8007F48438AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCBFE2B1-943F-46B8-AF64-8007F48438AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42F030B3-252B-44C8-A997-8FC1A980C1A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42F030B3-252B-44C8-A997-8FC1A980C1A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42F030B3-252B-44C8-A997-8FC1A980C1A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42F030B3-252B-44C8-A997-8FC1A980C1A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E57F1D4A-FE08-43A0-AE8F-FCD08777BCDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E57F1D4A-FE08-43A0-AE8F-FCD08777BCDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E57F1D4A-FE08-43A0-AE8F-FCD08777BCDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E57F1D4A-FE08-43A0-AE8F-FCD08777BCDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

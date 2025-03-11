@@ -8,11 +8,17 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.2"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="7.3.1"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="7.3.1"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.3.1"/>
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Dnd.Application.Auth\Dnd.Application.Auth.csproj"/>
+        <ProjectReference Include="..\Dnd.Application.Logging\Dnd.Application.Logging.csproj"/>
         <ProjectReference Include="..\Dnd.Core.Auth\Dnd.Core.Auth.csproj"/>
+        <ProjectReference Include="..\Dnd.Core.Logging\Dnd.Core.Logging.csproj"/>
     </ItemGroup>
 
 </Project>

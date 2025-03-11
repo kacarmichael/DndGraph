@@ -1,4 +1,5 @@
 ﻿using Dnd.Application.Main.DTOs;
+using Dnd.Core.Logging;
 using Dnd.Core.Main.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +12,17 @@ namespace Dnd.API.Main.Controllers;
 public class RollController : ControllerBase
 {
     private readonly IRollService _rollService;
-    private readonly ILogger _logger;
 
-    public RollController(IRollService rollService, ILogger<RollController> logger)
+    //private readonly ILogger _logger;
+    private readonly ILoggingClient _logger;
+
+    public RollController(IRollService rollService, ILogger<RollController> logger, ILoggingClient loggingClient)
     {
         _rollService = rollService;
-        _logger = logger;
+        // _logger = logger;
+        // _logger.LogInformation("Roll controller created");
+        _logger = loggingClient;
+        _logger.LogInformation("Roll controller created");
     }
 
     [HttpPost]

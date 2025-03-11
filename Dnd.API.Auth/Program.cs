@@ -1,10 +1,43 @@
+using Dnd.Application.Auth.Infrastructure.Database;
+using Dnd.Application.Auth.Repositories;
+using Dnd.Application.Auth.Services;
+using Dnd.Application.Logging;
+using Dnd.Core.Auth.Repositories;
+using Dnd.Core.Auth.Services;
+using Dnd.Core.Logging;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+
+builder.Services.AddDbContext<AuthDbContext>(options =>
+    options.UseInMemoryDatabase("AuthDb"));
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+// builder.Services.AddLogging(logging =>
+// {
+//     logging.AddProvider(new AuthLoggerProvider("Dnd.API.Auth",
+//         new ConsoleLoggerProvider(
+//             builder.Services.BuildServiceProvider()
+//                 .GetRequiredService<IOptionsMonitor<ConsoleLoggerOptions>>()
+//             )
+//         )
+//     );
+// });
+
+builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddTransient<IAuthUserRepository, AuthUserRepository>();
+
+builder.Services.AddTransient<ISaltRotationService, SaltRotationService>();
+
+builder.Services.AddTransient<IJwtService, JwtService>();
+
+builder.Services.AddSingleton<ILoggingClient>(
+    new LoggingClient(new LoggerConfig("Dnd.API.Main", null, LogLevel.Information)));
 
 var app = builder.Build();
 
@@ -17,6 +50,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseSwagger();
+
+app.UseSwaggerUI();
 
 app.MapControllers();
 
