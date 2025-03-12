@@ -1,4 +1,5 @@
 using Dnd.Application.Auth.Infrastructure.Database;
+using Dnd.Application.Auth.Models;
 using Dnd.Application.Auth.Repositories;
 using Dnd.Application.Auth.Services;
 using Dnd.Application.Logging;
@@ -14,7 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AuthDbContext>(options =>
-    options.UseInMemoryDatabase("AuthDb"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -35,9 +36,12 @@ builder.Services.AddTransient<IAuthUserRepository, AuthUserRepository>();
 builder.Services.AddTransient<ISaltRotationService, SaltRotationService>();
 
 builder.Services.AddTransient<IJwtService, JwtService>();
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
 builder.Services.AddSingleton<ILoggingClient>(
     new LoggingClient(new LoggerConfig("Dnd.API.Main", null, LogLevel.Information)));
+
+builder.Services.AddHostedService<SaltRotationService>();
 
 var app = builder.Build();
 

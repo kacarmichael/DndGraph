@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\Dnd.Application.Main\Dnd.Application.Main.csproj"/>
+        <ProjectReference Include="..\Dnd.Core.Caching\Dnd.Core.Caching.csproj"/>
+    </ItemGroup>
+
 </Project>

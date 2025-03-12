@@ -1,5 +1,6 @@
 ﻿using Dnd.API.Auth.DTOs;
 using Dnd.Core.Auth.Services;
+using Dnd.Core.Logging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dnd.API.Auth.Controllers;
@@ -7,11 +8,12 @@ namespace Dnd.API.Auth.Controllers;
 [ApiController]
 public class AuthController : ControllerBase
 {
-    private readonly ILogger _logger;
+    //private readonly ILogger _logger;
     private readonly IAuthService _authService;
     private readonly IJwtService _jwtService;
+    private readonly ILoggingClient _logger;
 
-    public AuthController(ILogger<AuthController> logger, IAuthService authService, IJwtService jwtService)
+    public AuthController(ILoggingClient logger, IAuthService authService, IJwtService jwtService)
     {
         _logger = logger;
         _authService = authService;

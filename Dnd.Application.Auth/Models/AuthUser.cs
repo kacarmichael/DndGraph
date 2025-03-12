@@ -56,6 +56,23 @@ public class AuthUser : IAuthUser
         PasswordResetToken = "Not Implemented Yet";
     }
 
+    public AuthUser(int id, string username, string salt, string hashedPassword, string role, string email)
+    {
+        Id = id;
+        Username = username;
+        CurrentSalt = salt;
+        PreviousSalt = String.Empty;
+        HashedPassword = hashedPassword;
+        Role = role;
+        Email = email;
+        Created = new DateTime(2000, 1, 1).ToUniversalTime();
+        Updated = new DateTime(2000, 1, 1).ToUniversalTime();
+        LastLogin = new DateTime(2000, 1, 1).ToUniversalTime();
+        Locked = false;
+        FailedLogins = 0;
+        PasswordResetToken = "Not Implemented Yet";
+    }
+
     public AuthUser()
     {
     }

@@ -19,6 +19,7 @@ public class SaltRotationService : ISaltRotationService, IHostedService, IDispos
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
+        _timer = new Timer(RotateSalts, null, TimeSpan.Zero, TimeSpan.FromHours(1));
         return Task.CompletedTask;
     }
 

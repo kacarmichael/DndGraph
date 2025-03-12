@@ -15,15 +15,15 @@ public class LoggingClient : ILoggingClient
         Config = config;
     }
 
-    public void LogMessage(string message)
-    {
-        //if (Config.MinLogLevel > LogLevel.Information) return;
-        Logger.LogMessage(message);
-    }
+    // public void LogMessage(string message)
+    // {
+    //     //if (Config.MinLogLevel > LogLevel.Information) return;
+    //     Logger.LogMessage(message);
+    // }
 
     public void LogInformation(string message)
     {
         if (Config.MinLogLevel > LogLevel.Information) return;
-        Logger.LogMessage(message);
+        Logger.LogMessage($"[INFO] {Config.Prefix} - {message}");
     }
 }
