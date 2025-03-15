@@ -1,11 +1,13 @@
-using System.Text;
 using Dnd.API.Main.Extensions;
+using Dnd.Application.Auth.Models;
+using Dnd.Application.Caching;
 using Dnd.Application.Logging;
 using Dnd.Application.Main.Infrastructure;
 using Dnd.Application.Main.Models.Characters;
 using Dnd.Application.Main.Models.Rolls;
 using Dnd.Application.Main.Repositories;
 using Dnd.Application.Main.Services;
+using Dnd.Core.Caching;
 using Dnd.Core.Logging;
 using Dnd.Core.Main.Models.Rolls;
 using Dnd.Core.Main.Repositories;
@@ -37,6 +39,11 @@ builder.Services.AddTransient<IRollMapperService, RollMapperService>();
 builder.Services.AddTransient<IRollService, RollService>();
 builder.Services.AddTransient<IClassMapperService, ClassMapperService>();
 builder.Services.AddTransient<IDiceSimulationFactory, DiceSimulationFactory>();
+builder.Services.AddTransient<IDiceRollCache, DiceRollCache>();
+builder.Services.AddTransient<IDiceSimulationCache, DiceSimulationCache>();
+
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
+builder.Services.Configure<JwksSettings>(builder.Configuration.GetSection("Jwks"));
 
 builder.Services.AddCors(options =>
     {
@@ -64,7 +71,15 @@ builder.Services.AddAuthentication(options =>
             ValidAudience = builder.Configuration["Jwt:Audience"],
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+            IssuerSigningKey = new JsonWebKey
+            {
+                KeyId = builder.Configuration["Jwks:Kid"],
+                Kty = builder.Configuration["Jwks:Kty"],
+                N = builder.Configuration["Jwks:N"],
+                E = builder.Configuration["Jwks:E"],
+                Use = builder.Configuration["Jwks:Use"],
+                Alg = builder.Configuration["Jwks:Alg"]
+            }
         };
 
         options.Events = new JwtBearerEvents

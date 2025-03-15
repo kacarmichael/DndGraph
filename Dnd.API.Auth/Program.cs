@@ -37,11 +37,23 @@ builder.Services.AddTransient<ISaltRotationService, SaltRotationService>();
 
 builder.Services.AddTransient<IJwtService, JwtService>();
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
+builder.Services.Configure<JwksSettings>(builder.Configuration.GetSection("Jwks"));
 
 builder.Services.AddSingleton<ILoggingClient>(
     new LoggingClient(new LoggerConfig("Dnd.API.Main", null, LogLevel.Information)));
 
 builder.Services.AddHostedService<SaltRotationService>();
+
+builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowLocalhost",
+            builder =>
+            {
+                builder.WithOrigins("http://localhost:3002", "https://localhost:3002").AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+    }
+);
 
 var app = builder.Build();
 
@@ -60,5 +72,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapControllers();
+
+app.UseCors("AllowLocalhost");
 
 app.Run();
