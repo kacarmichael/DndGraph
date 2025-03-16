@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Dnd.API.Main.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("api/roll")]
 public class RollController : ControllerBase
@@ -32,6 +31,7 @@ public class RollController : ControllerBase
         return Ok(response);
     }
 
+    [Authorize]
     [HttpPost("dice")]
     public Task<ActionResult<DiceRollResponseDto>> PostDiceRoll([FromBody] DiceRollRequestDto req)
     {

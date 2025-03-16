@@ -7,8 +7,8 @@ namespace Dnd.Application.Auth.Infrastructure.Database;
 public class AuthDbContext : DbContext
 {
     private readonly IConfiguration _configuration;
-    private static readonly string Salt = "i69J0wAqt4Nbj6gzsffhsw==";
-    private static readonly string HashedPassword = "BjvZ7XTMzY86C7ZVCrbDqDGcj12o4NyjC0kvpcCORiI=";
+    private static readonly string Salt = "xAgPEpjAIRRqkGLmYnibFQ==";
+    private static readonly string HashedPassword = "ubRuRiajwISrw7X1+YOlqCMlX1Z3UlC40uiX7oTIrGM=";
 
     public AuthDbContext(DbContextOptions<AuthDbContext> options, IConfiguration configuration) : base(options)
     {

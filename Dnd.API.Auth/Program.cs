@@ -37,7 +37,7 @@ builder.Services.AddTransient<ISaltRotationService, SaltRotationService>();
 
 builder.Services.AddTransient<IJwtService, JwtService>();
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
-builder.Services.Configure<JwksSettings>(builder.Configuration.GetSection("Jwks"));
+//builder.Services.Configure<JwksSettings>(builder.Configuration.GetSection("Jwks"));
 
 builder.Services.AddSingleton<ILoggingClient>(
     new LoggingClient(new LoggerConfig("Dnd.API.Main", null, LogLevel.Information)));
@@ -63,7 +63,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

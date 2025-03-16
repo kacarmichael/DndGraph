@@ -1,10 +1,14 @@
 ﻿using Dnd.API.Auth.DTOs;
+using Dnd.Application.Auth.Infrastructure.Security;
+using Dnd.Core.Auth.Models;
 using Dnd.Core.Auth.Services;
 using Dnd.Core.Logging;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dnd.API.Auth.Controllers;
 
+[AllowAnonymous]
 [ApiController]
 public class AuthController : ControllerBase
 {
@@ -24,23 +28,24 @@ public class AuthController : ControllerBase
     [HttpPost("/login")]
     public async Task<ActionResult<LoginResponseDto>> LoginAsync([FromBody] LoginRequestDto req)
     {
+        IAuthUser user = await _authService.GetUserAsync(req.Username);
+        if (user == null || user.HashedPassword != Passwords.HashPassword(req.Password, user.CurrentSalt))
+        {
+            return Unauthorized(
+                new LoginResponseDto(
+                    username: req.Username,
+                    success: false,
+                    token: ""));
+        }
+
         // var requestBody = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
         _logger.LogInformation($"Request: {req}");
         //Console.WriteLine("Console logging test");
-        if (req.Username == "admin" && req.Password == "asdf")
-        {
-            return Ok(
-                new LoginResponseDto(
-                    username: req.Username,
-                    success: true,
-                    token: _jwtService.GenerateToken(req.Username, "User")));
-        }
-
-        return Unauthorized(
+        return Ok(
             new LoginResponseDto(
                 username: req.Username,
-                success: false,
-                token: ""));
+                success: true,
+                token: _jwtService.GenerateToken(req.Username, "User")));
     }
 
     [HttpPost("/register")]

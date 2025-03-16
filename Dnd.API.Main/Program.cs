@@ -1,3 +1,4 @@
+using System.Text;
 using Dnd.API.Main.Extensions;
 using Dnd.Application.Auth.Models;
 using Dnd.Application.Caching;
@@ -43,7 +44,7 @@ builder.Services.AddTransient<IDiceRollCache, DiceRollCache>();
 builder.Services.AddTransient<IDiceSimulationCache, DiceSimulationCache>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
-builder.Services.Configure<JwksSettings>(builder.Configuration.GetSection("Jwks"));
+//builder.Services.Configure<JwksSettings>(builder.Configuration.GetSection("Jwks"));
 
 builder.Services.AddCors(options =>
     {
@@ -63,6 +64,8 @@ builder.Services.AddAuthentication(options =>
     })
     .AddJwtBearer(options =>
     {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -71,15 +74,16 @@ builder.Services.AddAuthentication(options =>
             ValidAudience = builder.Configuration["Jwt:Audience"],
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new JsonWebKey
-            {
-                KeyId = builder.Configuration["Jwks:Kid"],
-                Kty = builder.Configuration["Jwks:Kty"],
-                N = builder.Configuration["Jwks:N"],
-                E = builder.Configuration["Jwks:E"],
-                Use = builder.Configuration["Jwks:Use"],
-                Alg = builder.Configuration["Jwks:Alg"]
-            }
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"])),
+            // IssuerSigningKey = new JsonWebKey
+            // {
+            //     KeyId = builder.Configuration["Jwks:Kid"],
+            //     Kty = builder.Configuration["Jwks:Kty"],
+            //     N = builder.Configuration["Jwks:N"],
+            //     E = builder.Configuration["Jwks:E"],
+            //     Use = builder.Configuration["Jwks:Use"],
+            //     Alg = builder.Configuration["Jwks:Alg"]
+            // }
         };
 
         options.Events = new JwtBearerEvents
