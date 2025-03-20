@@ -24,6 +24,7 @@ public class RollController : ControllerBase
         _logger.LogInformation("Roll controller created");
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<RollResponseDto>> PostRoll([FromBody] RollRequestDto req)
     {
@@ -35,14 +36,22 @@ public class RollController : ControllerBase
     [HttpPost("dice")]
     public Task<ActionResult<DiceRollResponseDto>> PostDiceRoll([FromBody] DiceRollRequestDto req)
     {
-        _logger.LogInformation("POST /dice");
-        _logger.LogInformation($"REQUEST: {req}");
-        var res = _rollService.DiceRoll(req);
-        _logger.LogInformation($"Roll service response: {res}");
-        return Task.FromResult<ActionResult<DiceRollResponseDto>>(Ok(res));
+        try
+        {
+            _logger.LogInformation("POST /dice");
+            _logger.LogInformation($"REQUEST: {req}");
+            var res = _rollService.DiceRoll(req);
+            _logger.LogInformation($"Roll service response: {res}");
+            return Task.FromResult<ActionResult<DiceRollResponseDto>>(Ok(res));
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("ERROR: " + ex.Message);
+            return Task.FromResult<ActionResult<DiceRollResponseDto>>(BadRequest(ex.Message));
+        }
     }
 
-
+    [Authorize]
     [HttpPost("dice/simulate")]
     public Task<ActionResult<DiceSimulationResponseDto>> PostDiceSimulation([FromBody] DiceSimulationRequestDto req)
     {

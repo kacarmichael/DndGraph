@@ -7,12 +7,19 @@ using Dnd.Core.Auth.Repositories;
 using Dnd.Core.Auth.Services;
 using Dnd.Core.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddControllers();
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Dnd.API.Auth", Version = "v1" });
+});
 
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
@@ -49,8 +56,10 @@ builder.Services.AddCors(options =>
         options.AddPolicy("AllowLocalhost",
             builder =>
             {
-                builder.WithOrigins("http://localhost:3002", "https://localhost:3002").AllowAnyHeader()
-                    .AllowAnyMethod();
+                builder.WithOrigins("http://localhost:3002", "https://localhost:3002")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
             });
     }
 );

@@ -38,7 +38,7 @@ public class JwtService : IJwtService
         var key = Encoding.UTF8.GetBytes(_jwtSettings.Secret);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new[]
+            Subject = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Name, username),
                 new Claim(ClaimTypes.Role, role)
@@ -52,27 +52,5 @@ public class JwtService : IJwtService
         };
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
-        // var claims = new[]
-        // {
-        //     new Claim(ClaimTypes.Name, username),
-        //     new Claim(ClaimTypes.Role, role),
-        //     //new Claim("kid", _jwksSettings.Kid),
-        //     new Claim("iss", _jwtSettings.Issuer),
-        //     new Claim("aud", _jwtSettings.Audience)
-        // };
-        //
-        // var key = new RsaSecurityKey(new RSAParameters
-        // {
-        //     Modulus = Convert.FromBase64String(_jwksSettings.N),
-        //     Exponent = BitConverter.GetBytes(int.Parse(_jwksSettings.E))
-        // });
-        // var creds = new SigningCredentials(key, _jwksSettings.Alg);
-
-        // var token = new JwtSecurityToken(_issuer, _audience, claims,
-        //     expires: DateTime.Now.AddMinutes(30), signingCredentials: creds);
-        // var token = new JwtSecurityToken(_jwtSettings.Issuer, _jwtSettings.Audience, claims,
-        // expires: DateTime.Now.AddMinutes(30), signingCredentials: creds);
-
-        // return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }
