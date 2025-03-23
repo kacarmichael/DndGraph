@@ -49,6 +49,16 @@ public class Character : ICharacter
         Classes = charClass;
     }
 
+    public Character(int id, string? name, int level, CharacterStats? stats, int ac, Dictionary<string, int>? charClass)
+    {
+        Id = id;
+        Name = name;
+        Level = level;
+        Stats = stats;
+        AC = ac;
+        Classes = charClass;
+    }
+
     public bool Equals(ICharacter? other)
     {
         if (other is null) return false;

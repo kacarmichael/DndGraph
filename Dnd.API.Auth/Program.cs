@@ -1,11 +1,18 @@
+using Dnd.Application.Abstractions;
 using Dnd.Application.Auth.Infrastructure.Database;
 using Dnd.Application.Auth.Models;
 using Dnd.Application.Auth.Repositories;
 using Dnd.Application.Auth.Services;
 using Dnd.Application.Logging;
+using Dnd.Application.Main.Infrastructure;
+using Dnd.Application.Main.Repositories;
+using Dnd.Application.Main.Services;
+using Dnd.Core.Abstractions;
 using Dnd.Core.Auth.Repositories;
 using Dnd.Core.Auth.Services;
 using Dnd.Core.Logging;
+using Dnd.Core.Main.Repositories;
+using Dnd.Core.Main.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -24,6 +31,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddDbContext<UserDbContext>(options => options.UseInMemoryDatabase("UserDb"));
 builder.Services.AddOpenApi();
 
 // builder.Services.AddLogging(logging =>
@@ -39,6 +47,9 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IAuthUserRepository, AuthUserRepository>();
+builder.Services.AddTransient<IUserMapperService, UserMapperService>();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
 
 builder.Services.AddTransient<ISaltRotationService, SaltRotationService>();
 

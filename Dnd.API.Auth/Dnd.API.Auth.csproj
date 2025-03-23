@@ -7,22 +7,26 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.2"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="7.3.1"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="7.3.1"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.3.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.3"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="8.0.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.0.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Dnd.Application.Abstractions\Dnd.Application.Abstractions.csproj"/>
         <ProjectReference Include="..\Dnd.Application.Auth\Dnd.Application.Auth.csproj"/>
         <ProjectReference Include="..\Dnd.Application.Logging\Dnd.Application.Logging.csproj"/>
+        <ProjectReference Include="..\Dnd.Application.Main\Dnd.Application.Main.csproj"/>
+        <ProjectReference Include="..\Dnd.Core.Abstractions\Dnd.Core.Abstractions.csproj"/>
         <ProjectReference Include="..\Dnd.Core.Auth\Dnd.Core.Auth.csproj"/>
         <ProjectReference Include="..\Dnd.Core.Logging\Dnd.Core.Logging.csproj"/>
+        <ProjectReference Include="..\Dnd.Core.Main\Dnd.Core.Main.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Dnd.Core.Auth.Models;
 using Dnd.Core.Main.Models.Characters;
 using Dnd.Core.Main.Models.Users;
 
@@ -8,6 +9,10 @@ public class DomainUser : IDomainUser
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
+
+    public int AuthUserId { get; set; }
+
+    [ForeignKey("AuthUserId")] public IAuthUser AuthUser { get; set; }
 
     public string Username { get; set; }
     public List<ICharacter> Characters { get; set; }

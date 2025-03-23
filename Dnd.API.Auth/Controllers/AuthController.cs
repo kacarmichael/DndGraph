@@ -1,8 +1,11 @@
 ﻿using Dnd.API.Auth.DTOs;
 using Dnd.Application.Auth.Infrastructure.Security;
+using Dnd.Application.Main.Extensions;
+using Dnd.Core.Abstractions;
 using Dnd.Core.Auth.Models;
 using Dnd.Core.Auth.Services;
 using Dnd.Core.Logging;
+using Dnd.Core.Main.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,13 +18,18 @@ public class AuthController : ControllerBase
     //private readonly ILogger _logger;
     private readonly IAuthService _authService;
     private readonly IJwtService _jwtService;
+    private readonly IUserService _userService;
+    private readonly IUserMapperService _userMapperService;
     private readonly ILoggingClient _logger;
 
-    public AuthController(ILoggingClient logger, IAuthService authService, IJwtService jwtService)
+    public AuthController(ILoggingClient logger, IAuthService authService, IJwtService jwtService,
+        IUserService userService, IUserMapperService userMapperService)
     {
         _logger = logger;
         _authService = authService;
         _jwtService = jwtService;
+        _userService = userService;
+        _userMapperService = userMapperService;
         _logger.LogInformation("Auth controller created");
     }
 
@@ -52,6 +60,7 @@ public class AuthController : ControllerBase
     public async Task<ActionResult<RegisterResponseDto>> RegisterAsync([FromBody] RegisterRequestDto req)
     {
         await _authService.AddUserAsync(req.DtoToUser());
+        await _userService.AddUserAsync(DomainUserExtensions.FromAuthUser(req.DtoToUser()));
         return Ok(new RegisterResponseDto(req.DtoToUser()));
     }
 

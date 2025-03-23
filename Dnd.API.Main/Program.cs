@@ -57,7 +57,7 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 
 builder.Services.AddDbContext<CharacterDbContext>(options =>
-    options.UseInMemoryDatabase("RollDb"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
 
 builder.Services.AddDbContext<RollDbContext>(options =>
     options.UseInMemoryDatabase("RollDb"));

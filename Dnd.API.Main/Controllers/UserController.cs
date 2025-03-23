@@ -1,4 +1,5 @@
-﻿using Dnd.Core.Main.Models.Users;
+﻿using Dnd.Core.Abstractions;
+using Dnd.Core.Main.Models.Users;
 using Dnd.Core.Main.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,10 +8,12 @@ namespace Dnd.API.Main.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly IUserMapperService _userMapperService;
 
-    public UserController(IUserService userService)
+    public UserController(IUserService userService, IUserMapperService userMapperService)
     {
         _userService = userService;
+        _userMapperService = userMapperService;
     }
 
     [HttpGet("{username}")]

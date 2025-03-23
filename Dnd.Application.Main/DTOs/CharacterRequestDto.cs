@@ -58,7 +58,7 @@ public class CharacterRequestDto : IDto
             AbilityScores["Wisdom"],
             AbilityScores["Charisma"],
             SkillModifiers["Acrobatics"],
-            SkillModifiers["Animal Handling"],
+            SkillModifiers["AnimalHandling"],
             SkillModifiers["Arcana"],
             SkillModifiers["Athletics"],
             SkillModifiers["Deception"],
@@ -72,7 +72,7 @@ public class CharacterRequestDto : IDto
             SkillModifiers["Performance"],
             SkillModifiers["Persuasion"],
             SkillModifiers["Religion"],
-            SkillModifiers["Sleight of Hand"],
+            SkillModifiers["SleightOfHand"],
             SkillModifiers["Stealth"],
             SkillModifiers["Survival"],
             Proficiencies);
