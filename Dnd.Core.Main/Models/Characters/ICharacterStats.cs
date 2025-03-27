@@ -1,10 +1,11 @@
-﻿namespace Dnd.Core.Main.Models.Characters;
+﻿using Dnd.Core.Main.Utils;
+
+namespace Dnd.Core.Main.Models.Characters;
 
 public interface ICharacterStats
 {
-    Dictionary<string, int> AbilityModifiers { get; set; }
-    Dictionary<string, int> AbilityScores { get; set; }
-    Dictionary<string, int> SkillModifiers { get; set; }
+    List<Ability> Abilities { get; set; }
+    
     List<string>? Proficiencies { get; set; }
 
     bool Equals(ICharacterStats? other);
