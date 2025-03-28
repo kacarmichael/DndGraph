@@ -1,4 +1,5 @@
 ﻿using Dnd.Core.Main.Models.Characters;
+using Dnd.Core.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Models.Dice;
 
 namespace Dnd.Application.Main.Models.Rolls;
@@ -22,7 +23,7 @@ public class MeleeAttackRoll : DiceRollBase
 
     public override int Roll()
     {
-        return DiceRolled.Roll() + Roller.Stats.AbilityModifiers["Strength"] + Roller.ProficiencyModifier;
+        return DiceRolled.Roll() + Roller.Stats.AbilityCheckModifier(AbilityBlock.AbilityName.Strength) + Roller.ProficiencyModifier;
     }
 
     public override string Describe() => Roller.Name + " Melee Attack";
@@ -47,7 +48,7 @@ public class RangedAttackRoll : DiceRollBase
 
     public override int Roll()
     {
-        return DiceRolled.Roll() + Roller.Stats.AbilityModifiers["Dexterity"] +
+        return DiceRolled.Roll() + Roller.Stats.AbilityCheckModifier(AbilityBlock.AbilityName.Dexterity) +
                Roller.ProficiencyModifier;
     }
 

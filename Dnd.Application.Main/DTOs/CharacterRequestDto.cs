@@ -1,5 +1,6 @@
 ﻿using Dnd.Application.Main.Models.Characters;
 using Dnd.Core.Main.Models.Characters;
+using Dnd.Core.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Utils;
 
 namespace Dnd.Application.Main.DTOs;
@@ -39,9 +40,7 @@ public class CharacterRequestDto : IDto
 
     public CharacterRequestDto(ICharacter character)
     {
-        AbilityScores = character.Stats.AbilityScores;
-        SkillModifiers = character.Stats.SkillModifiers;
-        Proficiencies = character.Stats.Proficiencies;
+        (AbilityScores, SkillModifiers, Proficiencies) = character.Stats.GetStatsDictionary();
         Name = character.Name;
         Classes = character.Classes;
         Ac = character.AC;
@@ -50,33 +49,15 @@ public class CharacterRequestDto : IDto
 
     public Character DtoToCharacter()
     {
-        CharacterStats stats = new CharacterStats(
-            AbilityScores["Strength"],
-            AbilityScores["Dexterity"],
-            AbilityScores["Constitution"],
-            AbilityScores["Intelligence"],
-            AbilityScores["Wisdom"],
-            AbilityScores["Charisma"],
-            SkillModifiers["Acrobatics"],
-            SkillModifiers["AnimalHandling"],
-            SkillModifiers["Arcana"],
-            SkillModifiers["Athletics"],
-            SkillModifiers["Deception"],
-            SkillModifiers["History"],
-            SkillModifiers["Insight"],
-            SkillModifiers["Intimidation"],
-            SkillModifiers["Investigation"],
-            SkillModifiers["Medicine"],
-            SkillModifiers["Nature"],
-            SkillModifiers["Perception"],
-            SkillModifiers["Performance"],
-            SkillModifiers["Persuasion"],
-            SkillModifiers["Religion"],
-            SkillModifiers["SleightOfHand"],
-            SkillModifiers["Stealth"],
-            SkillModifiers["Survival"],
-            Proficiencies);
-
-        return new Character(Name, Level, stats, Ac, Classes);
+        return new Character(
+            name: Name,
+            level: Level,
+            charClass: Classes,
+            ac: Ac,
+            stats: new CharacterStats(
+                level: Level,
+                abilities: new AbilityBlock(AbilityScores),
+                skills: new SkillBlock(SkillModifiers)
+            ));
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Dnd.Core.Main.Models.Characters;
+﻿using Dnd.Core.Main.Models.Characters.Stats;
+
+namespace Dnd.Core.Main.Models.Characters;
 
 public interface ICharacter
 {

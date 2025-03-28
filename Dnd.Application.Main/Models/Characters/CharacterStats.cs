@@ -1,83 +1,76 @@
 ﻿using Dnd.Core.Main.Models.Characters;
+using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Models.Characters;
 
 public class CharacterStats : ICharacterStats
 {
-    public Dictionary<string, int>? AbilityScores { get; set; }
-
-    public Dictionary<string, int>? AbilityModifiers { get; set; }
-
-    public Dictionary<string, int>? SkillModifiers { get; set; }
-
-    public List<string>? Proficiencies { get; set; }
+    public int Level { get; set; }
+    public AbilityBlock Abilities { get; set; }
+    public SkillBlock Skills { get; set; }
+    public int ProficiencyBonus { get; set; }
 
     public CharacterStats()
     {
+        Level = 1;
+        Abilities = new AbilityBlock();
+        Skills = new SkillBlock();
+        ProficiencyBonus = 2;
     }
 
-    public CharacterStats(int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma,
-        int acrobatics, int animalHandling, int arcana, int athletics, int deception, int history, int insight,
-        int intimidation, int investigation, int medicine, int nature, int perception, int performance, int persuasion,
-        int religion, int sleightOfHand, int stealth, int survival, List<string>? proficiencies)
+    public CharacterStats(int level, AbilityBlock abilities, SkillBlock skills)
     {
-        AbilityScores = new Dictionary<string, int>()
-        {
-            { "Strength", strength },
-            { "Dexterity", dexterity },
-            { "Constitution", constitution },
-            { "Intelligence", intelligence },
-            { "Wisdom", wisdom },
-            { "Charisma", charisma }
-        };
-
-        AbilityModifiers = new Dictionary<string, int>()
-        {
-            { "Strength", (strength - 10) / 2 },
-            { "Dexterity", (dexterity - 10) / 2 },
-            { "Constitution", (constitution - 10) / 2 },
-            { "Intelligence", (intelligence - 10) / 2 },
-            { "Wisdom", (wisdom - 10) / 2 },
-            { "Charisma", (charisma - 10) / 2 }
-        };
-
-        Proficiencies = proficiencies;
-
-        SkillModifiers = new Dictionary<string, int>()
-        {
-            { "Acrobatics", acrobatics },
-            { "Animal Handling", animalHandling },
-            { "Arcana", arcana },
-            { "Athletics", athletics },
-            { "Deception", deception },
-            { "History", history },
-            { "Insight", insight },
-            { "Intimidation", intimidation },
-            { "Investigation", investigation },
-            { "Medicine", medicine },
-            { "Nature", nature },
-            { "Perception", perception },
-            { "Performance", performance },
-            { "Persuasion", persuasion },
-            { "Religion", religion },
-            { "Sleight of Hand", sleightOfHand },
-            { "Stealth", stealth },
-            { "Survival", survival }
-        };
+        Level = level;
+        Abilities = abilities;
+        Skills = skills;
+        ProficiencyBonus = (Level + 3) / 4 + 1;
     }
 
-    public bool Equals(ICharacterStats other)
+    public int AbilityCheckModifier(AbilityBlock.AbilityName ability)
     {
-        return AbilityScores.Count == other.AbilityScores.Count &&
-               !AbilityScores.Except(other.AbilityScores).Any() &&
-               AbilityModifiers.Count == other.AbilityModifiers.Count &&
-               !AbilityModifiers.Except(other.AbilityModifiers).Any() &&
-               SkillModifiers.Count == other.SkillModifiers.Count &&
-               !SkillModifiers.Except(other.SkillModifiers).Any();
+        Ability Ability = Abilities.First(a => a.name == ability.ToString());
+        return Ability.score + Ability.modifier + (Ability.proficient ? ProficiencyBonus : 0);
     }
 
-    public static bool Compare(ICharacterStats character1, ICharacterStats character2)
+    public int SkillCheckModifier(SkillBlock.SkillName skill)
     {
-        return character1.Equals(character2);
+        Skill Skill = Skills.Skills.First(s => s.name == skill.ToString());
+        return Skill.modifier + (Skill.proficient ? ProficiencyBonus : 0);
+    }
+
+    public int SaveThrowModifier(AbilityBlock.AbilityName ability)
+    {
+        Ability Ability = Abilities.First(a => a.name == ability.ToString());
+        return Ability.score + Ability.modifier + (Ability.proficient ? ProficiencyBonus : 0);
+    }
+
+    public bool Equals(ICharacterStats? other)
+    {
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return Level == other.Level && Abilities.Equals(other.Abilities) && Skills.Equals(other.Skills) &&
+               ProficiencyBonus == other.ProficiencyBonus;
+    }
+
+    public (Dictionary<String, int>, Dictionary<String, int>, List<String>) GetStatsDictionary()
+    {
+        List<String> proficiencies = new();
+        foreach (var ability in Abilities.Abilities)
+        {
+            if (ability.proficient)
+            {
+                proficiencies.Add(ability.name);
+            }
+        }
+        
+        foreach (var skill in Skills.Skills)
+        {
+            if (skill.proficient)
+            {
+                proficiencies.Add(skill.name);
+            }
+        }
+
+        return (Abilities.ToDictionary(), Skills.ToDictionary(), proficiencies);
     }
 }

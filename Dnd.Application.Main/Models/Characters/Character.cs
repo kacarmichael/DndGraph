@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dnd.Core.Main.Models.Characters;
+using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Models.Characters;
 

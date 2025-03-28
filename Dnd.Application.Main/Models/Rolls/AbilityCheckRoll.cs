@@ -1,5 +1,6 @@
 ﻿using Dnd.Application.Main.Utils;
 using Dnd.Core.Main.Models.Characters;
+using Dnd.Core.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Models.Dice;
 
 namespace Dnd.Application.Main.Models.Rolls;
@@ -26,25 +27,14 @@ public class AbilityCheckRoll : DiceRollBase
         int res = 0;
         if (Constants.AbilityNames.Contains(Ability))
         {
-            res = DiceRolled.Roll() + Roller.Stats.AbilityModifiers[Ability];
-            if (Roller.Stats.Proficiencies.Contains(Ability))
-            {
-                res += Roller.ProficiencyModifier;
-            }
-
+            res = DiceRolled.Roll() + Roller.Stats.AbilityCheckModifier(Roller.Stats.Abilities.GetAbility(Ability));
             return res;
         }
 
 
         if (Constants.SkillNames.Contains(Ability))
         {
-            res = DiceRolled.Roll() + Roller.Stats.SkillModifiers[Ability];
-            if (Roller.Stats.Proficiencies.Contains(Ability))
-            {
-                res += Roller.ProficiencyModifier;
-            }
-
-            return res;
+            res = DiceRolled.Roll() + Roller.Stats.SkillCheckModifier(Roller.Stats.Skills.GetSkill(Ability));
         }
 
         throw new ArgumentException("Invalid Ability");

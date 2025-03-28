@@ -1,5 +1,6 @@
 ﻿using Dnd.Application.Main.Utils;
 using Dnd.Core.Main.Models.Characters;
+using Dnd.Core.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Models.Dice;
 
 namespace Dnd.Application.Main.Models.Rolls;
@@ -30,11 +31,7 @@ public class SavingThrowRoll : DiceRollBase
             throw new ArgumentException("Invalid Ability");
         }
 
-        int res = DiceRolled.Roll() + Roller.Stats.AbilityModifiers[Ability];
-        if (Roller.Stats.Proficiencies.Contains(Ability))
-        {
-            res += Roller.ProficiencyModifier;
-        }
+        int res = DiceRolled.Roll() + Roller.Stats.SaveThrowModifier(Roller.Stats.Abilities.GetAbility(Ability));
 
         return res;
     }

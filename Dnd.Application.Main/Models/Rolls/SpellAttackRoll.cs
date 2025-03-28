@@ -25,7 +25,7 @@ public class SpellAttackRoll : DiceRollBase
 
     public override int Roll()
     {
-        return DiceRolled.Roll() + Roller.Stats.AbilityModifiers[ClassUsed.SpellcastingAbility] +
+        return DiceRolled.Roll() + Roller.Stats.AbilityCheckModifier(Roller.Stats.Abilities.GetAbility(ClassUsed.SpellcastingAbility)) +
                Roller.ProficiencyModifier;
     }
 }
