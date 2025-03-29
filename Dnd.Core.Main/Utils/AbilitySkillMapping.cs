@@ -1,6 +1,6 @@
-﻿namespace Dnd.Core.Main.Models.Characters.Stats;
+﻿namespace Dnd.Core.Main.Utils;
 
-public static class AbilitySkillMapping
+public class AbilitySkillMapping
 {
     public static Dictionary<string, List<string>> Mapping = new Dictionary<string, List<string>>
     {
@@ -11,16 +11,3 @@ public static class AbilitySkillMapping
         ["Charisma"] = new List<string> { "Deception", "Intimidation", "Performance", "Persuasion" }
     };
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,5 @@
 ﻿using Dnd.Application.Main.Utils;
 using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Models.Dice;
 
 namespace Dnd.Application.Main.Models.Rolls;

@@ -1,11 +1,10 @@
 ﻿using System.Collections;
+using Dnd.Core.Main.Models.Characters.Stats;
+using Dnd.Core.Main.Utils;
 
-namespace Dnd.Core.Main.Models.Characters.Stats;
+namespace Dnd.Application.Main.Models.Characters.Stats;
 
-//TODO: Refactor ICharacterStats to include structs to hole values
-
-
-public class Ability
+public class Ability : IAbility
 {
     public string name { get; set; }
     public int score { get; set; }
@@ -24,32 +23,22 @@ public class Ability
     }
 }
 
-public class AbilityBlock : IEnumerable<Ability>
+public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
 {
-    public enum AbilityName
-    {
-        Strength,
-        Dexterity,
-        Constitution,
-        Intelligence,
-        Wisdom,
-        Charisma
-    }
-    
     public AbilityName GetAbility(string name) => (AbilityName)Enum.Parse(typeof(AbilityName), name);
-    
-    public List<Ability> Abilities { get; set; }
+
+    public List<IAbility> Abilities { get; set; }
 
     public AbilityBlock()
     {
-        Abilities = new List<Ability>();
+        Abilities = new List<IAbility>();
         foreach (var ability in Enum.GetValues(typeof(AbilityName)))
         {
             Abilities.Add(new Ability(ability.ToString(), 10, 0, false));
         }
     }
 
-    public AbilityBlock(List<Ability> abilities)
+    public AbilityBlock(List<IAbility> abilities)
     {
         Abilities = abilities;
         foreach (var ability in Enum.GetValues(typeof(AbilityName)))
@@ -60,17 +49,17 @@ public class AbilityBlock : IEnumerable<Ability>
             }
         }
     }
-    
+
     public AbilityBlock(Dictionary<String, int> dict)
     {
-        Abilities = new List<Ability>();
+        Abilities = new List<IAbility>();
         foreach (var ability in Enum.GetValues(typeof(AbilityName)))
         {
             Abilities.Add(new Ability(ability.ToString(), dict[ability.ToString()], 0, false));
         }
     }
-    
-    public IEnumerator<Ability> GetEnumerator()
+
+    public IEnumerator<IAbility> GetEnumerator()
     {
         return Abilities.GetEnumerator();
     }

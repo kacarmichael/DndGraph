@@ -1,6 +1,6 @@
 ﻿using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Utils;
 
 namespace Dnd.Application.Main.DTOs;
