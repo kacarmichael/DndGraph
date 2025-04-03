@@ -18,7 +18,7 @@ public class CharacterStats : ICharacterStats
         ProficiencyBonus = 2;
     }
 
-    public CharacterStats(int level, AbilityBlock abilities, SkillBlock skills)
+    public CharacterStats(int level, IAbilityBlock abilities, ISkillBlock skills)
     {
         Level = level;
         Abilities = abilities;
@@ -28,20 +28,20 @@ public class CharacterStats : ICharacterStats
 
     public int AbilityCheckModifier(AbilityName abilityName)
     {
-        Ability ability = (Ability)Abilities.First(a => a.name == abilityName.ToString());
-        return ability.score + ability.modifier + (ability.proficient ? ProficiencyBonus : 0);
+        Ability ability = (Ability)Abilities.First(a => a.Name == abilityName.ToString());
+        return (ability.Score ?? 0) + ability.Modifier + (ability.Proficient ? ProficiencyBonus : 0);
     }
 
     public int SkillCheckModifier(SkillName skillName)
     {
-        Skill skill = (Skill)Skills.Skills.First(s => s.name == skillName.ToString());
-        return skill.modifier + (skill.proficient ? ProficiencyBonus : 0);
+        Skill skill = (Skill)Skills.Skills.First(s => s.Name == skillName.ToString());
+        return skill.Modifier + (skill.Proficient ? ProficiencyBonus : 0);
     }
 
     public int SaveThrowModifier(AbilityName abilityName)
     {
-        Ability ability = (Ability)Abilities.First(a => a.name == abilityName.ToString());
-        return ability.score + ability.modifier + (ability.proficient ? ProficiencyBonus : 0);
+        Ability ability = (Ability)Abilities.First(a => a.Name == abilityName.ToString());
+        return (ability.Score ?? 0) + ability.Modifier + (ability.Proficient ? ProficiencyBonus : 0);
     }
 
     public bool Equals(ICharacterStats? other)
@@ -57,17 +57,17 @@ public class CharacterStats : ICharacterStats
         List<String> proficiencies = new();
         foreach (var ability in Abilities.Abilities)
         {
-            if (ability.proficient)
+            if (ability.Proficient)
             {
-                proficiencies.Add(ability.name);
+                proficiencies.Add(ability.Name);
             }
         }
 
         foreach (var skill in Skills.Skills)
         {
-            if (skill.proficient)
+            if (skill.Proficient)
             {
-                proficiencies.Add(skill.name);
+                proficiencies.Add(skill.Name);
             }
         }
 

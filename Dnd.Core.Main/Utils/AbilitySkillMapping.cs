@@ -8,6 +8,7 @@ public class AbilitySkillMapping
         ["Dexterity"] = new List<string> { "Acrobatics", "Stealth", "SleightOfHand" },
         ["Intelligence"] = new List<string> { "Arcana", "History", "Investigation", "Nature", "Religion" },
         ["Wisdom"] = new List<string> { "AnimalHandling", "Insight", "Medicine", "Perception", "Survival" },
-        ["Charisma"] = new List<string> { "Deception", "Intimidation", "Performance", "Persuasion" }
+        ["Charisma"] = new List<string> { "Deception", "Intimidation", "Performance", "Persuasion" },
+        ["Constitution"] = new List<string>()
     };
 }

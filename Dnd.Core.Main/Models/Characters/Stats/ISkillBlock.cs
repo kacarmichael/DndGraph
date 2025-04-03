@@ -24,9 +24,9 @@ public enum SkillName
 
 public interface ISkill
 {
-    string name { get; set; }
-    int modifier { get; set; }
-    bool proficient { get; set; }
+    string Name { get; set; }
+    int Modifier { get; set; }
+    bool Proficient { get; set; }
 }
 
 public interface ISkillBlock : IEnumerable<ISkill>

@@ -56,8 +56,8 @@ public class CharacterRequestDto : IDto
             ac: Ac,
             stats: new CharacterStats(
                 level: Level,
-                abilities: new AbilityBlock(AbilityScores),
-                skills: new SkillBlock(SkillModifiers)
+                abilities: new AbilityBlock(AbilityScores, Proficiencies),
+                skills: new SkillBlock(SkillModifiers, Proficiencies)
             ));
     }
 }

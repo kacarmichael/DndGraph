@@ -12,11 +12,15 @@ public enum AbilityName
 
 public interface IAbility
 {
-    string name { get; set; }
-    int score { get; set; }
-    int modifier { get; set; }
-    bool proficient { get; set; }
-    List<String> Skills { get; set; }
+    string Name { get; set; }
+    int? Score { get; set; }
+    int Modifier { get; }
+    bool Proficient { get; set; }
+    private List<String> _skills
+    {
+        get { throw new NotImplementedException(); }
+        set { throw new NotImplementedException(); }
+    }
 }
 
 public interface IAbilityBlock : IEnumerable<IAbility>

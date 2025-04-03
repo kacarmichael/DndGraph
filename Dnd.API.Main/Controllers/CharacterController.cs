@@ -1,4 +1,5 @@
 ﻿using Dnd.Application.Main.DTOs;
+using Dnd.Application.Main.Models.Characters;
 using Dnd.Core.Main.Models.Characters;
 using Dnd.Core.Main.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -35,15 +36,15 @@ public class CharacterController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<CharacterResponseDto>> PostCharacter([FromBody] CharacterRequestDto req)
     {
-        var chars = await GetCharacters();
-        if (chars.Value != null)
+        var chars = (await GetCharacters()).Value;
+        if (chars != null)
         {
-            if (chars.Value.Select(x => x.DtoToCharacter()).Contains(req.DtoToCharacter()))
+            if (chars.Select(x => x.DtoToCharacter()).Contains(req.DtoToCharacter()))
                 return BadRequest("Character name already exists");
         }
 
-        ICharacter c = req.DtoToCharacter();
-        _characterService.AddCharacterAsync(c);
+        Character c = req.DtoToCharacter();
+        await _characterService.AddCharacterAsync(c);
         CharacterResponseDto resp = new CharacterResponseDto(c);
         return Ok(resp);
     }

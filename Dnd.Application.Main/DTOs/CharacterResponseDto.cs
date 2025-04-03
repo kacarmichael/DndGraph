@@ -34,7 +34,7 @@ public class CharacterResponseDto : IDto
         return new Character(
             name: Name,
             level: Level,
-            stats: new CharacterStats(Level, new AbilityBlock(Abilities), new SkillBlock(Skills)),
+            stats: new CharacterStats(Level, new AbilityBlock(Abilities, Proficiencies), new SkillBlock(Skills, Proficiencies)),
             ac: Ac,
             charClass: Classes
         );

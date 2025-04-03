@@ -1,6 +1,7 @@
 ﻿//using dnd.apiModels.Rolls;
 
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dnd.Core.Main.Models.Characters;
@@ -20,6 +21,16 @@ public class Character : ICharacter
     [JsonIgnore] public string? StatsJson { get; set; }
 
     [JsonIgnore] public string? ClassesJson { get; set; }
+
+    [OnDeserialized]
+    internal void OnDeserialized(StreamingContext context)
+    {
+        if (!string.IsNullOrEmpty(StatsJson))
+            Stats = JsonSerializer.Deserialize<CharacterStats>(StatsJson);
+        
+        if (!string.IsNullOrEmpty(ClassesJson))
+            Classes = JsonSerializer.Deserialize<Dictionary<string, int>>(ClassesJson);
+    }
 
     [NotMapped]
     public ICharacterStats? Stats

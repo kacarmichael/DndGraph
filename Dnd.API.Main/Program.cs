@@ -5,11 +5,14 @@ using Dnd.Application.Caching;
 using Dnd.Application.Logging;
 using Dnd.Application.Main.Infrastructure;
 using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Application.Main.Models.Rolls;
 using Dnd.Application.Main.Repositories;
+using Dnd.Application.Main.Serializers;
 using Dnd.Application.Main.Services;
 using Dnd.Core.Caching;
 using Dnd.Core.Logging;
+using Dnd.Core.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Models.Rolls;
 using Dnd.Core.Main.Repositories;
 using Dnd.Core.Main.Services;
@@ -17,6 +20,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,7 +57,15 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new AbilitySerializer());
+        options.JsonSerializerOptions.Converters.Add(new SkillSerializer());
+        options.JsonSerializerOptions.Converters.Add(new AbilityBlockSerializer());
+        options.JsonSerializerOptions.Converters.Add(new SkillBlockSerializer());
+    });
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 
 builder.Services.AddDbContext<CharacterDbContext>(options =>
@@ -71,6 +83,8 @@ builder.Services.AddTransient<IClassMapperService, ClassMapperService>();
 builder.Services.AddTransient<IDiceSimulationFactory, DiceSimulationFactory>();
 builder.Services.AddTransient<IDiceRollCache, DiceRollCache>();
 builder.Services.AddTransient<IDiceSimulationCache, DiceSimulationCache>();
+builder.Services.AddTransient<IAbilityBlock, AbilityBlock>();
+builder.Services.AddTransient<ISkillBlock, SkillBlock>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 //builder.Services.Configure<JwksSettings>(builder.Configuration.GetSection("Jwks"));

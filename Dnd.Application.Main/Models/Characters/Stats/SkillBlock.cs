@@ -5,15 +5,22 @@ namespace Dnd.Application.Main.Models.Characters.Stats;
 
 public class Skill : ISkill
 {
-    public string name { get; set; }
-    public int modifier { get; set; }
-    public bool proficient { get; set; }
+    public string Name { get; set; }
+    public int Modifier { get; set; }
+    public bool Proficient { get; set; }
 
     public Skill(string name, int modifier, bool proficient)
     {
-        this.name = name;
-        this.modifier = modifier;
-        this.proficient = proficient;
+        Name = name;
+        Modifier = modifier;
+        Proficient = proficient;
+    }
+
+    public Skill()
+    {
+        Name = "";
+        Modifier = 0;
+        Proficient = false;
     }
 }
 
@@ -36,7 +43,7 @@ public class SkillBlock : ISkillBlock, IEnumerable<ISkill>
         Skills = skills;
         foreach (var skill in Enum.GetValues(typeof(SkillName)))
         {
-            if (!Skills.Exists(s => s.name == skill.ToString()))
+            if (!Skills.Exists(s => s.Name == skill.ToString()))
             {
                 Skills.Add(new Skill(skill.ToString(), 0, false));
             }
@@ -49,6 +56,15 @@ public class SkillBlock : ISkillBlock, IEnumerable<ISkill>
         foreach (var skill in Enum.GetValues(typeof(SkillName)))
         {
             Skills.Add(new Skill(skill.ToString(), skills[skill.ToString()], false));
+        }
+    }
+    
+    public SkillBlock(Dictionary<String, int> skills, List<String> proficiencies)
+    {
+        Skills = new List<ISkill>();
+        foreach (var skill in Enum.GetValues(typeof(SkillName)))
+        {
+            Skills.Add(new Skill(skill.ToString(), skills[skill.ToString()], proficiencies.Contains(skill.ToString())));
         }
     }
 
@@ -67,7 +83,7 @@ public class SkillBlock : ISkillBlock, IEnumerable<ISkill>
         Dictionary<String, int> dict = new Dictionary<String, int>();
         foreach (var skill in Skills)
         {
-            dict.Add(skill.name, skill.modifier);
+            dict.Add(skill.Name, skill.Modifier);
         }
 
         return dict;
