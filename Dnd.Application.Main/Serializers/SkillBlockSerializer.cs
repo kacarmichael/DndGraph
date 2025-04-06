@@ -5,16 +5,17 @@ using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Serializers;
 
-public class SkillBlockSerializer : JsonConverter<SkillBlock>
+public class SkillBlockSerializer : JsonConverter<ISkillBlock>
 {
     private readonly JsonSerializerOptions _options;
+    private readonly SkillSerializer _skillSerializer = new();
 
     public SkillBlockSerializer()
     {
         _options = new JsonSerializerOptions();
         _options.Converters.Add(new SkillSerializer());
     }
-    
+
     public override SkillBlock Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var skillBlock = new SkillBlock();
@@ -38,12 +39,18 @@ public class SkillBlockSerializer : JsonConverter<SkillBlock>
 
         return skillBlock;
     }
-    
-    public override void Write(Utf8JsonWriter writer, SkillBlock value, JsonSerializerOptions options)
+
+    public override void Write(Utf8JsonWriter writer, ISkillBlock value, JsonSerializerOptions options)
     {
         writer.WriteStartObject();
         writer.WritePropertyName("skills");
-        JsonSerializer.Serialize(writer, value.Skills, _options);
+        writer.WriteStartArray();
+        foreach (var skill in value.Skills)
+        {
+            _skillSerializer.Write(writer, skill, options);
+        }
+
+        writer.WriteEndArray();
         writer.WriteEndObject();
     }
 }

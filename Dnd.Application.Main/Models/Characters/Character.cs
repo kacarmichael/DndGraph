@@ -27,7 +27,7 @@ public class Character : ICharacter
     {
         if (!string.IsNullOrEmpty(StatsJson))
             Stats = JsonSerializer.Deserialize<CharacterStats>(StatsJson);
-        
+
         if (!string.IsNullOrEmpty(ClassesJson))
             Classes = JsonSerializer.Deserialize<Dictionary<string, int>>(ClassesJson);
     }

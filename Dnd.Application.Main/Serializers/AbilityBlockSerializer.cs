@@ -5,17 +5,18 @@ using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Serializers;
 
-public class AbilityBlockSerializer : JsonConverter<AbilityBlock>
+public class AbilityBlockSerializer : JsonConverter<IAbilityBlock>
 {
     private readonly JsonSerializerOptions _options;
+    private readonly AbilitySerializer _abilitySerializer = new();
 
     public AbilityBlockSerializer()
     {
         _options = new JsonSerializerOptions();
         _options.Converters.Add(new AbilitySerializer());
     }
-    
-    public override AbilityBlock Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+
+    public override IAbilityBlock Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var abilityBlock = new AbilityBlock();
         while (reader.Read())
@@ -29,7 +30,7 @@ public class AbilityBlockSerializer : JsonConverter<AbilityBlock>
             {
                 var propertyName = reader.GetString()!;
                 reader.Read();
-                if (propertyName == "abilities")
+                if (propertyName == "Abilities")
                 {
                     abilityBlock.Abilities = JsonSerializer.Deserialize<List<IAbility>>(ref reader, _options)!;
                 }
@@ -38,12 +39,18 @@ public class AbilityBlockSerializer : JsonConverter<AbilityBlock>
 
         return abilityBlock;
     }
-    
-    public override void Write(Utf8JsonWriter writer, AbilityBlock value, JsonSerializerOptions options)
+
+    public override void Write(Utf8JsonWriter writer, IAbilityBlock value, JsonSerializerOptions options)
     {
         writer.WriteStartObject();
-        writer.WritePropertyName("abilities");
-        JsonSerializer.Serialize(writer, value.Abilities, _options);
+        writer.WritePropertyName("Abilities");
+        writer.WriteStartArray();
+        foreach (var ability in value.Abilities)
+        {
+            _abilitySerializer.Write(writer, ability, options);
+        }
+
+        writer.WriteEndArray();
         writer.WriteEndObject();
     }
 }

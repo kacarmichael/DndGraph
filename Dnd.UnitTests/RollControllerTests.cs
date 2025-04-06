@@ -1,8 +1,10 @@
 ﻿using Dnd.API.Main.Controllers;
 using Dnd.Application.Main.DTOs;
 using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Application.Main.Models.Dice;
 using Dnd.Application.Main.Models.Rolls;
+using Dnd.Core.Logging;
 using Dnd.Core.Main.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,44 +18,22 @@ public class RollControllerTests
     private readonly Mock<IRollMapperService> _rollMapperMock;
     private readonly Mock<ICharacterService> _characterServiceMock;
     private readonly Mock<ILogger<RollController>> _loggerMock;
+    private readonly Mock<ILoggingClient> _loggingClientMock;
     public RollController rollController;
 
     private List<Character> GetTestCharacters()
     {
+        var abilities = new AbilityBlock();
+        var skills = new SkillBlock();
         var characters = new List<Character>()
         {
             new Character(
                 name: "Theodred",
                 level: 6,
                 stats: new CharacterStats(
-                    strength: 10,
-                    dexterity: 10,
-                    intelligence: 10,
-                    constitution: 10,
-                    wisdom: 10,
-                    charisma: 10,
-                    acrobatics: 0,
-                    animalHandling: 0,
-                    arcana: 0,
-                    athletics: 0,
-                    deception: 0,
-                    history: 0,
-                    insight: 0,
-                    intimidation: 0,
-                    investigation: 0,
-                    medicine: 0,
-                    nature: 0,
-                    perception: 0,
-                    performance: 0,
-                    persuasion: 0,
-                    religion: 0,
-                    sleightOfHand: 0,
-                    stealth: 0,
-                    survival: 0,
-                    proficiencies: new List<string>()
-                    {
-                        "Arcana"
-                    }),
+                    level: 6,
+                    abilities: abilities,
+                    skills: skills),
                 ac: 14,
                 charClass: new Dictionary<string, int>()
                 {
@@ -90,9 +70,10 @@ public class RollControllerTests
         _rollMapperMock = new Mock<IRollMapperService>();
         _characterServiceMock = new Mock<ICharacterService>();
         _loggerMock = new Mock<ILogger<RollController>>();
+        _loggingClientMock = new Mock<ILoggingClient>();
         _rollServiceMock.Setup(x => x.Roll(It.IsAny<RollRequestDto>())).ReturnsAsync(GetTestRollResponseDto());
         _rollMapperMock.Setup(x => x.Map(It.IsAny<RollRequestDto>())).ReturnsAsync(GetTestDiceRoll());
-        rollController = new RollController(_rollServiceMock.Object, _loggerMock.Object);
+        rollController = new RollController(_rollServiceMock.Object, _loggerMock.Object, _loggingClientMock.Object);
     }
 
     [Fact]

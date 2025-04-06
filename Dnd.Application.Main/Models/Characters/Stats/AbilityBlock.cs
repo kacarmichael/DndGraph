@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Runtime.InteropServices.JavaScript;
 using Dnd.Core.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Utils;
 
@@ -10,15 +9,13 @@ public class Ability : IAbility
     //public string Name { get; set; }
     public int? Score { get; set; }
 
-    public int Modifier 
+    public int Modifier
     {
-        get
-        {
-            return (this.Score - 10) / 2 ?? 0;
-        }
+        get { return (this.Score - 10) / 2 ?? 0; }
     }
+
     public bool Proficient { get; set; }
-    
+
     private List<String> _skills;
     private string _name;
 
@@ -28,10 +25,13 @@ public class Ability : IAbility
         set
         {
             _name = value;
-            if (AbilitySkillMapping.Mapping.ContainsKey(_name))
+            if (_name == "")
+            {
+                _skills = new List<String>();
+            }
+            else if (AbilitySkillMapping.Mapping.ContainsKey(_name))
             {
                 _skills = AbilitySkillMapping.Mapping[_name];
-                
             }
             else
             {
@@ -39,7 +39,7 @@ public class Ability : IAbility
             }
         }
     }
-    
+
 
     public Ability(string name, int score, bool proficient)
     {
@@ -55,6 +55,11 @@ public class Ability : IAbility
         Score = 0;
         Proficient = false;
         _skills = new List<String>();
+    }
+
+    public override string ToString()
+    {
+        return $"Ability - {this.Name}: {this.Score}";
     }
 }
 
@@ -93,13 +98,14 @@ public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
             Abilities.Add(new Ability(ability.ToString(), dict[ability.ToString()], false));
         }
     }
-    
+
     public AbilityBlock(Dictionary<String, int> dict, List<string> proficiencies)
     {
         Abilities = new List<IAbility>();
         foreach (var ability in Enum.GetValues(typeof(AbilityName)))
         {
-            Abilities.Add(new Ability(ability.ToString(), dict[ability.ToString()], proficiencies.Contains(ability.ToString())));
+            Abilities.Add(new Ability(ability.ToString(), dict[ability.ToString()],
+                proficiencies.Contains(ability.ToString())));
         }
     }
 

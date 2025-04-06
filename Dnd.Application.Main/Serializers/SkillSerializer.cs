@@ -1,14 +1,13 @@
-﻿using Dnd.Application.Main.Models.Characters.Stats;
-using Dnd.Core.Main.Models.Characters.Stats;
-using Dnd.Core.Main.Utils;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dnd.Application.Main.Models.Characters.Stats;
+using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Serializers;
 
-public class SkillSerializer : JsonConverter<Skill>
+public class SkillSerializer : JsonConverter<ISkill>
 {
-    public override Skill Read(
+    public override ISkill Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options)
@@ -25,16 +24,19 @@ public class SkillSerializer : JsonConverter<Skill>
             {
                 var propertyName = reader.GetString();
                 reader.Read();
-                if (propertyName == "name")
+                if (propertyName == "Name")
                 {
                     skill.Name = reader.GetString() ?? string.Empty;
                 }
-                else if (propertyName == "proficient")
+                else if (propertyName == "Proficient")
                 {
                     skill.Proficient = reader.GetBoolean();
                 }
+                else if (propertyName == "Modifier")
+                {
+                    skill.Modifier = reader.GetInt32();
+                }
             }
-        
         }
 
         return skill;
@@ -43,14 +45,13 @@ public class SkillSerializer : JsonConverter<Skill>
 
     public override void Write(
         Utf8JsonWriter writer,
-        Skill value,
+        ISkill value,
         JsonSerializerOptions options)
     {
-        writer.WriteString("name", value.Name);
-        writer.WriteBoolean("proficient", value.Proficient);
-        writer.WriteNumber("modifier", value.Modifier);
+        writer.WriteStartObject();
+        writer.WriteString("Name", value.Name);
+        writer.WriteNumber("Modifier", (int)value.Modifier);
+        writer.WriteBoolean("Proficient", value.Proficient);
         writer.WriteEndObject();
     }
-        
-        
 }

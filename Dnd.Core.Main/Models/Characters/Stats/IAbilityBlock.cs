@@ -16,6 +16,7 @@ public interface IAbility
     int? Score { get; set; }
     int Modifier { get; }
     bool Proficient { get; set; }
+
     private List<String> _skills
     {
         get { throw new NotImplementedException(); }

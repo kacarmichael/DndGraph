@@ -15,7 +15,7 @@ public class CharacterBlockSerializer : JsonConverter<CharacterStats>
         _options.Converters.Add(new AbilityBlockSerializer());
         _options.Converters.Add(new SkillBlockSerializer());
     }
-    
+
     public override CharacterStats Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var stats = new CharacterStats();
@@ -50,8 +50,10 @@ public class CharacterBlockSerializer : JsonConverter<CharacterStats>
                 }
             }
         }
+
         return stats;
     }
+
     public override void Write(Utf8JsonWriter writer, CharacterStats value, JsonSerializerOptions options)
     {
         writer.WriteStartObject();

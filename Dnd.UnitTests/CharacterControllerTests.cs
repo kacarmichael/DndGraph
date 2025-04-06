@@ -1,6 +1,7 @@
 ﻿using Dnd.API.Main.Controllers;
 using Dnd.Application.Main.DTOs;
 using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -16,40 +17,18 @@ public class CharacterControllerTests
 
     private List<Character> GetTestCharacters()
     {
+        var abilities = new AbilityBlock();
+        var skills = new SkillBlock();
         var characters = new List<Character>()
         {
             new Character(
                 name: "Theodred",
                 level: 6,
                 stats: new CharacterStats(
-                    strength: 10,
-                    dexterity: 10,
-                    intelligence: 10,
-                    constitution: 10,
-                    wisdom: 10,
-                    charisma: 10,
-                    acrobatics: 0,
-                    animalHandling: 0,
-                    arcana: 0,
-                    athletics: 0,
-                    deception: 0,
-                    history: 0,
-                    insight: 0,
-                    intimidation: 0,
-                    investigation: 0,
-                    medicine: 0,
-                    nature: 0,
-                    perception: 0,
-                    performance: 0,
-                    persuasion: 0,
-                    religion: 0,
-                    sleightOfHand: 0,
-                    stealth: 0,
-                    survival: 0,
-                    proficiencies: new List<string>()
-                    {
-                        "Arcana"
-                    }),
+                    level: 6,
+                    abilities: abilities,
+                    skills: skills
+                ),
                 ac: 14,
                 charClass: new Dictionary<string, int>()
                 {

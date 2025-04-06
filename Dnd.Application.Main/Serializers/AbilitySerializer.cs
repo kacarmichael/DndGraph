@@ -1,14 +1,13 @@
-﻿using Dnd.Application.Main.Models.Characters.Stats;
-using Dnd.Core.Main.Models.Characters.Stats;
-using Dnd.Core.Main.Utils;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using Dnd.Application.Main.Models.Characters.Stats;
+using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Serializers;
 
-public class AbilitySerializer : JsonConverter<Ability>
+public class AbilitySerializer : JsonConverter<IAbility>
 {
-    public override Ability Read(
+    public override IAbility Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options)
@@ -25,7 +24,7 @@ public class AbilitySerializer : JsonConverter<Ability>
             {
                 var propertyName = reader.GetString();
                 reader.Read();
-                if (propertyName == "score")
+                if (propertyName == "Score")
                 {
                     if (reader.TryGetInt32(out int score))
                     {
@@ -36,16 +35,15 @@ public class AbilitySerializer : JsonConverter<Ability>
                         ability.Score = 0;
                     }
                 }
-                else if (propertyName == "name")
+                else if (propertyName == "Name")
                 {
                     ability.Name = reader.GetString() ?? string.Empty;
                 }
-                else if (propertyName == "proficient")
+                else if (propertyName == "Proficient")
                 {
                     ability.Proficient = reader.GetBoolean();
                 }
             }
-        
         }
 
         return ability;
@@ -54,14 +52,13 @@ public class AbilitySerializer : JsonConverter<Ability>
 
     public override void Write(
         Utf8JsonWriter writer,
-        Ability value,
+        IAbility value,
         JsonSerializerOptions options)
     {
-        writer.WriteString("name", value.Name);
-        writer.WriteNumber("score", (int)value.Score);
-        writer.WriteBoolean("proficient", value.Proficient);
+        writer.WriteStartObject();
+        writer.WriteString("Name", value.Name);
+        writer.WriteNumber("Score", (int)value.Score);
+        writer.WriteBoolean("Proficient", value.Proficient);
         writer.WriteEndObject();
     }
-        
-        
 }

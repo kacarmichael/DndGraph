@@ -58,7 +58,7 @@ public class SkillBlock : ISkillBlock, IEnumerable<ISkill>
             Skills.Add(new Skill(skill.ToString(), skills[skill.ToString()], false));
         }
     }
-    
+
     public SkillBlock(Dictionary<String, int> skills, List<String> proficiencies)
     {
         Skills = new List<ISkill>();

@@ -15,7 +15,7 @@ public class CharacterStats : ICharacterStats
         Level = 1;
         Abilities = new AbilityBlock();
         Skills = new SkillBlock();
-        ProficiencyBonus = 2;
+        ProficiencyBonus = (Level + 3) / 4 + 1;
     }
 
     public CharacterStats(int level, IAbilityBlock abilities, ISkillBlock skills)
