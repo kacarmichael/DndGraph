@@ -6,8 +6,9 @@ public interface ICharacterStats
     IAbilityBlock Abilities { get; set; }
     ISkillBlock Skills { get; set; }
     int ProficiencyBonus { get; set; }
+    string ToJson();
 
-    bool Equals(ICharacterStats? other);
+    bool Equals(Object? other);
     static bool Compare(ICharacterStats character1, ICharacterStats character2) => character1.Equals(character2);
 
     int AbilityCheckModifier(AbilityName ability);

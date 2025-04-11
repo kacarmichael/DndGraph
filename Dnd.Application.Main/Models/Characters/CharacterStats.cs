@@ -1,4 +1,5 @@
-﻿using Dnd.Application.Main.Models.Characters.Stats;
+﻿using System.Text.Json;
+using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Models.Characters;
@@ -44,13 +45,13 @@ public class CharacterStats : ICharacterStats
         return (ability.Score ?? 0) + ability.Modifier + (ability.Proficient ? ProficiencyBonus : 0);
     }
 
-    public bool Equals(ICharacterStats? other)
-    {
-        if (ReferenceEquals(null, other)) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return Level == other.Level && Abilities.Equals(other.Abilities) && Skills.Equals(other.Skills) &&
-               ProficiencyBonus == other.ProficiencyBonus;
-    }
+    // public bool Equals(ICharacterStats? other)
+    // {
+    //     if (ReferenceEquals(null, other)) return false;
+    //     if (ReferenceEquals(this, other)) return true;
+    //     return Level == other.Level && Abilities.Equals(other.Abilities) && Skills.Equals(other.Skills) &&
+    //            ProficiencyBonus == other.ProficiencyBonus;
+    // }
 
     public (Dictionary<String, int>, Dictionary<String, int>, List<String>) GetStatsDictionary()
     {
@@ -73,4 +74,20 @@ public class CharacterStats : ICharacterStats
 
         return (Abilities.ToDictionary(), Skills.ToDictionary(), proficiencies);
     }
+    
+    public override bool Equals(object? obj)
+    {
+        ICharacterStats other = (ICharacterStats)obj;
+        if (obj is CharacterStats stats)
+        {
+            return this.Abilities.Equals(other.Abilities) &&
+                   this.Skills.Equals(other.Skills) &&
+                   this.Level == other.Level &&
+                   this.ProficiencyBonus == other.ProficiencyBonus;
+        }
+
+        return false;
+    }
+    
+    public string ToJson() => JsonSerializer.Serialize(this);
 }

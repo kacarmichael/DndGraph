@@ -19,31 +19,21 @@ public class SkillBlockSerializer : JsonConverter<ISkillBlock>
     public override SkillBlock Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var skillBlock = new SkillBlock();
-        while (reader.Read())
+        
+        if (reader.TokenType != JsonTokenType.StartArray)
         {
-            if (reader.TokenType == JsonTokenType.EndObject)
-            {
-                break;
-            }
-
-            if (reader.TokenType == JsonTokenType.PropertyName)
-            {
-                var propertyName = reader.GetString()!;
-                reader.Read();
-                if (propertyName == "skills")
-                {
-                    skillBlock.Skills = JsonSerializer.Deserialize<List<ISkill>>(ref reader, _options)!;
-                }
-            }
+            throw new JsonException();
         }
-
+        
+        skillBlock.Skills = JsonSerializer.Deserialize<List<ISkill>>(ref reader, _options)!;
+        
         return skillBlock;
     }
 
     public override void Write(Utf8JsonWriter writer, ISkillBlock value, JsonSerializerOptions options)
     {
-        writer.WriteStartObject();
-        writer.WritePropertyName("skills");
+        // writer.WriteStartObject();
+        // writer.WritePropertyName("skills");
         writer.WriteStartArray();
         foreach (var skill in value.Skills)
         {
@@ -51,6 +41,6 @@ public class SkillBlockSerializer : JsonConverter<ISkillBlock>
         }
 
         writer.WriteEndArray();
-        writer.WriteEndObject();
+        //writer.WriteEndObject();
     }
 }

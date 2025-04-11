@@ -13,6 +13,10 @@ public class SkillSerializer : JsonConverter<ISkill>
         JsonSerializerOptions options)
     {
         var skill = new Skill();
+        if (reader.TokenType != JsonTokenType.StartObject)
+        {
+            throw new JsonException();
+        }
         while (reader.Read())
         {
             if (reader.TokenType == JsonTokenType.EndObject)

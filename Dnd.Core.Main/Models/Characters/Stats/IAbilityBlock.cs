@@ -10,18 +10,26 @@ public enum AbilityName
     Charisma
 }
 
-public interface IAbility
+public interface IAbility : IComparable
 {
     string Name { get; set; }
     int? Score { get; set; }
     int Modifier { get; }
     bool Proficient { get; set; }
+    
+    List<String> Skills
+    {
+        get { throw new NotImplementedException(); }
+        set { throw new NotImplementedException(); }
+    }
 
     private List<String> _skills
     {
         get { throw new NotImplementedException(); }
         set { throw new NotImplementedException(); }
     }
+    
+    string ToJson();
 }
 
 public interface IAbilityBlock : IEnumerable<IAbility>
@@ -29,4 +37,5 @@ public interface IAbilityBlock : IEnumerable<IAbility>
     AbilityName GetAbility(string name);
     List<IAbility> Abilities { get; set; }
     Dictionary<String, int> ToDictionary();
+    string ToJson();
 }

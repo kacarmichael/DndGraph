@@ -13,6 +13,11 @@ public class AbilitySerializer : JsonConverter<IAbility>
         JsonSerializerOptions options)
     {
         var ability = new Ability();
+        if (reader.TokenType != JsonTokenType.StartObject)
+        {
+            throw new JsonException("Invalid JSON Ability Object");
+        }
+        
         while (reader.Read())
         {
             if (reader.TokenType == JsonTokenType.EndObject)

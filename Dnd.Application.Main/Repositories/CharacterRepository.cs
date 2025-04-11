@@ -26,9 +26,7 @@ public class CharacterRepository<TCharacter> : ICharacterRepository
     }
 
     public async Task<IEnumerable<ICharacter>> GetAllCharactersAsync() =>
-        await Queryable
-            .OfType<ICharacter>(_context.Characters)
-            .ToListAsync();
+        await _context.Characters.ToListAsync();
 
 
     public async Task<ICharacter> GetCharacterAsync(int characterId)

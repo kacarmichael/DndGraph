@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Text.Json;
 using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Models.Characters.Stats;
@@ -21,6 +22,39 @@ public class Skill : ISkill
         Name = "";
         Modifier = 0;
         Proficient = false;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is Skill skill)
+        {
+            return this.Name == skill.Name;
+        }
+
+        return false;
+    }
+
+    public string ToJson() => JsonSerializer.Serialize(this);
+
+    public int CompareTo(Object? obj)
+    {
+        if (obj is ISkill)
+        {
+            ISkill other = (ISkill)obj;
+            if (this.Modifier > other.Modifier)
+            {
+                return 1;
+            }
+            else if (this.Modifier < other.Modifier)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        throw new ArgumentException("Compared Object is not a skill");
     }
 }
 
@@ -88,4 +122,16 @@ public class SkillBlock : ISkillBlock, IEnumerable<ISkill>
 
         return dict;
     }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is SkillBlock block)
+        {
+            return this.Skills.Order().SequenceEqual(block.Skills.Order());
+        }
+
+        return false;
+    }
+    
+    public string ToJson() => JsonSerializer.Serialize(this);
 }

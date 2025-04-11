@@ -2,23 +2,30 @@
 using System.Text.Json.Serialization;
 using Dnd.Application.Main.Models.Characters;
 using Dnd.Application.Main.Models.Characters.Stats;
+using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Serializers;
 
-public class CharacterBlockSerializer : JsonConverter<CharacterStats>
+public class CharacterStatsSerializer : JsonConverter<ICharacterStats>
 {
     private readonly JsonSerializerOptions _options;
 
-    public CharacterBlockSerializer()
+    public CharacterStatsSerializer()
     {
         _options = new JsonSerializerOptions();
         _options.Converters.Add(new AbilityBlockSerializer());
         _options.Converters.Add(new SkillBlockSerializer());
     }
 
-    public override CharacterStats Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override ICharacterStats Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var stats = new CharacterStats();
+        
+        if (reader.TokenType != JsonTokenType.StartObject)
+        {
+            throw new JsonException();
+        }
+        
         while (reader.Read())
         {
             if (reader.TokenType == JsonTokenType.EndObject)
@@ -28,24 +35,25 @@ public class CharacterBlockSerializer : JsonConverter<CharacterStats>
             else if (reader.TokenType == JsonTokenType.PropertyName)
             {
                 var propertyName = reader.GetString()!;
-                if (propertyName == "abilities")
+                reader.Read();
+                if (propertyName == "Abilities")
                 {
-                    reader.Read(); // Move to start of object
-                    stats.Abilities = JsonSerializer.Deserialize<AbilityBlock>(ref reader, _options)!;
+                    //reader.Read(); // Move to start of object
+                    stats.Abilities = JsonSerializer.Deserialize<IAbilityBlock>(ref reader, _options)!;
                 }
-                else if (propertyName == "skills")
+                else if (propertyName == "Skills")
                 {
-                    reader.Read(); // Move to start of object
-                    stats.Skills = JsonSerializer.Deserialize<SkillBlock>(ref reader, _options)!;
+                    //reader.Read(); // Move to start of object
+                    stats.Skills = JsonSerializer.Deserialize<ISkillBlock>(ref reader, _options)!;
                 }
-                else if (propertyName == "proficiencyBonus")
+                else if (propertyName == "ProficiencyBonus")
                 {
-                    reader.Read(); // Move to start of object
+                    //reader.Read(); // Move to start of object
                     stats.ProficiencyBonus = reader.GetInt32();
                 }
-                else if (propertyName == "level")
+                else if (propertyName == "Level")
                 {
-                    reader.Read(); // Move to start of object
+                    //reader.Read(); // Move to start of object
                     stats.Level = reader.GetInt32();
                 }
             }
@@ -54,16 +62,16 @@ public class CharacterBlockSerializer : JsonConverter<CharacterStats>
         return stats;
     }
 
-    public override void Write(Utf8JsonWriter writer, CharacterStats value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, ICharacterStats value, JsonSerializerOptions options)
     {
         writer.WriteStartObject();
-        writer.WritePropertyName("abilities");
+        writer.WritePropertyName("Abilities");
         JsonSerializer.Serialize(writer, value.Abilities, _options);
-        writer.WritePropertyName("skills");
+        writer.WritePropertyName("Skills");
         JsonSerializer.Serialize(writer, value.Skills, _options);
-        writer.WritePropertyName("proficiencyBonus");
+        writer.WritePropertyName("ProficiencyBonus");
         writer.WriteNumberValue(value.ProficiencyBonus);
-        writer.WritePropertyName("level");
+        writer.WritePropertyName("Level");
         writer.WriteNumberValue(value.Level);
         writer.WriteEndObject();
     }

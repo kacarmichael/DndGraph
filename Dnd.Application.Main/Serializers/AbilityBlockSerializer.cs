@@ -19,31 +19,21 @@ public class AbilityBlockSerializer : JsonConverter<IAbilityBlock>
     public override IAbilityBlock Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var abilityBlock = new AbilityBlock();
-        while (reader.Read())
+        
+        if (reader.TokenType != JsonTokenType.StartArray)
         {
-            if (reader.TokenType == JsonTokenType.EndObject)
-            {
-                break;
-            }
-
-            if (reader.TokenType == JsonTokenType.PropertyName)
-            {
-                var propertyName = reader.GetString()!;
-                reader.Read();
-                if (propertyName == "Abilities")
-                {
-                    abilityBlock.Abilities = JsonSerializer.Deserialize<List<IAbility>>(ref reader, _options)!;
-                }
-            }
+            throw new JsonException();
         }
+        
+        abilityBlock.Abilities = JsonSerializer.Deserialize<List<IAbility>>(ref reader, _options)!;
 
         return abilityBlock;
     }
 
     public override void Write(Utf8JsonWriter writer, IAbilityBlock value, JsonSerializerOptions options)
     {
-        writer.WriteStartObject();
-        writer.WritePropertyName("Abilities");
+        // writer.WriteStartObject();
+        // writer.WritePropertyName("Abilities");
         writer.WriteStartArray();
         foreach (var ability in value.Abilities)
         {
@@ -51,6 +41,6 @@ public class AbilityBlockSerializer : JsonConverter<IAbilityBlock>
         }
 
         writer.WriteEndArray();
-        writer.WriteEndObject();
+        //writer.WriteEndObject();
     }
 }

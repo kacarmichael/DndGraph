@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Text.Json;
 using Dnd.Core.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Utils;
 
@@ -18,6 +19,12 @@ public class Ability : IAbility
 
     private List<String> _skills;
     private string _name;
+    
+    public List<String> Skills
+    {
+        get { return _skills; }
+        set { _skills = value; }
+    }
 
     public string Name
     {
@@ -60,6 +67,40 @@ public class Ability : IAbility
     public override string ToString()
     {
         return $"Ability - {this.Name}: {this.Score}";
+    }
+    
+    public override bool Equals(object obj)
+    {
+        if (obj == null) return false;
+        if (obj.GetType() != typeof(Ability)) return false;
+        Ability ability = (Ability)obj;
+        return this.Name == ability.Name;
+    }
+    
+    public string ToJson()
+    {
+        return JsonSerializer.Serialize(this);
+    }
+
+    public int CompareTo(Object? obj)
+    {
+        if (obj is IAbility)
+        {
+            IAbility other = (IAbility)obj;
+            if (this.Score > other.Score)
+            {
+                return 1;
+            }
+            else if (this.Score < other.Score)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        throw new ArgumentException("Compared Object is not an Ability");
     }
 }
 
@@ -128,5 +169,20 @@ public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
         }
 
         return dict;
+    }
+    
+    public override bool Equals(object? obj)
+    {
+        if (obj is AbilityBlock block)
+        {
+            return this.Abilities.Order().SequenceEqual(block.Abilities.Order());
+        }
+
+        return false;
+    }
+    
+    public string ToJson()
+    {
+        return JsonSerializer.Serialize(this);
     }
 }
