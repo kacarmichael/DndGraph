@@ -1,10 +1,12 @@
 ﻿using System.Collections;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
 using Dnd.Core.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Utils;
 
 namespace Dnd.Application.Main.Models.Characters.Stats;
 
+[ComplexType]
 public class Ability : IAbility
 {
     //public string Name { get; set; }
@@ -104,6 +106,7 @@ public class Ability : IAbility
     }
 }
 
+[ComplexType]
 public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
 {
     public AbilityName GetAbility(string name) => (AbilityName)Enum.Parse(typeof(AbilityName), name);

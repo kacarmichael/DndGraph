@@ -176,22 +176,22 @@ builder.Services.AddCors(options =>
 //         };
 //     });
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidateAudience = true,
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            ValidateLifetime = true,
-            ClockSkew = TimeSpan.Zero,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"])),
-            // ValidAlgorithms = new[] { SecurityAlgorithms.HmacSha256 }
-        };
-    });
+// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//     .AddJwtBearer(options =>
+//     {
+//         options.TokenValidationParameters = new TokenValidationParameters
+//         {
+//             ValidateIssuer = true,
+//             ValidIssuer = builder.Configuration["Jwt:Issuer"],
+//             ValidateAudience = true,
+//             ValidAudience = builder.Configuration["Jwt:Audience"],
+//             ValidateLifetime = true,
+//             ClockSkew = TimeSpan.Zero,
+//             ValidateIssuerSigningKey = true,
+//             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"])),
+//             // ValidAlgorithms = new[] { SecurityAlgorithms.HmacSha256 }
+//         };
+//     });
 
 // builder.Services.AddLogging(logging =>
 // {
@@ -225,8 +225,8 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowLocalhost");
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseAuthentication();
-app.UseAuthorization();
+//app.UseAuthentication();
+//app.UseAuthorization();
 app.MapControllers();
 
 app.Services.SaveSwaggerJson();

@@ -42,7 +42,7 @@ public class CharacterRequestDto : IDto
     {
         (AbilityScores, SkillModifiers, Proficiencies) = character.Stats.GetStatsDictionary();
         Name = character.Name;
-        Classes = character.Classes;
+        //Classes = character.Classes;
         Ac = character.AC;
         Level = character.Level;
     }

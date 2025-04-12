@@ -1,5 +1,9 @@
-﻿using Dnd.Application.Main.Models.Characters;
+﻿using System.Text.Json;
+using Dnd.Application.Main.Infrastructure.EntityConfigurations;
+using Dnd.Application.Main.Models.Characters;
+using Dnd.Core.Main.Models.Characters.Stats;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Configuration;
 
 namespace Dnd.Application.Main.Infrastructure;
@@ -21,6 +25,8 @@ public class CharacterDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.ApplyConfiguration(new CharacterEntityConfiguration());
+        
         builder.Entity<Character>().HasData(
             new Character(
                 id: 1,

@@ -8,7 +8,7 @@ public interface ICharacter
     string Name { get; set; }
     int Level { get; set; }
     int AC { get; set; }
-    Dictionary<string, int> Classes { get; set; }
+    //Dictionary<string, int> Classes { get; set; }
     ICharacterStats Stats { get; set; }
     int ProficiencyModifier => Level / 4 + 2;
 

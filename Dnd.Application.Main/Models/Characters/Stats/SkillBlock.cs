@@ -1,9 +1,11 @@
 ﻿using System.Collections;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
 using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Models.Characters.Stats;
 
+[ComplexType]
 public class Skill : ISkill
 {
     public string Name { get; set; }
@@ -58,6 +60,7 @@ public class Skill : ISkill
     }
 }
 
+[ComplexType]
 public class SkillBlock : ISkillBlock, IEnumerable<ISkill>
 {
     public SkillName GetSkill(string skillName) => (SkillName)Enum.Parse(typeof(SkillName), skillName);

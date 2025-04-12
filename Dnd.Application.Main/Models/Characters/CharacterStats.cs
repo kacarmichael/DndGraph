@@ -1,9 +1,11 @@
-﻿using System.Text.Json;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json;
 using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Models.Characters;
 
+[ComplexType]
 public class CharacterStats : ICharacterStats
 {
     public int Level { get; set; }
@@ -90,4 +92,8 @@ public class CharacterStats : ICharacterStats
     }
     
     public string ToJson() => JsonSerializer.Serialize(this);
+
+    public override string ToString() => this.ToJson();
+    
+    public static CharacterStats FromJson(string json) => JsonSerializer.Deserialize<CharacterStats>(json)!;
 }

@@ -18,33 +18,37 @@ public class Character : ICharacter
     public int Level { get; set; }
     public int AC { get; set; }
 
-    [JsonIgnore] public string? StatsJson { get; set; }
+    //[JsonIgnore] public string? StatsJson { get; set; }
 
-    [JsonIgnore] public string? ClassesJson { get; set; }
+    //[JsonIgnore] public string? ClassesJson { get; set; }
 
-    [OnDeserialized]
-    internal void OnDeserialized(StreamingContext context)
-    {
-        if (!string.IsNullOrEmpty(StatsJson))
-            Stats = JsonSerializer.Deserialize<CharacterStats>(StatsJson);
+    // [OnDeserialized]
+    // internal void OnDeserialized(StreamingContext context)
+    // {
+    //     if (!string.IsNullOrEmpty(StatsJson))
+    //         Stats = JsonSerializer.Deserialize<CharacterStats>(StatsJson);
+    //
+    //     if (!string.IsNullOrEmpty(ClassesJson))
+    //         Classes = JsonSerializer.Deserialize<Dictionary<string, int>>(ClassesJson);
+    // }
 
-        if (!string.IsNullOrEmpty(ClassesJson))
-            Classes = JsonSerializer.Deserialize<Dictionary<string, int>>(ClassesJson);
-    }
+    // [NotMapped]
+    // public ICharacterStats? Stats
+    // {
+    //     get => JsonSerializer.Deserialize<CharacterStats>(StatsJson);
+    //     set => StatsJson = JsonSerializer.Serialize(value);
+    // }
+    
+    public ICharacterStats Stats { get; set; }
 
-    [NotMapped]
-    public ICharacterStats? Stats
-    {
-        get => JsonSerializer.Deserialize<CharacterStats>(StatsJson);
-        set => StatsJson = JsonSerializer.Serialize(value);
-    }
-
-    [NotMapped]
-    public Dictionary<string, int>? Classes
-    {
-        get => JsonSerializer.Deserialize<Dictionary<string, int>>(ClassesJson);
-        set => ClassesJson = JsonSerializer.Serialize(value);
-    }
+    // [NotMapped]
+    // public Dictionary<string, int>? Classes
+    // {
+    //     get => JsonSerializer.Deserialize<Dictionary<string, int>>(ClassesJson);
+    //     set => ClassesJson = JsonSerializer.Serialize(value);
+    // }
+    
+    //public Dictionary<string, int>? Classes { get; set; }
 
     public int ProficiencyModifier => Level / 4 + 2;
 
@@ -58,7 +62,7 @@ public class Character : ICharacter
         Level = level;
         Stats = stats;
         AC = ac;
-        Classes = charClass;
+        //Classes = charClass;
     }
 
     public Character(int id, string? name, int level, CharacterStats? stats, int ac, Dictionary<string, int>? charClass)
@@ -68,7 +72,7 @@ public class Character : ICharacter
         Level = level;
         Stats = stats;
         AC = ac;
-        Classes = charClass;
+        //Classes = charClass;
     }
 
     public bool Equals(ICharacter? other)
@@ -79,8 +83,8 @@ public class Character : ICharacter
                Name == other.Name &&
                Level == other.Level &&
                AC == other.AC &&
-               Classes.Count == other.Classes.Count &&
-               !Classes.Except(other.Classes).Any() &&
+               //Classes.Count == other.Classes.Count &&
+               //!Classes.Except(other.Classes).Any() &&
                Stats.Equals(other.Stats);
     }
 

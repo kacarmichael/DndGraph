@@ -8,7 +8,7 @@ public class CharacterEntityConfiguration : IEntityTypeConfiguration<Character>
 {
     public void Configure(EntityTypeBuilder<Character> builder)
     {
-        builder.ToTable("Rolls");
+        builder.ToTable("Characters");
 
         builder.HasKey(x => x.Id);
 
@@ -23,9 +23,12 @@ public class CharacterEntityConfiguration : IEntityTypeConfiguration<Character>
         //builder.HasMany(c => c.Classes).WithMany(c => c.Characters);
 
         builder.Property(c => c.Stats)
-            .HasColumnType("jsonb");
+            .HasConversion(
+                v => v.ToString(),
+                v => CharacterStats.FromJson(v)
+            );
 
-        builder.Property(c => c.Classes)
-            .HasColumnType("jsonb");
+        // builder.Property(c => c.Classes)
+        //     .HasColumnType("jsonb");
     }
 }
