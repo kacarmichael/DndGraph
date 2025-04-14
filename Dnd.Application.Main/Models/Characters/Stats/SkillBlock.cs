@@ -26,6 +26,13 @@ public class Skill : ISkill
         Proficient = false;
     }
 
+    public Skill(string name, int parentAbilityScore)
+    {
+        Name = name;
+        Modifier = (parentAbilityScore - 10) / 2;
+        Proficient = false;
+    }
+
     public override bool Equals(object? obj)
     {
         if (obj is Skill skill)
@@ -56,6 +63,7 @@ public class Skill : ISkill
                 return 0;
             }
         }
+
         throw new ArgumentException("Compared Object is not a skill");
     }
 }
@@ -63,7 +71,7 @@ public class Skill : ISkill
 [ComplexType]
 public class SkillBlock : ISkillBlock, IEnumerable<ISkill>
 {
-    public SkillName GetSkill(string skillName) => (SkillName)Enum.Parse(typeof(SkillName), skillName);
+    public ISkill GetSkill(string skillName) => Skills.First((s) => s.Name == skillName);
     public List<ISkill> Skills { get; set; }
 
     public SkillBlock()
@@ -105,6 +113,18 @@ public class SkillBlock : ISkillBlock, IEnumerable<ISkill>
         }
     }
 
+    public SkillBlock(IAbilityBlock abilities)
+    {
+        Skills = new List<ISkill>();
+        foreach (var ability in abilities)
+        {
+            foreach (var skill in ability.Skills)
+            {
+                Skills.Add(new Skill(skill, ability.Score ?? 0));
+            }
+        }
+    }
+
     public IEnumerator<ISkill> GetEnumerator()
     {
         return Skills.GetEnumerator();
@@ -135,6 +155,6 @@ public class SkillBlock : ISkillBlock, IEnumerable<ISkill>
 
         return false;
     }
-    
+
     public string ToJson() => JsonSerializer.Serialize(this);
 }

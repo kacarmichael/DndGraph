@@ -19,14 +19,14 @@ public class SkillBlockSerializer : JsonConverter<ISkillBlock>
     public override SkillBlock Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var skillBlock = new SkillBlock();
-        
+
         if (reader.TokenType != JsonTokenType.StartArray)
         {
             throw new JsonException();
         }
-        
+
         skillBlock.Skills = JsonSerializer.Deserialize<List<ISkill>>(ref reader, _options)!;
-        
+
         return skillBlock;
     }
 

@@ -17,7 +17,7 @@ public class AbilitySerializer : JsonConverter<IAbility>
         {
             throw new JsonException("Invalid JSON Ability Object");
         }
-        
+
         while (reader.Read())
         {
             if (reader.TokenType == JsonTokenType.EndObject)

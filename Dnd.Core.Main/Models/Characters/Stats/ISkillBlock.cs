@@ -32,7 +32,7 @@ public interface ISkill : IComparable
 
 public interface ISkillBlock : IEnumerable<ISkill>
 {
-    SkillName GetSkill(string skillName);
+    ISkill GetSkill(string skillName);
     List<ISkill> Skills { get; set; }
     Dictionary<String, int> ToDictionary();
     string ToJson();

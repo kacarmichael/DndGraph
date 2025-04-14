@@ -21,7 +21,7 @@ public class Ability : IAbility
 
     private List<String> _skills;
     private string _name;
-    
+
     public List<String> Skills
     {
         get { return _skills; }
@@ -70,7 +70,7 @@ public class Ability : IAbility
     {
         return $"Ability - {this.Name}: {this.Score}";
     }
-    
+
     public override bool Equals(object obj)
     {
         if (obj == null) return false;
@@ -78,7 +78,7 @@ public class Ability : IAbility
         Ability ability = (Ability)obj;
         return this.Name == ability.Name;
     }
-    
+
     public string ToJson()
     {
         return JsonSerializer.Serialize(this);
@@ -102,6 +102,7 @@ public class Ability : IAbility
                 return 0;
             }
         }
+
         throw new ArgumentException("Compared Object is not an Ability");
     }
 }
@@ -109,7 +110,7 @@ public class Ability : IAbility
 [ComplexType]
 public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
 {
-    public AbilityName GetAbility(string name) => (AbilityName)Enum.Parse(typeof(AbilityName), name);
+    public IAbility GetAbility(string name) => Abilities.First(a => a.Name == name);
 
     public List<IAbility> Abilities { get; set; }
 
@@ -122,6 +123,14 @@ public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
         }
     }
 
+    public int Strength => Abilities.First(a => a.Name == this.GetAbility("Strength").ToString()).Score ?? 0;
+    public int Dexterity => Abilities.First(a => a.Name == this.GetAbility("Dexterity").ToString()).Score ?? 0;
+    public int Constitution => Abilities.First(a => a.Name == this.GetAbility("Constitution").ToString()).Score ?? 0;
+    public int Intelligence => Abilities.First(a => a.Name == this.GetAbility("Intelligence").ToString()).Score ?? 0;
+    public int Wisdom => Abilities.First(a => a.Name == this.GetAbility("Wisdom").ToString()).Score ?? 0;
+    public int Charisma => Abilities.First(a => a.Name == this.GetAbility("Charisma").ToString()).Score ?? 0;
+
+
     public AbilityBlock(List<IAbility> abilities)
     {
         Abilities = abilities;
@@ -131,6 +140,16 @@ public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
             {
                 Abilities.Add(new Ability(ability.ToString(), 10, false));
             }
+        }
+    }
+
+    public AbilityBlock(List<int> scores)
+    {
+        Abilities = new List<IAbility>();
+        foreach (var ability in Enum.GetValues(typeof(AbilityName)))
+        {
+            Abilities.Add(new Ability(ability.ToString(),
+                scores[Array.IndexOf(Enum.GetValues(typeof(AbilityName)), ability)], false));
         }
     }
 
@@ -173,7 +192,7 @@ public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
 
         return dict;
     }
-    
+
     public override bool Equals(object? obj)
     {
         if (obj is AbilityBlock block)
@@ -183,7 +202,7 @@ public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
 
         return false;
     }
-    
+
     public string ToJson()
     {
         return JsonSerializer.Serialize(this);

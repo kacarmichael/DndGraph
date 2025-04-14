@@ -9,9 +9,47 @@ namespace Dnd.Application.Main.Models.Characters;
 public class CharacterStats : ICharacterStats
 {
     public int Level { get; set; }
-    public IAbilityBlock Abilities { get; set; }
-    public ISkillBlock Skills { get; set; }
+
+    [NotMapped] public IAbilityBlock Abilities { get; set; }
+
+    [NotMapped] public ISkillBlock Skills { get; set; }
     public int ProficiencyBonus { get; set; }
+
+    public int StrengthScore
+    {
+        get => Abilities.GetAbility("Strength").Score ?? 0;
+        set => Abilities.GetAbility("Strength").Score = value;
+    }
+
+    public int DexterityScore
+    {
+        get => Abilities.GetAbility("Dexterity").Score ?? 0;
+        set => Abilities.GetAbility("Dexterity").Score = value;
+    }
+
+    public int ConstitutionScore
+    {
+        get => Abilities.GetAbility("Constitution").Score ?? 0;
+        set => Abilities.GetAbility("Constitution").Score = value;
+    }
+
+    public int IntelligenceScore
+    {
+        get => Abilities.GetAbility("Intelligence").Score ?? 0;
+        set => Abilities.GetAbility("Intelligence").Score = value;
+    }
+
+    public int WisdomScore
+    {
+        get => Abilities.GetAbility("Wisdom").Score ?? 0;
+        set => Abilities.GetAbility("Wisdom").Score = value;
+    }
+
+    public int CharismaScore
+    {
+        get => Abilities.GetAbility("Charisma").Score ?? 0;
+        set => Abilities.GetAbility("Charisma").Score = value;
+    }
 
     public CharacterStats()
     {
@@ -35,15 +73,33 @@ public class CharacterStats : ICharacterStats
         return (ability.Score ?? 0) + ability.Modifier + (ability.Proficient ? ProficiencyBonus : 0);
     }
 
+    public int AbilityCheckModifier(string abilityName)
+    {
+        Ability ability = (Ability)Abilities.First(a => a.Name == abilityName);
+        return (ability.Score ?? 0) + ability.Modifier + (ability.Proficient ? ProficiencyBonus : 0);
+    }
+
     public int SkillCheckModifier(SkillName skillName)
     {
         Skill skill = (Skill)Skills.Skills.First(s => s.Name == skillName.ToString());
         return skill.Modifier + (skill.Proficient ? ProficiencyBonus : 0);
     }
 
+    public int SkillCheckModifier(string skillName)
+    {
+        Skill skill = (Skill)Skills.Skills.First(s => s.Name == skillName);
+        return skill.Modifier + (skill.Proficient ? ProficiencyBonus : 0);
+    }
+
     public int SaveThrowModifier(AbilityName abilityName)
     {
         Ability ability = (Ability)Abilities.First(a => a.Name == abilityName.ToString());
+        return (ability.Score ?? 0) + ability.Modifier + (ability.Proficient ? ProficiencyBonus : 0);
+    }
+
+    public int SaveThrowModifier(string abilityName)
+    {
+        Ability ability = (Ability)Abilities.First(a => a.Name == abilityName);
         return (ability.Score ?? 0) + ability.Modifier + (ability.Proficient ? ProficiencyBonus : 0);
     }
 
@@ -76,7 +132,7 @@ public class CharacterStats : ICharacterStats
 
         return (Abilities.ToDictionary(), Skills.ToDictionary(), proficiencies);
     }
-    
+
     public override bool Equals(object? obj)
     {
         ICharacterStats other = (ICharacterStats)obj;
@@ -90,10 +146,10 @@ public class CharacterStats : ICharacterStats
 
         return false;
     }
-    
+
     public string ToJson() => JsonSerializer.Serialize(this);
 
     public override string ToString() => this.ToJson();
-    
+
     public static CharacterStats FromJson(string json) => JsonSerializer.Deserialize<CharacterStats>(json)!;
 }

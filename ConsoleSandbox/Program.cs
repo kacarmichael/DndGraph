@@ -15,7 +15,7 @@ class ConsoleSandbox
         options.Converters.Add(new AbilityBlockSerializer());
         var ability = new Ability(name: "Constitution", score: 20, proficient: true);
         var abilityBlock = new AbilityBlock();
-        
+
         Console.WriteLine(JsonSerializer.Serialize(ability, options));
         Console.WriteLine(JsonSerializer.Serialize(abilityBlock, options));
     }

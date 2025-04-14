@@ -1,9 +1,7 @@
 ﻿//using dnd.apiModels.Rolls;
 
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.Serialization;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Models.Characters;
 using Dnd.Core.Main.Models.Characters.Stats;
 
@@ -38,8 +36,44 @@ public class Character : ICharacter
     //     get => JsonSerializer.Deserialize<CharacterStats>(StatsJson);
     //     set => StatsJson = JsonSerializer.Serialize(value);
     // }
-    
+
     public ICharacterStats Stats { get; set; }
+
+    public int Strength
+    {
+        get => Stats.Abilities.GetAbility("Strength").Score ?? 0;
+        set => Stats.Abilities.Abilities.First(a => a.Name == "Strength").Score = value;
+    }
+
+    public int Dexterity
+    {
+        get => Stats.Abilities.GetAbility("Dexterity").Score ?? 0;
+        set => Stats.Abilities.Abilities.First(a => a.Name == "Dexterity").Score = value;
+    }
+
+    public int Constitution
+    {
+        get => Stats.Abilities.GetAbility("Constitution").Score ?? 0;
+        set => Stats.Abilities.Abilities.First(a => a.Name == "Constitution").Score = value;
+    }
+
+    public int Intelligence
+    {
+        get => Stats.Abilities.GetAbility("Intelligence").Score ?? 0;
+        set => Stats.Abilities.Abilities.First(a => a.Name == "Intelligence").Score = value;
+    }
+
+    public int Wisdom
+    {
+        get => Stats.Abilities.GetAbility("Wisdom").Score ?? 0;
+        set => Stats.Abilities.Abilities.First(a => a.Name == "Wisdom").Score = value;
+    }
+
+    public int Charisma
+    {
+        get => Stats.Abilities.GetAbility("Charisma").Score ?? 0;
+        set => Stats.Abilities.Abilities.First(a => a.Name == "Charisma").Score = value;
+    }
 
     // [NotMapped]
     // public Dictionary<string, int>? Classes
@@ -47,7 +81,7 @@ public class Character : ICharacter
     //     get => JsonSerializer.Deserialize<Dictionary<string, int>>(ClassesJson);
     //     set => ClassesJson = JsonSerializer.Serialize(value);
     // }
-    
+
     //public Dictionary<string, int>? Classes { get; set; }
 
     public int ProficiencyModifier => Level / 4 + 2;
@@ -73,6 +107,16 @@ public class Character : ICharacter
         Stats = stats;
         AC = ac;
         //Classes = charClass;
+    }
+
+    public Character(int id, string? name, int level, int str, int dex, int con, int intt, int wis, int cha, int ac)
+    {
+        Id = id;
+        Name = name;
+        Level = level;
+        Stats = new CharacterStats(level, new AbilityBlock(new List<int>() { str, dex, con, intt, wis, cha }),
+            new SkillBlock());
+        AC = ac;
     }
 
     public bool Equals(ICharacter? other)

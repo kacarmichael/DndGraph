@@ -17,6 +17,7 @@ public class SkillSerializer : JsonConverter<ISkill>
         {
             throw new JsonException();
         }
+
         while (reader.Read())
         {
             if (reader.TokenType == JsonTokenType.EndObject)

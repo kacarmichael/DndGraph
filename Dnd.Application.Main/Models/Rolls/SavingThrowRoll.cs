@@ -30,7 +30,7 @@ public class SavingThrowRoll : DiceRollBase
             throw new ArgumentException("Invalid Ability");
         }
 
-        int res = DiceRolled.Roll() + Roller.Stats.SaveThrowModifier(Roller.Stats.Abilities.GetAbility(Ability));
+        int res = DiceRolled.Roll() + Roller.Stats.SaveThrowModifier(Roller.Stats.Abilities.GetAbility(Ability).Name);
 
         return res;
     }

@@ -51,8 +51,9 @@ public class JSONSerializerTests
         skills.Add(new Skill("Survival", 2, true));
         return new SkillBlock(skills);
     }
-    
-    private CharacterStats GetTestCharacterStats() => new CharacterStats(20, GetTestAbilityBlock(), GetTestSkillBlock());
+
+    private CharacterStats GetTestCharacterStats() =>
+        new CharacterStats(20, GetTestAbilityBlock(), GetTestSkillBlock());
 
 
     public JSONSerializerTests(ITestOutputHelper output)
@@ -216,15 +217,15 @@ public class JSONSerializerTests
                            "{\"Name\":\"Performance\",\"Modifier\":2,\"Proficient\":true}," +
                            "{\"Name\":\"Persuasion\",\"Modifier\":2,\"Proficient\":true}," +
                            "{\"Name\":\"Religion\",\"Modifier\":2,\"Proficient\":true}," +
-                           "{\"Name\":\"SleightOfHand\",\"Modifier\":2,\"Proficient\":true}," +    
+                           "{\"Name\":\"SleightOfHand\",\"Modifier\":2,\"Proficient\":true}," +
                            "{\"Name\":\"Stealth\",\"Modifier\":2,\"Proficient\":true}," +
                            "{\"Name\":\"Survival\",\"Modifier\":2,\"Proficient\":true}]," +
                            "\"ProficiencyBonus\":6,\"Level\":20}";
-        
-    
+
+
         Assert.Equal(expectedJson, statsJson);
     }
-    
+
     [Fact]
     public void CharacterStatsDeserializationTest()
     {
@@ -249,7 +250,7 @@ public class JSONSerializerTests
                            "{\"Name\":\"Performance\",\"Modifier\":2,\"Proficient\":true}," +
                            "{\"Name\":\"Persuasion\",\"Modifier\":2,\"Proficient\":true}," +
                            "{\"Name\":\"Religion\",\"Modifier\":2,\"Proficient\":true}," +
-                           "{\"Name\":\"SleightOfHand\",\"Modifier\":2,\"Proficient\":true}," +    
+                           "{\"Name\":\"SleightOfHand\",\"Modifier\":2,\"Proficient\":true}," +
                            "{\"Name\":\"Stealth\",\"Modifier\":2,\"Proficient\":true}," +
                            "{\"Name\":\"Survival\",\"Modifier\":2,\"Proficient\":true}]," +
                            "\"ProficiencyBonus\":6}";

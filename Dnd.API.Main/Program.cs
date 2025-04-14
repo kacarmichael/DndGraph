@@ -1,4 +1,3 @@
-using System.Text;
 using Dnd.API.Main.Extensions;
 using Dnd.Application.Auth.Models;
 using Dnd.Application.Caching;
@@ -16,9 +15,7 @@ using Dnd.Core.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Models.Rolls;
 using Dnd.Core.Main.Repositories;
 using Dnd.Core.Main.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -63,6 +60,8 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.Converters.Add(new SkillSerializer());
         options.JsonSerializerOptions.Converters.Add(new AbilityBlockSerializer());
         options.JsonSerializerOptions.Converters.Add(new SkillBlockSerializer());
+        options.JsonSerializerOptions.Converters.Add(new CharacterStatsSerializer());
+        options.JsonSerializerOptions.Converters.Add(new CharacterSerializer());
     });
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using Dnd.Application.Main.Models.Characters;
-using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Serializers;
@@ -20,12 +19,12 @@ public class CharacterStatsSerializer : JsonConverter<ICharacterStats>
     public override ICharacterStats Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var stats = new CharacterStats();
-        
+
         if (reader.TokenType != JsonTokenType.StartObject)
         {
             throw new JsonException();
         }
-        
+
         while (reader.Read())
         {
             if (reader.TokenType == JsonTokenType.EndObject)
@@ -62,8 +61,9 @@ public class CharacterStatsSerializer : JsonConverter<ICharacterStats>
         return stats;
     }
 
-    public override void Write(Utf8JsonWriter writer, ICharacterStats value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, ICharacterStats val, JsonSerializerOptions options)
     {
+        CharacterStats value = (CharacterStats)val;
         writer.WriteStartObject();
         writer.WritePropertyName("Abilities");
         JsonSerializer.Serialize(writer, value.Abilities, _options);

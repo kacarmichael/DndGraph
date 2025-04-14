@@ -19,12 +19,12 @@ public class AbilityBlockSerializer : JsonConverter<IAbilityBlock>
     public override IAbilityBlock Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var abilityBlock = new AbilityBlock();
-        
+
         if (reader.TokenType != JsonTokenType.StartArray)
         {
             throw new JsonException();
         }
-        
+
         abilityBlock.Abilities = JsonSerializer.Deserialize<List<IAbility>>(ref reader, _options)!;
 
         return abilityBlock;

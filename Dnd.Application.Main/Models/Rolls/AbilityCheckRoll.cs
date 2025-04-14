@@ -26,14 +26,15 @@ public class AbilityCheckRoll : DiceRollBase
         int res = 0;
         if (Constants.AbilityNames.Contains(Ability))
         {
-            res = DiceRolled.Roll() + Roller.Stats.AbilityCheckModifier(Roller.Stats.Abilities.GetAbility(Ability));
+            res = DiceRolled.Roll() +
+                  Roller.Stats.AbilityCheckModifier(Roller.Stats.Abilities.GetAbility(Ability).Name);
             return res;
         }
 
 
         if (Constants.SkillNames.Contains(Ability))
         {
-            res = DiceRolled.Roll() + Roller.Stats.SkillCheckModifier(Roller.Stats.Skills.GetSkill(Ability));
+            res = DiceRolled.Roll() + Roller.Stats.SkillCheckModifier(Roller.Stats.Skills.GetSkill(Ability).Name);
         }
 
         throw new ArgumentException("Invalid Ability");

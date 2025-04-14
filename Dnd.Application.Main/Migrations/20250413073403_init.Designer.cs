@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Dnd.Application.Main.Migrations
 {
     [DbContext(typeof(CharacterDbContext))]
-    [Migration("20250323073946_initial_migration")]
-    partial class initial_migration
+    [Migration("20250413073403_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,33 +33,56 @@ namespace Dnd.Application.Main.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AC")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    b.Property<string>("ClassesJson")
-                        .HasColumnType("text");
+                    b.Property<int>("Charisma")
+                        .HasColumnType("integer")
+                        .HasColumnName("CharismaScore");
+
+                    b.Property<int>("Constitution")
+                        .HasColumnType("integer")
+                        .HasColumnName("ConstitutionScore");
+
+                    b.Property<int>("Dexterity")
+                        .HasColumnType("integer")
+                        .HasColumnName("DexterityScore");
+
+                    b.Property<int>("Intelligence")
+                        .HasColumnType("integer")
+                        .HasColumnName("IntelligenceScore");
 
                     b.Property<int>("Level")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
-                    b.Property<string>("StatsJson")
-                        .HasColumnType("text");
+                    b.Property<int>("Strength")
+                        .HasColumnType("integer")
+                        .HasColumnName("StrengthScore");
+
+                    b.Property<int>("Wisdom")
+                        .HasColumnType("integer")
+                        .HasColumnName("WisdomScore");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Characters");
+                    b.ToTable("Characters", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             AC = 10,
-                            ClassesJson = "{}",
+                            Charisma = 10,
+                            Constitution = 10,
+                            Dexterity = 10,
+                            Intelligence = 10,
                             Level = 1,
                             Name = "Test Character",
-                            StatsJson = "{\"AbilityModifiers\":{\"Strength\":0,\"Dexterity\":0,\"Constitution\":0,\"Intelligence\":0,\"Wisdom\":0,\"Charisma\":0},\"AbilityScores\":{\"Strength\":10,\"Dexterity\":10,\"Constitution\":10,\"Intelligence\":10,\"Wisdom\":10,\"Charisma\":10},\"SkillModifiers\":{\"Acrobatics\":10,\"Animal Handling\":10,\"Arcana\":10,\"Athletics\":10,\"Deception\":10,\"History\":10,\"Insight\":10,\"Intimidation\":10,\"Investigation\":10,\"Medicine\":10,\"Nature\":10,\"Perception\":10,\"Performance\":10,\"Persuasion\":10,\"Religion\":10,\"Sleight of Hand\":10,\"Stealth\":10,\"Survival\":10},\"Proficiencies\":[]}"
+                            Strength = 10,
+                            Wisdom = 10
                         });
                 });
 #pragma warning restore 612, 618

@@ -12,8 +12,11 @@ public interface ICharacterStats
     static bool Compare(ICharacterStats character1, ICharacterStats character2) => character1.Equals(character2);
 
     int AbilityCheckModifier(AbilityName ability);
+    int AbilityCheckModifier(string ability);
     int SaveThrowModifier(AbilityName ability);
+    int SaveThrowModifier(string ability);
     int SkillCheckModifier(SkillName skill);
+    int SkillCheckModifier(string skill);
 
     (Dictionary<String, int>, Dictionary<String, int>, List<String>) GetStatsDictionary();
 }

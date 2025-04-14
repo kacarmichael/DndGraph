@@ -16,7 +16,7 @@ public interface IAbility : IComparable
     int? Score { get; set; }
     int Modifier { get; }
     bool Proficient { get; set; }
-    
+
     List<String> Skills
     {
         get { throw new NotImplementedException(); }
@@ -28,13 +28,13 @@ public interface IAbility : IComparable
         get { throw new NotImplementedException(); }
         set { throw new NotImplementedException(); }
     }
-    
+
     string ToJson();
 }
 
 public interface IAbilityBlock : IEnumerable<IAbility>
 {
-    AbilityName GetAbility(string name);
+    IAbility GetAbility(string name);
     List<IAbility> Abilities { get; set; }
     Dictionary<String, int> ToDictionary();
     string ToJson();
