@@ -10,8 +10,9 @@ public abstract class DiceRollBase : IDiceRoll
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
-    public IDiceSet DiceRolled { get; set; }
-    public ICharacter? Roller { get; set; }
+    [NotMapped] public IDiceSet DiceRolled { get; set; }
+
+    [NotMapped] public ICharacter? Roller { get; set; }
     public int Value { get; set; }
 
     public string RollType { get; set; }

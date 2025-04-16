@@ -9,10 +9,10 @@ namespace Dnd.Application.Main.Repositories;
 public class CharacterRepository<TCharacter> : ICharacterRepository
     where TCharacter : class, ICharacter
 {
-    private readonly CharacterDbContext _context;
+    private readonly DndDbContext _context;
     //private readonly Type _concreteType;
 
-    public CharacterRepository(CharacterDbContext context)
+    public CharacterRepository(DndDbContext context)
     {
         _context = context;
         //_concreteType = typeof(TCharacter);

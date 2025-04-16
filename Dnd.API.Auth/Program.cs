@@ -4,7 +4,6 @@ using Dnd.Application.Auth.Models;
 using Dnd.Application.Auth.Repositories;
 using Dnd.Application.Auth.Services;
 using Dnd.Application.Logging;
-using Dnd.Application.Main.Infrastructure;
 using Dnd.Application.Main.Repositories;
 using Dnd.Application.Main.Services;
 using Dnd.Core.Abstractions;
@@ -31,7 +30,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddDbContext<UserDbContext>(options => options.UseInMemoryDatabase("UserDb"));
+// builder.Services.AddDbContext<UserDbContext>(options => options.UseInMemoryDatabase("UserDb"));
 builder.Services.AddOpenApi();
 
 // builder.Services.AddLogging(logging =>

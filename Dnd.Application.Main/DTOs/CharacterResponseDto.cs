@@ -24,8 +24,8 @@ public class CharacterResponseDto : IDto
     {
         Name = character.Name;
         (Abilities, Skills, Proficiencies) = character.Stats.GetStatsDictionary();
-        Level = character.Level;
-        Ac = character.AC;
+        Level = character.Stats.Level;
+        //Ac = character.AC;
         //Classes = character.Classes;
     }
 

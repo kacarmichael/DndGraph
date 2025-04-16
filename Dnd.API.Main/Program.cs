@@ -7,7 +7,6 @@ using Dnd.Application.Main.Models.Characters;
 using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Application.Main.Models.Rolls;
 using Dnd.Application.Main.Repositories;
-using Dnd.Application.Main.Serializers;
 using Dnd.Application.Main.Services;
 using Dnd.Core.Caching;
 using Dnd.Core.Logging;
@@ -53,24 +52,24 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new AbilitySerializer());
-        options.JsonSerializerOptions.Converters.Add(new SkillSerializer());
-        options.JsonSerializerOptions.Converters.Add(new AbilityBlockSerializer());
-        options.JsonSerializerOptions.Converters.Add(new SkillBlockSerializer());
-        options.JsonSerializerOptions.Converters.Add(new CharacterStatsSerializer());
-        options.JsonSerializerOptions.Converters.Add(new CharacterSerializer());
-    });
+builder.Services.AddControllers();
+// .AddJsonOptions(options =>
+// {
+//     options.JsonSerializerOptions.Converters.Add(new AbilitySerializer());
+//     options.JsonSerializerOptions.Converters.Add(new SkillSerializer());
+//     options.JsonSerializerOptions.Converters.Add(new AbilityBlockSerializer());
+//     options.JsonSerializerOptions.Converters.Add(new SkillBlockSerializer());
+//     options.JsonSerializerOptions.Converters.Add(new CharacterStatsSerializer());
+//     options.JsonSerializerOptions.Converters.Add(new CharacterSerializer());
+// });
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 
-builder.Services.AddDbContext<CharacterDbContext>(options =>
+builder.Services.AddDbContext<DndDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
 
-builder.Services.AddDbContext<RollDbContext>(options =>
-    options.UseInMemoryDatabase("RollDb"));
+// builder.Services.AddDbContext<RollDbContext>(options =>
+//     options.UseInMemoryDatabase("RollDb"));
 
 builder.Services.AddTransient<ICharacterRepository, CharacterRepository<Character>>();
 builder.Services.AddTransient<ICharacterService, CharacterService>(); //<>()
@@ -235,7 +234,7 @@ app.UseSwaggerUI();
 
 // using (var scope = app.Services.CreateScope())
 // {
-// var dbContext = scope.ServiceProvider.GetService<CharacterDbContext>();
+// var dbContext = scope.ServiceProvider.GetService<DndDbContext>();
 // dbContext.Database.EnsureCreated();
 // dbContext.Populate();
 // }

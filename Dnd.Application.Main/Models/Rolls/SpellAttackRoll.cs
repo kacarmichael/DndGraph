@@ -1,11 +1,12 @@
-﻿using Dnd.Core.Main.Models.Characters;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Dnd.Core.Main.Models.Characters;
 using Dnd.Core.Main.Models.Dice;
 
 namespace Dnd.Application.Main.Models.Rolls;
 
 public class SpellAttackRoll : DiceRollBase
 {
-    public IClass ClassUsed { get; set; }
+    [NotMapped] public IClass ClassUsed { get; set; }
 
     public string RollType => "spellAttack";
 
@@ -28,6 +29,6 @@ public class SpellAttackRoll : DiceRollBase
         return DiceRolled.Roll() +
                Roller.Stats.AbilityCheckModifier(Roller.Stats.Abilities.GetAbility(ClassUsed.SpellcastingAbility)
                    .Name) +
-               Roller.ProficiencyModifier;
+               Roller.Stats.ProficiencyBonus;
     }
 }

@@ -11,6 +11,10 @@ public class CampaignSession : ICampaignSession
     public ICampaign Campaign { get; }
     public DateTime? SessionDate { get; set; }
 
+    public CampaignSession()
+    {
+    }
+
     public CampaignSession(ICampaign campaign, DateTime? sessionDate)
     {
         Campaign = campaign;

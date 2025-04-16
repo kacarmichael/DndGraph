@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Dnd.Application.Main.Migrations
 {
-    [DbContext(typeof(CharacterDbContext))]
+    [DbContext(typeof(DndDbContext))]
     [Migration("20250414072455_char_config")]
     partial class char_config
     {

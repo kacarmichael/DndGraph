@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Dnd.Application.Main.Migrations
 {
-    [DbContext(typeof(CharacterDbContext))]
+    [DbContext(typeof(DndDbContext))]
     [Migration("20250413073403_init")]
     partial class init
     {

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
 using Dnd.Application.Main.Models.Characters.Stats;
+using Dnd.Core.Main.Models.Characters;
 using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Models.Characters;
@@ -8,6 +9,11 @@ namespace Dnd.Application.Main.Models.Characters;
 [ComplexType]
 public class CharacterStats : ICharacterStats
 {
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
+
+    public ICharacter Character { get; set; }
+    public int CharacterId { get; set; }
     public int Level { get; set; }
 
     [NotMapped] public IAbilityBlock Abilities { get; set; }
@@ -64,6 +70,14 @@ public class CharacterStats : ICharacterStats
         Level = level;
         Abilities = abilities;
         Skills = skills;
+        ProficiencyBonus = (Level + 3) / 4 + 1;
+    }
+
+    public CharacterStats(int level, IAbilityBlock abilities)
+    {
+        Level = level;
+        Abilities = abilities;
+        Skills = new SkillBlock(abilities);
         ProficiencyBonus = (Level + 3) / 4 + 1;
     }
 

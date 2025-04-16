@@ -24,7 +24,7 @@ public class MeleeAttackRoll : DiceRollBase
     public override int Roll()
     {
         return DiceRolled.Roll() + Roller.Stats.AbilityCheckModifier(AbilityName.Strength) +
-               Roller.ProficiencyModifier;
+               Roller.Stats.ProficiencyBonus;
     }
 
     public override string Describe() => Roller.Name + " Melee Attack";
@@ -50,7 +50,7 @@ public class RangedAttackRoll : DiceRollBase
     public override int Roll()
     {
         return DiceRolled.Roll() + Roller.Stats.AbilityCheckModifier(AbilityName.Dexterity) +
-               Roller.ProficiencyModifier;
+               Roller.Stats.ProficiencyBonus;
     }
 
     public override string Describe() => Roller.Name + " Ranged Attack";

@@ -8,9 +8,9 @@ namespace Dnd.Application.Main.Repositories;
 
 public class CampaignSessionRepository : ICampaignSessionRepository
 {
-    private readonly SessionDbContext _context;
+    private readonly DndDbContext _context;
 
-    public CampaignSessionRepository(SessionDbContext context)
+    public CampaignSessionRepository(DndDbContext context)
     {
         _context = context;
     }

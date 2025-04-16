@@ -7,9 +7,9 @@ namespace Dnd.Application.Main.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    private readonly UserDbContext _context;
+    private readonly DndDbContext _context;
 
-    public UserRepository(UserDbContext context)
+    public UserRepository(DndDbContext context)
     {
         _context = context;
     }

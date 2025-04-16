@@ -9,11 +9,11 @@ namespace Dnd.Application.Main.Repositories;
 public class RollRepository<TRoll> : IRollRepository
     where TRoll : class, IDiceRoll
 {
-    private readonly RollDbContext _rollDbContext;
+    private readonly DndDbContext _rollDbContext;
     private readonly ICharacterRepository _characterRepository;
     private readonly Type _concreteType;
 
-    public RollRepository(RollDbContext rollDbContext, ICharacterRepository characterRepository)
+    public RollRepository(DndDbContext rollDbContext, ICharacterRepository characterRepository)
     {
         _rollDbContext = rollDbContext;
         _characterRepository = characterRepository;

@@ -14,7 +14,7 @@ public class Ability : IAbility
 
     public int Modifier
     {
-        get { return (this.Score - 10) / 2 ?? 0; }
+        get { return (Score - 10) / 2 ?? 0; }
     }
 
     public bool Proficient { get; set; }

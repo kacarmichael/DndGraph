@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Dnd.Application.Main.Models.Intermediate;
 using Dnd.Core.Main.Models.Campaigns;
 using Dnd.Core.Main.Models.Users;
 
@@ -10,9 +11,22 @@ public class Campaign : ICampaign
     public int Id { get; set; }
 
     public string Name { get; set; }
-    public List<IDomainUser> Players { get; set; }
-    public IDomainUser Owner { get; set; }
-    public IDomainUser DungeonMaster { get; set; }
+
+    [NotMapped] public List<IDomainUser> Players { get; set; }
+
+    public int OwnerId { get; set; }
+
+    [NotMapped] public IDomainUser Owner { get; set; }
+
+    public int DungeonMasterId { get; set; }
+
+    [NotMapped] public IDomainUser DungeonMaster { get; set; }
+
+    [NotMapped] public List<UserCharacterCampaign> UserCharacters { get; set; }
+
+    public Campaign()
+    {
+    }
 
     public Campaign(string campaignName, List<IDomainUser> players, IDomainUser dungeonMaster, IDomainUser owner)
     {

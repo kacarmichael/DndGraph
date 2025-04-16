@@ -22,49 +22,20 @@ public class CharacterEntityConfiguration : IEntityTypeConfiguration<Character>
 {
     public void Configure(EntityTypeBuilder<Character> builder)
     {
-        builder.Ignore(c => c.Stats);
         builder.ToTable("Characters");
 
-        builder.HasKey(x => x.Id);
+        builder.HasKey(c => c.Id);
 
-        builder.Property(c => c.Name)
-            .HasMaxLength(50);
+        builder.HasOne(c => (CharacterStats)c.Stats)
+            .WithOne(cs => (Character)cs.Character)
+            .HasForeignKey<CharacterStats>(cs => cs.CharacterId);
 
-        //builder.Property(c => c.Class).HasMaxLength(50);
+        builder.HasMany(c => c.Classes)
+            .WithOne(cc => (Character)cc._character)
+            .HasForeignKey(cc => cc.CharacterId);
 
-        builder.Property(c => c.AC)
-            .HasColumnType("int");
-
-        //builder.HasMany(c => c.Classes).WithMany(c => c.Characters);
-
-        // builder.Property(c => c.Stats)
-        //     .HasConversion(
-        //         v => v.ToString(),
-        //         v => CharacterStats.FromJson(v)
-        //     );
-
-        // builder.Property(c => c.Stats.Abilities.GetAbility("Strength").Score).HasColumnName("StrengthScore");
-        // builder.Property(c => c.Stats.Abilities.GetAbility("Dexterity").Score).HasColumnName("DexterityScore");
-        // builder.Property(c => c.Stats.Abilities.GetAbility("Constitution").Score).HasColumnName("ConstitutionScore");
-        // builder.Property(c => c.Stats.Abilities.GetAbility("Intelligence").Score).HasColumnName("IntelligenceScore");
-        // builder.Property(c => c.Stats.Abilities.GetAbility("Wisdom").Score).HasColumnName("WisdomScore");
-        // builder.Property(c => c.Stats.Abilities.GetAbility("Charisma").Score).HasColumnName("CharismaScore");
-        builder.OwnsOne(c => (CharacterStats)c.Stats, statsBuilder =>
-            {
-                statsBuilder.Property(s => s.Level).HasColumnName("Level");
-                statsBuilder.Property(c => c.StrengthScore).HasColumnName("StrengthScore").HasColumnType("int");
-                statsBuilder.Property(c => c.DexterityScore).HasColumnType("int").HasColumnName("DexterityScore");
-                statsBuilder.Property(c => c.ConstitutionScore).HasColumnType("int").HasColumnName("ConstitutionScore");
-                statsBuilder.Property(c => c.IntelligenceScore).HasColumnType("int").HasColumnName("IntelligenceScore");
-                statsBuilder.Property(c => c.WisdomScore).HasColumnType("int").HasColumnName("WisdomScore");
-                statsBuilder.Property(c => c.CharismaScore).HasColumnType("int").HasColumnName("CharismaScore");
-            }
-        );
-
-
-        //builder.Navigation(c => c.Stats).AutoInclude();
-
-        // builder.Property(c => c.Classes)
-        //     .HasColumnType("jsonb");
+        builder.HasMany(c => c.Campaigns)
+            .WithOne(ucc => (Character)ucc._Character)
+            .HasForeignKey(ucc => ucc.CharacterId);
     }
 }

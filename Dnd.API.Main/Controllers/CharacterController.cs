@@ -9,7 +9,7 @@ namespace Dnd.API.Main.Controllers;
 [Route("api/Characters")]
 public class CharacterController : ControllerBase
 {
-    //private readonly CharacterDbContext _context;
+    //private readonly DndDbContext _context;
     private readonly ICharacterService _characterService;
 
     public CharacterController(ICharacterService characterService)
