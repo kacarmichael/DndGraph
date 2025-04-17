@@ -13,4 +13,15 @@ public class CharacterClass : ICharacterClass
     [NotMapped] public ICharacter _character { get; set; }
 
     [NotMapped] public IClass _class { get; set; }
+
+    public CharacterClass()
+    {
+    }
+
+    public CharacterClass(int classId, int characterId, int levels)
+    {
+        ClassId = classId;
+        CharacterId = characterId;
+        Levels = levels;
+    }
 }

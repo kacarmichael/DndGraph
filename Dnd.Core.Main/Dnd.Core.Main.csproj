@@ -15,4 +15,10 @@
         <ProjectReference Include="..\Dnd.Core.Auth\Dnd.Core.Auth.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Reference Include="Dnd.Application.Main">
+            <HintPath>..\Dnd.UnitTests\bin\Debug\net9.0\Dnd.Application.Main.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
 </Project>

@@ -5,6 +5,7 @@ using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Application.Main.Models.Intermediate;
 using Dnd.Core.Main.Models.Characters;
 using Dnd.Core.Main.Models.Characters.Stats;
+using Dnd.Core.Main.Models.Intermediate;
 using Dnd.Core.Main.Models.Users;
 
 namespace Dnd.Application.Main.Models.Characters;
@@ -28,23 +29,44 @@ public class Character : ICharacter
 
     [NotMapped] public List<UserCharacterCampaign> Campaigns { get; set; }
 
-    [NotMapped] public List<CharacterClass> Classes { get; set; }
+    [NotMapped] public ICollection<CharacterClass> Classes { get; set; }
 
     public Character()
     {
     }
 
-    public Character(string name, int level, ICharacterStats stats, int ac, Dictionary<string, int>? charClass)
+    public Character(string name, ICharacterStats stats, int ac, Dictionary<string, int>? charClass)
     {
         Name = name;
         Stats = stats;
     }
 
-    public Character(int id, string name, int level, ICharacterStats stats, int ac, Dictionary<string, int>? charClass)
+    public Character(int id, string name, ICharacterStats stats, int ac, Dictionary<string, int>? charClass)
     {
         Id = id;
         Name = name;
         Stats = stats;
+        CharacterStatsId = stats.StatBlockId;
+    }
+
+    public Character(int id, string name, ICharacterStats stats, Dictionary<int, int>? charClass, int userId)
+    {
+        Id = id;
+        Name = name;
+        Stats = stats;
+        //Classes = charClass;
+        CharacterStatsId = stats.StatBlockId;
+        UserId = userId;
+    }
+
+    public Character(int id, string name, ICharacterStats stats, List<ICharacterClass> charClass, int userId)
+    {
+        Id = id;
+        Name = name;
+        Stats = stats;
+        CharacterStatsId = stats.StatBlockId;
+        UserId = userId;
+        Classes = (ICollection<CharacterClass>?)charClass.Select(cc => (CharacterClass)cc).ToList();
     }
 
     public Character(int id, string name, int level, int str, int dex, int con, int intt, int wis, int cha, int ac)

@@ -10,7 +10,7 @@ namespace Dnd.Application.Main.Models.Characters;
 public class CharacterStats : ICharacterStats
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
+    public int StatBlockId { get; set; }
 
     public ICharacter Character { get; set; }
     public int CharacterId { get; set; }
@@ -75,6 +75,16 @@ public class CharacterStats : ICharacterStats
 
     public CharacterStats(int level, IAbilityBlock abilities)
     {
+        Level = level;
+        Abilities = abilities;
+        Skills = new SkillBlock(abilities);
+        ProficiencyBonus = (Level + 3) / 4 + 1;
+    }
+
+    public CharacterStats(int id, int characterId, int level, IAbilityBlock abilities)
+    {
+        StatBlockId = id;
+        CharacterId = characterId;
         Level = level;
         Abilities = abilities;
         Skills = new SkillBlock(abilities);

@@ -23,7 +23,7 @@ public class DndDbContext : DbContext
     {
         builder
             .ApplyConfiguration(new CharacterEntityConfiguration())
-            // .ApplyConfiguration(new CharacterStatsEntityConfiguration())
+            .ApplyConfiguration(new CharacterStatsEntityConfiguration())
             .ApplyConfiguration(new CharacterClassEntityConfiguration())
             .ApplyConfiguration(new UserCharacterCampaignEntityConfiguration());
         // .ApplyConfiguration(new UserEntityConfiguration());
@@ -42,8 +42,6 @@ public class DndDbContext : DbContext
             Models.Characters.Classes.AllClasses.Select(x => x)
         );
 
-        //builder.Entity<CharacterClass>
-
 
         // builder.Entity<Character>().HasData(
         //     new Character(
@@ -57,12 +55,12 @@ public class DndDbContext : DbContext
         //             abilities: new AbilityBlock(
         //                 new List<IAbility>()
         //                 {
-        //                     new Ability("Strength", 10, true),
-        //                     new Ability("Dexterity", 10, true),
-        //                     new Ability("Constitution", 10, true),
-        //                     new Ability("Intelligence", 10, true),
-        //                     new Ability("Wisdom", 10, true),
-        //                     new Ability("Charisma", 10, true)
+        //                  new Ability("Strength", 10, true),
+        //                  new Ability("Dexterity", 10, true),
+        //                  new Ability("Constitution", 10, true),
+        //                  new Ability("Intelligence", 10, true),
+        //                  new Ability("Wisdom", 10, true),
+        //                  new Ability("Charisma", 10, true)
         //                 }
         //             ),
         //             skills: new SkillBlock(
@@ -89,8 +87,8 @@ public class DndDbContext : DbContext
         //                 }
         //             )
         //         )
-        //     )
-        //);
+        //         )
+        // );
     }
 
     public DbSet<Character> Characters { get; set; }

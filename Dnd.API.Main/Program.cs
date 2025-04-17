@@ -5,12 +5,14 @@ using Dnd.Application.Logging;
 using Dnd.Application.Main.Infrastructure;
 using Dnd.Application.Main.Models.Characters;
 using Dnd.Application.Main.Models.Characters.Stats;
+using Dnd.Application.Main.Models.Intermediate;
 using Dnd.Application.Main.Models.Rolls;
 using Dnd.Application.Main.Repositories;
 using Dnd.Application.Main.Services;
 using Dnd.Core.Caching;
 using Dnd.Core.Logging;
 using Dnd.Core.Main.Models.Characters.Stats;
+using Dnd.Core.Main.Models.Intermediate;
 using Dnd.Core.Main.Models.Rolls;
 using Dnd.Core.Main.Repositories;
 using Dnd.Core.Main.Services;
@@ -71,7 +73,7 @@ builder.Services.AddDbContext<DndDbContext>(options =>
 // builder.Services.AddDbContext<RollDbContext>(options =>
 //     options.UseInMemoryDatabase("RollDb"));
 
-builder.Services.AddTransient<ICharacterRepository, CharacterRepository<Character>>();
+builder.Services.AddTransient<ICharacterRepository, CharacterRepository>();
 builder.Services.AddTransient<ICharacterService, CharacterService>(); //<>()
 builder.Services.AddTransient<IRollRepository, RollRepository<DiceRollBase>>();
 builder.Services.AddTransient<IRollMapperService, RollMapperService>();
@@ -230,6 +232,41 @@ app.MapControllers();
 app.Services.SaveSwaggerJson();
 app.UseSwagger();
 app.UseSwaggerUI();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetService<DndDbContext>();
+    //dbContext.Database.Migrate();
+    var stat_block = new CharacterStats(
+        id: 1,
+        characterId: 1,
+        level: 7,
+        new AbilityBlock(
+            new List<int> { 10, 13, 12, 17, 19, 18 }
+        )
+    );
+    var cc = new List<ICharacterClass>
+    {
+        new CharacterClass(
+            classId: 11,
+            characterId: 1,
+            levels: 6),
+        new CharacterClass(
+            classId: 12,
+            characterId: 1,
+            levels: 1)
+    };
+    var test_char = new Character(
+        id: 1,
+        name: "Theodred Venran",
+        stats: stat_block,
+        charClass: cc,
+        userId: 1);
+    dbContext.Characters.Add(test_char);
+    dbContext.CharacterStats.Add(stat_block);
+    dbContext.CharacterClasses.AddRange(cc.Select(cc => (CharacterClass)cc));
+    dbContext.SaveChanges();
+}
 
 
 // using (var scope = app.Services.CreateScope())

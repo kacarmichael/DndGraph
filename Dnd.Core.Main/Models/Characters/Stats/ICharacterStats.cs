@@ -2,6 +2,7 @@
 
 public interface ICharacterStats
 {
+    int StatBlockId { get; set; }
     int CharacterId { get; set; }
     int Level { get; set; }
     IAbilityBlock Abilities { get; set; }

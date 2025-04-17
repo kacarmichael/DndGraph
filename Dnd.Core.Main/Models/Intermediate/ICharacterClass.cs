@@ -8,4 +8,5 @@ public interface ICharacterClass
     ICharacter _character { get; set; }
     int ClassId { get; set; }
     IClass _class { get; set; }
+    int Levels { get; set; }
 }

@@ -51,7 +51,7 @@ public class CharacterRequestDto : IDto
     {
         return new Character(
             name: Name,
-            level: Level,
+            //level: Level,
             charClass: Classes,
             ac: Ac,
             stats: new CharacterStats(

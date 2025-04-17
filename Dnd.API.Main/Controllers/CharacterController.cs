@@ -20,9 +20,8 @@ public class CharacterController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<CharacterResponseDto>>> GetCharacters()
     {
-        var chars = await _characterService.GetAllCharactersAsync();
-        var converted = chars.Select(x => new CharacterResponseDto(character: x)).ToList();
-        return Ok(converted);
+        var dtos = _characterService.GetAllCharactersAsync().Result;
+        return Ok(dtos);
     }
 
     [HttpGet("{id:int}")]

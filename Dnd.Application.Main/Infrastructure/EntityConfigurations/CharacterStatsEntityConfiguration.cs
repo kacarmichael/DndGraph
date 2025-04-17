@@ -10,7 +10,7 @@ public class CharacterStatsEntityConfiguration : IEntityTypeConfiguration<Charac
     {
         builder.ToTable("CharacterStats");
 
-        builder.HasKey(cs => cs.Id);
+        builder.HasKey(cs => cs.StatBlockId);
 
         builder.HasOne(cs => (Character)cs.Character)
             .WithOne(c => (CharacterStats)c.Stats)
