@@ -3,7 +3,7 @@ using Dnd.Core.Main.Utils;
 
 namespace Dnd.Application.Main.DTOs;
 
-public class DiceRollResponseDto : DtoBase
+public class DiceRollResponseDto : IDto
 {
     public int D4 { get; set; }
     public int D6 { get; set; }

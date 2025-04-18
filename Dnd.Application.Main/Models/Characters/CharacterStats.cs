@@ -12,13 +12,13 @@ public class CharacterStats : ICharacterStats
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int StatBlockId { get; set; }
 
-    public ICharacter Character { get; set; }
+    [NotMapped] public virtual ICharacter Character { get; set; }
     public int CharacterId { get; set; }
     public int Level { get; set; }
 
-    [NotMapped] public IAbilityBlock Abilities { get; set; }
+    [NotMapped] public virtual IAbilityBlock Abilities { get; set; }
 
-    [NotMapped] public ISkillBlock Skills { get; set; }
+    [NotMapped] public virtual ISkillBlock Skills { get; set; }
     public int ProficiencyBonus { get; set; }
 
     public int StrengthScore

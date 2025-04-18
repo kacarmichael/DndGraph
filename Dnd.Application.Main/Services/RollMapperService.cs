@@ -18,7 +18,7 @@ public class RollMapperService : IRollMapperService
         _classMapper = classMapper;
     }
 
-    public async Task<IDiceRoll> Map(DtoBase request)
+    public async Task<IDiceRoll> Map(IDto request)
     {
         if (request is RollRequestDto req)
         {
@@ -80,7 +80,7 @@ public class RollMapperService : IRollMapperService
         }
     }
 
-    public DtoBase Map(IDiceRoll roll)
+    public IDto Map(IDiceRoll roll)
     {
         throw new NotImplementedException();
     }

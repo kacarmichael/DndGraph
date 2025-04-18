@@ -91,9 +91,9 @@ public class CharacterRepository : ICharacterRepository
         return await _context.CharacterClasses.ToListAsync();
     }
 
-    public async Task<ICharacterClass> GetCharacterClassesByIdAsync(int id)
+    public async Task<IEnumerable<ICharacterClass>> GetCharacterClassesByIdAsync(int id)
     {
-        return await _context.CharacterClasses.FirstOrDefaultAsync(cc => cc.CharacterId == id);
+        return await _context.CharacterClasses.Where(cc => cc.CharacterId == id).ToListAsync();
     }
 
     public void UpdateCharacterClass(ICharacterClass cc) => _context.CharacterClasses.Update((CharacterClass)cc);

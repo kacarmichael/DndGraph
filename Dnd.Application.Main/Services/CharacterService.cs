@@ -1,7 +1,10 @@
 ﻿using Dnd.Application.Main.DTOs;
 using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Models.Characters.Stats;
+using Dnd.Application.Main.Models.Intermediate;
 using Dnd.Application.Main.Utils;
 using Dnd.Core.Main.Models.Characters;
+using Dnd.Core.Main.Models.Characters.Stats;
 using Dnd.Core.Main.Models.Intermediate;
 using Dnd.Core.Main.Repositories;
 using Dnd.Core.Main.Services;
@@ -12,35 +15,24 @@ namespace Dnd.Application.Main.Services;
 public class CharacterService : ICharacterService
 {
     private readonly ICharacterRepository _repository;
+    private readonly IClassMapperService _classMapperService;
 
-    public CharacterService(ICharacterRepository repository)
+    public CharacterService(ICharacterRepository repository, IClassMapperService classMapperService)
     {
         _repository = repository;
+        _classMapperService = classMapperService;
     }
 
-    public async Task<IDto> GetCharacterAsync(int id)
+    public async Task<ICharacter> GetCharacterAsync(int id)
     {
-        var character = _repository.GetCharacterAsync(id).Result;
-        var stats = _repository.GetStatBlockByIdAsync(id).Result;
-        var classes = _repository.GetCharacterClassesByIdAsync(id).Result;
-        var dto = new CharacterResponseDto(character, new List<ICharacterClass> { classes }, stats);
-        return dto;
+        var character = await _repository.GetCharacterAsync(id);
+        return character;
     }
 
-    public async Task<IEnumerable<IDto>> GetAllCharactersAsync()
+    public async Task<IEnumerable<ICharacter>> GetAllCharactersAsync()
     {
-        var chars = _repository.GetAllCharactersAsync().Result;
-        var stats = _repository.GetAllStatBlocksAsync().Result;
-        var classes = _repository.GetAllCharacterClassesAsync().Result;
-        var dtos = new List<CharacterResponseDto> { };
-        foreach (var ch in chars)
-        {
-            var statblock = stats.FirstOrDefault(sb => sb.CharacterId == ch.Id);
-            var cls = classes.Where(cl => cl.CharacterId == ch.Id).ToList();
-            dtos.Add(new CharacterResponseDto(ch: ch, cc: cls, cs: statblock));
-        }
-
-        return dtos;
+        var chars = await _repository.GetAllCharactersAsync();
+        return chars;
     }
 
     public IEnumerable<ICharacter> GetCurrentCharacters() => throw new NotImplementedException();
@@ -55,5 +47,54 @@ public class CharacterService : ICharacterService
     public IEnumerable<IClass> GetAllClasses()
     {
         return Classes.AllClasses;
+    }
+
+    public ICharacter DtoToCharacter(IDto req)
+    {
+        if (req is CharacterRequestDto crd)
+        {
+            return new Character(
+                name: crd.Name,
+                charClass: null,
+                stats: null
+            );
+        }
+        else
+        {
+            throw new ArgumentException("DtoToCharacter takes one CharacterRequestDto as arg");
+        }
+    }
+
+    public ICharacterStats DtoToCharacterStats(IDto req)
+    {
+        if (req is CharacterRequestDto crd)
+        {
+            return new CharacterStats(
+                level: crd.Level,
+                abilities: new AbilityBlock(crd.AbilityScores));
+        }
+        else
+        {
+            throw new ArgumentException("DtoToCharacter takes one CharacterRequestDto as arg");
+        }
+    }
+
+    public IEnumerable<ICharacterClass> DtoToCharacterClasses(IDto req, int characterId)
+    {
+        var class_list = new List<CharacterClass>();
+        if (req is CharacterRequestDto crd)
+        {
+            foreach (var kvp in crd.Classes)
+            {
+                var cid = _classMapperService.Map(kvp.Key).ClassId;
+                class_list.Add(new CharacterClass(cid, characterId, kvp.Value));
+            }
+
+            return class_list;
+        }
+        else
+        {
+            throw new ArgumentException("DtoToCharacter takes one CharacterRequestDto as arg");
+        }
     }
 }

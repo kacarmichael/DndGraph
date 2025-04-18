@@ -29,7 +29,7 @@ public class RollService : IRollService
         _diceSimulationCache = diceSimulationCache;
     }
 
-    public async Task<DtoBase> Roll(DtoBase request)
+    public async Task<IDto> Roll(IDto request)
     {
         if (request is RollRequestDto req)
         {
@@ -53,7 +53,7 @@ public class RollService : IRollService
         return Task.FromResult(sim);
     }
 
-    public DtoBase Simulate(DtoBase request)
+    public IDto Simulate(IDto request)
     {
         if (request is DiceSimulationRequestDto req)
         {
@@ -69,7 +69,7 @@ public class RollService : IRollService
         ;
     }
 
-    public DtoBase DiceRoll(DtoBase request)
+    public IDto DiceRoll(IDto request)
     {
         if (request is DiceRollRequestDto req)
         {

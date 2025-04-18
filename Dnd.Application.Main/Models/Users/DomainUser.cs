@@ -14,17 +14,17 @@ public class DomainUser : IDomainUser
 
     public int AuthUserId { get; set; }
 
-    [ForeignKey("AuthUserId")] [NotMapped] public IAuthUser AuthUser { get; set; }
+    [ForeignKey("AuthUserId")] [NotMapped] public virtual IAuthUser AuthUser { get; set; }
 
     public string Username { get; set; }
 
-    [NotMapped] public List<ICharacter> Characters { get; set; }
+    [NotMapped] public virtual List<ICharacter> Characters { get; set; }
 
-    [NotMapped] public List<UserCharacterCampaign> CampaignsPlayed { get; set; }
+    [NotMapped] public virtual List<UserCharacterCampaign> CampaignsPlayed { get; set; }
 
-    [NotMapped] public List<Campaign> CampaignsOwned { get; set; }
+    [NotMapped] public virtual List<Campaign> CampaignsOwned { get; set; }
 
-    [NotMapped] public List<Campaign> CampaignsDmed { get; set; }
+    [NotMapped] public virtual List<Campaign> CampaignsDmed { get; set; }
 
     public DomainUser(string username)
     {

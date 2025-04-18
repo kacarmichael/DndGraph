@@ -16,7 +16,7 @@ public interface ICharacterRepository
     Task<ICharacterStats> AddStatBlock(ICharacterStats stats);
     void UpdateCharacterStats(ICharacterStats stats);
     Task<Task> DeleteStatBlockByIdAsync(int id);
-    Task<ICharacterClass> GetCharacterClassesByIdAsync(int id);
+    Task<IEnumerable<ICharacterClass>> GetCharacterClassesByIdAsync(int id);
     Task<IEnumerable<ICharacterClass>> GetAllCharacterClassesAsync();
     Task<ICharacterClass> AddCharacterClass(ICharacterClass cls);
     void UpdateCharacterClass(ICharacterClass cls);

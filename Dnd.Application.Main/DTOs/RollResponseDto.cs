@@ -3,7 +3,7 @@ using Dnd.Core.Main.Utils;
 
 namespace Dnd.Application.Main.DTOs;
 
-public class RollResponseDto : DtoBase
+public class RollResponseDto : IDto
 {
     public string RollType { get; set; }
     public int RollValue { get; set; }

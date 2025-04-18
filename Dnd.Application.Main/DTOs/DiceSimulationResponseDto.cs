@@ -5,7 +5,7 @@ using MathNet.Numerics.Statistics;
 
 namespace Dnd.Application.Main.DTOs;
 
-public class DiceSimulationResponseDto : DtoBase
+public class DiceSimulationResponseDto : IDto
 {
     public IDiceSet DiceRolled { get; set; }
     public int Modifier { get; set; }

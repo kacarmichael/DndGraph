@@ -18,30 +18,28 @@ public class Character : ICharacter
     public string Name { get; set; }
 
     public int CharacterStatsId { get; set; }
-    public ICharacterStats Stats { get; set; }
+
+    [NotMapped] public virtual ICharacterStats Stats { get; set; }
 
     public int UserId { get; set; }
 
-    [NotMapped] public IDomainUser User { get; set; }
+    [NotMapped] public virtual IDomainUser User { get; set; }
 
-    // [NotMapped]
-    // public List<ICharacterClass> Classes { get; set; }
+    [NotMapped] public virtual List<UserCharacterCampaign> Campaigns { get; set; }
 
-    [NotMapped] public List<UserCharacterCampaign> Campaigns { get; set; }
-
-    [NotMapped] public ICollection<CharacterClass> Classes { get; set; }
+    [NotMapped] public virtual IEnumerable<ICharacterClass> Classes { get; set; }
 
     public Character()
     {
     }
 
-    public Character(string name, ICharacterStats stats, int ac, Dictionary<string, int>? charClass)
+    public Character(string name, ICharacterStats stats, Dictionary<string, int>? charClass)
     {
         Name = name;
         Stats = stats;
     }
 
-    public Character(int id, string name, ICharacterStats stats, int ac, Dictionary<string, int>? charClass)
+    public Character(int id, string name, ICharacterStats stats, Dictionary<string, int>? charClass)
     {
         Id = id;
         Name = name;
@@ -66,7 +64,7 @@ public class Character : ICharacter
         Stats = stats;
         CharacterStatsId = stats.StatBlockId;
         UserId = userId;
-        Classes = (ICollection<CharacterClass>?)charClass.Select(cc => (CharacterClass)cc).ToList();
+        Classes = charClass.Select(cc => (CharacterClass)cc).ToList();
     }
 
     public Character(int id, string name, int level, int str, int dex, int con, int intt, int wis, int cha, int ac)

@@ -12,9 +12,9 @@ public class UserCharacterCampaign : IUserCharacterCampaign
     public int CharacterId { get; set; }
     public int CampaignId { get; set; }
 
-    [NotMapped] public IDomainUser _User { get; set; }
+    [NotMapped] public virtual IDomainUser _User { get; set; }
 
-    [NotMapped] public ICharacter _Character { get; set; }
+    [NotMapped] public virtual ICharacter _Character { get; set; }
 
-    [NotMapped] public ICampaign _Campaign { get; set; }
+    [NotMapped] public virtual ICampaign _Campaign { get; set; }
 }

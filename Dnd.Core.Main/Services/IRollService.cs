@@ -5,11 +5,11 @@ namespace Dnd.Core.Main.Services;
 
 public interface IRollService
 {
-    Task<DtoBase> Roll(DtoBase req);
+    Task<IDto> Roll(IDto req);
 
     Task<IDiceSimulation> Simulate(IDiceSet set, int trials);
 
-    DtoBase Simulate(DtoBase req);
+    IDto Simulate(IDto req);
 
-    DtoBase DiceRoll(DtoBase req);
+    IDto DiceRoll(IDto req);
 }

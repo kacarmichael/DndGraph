@@ -2,6 +2,7 @@
 
 public interface IClass
 {
+    int ClassId { get; set; }
     string SpellcastingAbility { get; set; }
     string Name { get; set; }
 }

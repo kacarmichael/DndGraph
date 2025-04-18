@@ -10,9 +10,9 @@ public class CharacterClass : ICharacterClass
     public int ClassId { get; set; }
     public int Levels { get; set; }
 
-    [NotMapped] public ICharacter _character { get; set; }
+    [NotMapped] public virtual ICharacter _character { get; set; }
 
-    [NotMapped] public IClass _class { get; set; }
+    [NotMapped] public virtual IClass _class { get; set; }
 
     public CharacterClass()
     {
@@ -23,5 +23,27 @@ public class CharacterClass : ICharacterClass
         ClassId = classId;
         CharacterId = characterId;
         Levels = levels;
+    }
+
+    public static IEnumerable<CharacterClass> FromDict(Dictionary<int, int> classes, int characterId)
+    {
+        var class_list = new List<CharacterClass>();
+        foreach (var kvp in classes)
+        {
+            class_list.Add(new CharacterClass(kvp.Key, characterId: characterId, levels: kvp.Value));
+        }
+
+        return class_list;
+    }
+
+    public static IEnumerable<CharacterClass> FromDict(Dictionary<int, int> classes)
+    {
+        var class_list = new List<CharacterClass>();
+        foreach (var kvp in classes)
+        {
+            class_list.Add(new CharacterClass(kvp.Key, characterId: -1, levels: kvp.Value));
+        }
+
+        return class_list;
     }
 }

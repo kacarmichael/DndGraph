@@ -19,14 +19,20 @@ public class DndDbContext : DbContext
         _configuration = configuration;
     }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder builder)
+    {
+        builder
+            .UseLazyLoadingProxies();
+    }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder
             .ApplyConfiguration(new CharacterEntityConfiguration())
             .ApplyConfiguration(new CharacterStatsEntityConfiguration())
             .ApplyConfiguration(new CharacterClassEntityConfiguration())
-            .ApplyConfiguration(new UserCharacterCampaignEntityConfiguration());
-        // .ApplyConfiguration(new UserEntityConfiguration());
+            .ApplyConfiguration(new UserCharacterCampaignEntityConfiguration())
+            .ApplyConfiguration(new UserEntityConfiguration());
 
         builder.Entity<DiceRollBase>()
             //.HasBaseType<IDiceRoll>()
