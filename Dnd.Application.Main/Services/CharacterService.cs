@@ -41,12 +41,48 @@ public class CharacterService : ICharacterService
 
     public async Task<ICharacter> AddCharacterAsync(ICharacter character)
     {
-        return await _repository.AddCharacter(character);
+        return await _repository.AddCharacterAsync(character);
+    }
+
+    public async Task<ICharacter> AddCharacterAsync(ICharacter character, ICharacterStats stats,
+        IEnumerable<ICharacterClass> classes)
+    {
+        return await _repository.AddCharacterAsync(character);
     }
 
     public IEnumerable<IClass> GetAllClasses()
     {
         return Classes.AllClasses;
+    }
+
+    public async Task<IEnumerable<ICharacterStats>> GetAllStatBlocksAsync()
+    {
+        return await _repository.GetAllStatBlocksAsync();
+    }
+
+    public async Task<ICharacterStats> GetStatBlockByIdAsync(int id)
+    {
+        return await _repository.GetStatBlockByIdAsync(id);
+    }
+
+    public async Task<ICharacterStats> AddStatBlockAsync(ICharacterStats stats)
+    {
+        return await _repository.AddStatBlock(stats);
+    }
+
+    public async Task<IEnumerable<ICharacterClass>> GetAllCharacterClasses()
+    {
+        return await _repository.GetAllCharacterClassesAsync();
+    }
+
+    public async Task<IEnumerable<ICharacterClass>> GetCharacterClassesByIdAsync(int id)
+    {
+        return await _repository.GetCharacterClassesByIdAsync(id);
+    }
+
+    public async Task<IEnumerable<ICharacterClass>> AddCharacterClassesAsync(IEnumerable<ICharacterClass> classes)
+    {
+        return await _repository.AddCharacterClassesAsync(classes);
     }
 
     public ICharacter DtoToCharacter(IDto req)
@@ -65,12 +101,13 @@ public class CharacterService : ICharacterService
         }
     }
 
-    public ICharacterStats DtoToCharacterStats(IDto req)
+    public ICharacterStats DtoToCharacterStats(IDto req, int characterId)
     {
         if (req is CharacterRequestDto crd)
         {
             return new CharacterStats(
                 level: crd.Level,
+                characterId: characterId,
                 abilities: new AbilityBlock(crd.AbilityScores));
         }
         else

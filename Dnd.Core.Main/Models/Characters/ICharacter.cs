@@ -9,7 +9,7 @@ public interface ICharacter
     int Id { get; set; }
     string Name { get; set; }
 
-    int CharacterStatsId { get; set; }
+    //int CharacterStatsId { get; set; }
     ICharacterStats Stats { get; set; }
 
     int UserId { get; set; }

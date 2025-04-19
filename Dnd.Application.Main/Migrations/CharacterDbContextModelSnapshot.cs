@@ -42,7 +42,7 @@ namespace Dnd.Application.Main.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Campaigns");
+                    b.ToTable("Campaigns", (string)null);
                 });
 
             modelBuilder.Entity("Dnd.Application.Main.Models.Campaigns.CampaignSession", b =>
@@ -58,7 +58,7 @@ namespace Dnd.Application.Main.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CampaignSessions");
+                    b.ToTable("CampaignSessions", (string)null);
                 });
 
             modelBuilder.Entity("Dnd.Application.Main.Models.Characters.Character", b =>
@@ -139,7 +139,7 @@ namespace Dnd.Application.Main.Migrations
 
                     b.HasKey("ClassId");
 
-                    b.ToTable("Classes");
+                    b.ToTable("Classes", (string)null);
 
                     b.HasData(
                         new
@@ -274,7 +274,7 @@ namespace Dnd.Application.Main.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rolls");
+                    b.ToTable("Rolls", (string)null);
 
                     b.HasDiscriminator<string>("RollType").HasValue("DiceRollBase");
 
@@ -298,7 +298,7 @@ namespace Dnd.Application.Main.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Dnd.Application.Main.Models.Rolls.AbilityCheckRoll", b =>
@@ -344,7 +344,7 @@ namespace Dnd.Application.Main.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.ToTable("Rolls", t =>
+                    b.ToTable("Rolls", null, t =>
                         {
                             t.Property("Ability")
                                 .HasColumnName("SavingThrowRoll_Ability");

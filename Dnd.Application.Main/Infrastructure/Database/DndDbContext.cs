@@ -28,7 +28,7 @@ public class DndDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder
-            .ApplyConfiguration(new CharacterEntityConfiguration())
+            // .ApplyConfiguration(new CharacterEntityConfiguration());
             .ApplyConfiguration(new CharacterStatsEntityConfiguration())
             .ApplyConfiguration(new CharacterClassEntityConfiguration())
             .ApplyConfiguration(new UserCharacterCampaignEntityConfiguration())

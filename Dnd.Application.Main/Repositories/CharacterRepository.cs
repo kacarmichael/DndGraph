@@ -18,12 +18,23 @@ public class CharacterRepository : ICharacterRepository
         _context = context;
     }
 
-    public async Task<ICharacter> AddCharacter(ICharacter character)
+    public async Task<ICharacter> AddCharacterAsync(ICharacter character)
     {
         _context.Characters.Add((Character)character);
         await _context.SaveChangesAsync();
         return character;
     }
+
+    // public async Task<ICharacter> AddCharacterAsync(ICharacter character, ICharacterStats stats,
+    //     IEnumerable<ICharacterClass> classes)
+    // {
+    //     ////////This should be redundant???//////
+    //     // _context.Characters.Add((Character)character);
+    //     // await _context.SaveChangesAsync();
+    //
+    //     _context.CharacterClasses.AddRangeAsync(classes.Select(cc => (CharacterClass)cc));
+    //     return classes;
+    // }
 
     public async Task<IEnumerable<ICharacter>> GetAllCharactersAsync() =>
         await _context.Characters.ToListAsync();
@@ -79,11 +90,12 @@ public class CharacterRepository : ICharacterRepository
         return Task.CompletedTask;
     }
 
-    public async Task<ICharacterClass> AddCharacterClass(ICharacterClass cc)
+    public async Task<IEnumerable<ICharacterClass>> AddCharacterClassesAsync(IEnumerable<ICharacterClass> classes)
     {
-        _context.CharacterClasses.Add((CharacterClass)cc);
+        var conv = classes.Select(cc => (CharacterClass)cc);
+        await _context.CharacterClasses.AddRangeAsync(conv);
         await _context.SaveChangesAsync();
-        return cc;
+        return classes;
     }
 
     public async Task<IEnumerable<ICharacterClass>> GetAllCharacterClassesAsync()

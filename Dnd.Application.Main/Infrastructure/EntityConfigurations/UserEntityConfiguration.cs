@@ -1,4 +1,5 @@
-﻿using Dnd.Application.Main.Models.Users;
+﻿using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Models.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,7 +13,7 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<DomainUser>
 
         builder.HasKey(u => u.Id);
 
-        builder.HasMany(u => u.Characters)
+        builder.HasMany(u => u.Characters as IEnumerable<Character>)
             .WithOne(c => (DomainUser)c.User)
             .HasForeignKey(c => c.UserId);
 
@@ -21,7 +22,7 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<DomainUser>
             .HasForeignKey(ucc => ucc.UserId);
 
         builder.HasMany(u => u.CampaignsOwned)
-            .WithOne(co => (DomainUser)co.Owner)
+            .WithOne(co => co.Owner as DomainUser)
             .HasForeignKey(co => co.Id);
 
         builder.HasMany(u => u.CampaignsDmed)

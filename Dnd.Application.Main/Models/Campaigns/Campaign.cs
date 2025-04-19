@@ -12,17 +12,17 @@ public class Campaign : ICampaign
 
     public string Name { get; set; }
 
-    [NotMapped] public List<IDomainUser> Players { get; set; }
+    [NotMapped] public virtual List<IDomainUser> Players { get; set; }
 
     public int OwnerId { get; set; }
 
-    [NotMapped] public IDomainUser Owner { get; set; }
+    [NotMapped] public virtual IDomainUser Owner { get; set; }
 
     public int DungeonMasterId { get; set; }
 
-    [NotMapped] public IDomainUser DungeonMaster { get; set; }
+    [NotMapped] public virtual IDomainUser DungeonMaster { get; set; }
 
-    [NotMapped] public List<UserCharacterCampaign> UserCharacters { get; set; }
+    [NotMapped] public virtual List<UserCharacterCampaign> UserCharacters { get; set; }
 
     public Campaign()
     {

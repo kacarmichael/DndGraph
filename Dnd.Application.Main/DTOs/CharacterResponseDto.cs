@@ -1,4 +1,6 @@
 ﻿using Dnd.Core.Main.Models.Characters;
+using Dnd.Core.Main.Models.Characters.Stats;
+using Dnd.Core.Main.Models.Intermediate;
 using Dnd.Core.Main.Utils;
 
 namespace Dnd.Application.Main.DTOs;
@@ -29,11 +31,21 @@ public class CharacterResponseDto : IDto
     //     Classes = cc.ToDictionary(cl => cl.ClassId, cl => cl.Levels);
     // }
 
+    public CharacterResponseDto(ICharacter character, ICharacterStats stats, IEnumerable<ICharacterClass> classes)
+    {
+        Id = character.Id;
+        Name = character.Name;
+        StatBlockId = stats.StatBlockId;
+        (Abilities, Skills, Proficiencies) = stats.GetStatsDictionary();
+        Level = stats.Level;
+        Classes = classes.ToDictionary(cl => cl.ClassId, cl => cl.Levels);
+    }
+
     public CharacterResponseDto(ICharacter ch)
     {
         Id = ch.Id;
         Name = ch.Name;
-        StatBlockId = ch.CharacterStatsId;
+        StatBlockId = ch.Stats.StatBlockId;
         (Abilities, Skills, Proficiencies) = ch.Stats.GetStatsDictionary();
         Level = ch.Stats.Level;
         Classes = ch.Classes.ToDictionary(cl => cl.ClassId, cl => cl.Levels);

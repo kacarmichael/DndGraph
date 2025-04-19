@@ -17,7 +17,7 @@ public class Character : ICharacter
 
     public string Name { get; set; }
 
-    public int CharacterStatsId { get; set; }
+    //public int CharacterStatsId { get; set; }
 
     [NotMapped] public virtual ICharacterStats Stats { get; set; }
 
@@ -44,7 +44,7 @@ public class Character : ICharacter
         Id = id;
         Name = name;
         Stats = stats;
-        CharacterStatsId = stats.StatBlockId;
+        //CharacterStatsId = stats.StatBlockId;
     }
 
     public Character(int id, string name, ICharacterStats stats, Dictionary<int, int>? charClass, int userId)
@@ -53,7 +53,7 @@ public class Character : ICharacter
         Name = name;
         Stats = stats;
         //Classes = charClass;
-        CharacterStatsId = stats.StatBlockId;
+        //CharacterStatsId = stats.StatBlockId;
         UserId = userId;
     }
 
@@ -62,7 +62,7 @@ public class Character : ICharacter
         Id = id;
         Name = name;
         Stats = stats;
-        CharacterStatsId = stats.StatBlockId;
+        //CharacterStatsId = stats.StatBlockId;
         UserId = userId;
         Classes = charClass.Select(cc => (CharacterClass)cc).ToList();
     }

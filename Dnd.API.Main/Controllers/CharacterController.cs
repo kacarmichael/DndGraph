@@ -42,10 +42,18 @@ public class CharacterController : ControllerBase
         // }
 
         var c = _characterService.DtoToCharacter(req);
-        c = await _characterService.AddCharacterAsync(c);
-        c.Stats = _characterService.DtoToCharacterStats(req);
-        c.Classes = _characterService.DtoToCharacterClasses(req, c.Id);
-        CharacterResponseDto resp = new CharacterResponseDto(c);
+        c = await _characterService.AddCharacterAsync(c); //This should populate the CharacterId
+
+        var stats = _characterService.DtoToCharacterStats(req, c.Id);
+        stats = await _characterService.AddStatBlockAsync(stats);
+
+        var classes = _characterService.DtoToCharacterClasses(req, c.Id);
+        classes = await _characterService.AddCharacterClassesAsync(classes);
+
+        // c = await _characterService.AddCharacterAsync(c);
+        // c.Stats = _characterService.DtoToCharacterStats(req);
+        // c.Classes = _characterService.DtoToCharacterClasses(req, c.Id);
+        CharacterResponseDto resp = new CharacterResponseDto(c, stats, classes);
         return Ok(resp);
     }
 }

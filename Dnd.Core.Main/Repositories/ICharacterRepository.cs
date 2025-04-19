@@ -8,7 +8,10 @@ public interface ICharacterRepository
 {
     Task<ICharacter> GetCharacterAsync(int characterId);
     Task<IEnumerable<ICharacter>> GetAllCharactersAsync();
-    Task<ICharacter> AddCharacter(ICharacter character);
+
+    Task<ICharacter> AddCharacterAsync(ICharacter character);
+
+    //Task<ICharacter> AddCharacterAsync(ICharacter character, ICharacterStats stats, IEnumerable<ICharacterClass> classes);
     void UpdateCharacter(ICharacter character);
     Task<Task> DeleteCharacterAsync(int id);
     Task<ICharacterStats> GetStatBlockByIdAsync(int id);
@@ -18,7 +21,7 @@ public interface ICharacterRepository
     Task<Task> DeleteStatBlockByIdAsync(int id);
     Task<IEnumerable<ICharacterClass>> GetCharacterClassesByIdAsync(int id);
     Task<IEnumerable<ICharacterClass>> GetAllCharacterClassesAsync();
-    Task<ICharacterClass> AddCharacterClass(ICharacterClass cls);
+    Task<IEnumerable<ICharacterClass>> AddCharacterClassesAsync(IEnumerable<ICharacterClass> classes);
     void UpdateCharacterClass(ICharacterClass cls);
     Task<Task> DeleteCharacterClassesByIdAsync(int id);
 }

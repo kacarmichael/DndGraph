@@ -26,9 +26,9 @@ public class CharacterEntityConfiguration : IEntityTypeConfiguration<Character>
 
         builder.HasKey(c => c.Id);
 
-        builder.HasOne(c => (CharacterStats)c.Stats)
-            .WithOne(cs => (Character)cs.Character)
-            .HasForeignKey<CharacterStats>(cs => cs.CharacterId);
+        // builder.HasOne(c => (CharacterStats)c.Stats)
+        //     .WithOne(cs => (Character)cs.Character)
+        //     .HasForeignKey<CharacterStats>(cs => cs.CharacterId);
 
         builder.HasMany(c => c.Classes)
             .WithOne(cc => (Character)cc._character)
