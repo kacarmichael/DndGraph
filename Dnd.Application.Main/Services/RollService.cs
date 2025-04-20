@@ -1,4 +1,6 @@
 ﻿using Dnd.Application.Main.DTOs;
+using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Models.Intermediate;
 using Dnd.Core.Caching;
 using Dnd.Core.Main.Models.Dice;
 using Dnd.Core.Main.Models.Rolls;
@@ -10,14 +12,15 @@ namespace Dnd.Application.Main.Services;
 
 public class RollService : IRollService
 {
-    private readonly ICharacterRepository _characterRepository;
-    private readonly IRollRepository _rollRepository;
+    private readonly ICharacterRepository<Character, CharacterStats, CharacterClass> _characterRepository;
+    private readonly IRollRepository<IDiceRoll> _rollRepository;
     private readonly IRollMapperService _rollMapperService;
     private readonly IDiceSimulationFactory _diceSimulationFactory;
     private readonly IDiceRollCache _diceRollCache;
     private readonly IDiceSimulationCache _diceSimulationCache;
 
-    public RollService(ICharacterRepository characterRepository, IRollRepository rollRepository,
+    public RollService(ICharacterRepository<Character, CharacterStats, CharacterClass> characterRepository,
+        IRollRepository<IDiceRoll> rollRepository,
         IRollMapperService rollMapperService, IDiceSimulationFactory diceSimulationFactory,
         IDiceRollCache diceRollCache, IDiceSimulationCache diceSimulationCache)
     {

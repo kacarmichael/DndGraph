@@ -1,13 +1,11 @@
-﻿using Dnd.Core.Main.Models.Campaigns;
+﻿namespace Dnd.Core.Main.Repositories;
 
-namespace Dnd.Core.Main.Repositories;
-
-public interface ICampaignRepository
+public interface ICampaignRepository<T>
 {
-    Task<ICampaign> GetCampaignByIdAsync(int campaignId);
-    Task<IEnumerable<ICampaign>> GetAllCampaignsAsync();
-    Task<ICampaign> CreateCampaignAsync(ICampaign campaign);
-    Task<ICampaign> UpdateCampaignAsync(ICampaign campaign);
-    Task<ICampaign> DeleteCampaignByIdAsync(int campaignId);
-    Task<ICampaign> DeleteCampaignAsync(ICampaign campaign);
+    Task<T> GetCampaignByIdAsync(int campaignId);
+    Task<IEnumerable<T>> GetAllCampaignsAsync();
+    Task<T> CreateCampaignAsync(T campaign);
+    Task<T> UpdateCampaignAsync(T campaign);
+    Task<T> DeleteCampaignByIdAsync(int campaignId);
+    Task<T> DeleteCampaignAsync(T campaign);
 }

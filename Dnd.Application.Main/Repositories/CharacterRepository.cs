@@ -1,15 +1,12 @@
 ﻿using Dnd.Application.Main.Infrastructure;
 using Dnd.Application.Main.Models.Characters;
 using Dnd.Application.Main.Models.Intermediate;
-using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Models.Characters.Stats;
-using Dnd.Core.Main.Models.Intermediate;
 using Dnd.Core.Main.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dnd.Application.Main.Repositories;
 
-public class CharacterRepository : ICharacterRepository
+public class CharacterRepository : ICharacterRepository<Character, CharacterStats, CharacterClass>
 {
     private readonly DndDbContext _context;
 
@@ -18,14 +15,14 @@ public class CharacterRepository : ICharacterRepository
         _context = context;
     }
 
-    public async Task<ICharacter> AddCharacterAsync(ICharacter character)
+    public async Task<Character> AddCharacterAsync(Character character)
     {
         _context.Characters.Add((Character)character);
         await _context.SaveChangesAsync();
         return character;
     }
 
-    // public async Task<ICharacter> AddCharacterAsync(ICharacter character, ICharacterStats stats,
+    // public async Task<Character> AddCharacterAsync(Character character, ICharacterStats stats,
     //     IEnumerable<ICharacterClass> classes)
     // {
     //     ////////This should be redundant???//////
@@ -36,11 +33,11 @@ public class CharacterRepository : ICharacterRepository
     //     return classes;
     // }
 
-    public async Task<IEnumerable<ICharacter>> GetAllCharactersAsync() =>
+    public async Task<IEnumerable<Character>> GetAllCharactersAsync() =>
         await _context.Characters.ToListAsync();
 
 
-    public async Task<ICharacter> GetCharacterAsync(int characterId)
+    public async Task<Character> GetCharacterAsync(int characterId)
     {
         return await _context.Characters.FirstOrDefaultAsync(x => x.Id == characterId);
     }
@@ -57,26 +54,26 @@ public class CharacterRepository : ICharacterRepository
         return Task.CompletedTask;
     }
 
-    public void UpdateCharacter(ICharacter character) => _context.Characters.Update((Character)character);
+    public void UpdateCharacter(Character character) => _context.Characters.Update((Character)character);
 
-    public async Task<ICharacterStats> AddStatBlock(ICharacterStats stats)
+    public async Task<CharacterStats> AddStatBlock(CharacterStats stats)
     {
         _context.CharacterStats.Add((CharacterStats)stats);
         await _context.SaveChangesAsync();
         return stats;
     }
 
-    public async Task<IEnumerable<ICharacterStats>> GetAllStatBlocksAsync()
+    public async Task<IEnumerable<CharacterStats>> GetAllStatBlocksAsync()
     {
         return await _context.CharacterStats.ToListAsync();
     }
 
-    public async Task<ICharacterStats> GetStatBlockByIdAsync(int id)
+    public async Task<CharacterStats> GetStatBlockByIdAsync(int id)
     {
         return await _context.CharacterStats.FirstOrDefaultAsync(cs => cs.CharacterId == id);
     }
 
-    public void UpdateCharacterStats(ICharacterStats stats) => _context.CharacterStats.Update((CharacterStats)stats);
+    public void UpdateCharacterStats(CharacterStats stats) => _context.CharacterStats.Update((CharacterStats)stats);
 
     public async Task<Task> DeleteStatBlockByIdAsync(int id)
     {
@@ -90,7 +87,7 @@ public class CharacterRepository : ICharacterRepository
         return Task.CompletedTask;
     }
 
-    public async Task<IEnumerable<ICharacterClass>> AddCharacterClassesAsync(IEnumerable<ICharacterClass> classes)
+    public async Task<IEnumerable<CharacterClass>> AddCharacterClassesAsync(IEnumerable<CharacterClass> classes)
     {
         var conv = classes.Select(cc => (CharacterClass)cc);
         await _context.CharacterClasses.AddRangeAsync(conv);
@@ -98,17 +95,17 @@ public class CharacterRepository : ICharacterRepository
         return classes;
     }
 
-    public async Task<IEnumerable<ICharacterClass>> GetAllCharacterClassesAsync()
+    public async Task<IEnumerable<CharacterClass>> GetAllCharacterClassesAsync()
     {
         return await _context.CharacterClasses.ToListAsync();
     }
 
-    public async Task<IEnumerable<ICharacterClass>> GetCharacterClassesByIdAsync(int id)
+    public async Task<IEnumerable<CharacterClass>> GetCharacterClassesByIdAsync(int id)
     {
         return await _context.CharacterClasses.Where(cc => cc.CharacterId == id).ToListAsync();
     }
 
-    public void UpdateCharacterClass(ICharacterClass cc) => _context.CharacterClasses.Update((CharacterClass)cc);
+    public void UpdateCharacterClass(CharacterClass cc) => _context.CharacterClasses.Update((CharacterClass)cc);
 
     public async Task<Task> DeleteCharacterClassesByIdAsync(int id)
     {

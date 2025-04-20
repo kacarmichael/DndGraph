@@ -73,9 +73,9 @@ builder.Services.AddDbContext<DndDbContext>(options =>
 // builder.Services.AddDbContext<RollDbContext>(options =>
 //     options.UseInMemoryDatabase("RollDb"));
 
-builder.Services.AddTransient<ICharacterRepository, CharacterRepository>();
+builder.Services.AddTransient<ICharacterRepository<Character, CharacterStats, CharacterClass>, CharacterRepository>();
 builder.Services.AddTransient<ICharacterService, CharacterService>(); //<>()
-builder.Services.AddTransient<IRollRepository, RollRepository<DiceRollBase>>();
+builder.Services.AddTransient<IRollRepository<IDiceRoll>, RollRepository>();
 builder.Services.AddTransient<IRollMapperService, RollMapperService>();
 builder.Services.AddTransient<IRollService, RollService>();
 builder.Services.AddTransient<IClassMapperService, ClassMapperService>();

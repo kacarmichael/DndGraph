@@ -1,9 +1,7 @@
-﻿using Dnd.Core.Main.Models.Rolls;
+﻿namespace Dnd.Core.Main.Repositories;
 
-namespace Dnd.Core.Main.Repositories;
-
-public interface IRollRepository
+public interface IRollRepository<T>
 {
-    public Task AddRoll(IDiceRoll roll);
-    public Task AddRollAsync(IDiceRoll roll);
+    public Task AddRoll(T roll);
+    public Task AddRollAsync(T roll);
 }

@@ -1,12 +1,11 @@
 ﻿using Dnd.Application.Main.Infrastructure;
 using Dnd.Application.Main.Models.Campaigns;
-using Dnd.Core.Main.Models.Campaigns;
 using Dnd.Core.Main.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dnd.Application.Main.Repositories;
 
-public class CampaignSessionRepository : ICampaignSessionRepository
+public class CampaignSessionRepository : ICampaignSessionRepository<CampaignSession>
 {
     private readonly DndDbContext _context;
 
@@ -15,31 +14,31 @@ public class CampaignSessionRepository : ICampaignSessionRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<ICampaignSession>> GetCampaignSessionsAsync()
+    public async Task<IEnumerable<CampaignSession>> GetCampaignSessionsAsync()
     {
         return await Queryable
-            .OfType<ICampaignSession>(_context.CampaignSessions)
+            .OfType<CampaignSession>(_context.CampaignSessions)
             .ToListAsync();
     }
 
-    public async Task<ICampaignSession> GetCampaignSessionByIdAsync(int campaignSessionId)
+    public async Task<CampaignSession> GetCampaignSessionByIdAsync(int campaignSessionId)
     {
         return await _context.CampaignSessions.FirstOrDefaultAsync(x => x.Id == campaignSessionId);
     }
 
-    public async Task<ICampaignSession> GetCampaignSessionAsync(ICampaignSession campaignSession)
+    public async Task<CampaignSession> GetCampaignSessionAsync(CampaignSession campaignSession)
     {
-        return await Task.FromResult<ICampaignSession>(_context.CampaignSessions.Find(campaignSession));
+        return await Task.FromResult<CampaignSession>(_context.CampaignSessions.Find(campaignSession));
     }
 
-    public async Task<ICampaignSession> UpdateCampaignSessionAsync(ICampaignSession campaignSession)
+    public async Task<CampaignSession> UpdateCampaignSessionAsync(CampaignSession campaignSession)
     {
         _context.CampaignSessions.Update((CampaignSession)campaignSession);
         await _context.SaveChangesAsync();
         return campaignSession;
     }
 
-    public async Task<ICampaignSession> DeleteCampaignSessionByIdAsync(int campaignSessionId)
+    public async Task<CampaignSession> DeleteCampaignSessionByIdAsync(int campaignSessionId)
     {
         var campaignSession = await _context.CampaignSessions.FirstOrDefaultAsync(x => x.Id == campaignSessionId);
         _context.CampaignSessions.Remove(campaignSession);
@@ -47,28 +46,28 @@ public class CampaignSessionRepository : ICampaignSessionRepository
         return campaignSession;
     }
 
-    public async Task<ICampaignSession> DeleteCampaignSessionAsync(ICampaignSession campaignSession)
+    public async Task<CampaignSession> DeleteCampaignSessionAsync(CampaignSession campaignSession)
     {
         _context.CampaignSessions.Remove((CampaignSession)campaignSession);
         await _context.SaveChangesAsync();
         return campaignSession;
     }
 
-    public async Task<ICampaignSession> AddCampaignSessionAsync(ICampaignSession campaignSession)
+    public async Task<CampaignSession> AddCampaignSessionAsync(CampaignSession campaignSession)
     {
         _context.CampaignSessions.Add((CampaignSession)campaignSession);
         await _context.SaveChangesAsync();
         return campaignSession;
     }
 
-    public async Task<IEnumerable<ICampaignSession>> GetCampaignSessionsByCampaignIdAsync(int campaignId)
+    public async Task<IEnumerable<CampaignSession>> GetCampaignSessionsByCampaignIdAsync(int campaignId)
     {
-        return await Task.FromResult<IEnumerable<ICampaignSession>>(
+        return await Task.FromResult<IEnumerable<CampaignSession>>(
             _context.CampaignSessions.Where(
                 x => x.Campaign.Id == campaignId));
     }
 
-    public async Task<ICampaignSession> CreateCampaignSessionAsync(ICampaignSession campaignSession)
+    public async Task<CampaignSession> CreateCampaignSessionAsync(CampaignSession campaignSession)
     {
         _context.CampaignSessions.Add((CampaignSession)campaignSession);
         await _context.SaveChangesAsync();

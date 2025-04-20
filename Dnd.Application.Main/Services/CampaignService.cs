@@ -1,4 +1,5 @@
-﻿using Dnd.Core.Main.Models.Campaigns;
+﻿using Dnd.Application.Main.Models.Campaigns;
+using Dnd.Core.Main.Models.Campaigns;
 using Dnd.Core.Main.Repositories;
 using Dnd.Core.Main.Services;
 
@@ -6,10 +7,11 @@ namespace Dnd.Application.Main.Services;
 
 public class CampaignService : ICampaignService
 {
-    private readonly ICampaignRepository _campaignRepository;
-    private readonly ICampaignSessionRepository _campaignSessionRepository;
+    private readonly ICampaignRepository<Campaign> _campaignRepository;
+    private readonly ICampaignSessionRepository<CampaignSession> _campaignSessionRepository;
 
-    public CampaignService(ICampaignRepository campaignRepository, ICampaignSessionRepository campaignSessionRepository)
+    public CampaignService(ICampaignRepository<Campaign> campaignRepository,
+        ICampaignSessionRepository<CampaignSession> campaignSessionRepository)
     {
         _campaignRepository = campaignRepository;
         _campaignSessionRepository = campaignSessionRepository;
@@ -17,12 +19,24 @@ public class CampaignService : ICampaignService
 
     public async Task<ICampaign> CreateCampaignAsync(ICampaign campaign)
     {
-        return await _campaignRepository.CreateCampaignAsync(campaign);
+        var campImpl = campaign as Campaign;
+        if (campImpl == null)
+        {
+            throw new ArgumentException("Invalid Campaign in Campaign Creation");
+        }
+
+        return await _campaignRepository.CreateCampaignAsync(campImpl);
     }
 
     public async Task<ICampaignSession> CreateCampaignSessionAsync(ICampaignSession campaignSession)
     {
-        return await _campaignSessionRepository.CreateCampaignSessionAsync(campaignSession);
+        var csImpl = campaignSession as CampaignSession;
+        if (csImpl == null)
+        {
+            throw new ArgumentException("Invalid CampaignSession in Creation");
+        }
+
+        return await _campaignSessionRepository.CreateCampaignSessionAsync(csImpl);
     }
 
     public async Task<ICampaign> GetCampaignByIdAsync(int campaignId)
@@ -42,12 +56,24 @@ public class CampaignService : ICampaignService
 
     public async Task<ICampaignSession> UpdateCampaignSessionAsync(ICampaignSession campaignSession)
     {
-        return await _campaignSessionRepository.UpdateCampaignSessionAsync(campaignSession);
+        var csImpl = campaignSession as CampaignSession;
+        if (csImpl == null)
+        {
+            throw new ArgumentException("Invalid CampaignSession in Creation");
+        }
+
+        return await _campaignSessionRepository.UpdateCampaignSessionAsync(csImpl);
     }
 
     public async Task<ICampaign> UpdateCampaignAsync(ICampaign campaign)
     {
-        return await _campaignRepository.UpdateCampaignAsync(campaign);
+        var campImpl = campaign as Campaign;
+        if (campImpl == null)
+        {
+            throw new ArgumentException("Invalid Campaign in Creation");
+        }
+
+        return await _campaignRepository.UpdateCampaignAsync(campImpl);
     }
 
     public async Task<ICampaign> DeleteCampaignByIdAsync(int campaignId)

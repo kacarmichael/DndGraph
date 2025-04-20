@@ -1,11 +1,11 @@
 ﻿using Dnd.Application.Main.Infrastructure;
 using Dnd.Application.Main.Models.Users;
-using Dnd.Core.Main.Models.Users;
 using Dnd.Core.Main.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dnd.Application.Main.Repositories;
 
-public class UserRepository : IUserRepository
+public class UserRepository : IUserRepository<DomainUser>
 {
     private readonly DndDbContext _context;
 
@@ -14,20 +14,20 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public Task<IDomainUser> GetUserByIdAsync(int userId) => Task.FromResult((IDomainUser)_context.Users.Find(userId));
+    public Task<DomainUser> GetUserByIdAsync(int userId) => Task.FromResult(_context.Users.Find(userId));
 
-    public Task<IDomainUser> AddUserAsync(IDomainUser domainUser) =>
-        Task.FromResult((IDomainUser)_context.Users.Add((DomainUser)domainUser).Entity);
+    public Task<DomainUser> AddUserAsync(DomainUser domainUser) =>
+        Task.FromResult(_context.Users.Add(domainUser).Entity);
 
-    public Task<IDomainUser> UpdateUserAsync(IDomainUser domainUser) =>
-        Task.FromResult((IDomainUser)_context.Users.Update((DomainUser)domainUser).Entity);
+    public Task<DomainUser> UpdateUserAsync(DomainUser domainUser) =>
+        Task.FromResult(_context.Users.Update(domainUser).Entity);
 
-    public Task<IDomainUser> DeleteUserAsync(IDomainUser domainUser) =>
-        Task.FromResult((IDomainUser)_context.Users.Remove((DomainUser)domainUser).Entity);
+    public Task<DomainUser> DeleteUserAsync(DomainUser domainUser) =>
+        Task.FromResult(_context.Users.Remove(domainUser).Entity);
 
-    public Task<IEnumerable<IDomainUser>> GetAllUsersAsync() =>
-        Task.FromResult((IEnumerable<IDomainUser>)_context.Users);
+    public Task<List<DomainUser>> GetAllUsersAsync() =>
+        _context.Users.ToListAsync();
 
-    public Task<IDomainUser> GetUserAsync(string username) =>
-        Task.FromResult((IDomainUser)_context.Users.FirstOrDefault(x => x.Username == username));
+    public Task<DomainUser> GetUserAsync(string username) =>
+        Task.FromResult(_context.Users.FirstOrDefault(x => x.Username == username));
 }

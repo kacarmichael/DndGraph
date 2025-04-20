@@ -14,10 +14,11 @@ namespace Dnd.Application.Main.Services;
 
 public class CharacterService : ICharacterService
 {
-    private readonly ICharacterRepository _repository;
+    private readonly ICharacterRepository<Character, CharacterStats, CharacterClass> _repository;
     private readonly IClassMapperService _classMapperService;
 
-    public CharacterService(ICharacterRepository repository, IClassMapperService classMapperService)
+    public CharacterService(ICharacterRepository<Character, CharacterStats, CharacterClass> repository,
+        IClassMapperService classMapperService)
     {
         _repository = repository;
         _classMapperService = classMapperService;
@@ -41,13 +42,25 @@ public class CharacterService : ICharacterService
 
     public async Task<ICharacter> AddCharacterAsync(ICharacter character)
     {
-        return await _repository.AddCharacterAsync(character);
+        var charImpl = character as Character;
+        if (charImpl == null)
+        {
+            throw new ArgumentException("Invalid CampaignSession in Creation");
+        }
+
+        return await _repository.AddCharacterAsync(charImpl);
     }
 
     public async Task<ICharacter> AddCharacterAsync(ICharacter character, ICharacterStats stats,
         IEnumerable<ICharacterClass> classes)
     {
-        return await _repository.AddCharacterAsync(character);
+        var charImpl = character as Character;
+        if (charImpl == null)
+        {
+            throw new ArgumentException("Invalid Character in Creation");
+        }
+
+        return await _repository.AddCharacterAsync(charImpl);
     }
 
     public IEnumerable<IClass> GetAllClasses()
@@ -67,7 +80,13 @@ public class CharacterService : ICharacterService
 
     public async Task<ICharacterStats> AddStatBlockAsync(ICharacterStats stats)
     {
-        return await _repository.AddStatBlock(stats);
+        var statsImpl = stats as CharacterStats;
+        if (statsImpl == null)
+        {
+            throw new ArgumentException("Invalid CharacterStats in Creation");
+        }
+
+        return await _repository.AddStatBlock(statsImpl);
     }
 
     public async Task<IEnumerable<ICharacterClass>> GetAllCharacterClasses()
@@ -82,7 +101,13 @@ public class CharacterService : ICharacterService
 
     public async Task<IEnumerable<ICharacterClass>> AddCharacterClassesAsync(IEnumerable<ICharacterClass> classes)
     {
-        return await _repository.AddCharacterClassesAsync(classes);
+        var classImpl = classes as IEnumerable<CharacterClass>;
+        if (classImpl == null)
+        {
+            throw new ArgumentException("Invalid CampaignClasses in Creation");
+        }
+
+        return await _repository.AddCharacterClassesAsync(classImpl);
     }
 
     public ICharacter DtoToCharacter(IDto req)

@@ -1,27 +1,23 @@
-﻿using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Models.Characters.Stats;
-using Dnd.Core.Main.Models.Intermediate;
+﻿namespace Dnd.Core.Main.Repositories;
 
-namespace Dnd.Core.Main.Repositories;
-
-public interface ICharacterRepository
+public interface ICharacterRepository<TCharacter, TStats, TClass>
 {
-    Task<ICharacter> GetCharacterAsync(int characterId);
-    Task<IEnumerable<ICharacter>> GetAllCharactersAsync();
+    Task<TCharacter> GetCharacterAsync(int characterId);
+    Task<IEnumerable<TCharacter>> GetAllCharactersAsync();
 
-    Task<ICharacter> AddCharacterAsync(ICharacter character);
+    Task<TCharacter> AddCharacterAsync(TCharacter character);
 
     //Task<ICharacter> AddCharacterAsync(ICharacter character, ICharacterStats stats, IEnumerable<ICharacterClass> classes);
-    void UpdateCharacter(ICharacter character);
+    void UpdateCharacter(TCharacter character);
     Task<Task> DeleteCharacterAsync(int id);
-    Task<ICharacterStats> GetStatBlockByIdAsync(int id);
-    Task<IEnumerable<ICharacterStats>> GetAllStatBlocksAsync();
-    Task<ICharacterStats> AddStatBlock(ICharacterStats stats);
-    void UpdateCharacterStats(ICharacterStats stats);
+    Task<TStats> GetStatBlockByIdAsync(int id);
+    Task<IEnumerable<TStats>> GetAllStatBlocksAsync();
+    Task<TStats> AddStatBlock(TStats stats);
+    void UpdateCharacterStats(TStats stats);
     Task<Task> DeleteStatBlockByIdAsync(int id);
-    Task<IEnumerable<ICharacterClass>> GetCharacterClassesByIdAsync(int id);
-    Task<IEnumerable<ICharacterClass>> GetAllCharacterClassesAsync();
-    Task<IEnumerable<ICharacterClass>> AddCharacterClassesAsync(IEnumerable<ICharacterClass> classes);
-    void UpdateCharacterClass(ICharacterClass cls);
+    Task<IEnumerable<TClass>> GetCharacterClassesByIdAsync(int id);
+    Task<IEnumerable<TClass>> GetAllCharacterClassesAsync();
+    Task<IEnumerable<TClass>> AddCharacterClassesAsync(IEnumerable<TClass> classes);
+    void UpdateCharacterClass(TClass cls);
     Task<Task> DeleteCharacterClassesByIdAsync(int id);
 }

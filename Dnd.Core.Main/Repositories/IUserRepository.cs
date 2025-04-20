@@ -1,13 +1,11 @@
-﻿using Dnd.Core.Main.Models.Users;
+﻿namespace Dnd.Core.Main.Repositories;
 
-namespace Dnd.Core.Main.Repositories;
-
-public interface IUserRepository
+public interface IUserRepository<T>
 {
-    Task<IDomainUser> GetUserAsync(string username);
-    Task<IDomainUser> AddUserAsync(IDomainUser domainUser);
-    Task<IDomainUser> UpdateUserAsync(IDomainUser domainUser);
-    Task<IDomainUser> DeleteUserAsync(IDomainUser domainUser);
-    Task<IEnumerable<IDomainUser>> GetAllUsersAsync();
-    Task<IDomainUser> GetUserByIdAsync(int id);
+    Task<T> GetUserAsync(string username);
+    Task<T> AddUserAsync(T domainUser);
+    Task<T> UpdateUserAsync(T domainUser);
+    Task<T> DeleteUserAsync(T domainUser);
+    Task<List<T>> GetAllUsersAsync();
+    Task<T> GetUserByIdAsync(int id);
 }
