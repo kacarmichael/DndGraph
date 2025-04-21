@@ -29,12 +29,12 @@ public class RollControllerTests
         {
             new Character(
                 name: "Theodred",
-                level: 6,
+                //level: 6,
                 stats: new CharacterStats(
                     level: 6,
                     abilities: abilities,
                     skills: skills),
-                ac: 14,
+                //ac: 14,
                 charClass: new Dictionary<string, int>()
                 {
                     { "Warlock", 6 }

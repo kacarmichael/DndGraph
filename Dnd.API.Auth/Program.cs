@@ -4,6 +4,7 @@ using Dnd.Application.Auth.Models;
 using Dnd.Application.Auth.Repositories;
 using Dnd.Application.Auth.Services;
 using Dnd.Application.Logging;
+using Dnd.Application.Main.Models.Users;
 using Dnd.Application.Main.Repositories;
 using Dnd.Application.Main.Services;
 using Dnd.Core.Abstractions;
@@ -48,7 +49,7 @@ builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IAuthUserRepository, AuthUserRepository>();
 builder.Services.AddTransient<IUserMapperService, UserMapperService>();
 builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IUserRepository<DomainUser>, UserRepository>();
 
 builder.Services.AddTransient<ISaltRotationService, SaltRotationService>();
 

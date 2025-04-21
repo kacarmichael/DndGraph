@@ -23,13 +23,13 @@ public class CharacterControllerTests
         {
             new Character(
                 name: "Theodred",
-                level: 6,
+                //level: 6,
                 stats: new CharacterStats(
                     level: 6,
                     abilities: abilities,
                     skills: skills
                 ),
-                ac: 14,
+                //ac: 14,
                 charClass: new Dictionary<string, int>()
                 {
                     { "Warlock", 6 }
@@ -52,37 +52,30 @@ public class CharacterControllerTests
     [Fact]
     public void GetCharacterList_ReturnsAllCharacters()
     {
-        var characterController = new CharacterController(_characterServiceMock.Object);
-
-        var result = characterController.GetCharacters();
-        var conv = ((OkObjectResult)result.Result.Result).Value;
-        var list = (conv as IEnumerable<CharacterResponseDto>).Select(x => x.DtoToCharacter()).ToList();
+        var result = characterController.GetCharacters().Result.Value;
 
         Assert.NotNull(result);
-        Assert.Equal(characters.Count(), list.Count());
-        Assert.True(characters.All(x => list.Any(y => Character.Compare(y, x))));
+        Assert.Equal(characters.Count(), result.Count());
+        Assert.True(characters.All(x => result.Any(y => Character.Compare(_characterServiceMock.Object.DtoToCharacter(y), x))));
     }
 
     [Fact]
     public void GetCharacterById_ReturnsCharacter()
     {
         var test = _characterServiceMock.Object.GetCharacterAsync(0);
-        var characterController = new CharacterController(_characterServiceMock.Object);
 
-        var result = characterController.GetCharacter(0);
-        var result_conv = (CharacterResponseDto)((OkObjectResult)result.Result.Result).Value;
-        var result_char = result_conv.DtoToCharacter();
+        var result = characterController.GetCharacter(0).Result.Value;
 
         Assert.NotNull(result);
-        Assert.True(character.Equals(result_char));
+        Assert.True(character.Equals(result));
     }
 
     [Fact]
     public void PostCharacter_ReturnsRequest()
     {
-        var result = characterController.PostCharacter(new CharacterRequestDto(character));
+        var result = characterController.PostCharacter(new CharacterRequestDto(character)).Result.Value;
 
-        var result_conv = ((CharacterResponseDto)((OkObjectResult)result.Result.Result).Value).DtoToCharacter();
+        var result_conv = _characterServiceMock.Object.DtoToCharacter(result);
 
         Assert.NotNull(result);
         Assert.True(character.Equals(result_conv));
