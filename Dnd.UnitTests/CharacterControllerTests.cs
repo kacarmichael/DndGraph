@@ -2,7 +2,7 @@
 using Dnd.Application.Main.DTOs;
 using Dnd.Application.Main.Models.Characters;
 using Dnd.Application.Main.Models.Characters.Stats;
-using Dnd.Core.Main.Services;
+using Dnd.Application.Main.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 

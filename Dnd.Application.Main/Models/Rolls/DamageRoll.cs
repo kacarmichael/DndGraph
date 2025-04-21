@@ -1,18 +1,18 @@
-﻿using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Models.Dice;
+﻿using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Models.Dice;
 
 namespace Dnd.Application.Main.Models.Rolls;
 
 public class DamageRoll : DiceRollBase
 {
     public int Modifier { get; set; }
-    public IDiceSet DiceRolled { get; set; }
+    public DiceSet DiceRolled { get; set; }
 
     public DamageRoll()
     {
     }
 
-    public DamageRoll(int modifier, ICharacter character, IDiceSet diceRolled)
+    public DamageRoll(int modifier, Character character, DiceSet diceRolled)
     {
         DiceRolled = diceRolled;
         Roller = character;

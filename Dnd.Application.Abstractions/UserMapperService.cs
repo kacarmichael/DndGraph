@@ -1,12 +1,11 @@
-﻿using Dnd.Core.Abstractions;
-using Dnd.Core.Auth.Models;
-using Dnd.Core.Auth.Services;
-using Dnd.Core.Main.Models.Users;
-using Dnd.Core.Main.Services;
+﻿using Dnd.Application.Auth.Models;
+using Dnd.Application.Auth.Services.Interfaces;
+using Dnd.Application.Main.Models.Users;
+using Dnd.Application.Main.Services.Interfaces;
 
 namespace Dnd.Application.Abstractions;
 
-public class UserMapperService : IUserMapperService
+public class UserMapperService
 {
     private readonly IUserService _userService;
     private readonly IAuthService _authService;
@@ -17,7 +16,7 @@ public class UserMapperService : IUserMapperService
         _authService = authService;
     }
 
-    public Task<IAuthUser> MapToAuthUser(IDomainUser user) => _authService.GetUserAsync(user.Username);
+    public Task<AuthUser> MapToAuthUser(DomainUser user) => _authService.GetUserAsync(user.Username);
 
-    public Task<IDomainUser> MapToDomainUser(IAuthUser user) => _userService.GetUserAsync(user.Username);
+    public Task<DomainUser> MapToDomainUser(AuthUser user) => _userService.GetUserAsync(user.Username);
 }

@@ -12,8 +12,8 @@ public class CharacterStatsEntityConfiguration : IEntityTypeConfiguration<Charac
 
         builder.HasKey(cs => cs.StatBlockId);
 
-        builder.HasOne(cs => (Character)cs.Character)
-            .WithOne(c => (CharacterStats)c.Stats)
+        builder.HasOne(cs => cs.Character)
+            .WithOne(c => c.Stats)
             .HasForeignKey<Character>(cs => cs.Id);
     }
 }

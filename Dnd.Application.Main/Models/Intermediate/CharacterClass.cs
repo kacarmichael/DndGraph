@@ -1,18 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Models.Intermediate;
+using Dnd.Application.Main.Models.Characters;
 
 namespace Dnd.Application.Main.Models.Intermediate;
 
-public class CharacterClass : ICharacterClass
+public class CharacterClass
 {
     public int CharacterId { get; set; }
     public int ClassId { get; set; }
     public int Levels { get; set; }
 
-    [NotMapped] public virtual ICharacter _character { get; set; }
+    [NotMapped] public virtual Character _character { get; set; }
 
-    [NotMapped] public virtual IClass _class { get; set; }
+    [NotMapped] public virtual Class _class { get; set; }
 
     public CharacterClass()
     {

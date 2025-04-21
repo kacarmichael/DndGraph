@@ -1,24 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
 using Dnd.Application.Main.Models.Characters.Stats;
-using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Models.Characters;
 
 [ComplexType]
-public class CharacterStats : ICharacterStats
+public class CharacterStats
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int StatBlockId { get; set; }
 
-    [NotMapped] public virtual ICharacter Character { get; set; }
+    [NotMapped] public virtual Character Character { get; set; }
     public int CharacterId { get; set; }
     public int Level { get; set; }
 
-    [NotMapped] public virtual IAbilityBlock Abilities { get; set; }
+    [NotMapped] public virtual AbilityBlock Abilities { get; set; }
 
-    [NotMapped] public virtual ISkillBlock Skills { get; set; }
+    [NotMapped] public virtual SkillBlock Skills { get; set; }
     public int ProficiencyBonus { get; set; }
 
     public int StrengthScore
@@ -65,7 +63,7 @@ public class CharacterStats : ICharacterStats
         ProficiencyBonus = (Level + 3) / 4 + 1;
     }
 
-    public CharacterStats(int level, IAbilityBlock abilities, ISkillBlock skills)
+    public CharacterStats(int level, AbilityBlock abilities, SkillBlock skills)
     {
         Level = level;
         Abilities = abilities;
@@ -73,7 +71,7 @@ public class CharacterStats : ICharacterStats
         ProficiencyBonus = (Level + 3) / 4 + 1;
     }
 
-    public CharacterStats(int level, IAbilityBlock abilities)
+    public CharacterStats(int level, AbilityBlock abilities)
     {
         Level = level;
         Abilities = abilities;
@@ -81,7 +79,7 @@ public class CharacterStats : ICharacterStats
         ProficiencyBonus = (Level + 3) / 4 + 1;
     }
 
-    public CharacterStats(int level, int characterId, IAbilityBlock abilities)
+    public CharacterStats(int level, int characterId, AbilityBlock abilities)
     {
         Level = level;
         CharacterId = characterId;
@@ -90,7 +88,7 @@ public class CharacterStats : ICharacterStats
         ProficiencyBonus = (Level + 3) / 4 + 1;
     }
 
-    public CharacterStats(int id, int characterId, int level, IAbilityBlock abilities)
+    public CharacterStats(int id, int characterId, int level, AbilityBlock abilities)
     {
         StatBlockId = id;
         CharacterId = characterId;
@@ -102,37 +100,37 @@ public class CharacterStats : ICharacterStats
 
     public int AbilityCheckModifier(AbilityName abilityName)
     {
-        Ability ability = (Ability)Abilities.First(a => a.Name == abilityName.ToString());
+        Ability ability = Abilities.First(a => a.Name == abilityName.ToString());
         return (ability.Score ?? 0) + ability.Modifier + (ability.Proficient ? ProficiencyBonus : 0);
     }
 
     public int AbilityCheckModifier(string abilityName)
     {
-        Ability ability = (Ability)Abilities.First(a => a.Name == abilityName);
+        Ability ability = Abilities.First(a => a.Name == abilityName);
         return (ability.Score ?? 0) + ability.Modifier + (ability.Proficient ? ProficiencyBonus : 0);
     }
 
     public int SkillCheckModifier(SkillName skillName)
     {
-        Skill skill = (Skill)Skills.Skills.First(s => s.Name == skillName.ToString());
+        Skill skill = Skills.Skills.First(s => s.Name == skillName.ToString());
         return skill.Modifier + (skill.Proficient ? ProficiencyBonus : 0);
     }
 
     public int SkillCheckModifier(string skillName)
     {
-        Skill skill = (Skill)Skills.Skills.First(s => s.Name == skillName);
+        Skill skill = Skills.Skills.First(s => s.Name == skillName);
         return skill.Modifier + (skill.Proficient ? ProficiencyBonus : 0);
     }
 
     public int SaveThrowModifier(AbilityName abilityName)
     {
-        Ability ability = (Ability)Abilities.First(a => a.Name == abilityName.ToString());
+        Ability ability = Abilities.First(a => a.Name == abilityName.ToString());
         return (ability.Score ?? 0) + ability.Modifier + (ability.Proficient ? ProficiencyBonus : 0);
     }
 
     public int SaveThrowModifier(string abilityName)
     {
-        Ability ability = (Ability)Abilities.First(a => a.Name == abilityName);
+        Ability ability = Abilities.First(a => a.Name == abilityName);
         return (ability.Score ?? 0) + ability.Modifier + (ability.Proficient ? ProficiencyBonus : 0);
     }
 
@@ -168,7 +166,7 @@ public class CharacterStats : ICharacterStats
 
     public override bool Equals(object? obj)
     {
-        ICharacterStats other = (ICharacterStats)obj;
+        CharacterStats other = (CharacterStats)obj;
         if (obj is CharacterStats stats)
         {
             return this.Abilities.Equals(other.Abilities) &&

@@ -27,10 +27,7 @@
         <ProjectReference Include="..\Dnd.Application.Auth\Dnd.Application.Auth.csproj"/>
         <ProjectReference Include="..\Dnd.Application.Logging\Dnd.Application.Logging.csproj"/>
         <ProjectReference Include="..\Dnd.Application.Main\Dnd.Application.Main.csproj"/>
-        <ProjectReference Include="..\Dnd.Core.Abstractions\Dnd.Core.Abstractions.csproj"/>
-        <ProjectReference Include="..\Dnd.Core.Auth\Dnd.Core.Auth.csproj"/>
         <ProjectReference Include="..\Dnd.Core.Logging\Dnd.Core.Logging.csproj"/>
-        <ProjectReference Include="..\Dnd.Core.Main\Dnd.Core.Main.csproj"/>
     </ItemGroup>
 
 </Project>

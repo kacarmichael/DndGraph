@@ -1,5 +1,4 @@
 ﻿using Dnd.Application.Main.Models.Characters;
-using Dnd.Core.Main.Models.Characters;
 
 namespace Dnd.Application.Main.Utils;
 
@@ -20,7 +19,7 @@ public static class Constants
         "Sleight of Hand", "Stealth", "Survival"
     ];
 
-    public static readonly Dictionary<string, IClass?> Classes = new Dictionary<string, IClass?>()
+    public static readonly Dictionary<string, Class?> Classes = new Dictionary<string, Class?>()
     {
         ["Bard"] = new Class("Charisma", "Bard"),
         ["Cleric"] = new Class("Wisdom", "Cleric"),

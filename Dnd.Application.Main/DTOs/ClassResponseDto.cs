@@ -1,5 +1,5 @@
-﻿using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Utils;
+﻿using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Utils;
 
 namespace Dnd.Application.Main.DTOs;
 
@@ -14,7 +14,7 @@ public class ClassResponseDto : IDto
         SpellcastingAbility = spellcastingAbility;
     }
 
-    public ClassResponseDto(IClass @class)
+    public ClassResponseDto(Class @class)
     {
         Name = @class.Name;
         SpellcastingAbility = @class.SpellcastingAbility;

@@ -1,5 +1,5 @@
-﻿using Dnd.Core.Main.Models.Rolls;
-using Dnd.Core.Main.Utils;
+﻿using Dnd.Application.Main.Models.Rolls;
+using Dnd.Application.Main.Utils;
 
 namespace Dnd.Application.Main.DTOs;
 
@@ -10,7 +10,7 @@ public class RollResponseDto : IDto
     public int? CharacterId { get; set; }
     public string? CharacterName { get; set; }
 
-    public RollResponseDto(IDiceRoll Roll)
+    public RollResponseDto(DiceRollBase Roll)
     {
         RollType = Roll.RollType;
         RollValue = Roll.Value;

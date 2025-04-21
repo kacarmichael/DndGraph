@@ -1,7 +1,6 @@
-﻿using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Models.Characters.Stats;
-using Dnd.Core.Main.Models.Intermediate;
-using Dnd.Core.Main.Utils;
+﻿using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Models.Intermediate;
+using Dnd.Application.Main.Utils;
 
 namespace Dnd.Application.Main.DTOs;
 
@@ -31,7 +30,7 @@ public class CharacterResponseDto : IDto
     //     Classes = cc.ToDictionary(cl => cl.ClassId, cl => cl.Levels);
     // }
 
-    public CharacterResponseDto(ICharacter character, ICharacterStats stats, IEnumerable<ICharacterClass> classes)
+    public CharacterResponseDto(Character character, CharacterStats stats, IEnumerable<CharacterClass> classes)
     {
         Id = character.Id;
         Name = character.Name;
@@ -41,7 +40,7 @@ public class CharacterResponseDto : IDto
         Classes = classes.ToDictionary(cl => cl.ClassId, cl => cl.Levels);
     }
 
-    public CharacterResponseDto(ICharacter ch)
+    public CharacterResponseDto(Character ch)
     {
         Id = ch.Id;
         Name = ch.Name;

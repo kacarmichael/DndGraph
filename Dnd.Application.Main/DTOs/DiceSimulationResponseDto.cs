@@ -1,20 +1,20 @@
 ﻿using System.Text.Json;
-using Dnd.Core.Main.Models.Dice;
-using Dnd.Core.Main.Utils;
+using Dnd.Application.Main.Models.Dice;
+using Dnd.Application.Main.Utils;
 using MathNet.Numerics.Statistics;
 
 namespace Dnd.Application.Main.DTOs;
 
 public class DiceSimulationResponseDto : IDto
 {
-    public IDiceSet DiceRolled { get; set; }
+    public DiceSet DiceRolled { get; set; }
     public int Modifier { get; set; }
-    public List<ISimResult> Results { get; set; }
+    public List<SimResult> Results { get; set; }
     public int Trials { get; set; }
 
     public DescriptiveStatistics Stats { get; set; }
 
-    public DiceSimulationResponseDto(IDiceSet diceRolled, int modifier, List<ISimResult> results, int trials,
+    public DiceSimulationResponseDto(DiceSet diceRolled, int modifier, List<SimResult> results, int trials,
         DescriptiveStatistics stats)
     {
         DiceRolled = diceRolled;
@@ -24,7 +24,7 @@ public class DiceSimulationResponseDto : IDto
         Stats = stats;
     }
 
-    public DiceSimulationResponseDto(IDiceSimulation sim)
+    public DiceSimulationResponseDto(DiceSimulation sim)
     {
         DiceRolled = sim.SimDice;
         Modifier = sim.Modifier;

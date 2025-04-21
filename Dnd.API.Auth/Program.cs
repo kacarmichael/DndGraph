@@ -1,18 +1,17 @@
 using Dnd.Application.Abstractions;
 using Dnd.Application.Auth.Infrastructure.Database;
 using Dnd.Application.Auth.Models;
-using Dnd.Application.Auth.Repositories;
-using Dnd.Application.Auth.Services;
+using Dnd.Application.Auth.Repositories.Implementations;
+using Dnd.Application.Auth.Repositories.Interfaces;
+using Dnd.Application.Auth.Services.Implementations;
+using Dnd.Application.Auth.Services.Interfaces;
 using Dnd.Application.Logging;
 using Dnd.Application.Main.Models.Users;
-using Dnd.Application.Main.Repositories;
-using Dnd.Application.Main.Services;
-using Dnd.Core.Abstractions;
-using Dnd.Core.Auth.Repositories;
-using Dnd.Core.Auth.Services;
+using Dnd.Application.Main.Repositories.Implementations;
+using Dnd.Application.Main.Repositories.Interfaces;
+using Dnd.Application.Main.Services.Implementations;
+using Dnd.Application.Main.Services.Interfaces;
 using Dnd.Core.Logging;
-using Dnd.Core.Main.Repositories;
-using Dnd.Core.Main.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -47,7 +46,7 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IAuthUserRepository, AuthUserRepository>();
-builder.Services.AddTransient<IUserMapperService, UserMapperService>();
+//builder.Services.AddTransient<IUserMapperService, UserMapperService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IUserRepository<DomainUser>, UserRepository>();
 

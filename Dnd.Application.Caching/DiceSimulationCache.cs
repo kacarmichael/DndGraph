@@ -1,23 +1,23 @@
-﻿using Dnd.Core.Caching;
-using Dnd.Core.Main.Models.Dice;
+﻿using Dnd.Application.Main.Models.Dice;
+using Dnd.Core.Caching;
 
 namespace Dnd.Application.Caching;
 
 public class DiceSimulationCache : IDiceSimulationCache
 {
-    private readonly List<IDiceSimulation> _cache = new();
+    private readonly List<DiceSimulation> _cache = new();
 
-    public void AddDiceSimulation(IDiceSimulation simulation)
+    public void AddDiceSimulation(DiceSimulation simulation)
     {
         _cache.Add(simulation);
     }
 
-    public List<IDiceSimulation> GetDiceSimulations()
+    public List<DiceSimulation> GetDiceSimulations()
     {
         return _cache;
     }
 
-    public void RemoveDiceSimulation(IDiceSimulation simulation)
+    public void RemoveDiceSimulation(DiceSimulation simulation)
     {
         _cache.Remove(simulation);
     }

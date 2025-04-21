@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
-using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Models.Characters.Stats;
 
 [ComplexType]
-public class Skill : ISkill
+public class Skill
 {
     public string Name { get; set; }
     public int Modifier { get; set; }
@@ -47,9 +46,9 @@ public class Skill : ISkill
 
     public int CompareTo(Object? obj)
     {
-        if (obj is ISkill)
+        if (obj is Skill)
         {
-            ISkill other = (ISkill)obj;
+            Skill other = (Skill)obj;
             if (this.Modifier > other.Modifier)
             {
                 return 1;
@@ -69,21 +68,21 @@ public class Skill : ISkill
 }
 
 [ComplexType]
-public class SkillBlock : ISkillBlock, IEnumerable<ISkill>
+public class SkillBlock : IEnumerable<Skill>
 {
-    public ISkill GetSkill(string skillName) => Skills.First((s) => s.Name == skillName);
-    public List<ISkill> Skills { get; set; }
+    public Skill GetSkill(string skillName) => Skills.First((s) => s.Name == skillName);
+    public List<Skill> Skills { get; set; }
 
     public SkillBlock()
     {
-        Skills = new List<ISkill>();
+        Skills = new List<Skill>();
         foreach (var skill in Enum.GetValues(typeof(SkillName)))
         {
             Skills.Add(new Skill(skill.ToString(), 0, false));
         }
     }
 
-    public SkillBlock(List<ISkill> skills)
+    public SkillBlock(List<Skill> skills)
     {
         Skills = skills;
         foreach (var skill in Enum.GetValues(typeof(SkillName)))
@@ -97,7 +96,7 @@ public class SkillBlock : ISkillBlock, IEnumerable<ISkill>
 
     public SkillBlock(Dictionary<String, int> skills)
     {
-        Skills = new List<ISkill>();
+        Skills = new List<Skill>();
         foreach (var skill in Enum.GetValues(typeof(SkillName)))
         {
             Skills.Add(new Skill(skill.ToString(), skills[skill.ToString()], false));
@@ -106,16 +105,16 @@ public class SkillBlock : ISkillBlock, IEnumerable<ISkill>
 
     public SkillBlock(Dictionary<String, int> skills, List<String> proficiencies)
     {
-        Skills = new List<ISkill>();
+        Skills = new List<Skill>();
         foreach (var skill in Enum.GetValues(typeof(SkillName)))
         {
             Skills.Add(new Skill(skill.ToString(), skills[skill.ToString()], proficiencies.Contains(skill.ToString())));
         }
     }
 
-    public SkillBlock(IAbilityBlock abilities)
+    public SkillBlock(AbilityBlock abilities)
     {
-        Skills = new List<ISkill>();
+        Skills = new List<Skill>();
         foreach (var ability in abilities)
         {
             foreach (var skill in ability.Skills)
@@ -125,7 +124,7 @@ public class SkillBlock : ISkillBlock, IEnumerable<ISkill>
         }
     }
 
-    public IEnumerator<ISkill> GetEnumerator()
+    public IEnumerator<Skill> GetEnumerator()
     {
         return Skills.GetEnumerator();
     }

@@ -1,22 +1,21 @@
-﻿using Dnd.Core.Main.Models.Dice;
-using MathNet.Numerics.Statistics;
+﻿using MathNet.Numerics.Statistics;
 
 namespace Dnd.Application.Main.Models.Dice;
 
-public class DiceSimulation : IDiceSimulation
+public class DiceSimulation
 {
-    public IDiceSet SimDice { get; set; }
+    public DiceSet SimDice { get; set; }
     public int Trials { get; set; }
     public int? DC { get; set; }
     public int Modifier { get; set; }
 
     //public Dictionary<int, int> Results { get; set; }
 
-    public List<ISimResult> Results { get; set; }
+    public List<SimResult> Results { get; set; }
 
     public DescriptiveStatistics Stats { get; set; }
 
-    public DiceSimulation(IDiceSet simDice, int trials, int modifier = 0)
+    public DiceSimulation(DiceSet simDice, int trials, int modifier = 0)
     {
         SimDice = simDice;
         Trials = trials;

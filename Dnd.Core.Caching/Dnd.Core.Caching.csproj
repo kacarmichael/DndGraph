@@ -7,7 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dnd.Core.Main\Dnd.Core.Main.csproj"/>
+      <Reference Include="Dnd.Application.Main">
+        <HintPath>..\Dnd.API.Main\bin\Debug\net9.0\Dnd.Application.Main.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

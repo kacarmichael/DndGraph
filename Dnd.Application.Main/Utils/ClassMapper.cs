@@ -1,10 +1,10 @@
-﻿using Dnd.Core.Main.Models.Characters;
+﻿using Dnd.Application.Main.Models.Characters;
 
 namespace Dnd.Application.Main.Utils;
 
 public class ClassMapper
 {
-    public IClass Map(string className)
+    public Class Map(string className)
     {
         return Constants.Classes[className];
     }

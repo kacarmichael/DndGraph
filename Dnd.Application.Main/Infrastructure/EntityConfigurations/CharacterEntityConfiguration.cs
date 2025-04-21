@@ -31,11 +31,11 @@ public class CharacterEntityConfiguration : IEntityTypeConfiguration<Character>
         //     .HasForeignKey<CharacterStats>(cs => cs.CharacterId);
 
         builder.HasMany(c => c.Classes)
-            .WithOne(cc => (Character)cc._character)
+            .WithOne(cc => cc._character)
             .HasForeignKey(cc => cc.CharacterId);
 
         builder.HasMany(c => c.Campaigns)
-            .WithOne(ucc => (Character)ucc._Character)
+            .WithOne(ucc => ucc._Character)
             .HasForeignKey(ucc => ucc.CharacterId);
     }
 }

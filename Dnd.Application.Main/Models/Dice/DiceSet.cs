@@ -25,11 +25,9 @@
 //     }
 // }
 
-using Dnd.Core.Main.Models.Dice;
-
 namespace Dnd.Application.Main.Models.Dice;
 
-public class DiceSet : IDiceSet
+public class DiceSet
 {
     public int D4 { get; set; }
     public int D6 { get; set; }

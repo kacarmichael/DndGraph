@@ -1,8 +1,6 @@
-﻿using Dnd.Core.Main.Models.Dice;
+﻿namespace Dnd.Application.Main.Models.Dice;
 
-namespace Dnd.Application.Main.Models.Dice;
-
-public class Die : IDice
+public class Die
 {
     private readonly int _minValue;
     private readonly int _maxValue;

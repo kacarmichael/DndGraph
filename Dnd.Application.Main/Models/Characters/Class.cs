@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Dnd.Application.Main.Utils;
-using Dnd.Core.Main.Models.Characters;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dnd.Application.Main.Models.Characters;
 
 [NotMapped]
 [PrimaryKey(propertyName: "ClassId")]
-public class Class : IClass
+public class Class
 {
     public int ClassId { get; set; }
     public string? SpellcastingAbility { get; set; }

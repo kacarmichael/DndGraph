@@ -1,11 +1,10 @@
 ﻿using Dnd.API.Auth.DTOs;
+using Dnd.Application.Auth.Extensions;
 using Dnd.Application.Auth.Infrastructure.Security;
-using Dnd.Application.Main.Extensions;
-using Dnd.Core.Abstractions;
-using Dnd.Core.Auth.Models;
-using Dnd.Core.Auth.Services;
+using Dnd.Application.Auth.Models;
+using Dnd.Application.Auth.Services.Interfaces;
+using Dnd.Application.Main.Services.Interfaces;
 using Dnd.Core.Logging;
-using Dnd.Core.Main.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,24 +18,24 @@ public class AuthController : ControllerBase
     private readonly IAuthService _authService;
     private readonly IJwtService _jwtService;
     private readonly IUserService _userService;
-    private readonly IUserMapperService _userMapperService;
+    //private readonly IUserMapperService _userMapperService;
     private readonly ILoggingClient _logger;
 
     public AuthController(ILoggingClient logger, IAuthService authService, IJwtService jwtService,
-        IUserService userService, IUserMapperService userMapperService)
+        IUserService userService)
     {
         _logger = logger;
         _authService = authService;
         _jwtService = jwtService;
         _userService = userService;
-        _userMapperService = userMapperService;
+        //_userMapperService = userMapperService;
         _logger.LogInformation("Auth controller created");
     }
 
     [HttpPost("/login")]
     public async Task<ActionResult<LoginResponseDto>> LoginAsync([FromBody] LoginRequestDto req)
     {
-        IAuthUser user = await _authService.GetUserAsync(req.Username);
+        AuthUser user = await _authService.GetUserAsync(req.Username);
         if (user == null || user.HashedPassword != Passwords.HashPassword(req.Password, user.CurrentSalt))
         {
             return Unauthorized(

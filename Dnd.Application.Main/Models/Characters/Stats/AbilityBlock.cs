@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
-using Dnd.Core.Main.Models.Characters.Stats;
-using Dnd.Core.Main.Utils;
+using Dnd.Application.Main.Utils;
 
 namespace Dnd.Application.Main.Models.Characters.Stats;
 
 [ComplexType]
-public class Ability : IAbility
+public class Ability
 {
     //public string Name { get; set; }
     public int? Score { get; set; }
@@ -86,9 +85,9 @@ public class Ability : IAbility
 
     public int CompareTo(Object? obj)
     {
-        if (obj is IAbility)
+        if (obj is Ability)
         {
-            IAbility other = (IAbility)obj;
+            Ability other = (Ability)obj;
             if (this.Score > other.Score)
             {
                 return 1;
@@ -108,15 +107,15 @@ public class Ability : IAbility
 }
 
 [ComplexType]
-public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
+public class AbilityBlock : IEnumerable<Ability>
 {
-    public IAbility GetAbility(string name) => Abilities.First(a => a.Name == name);
+    public Ability GetAbility(string name) => Abilities.First(a => a.Name == name);
 
-    public List<IAbility> Abilities { get; set; }
+    public List<Ability> Abilities { get; set; }
 
     public AbilityBlock()
     {
-        Abilities = new List<IAbility>();
+        Abilities = new List<Ability>();
         foreach (var ability in Enum.GetValues(typeof(AbilityName)))
         {
             Abilities.Add(new Ability(ability.ToString(), 10, false));
@@ -131,7 +130,7 @@ public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
     public int Charisma => Abilities.First(a => a.Name == this.GetAbility("Charisma").ToString()).Score ?? 0;
 
 
-    public AbilityBlock(List<IAbility> abilities)
+    public AbilityBlock(List<Ability> abilities)
     {
         Abilities = abilities;
         foreach (var ability in Enum.GetValues(typeof(AbilityName)))
@@ -145,7 +144,7 @@ public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
 
     public AbilityBlock(List<int> scores)
     {
-        Abilities = new List<IAbility>();
+        Abilities = new List<Ability>();
         foreach (var ability in Enum.GetValues(typeof(AbilityName)))
         {
             Abilities.Add(new Ability(ability.ToString(),
@@ -155,7 +154,7 @@ public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
 
     public AbilityBlock(Dictionary<String, int> dict)
     {
-        Abilities = new List<IAbility>();
+        Abilities = new List<Ability>();
         foreach (var ability in Enum.GetValues(typeof(AbilityName)))
         {
             Abilities.Add(new Ability(ability.ToString(), dict[ability.ToString()], false));
@@ -164,7 +163,7 @@ public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
 
     public AbilityBlock(Dictionary<String, int> dict, List<string> proficiencies)
     {
-        Abilities = new List<IAbility>();
+        Abilities = new List<Ability>();
         foreach (var ability in Enum.GetValues(typeof(AbilityName)))
         {
             Abilities.Add(new Ability(ability.ToString(), dict[ability.ToString()],
@@ -172,7 +171,7 @@ public class AbilityBlock : IAbilityBlock, IEnumerable<IAbility>
         }
     }
 
-    public IEnumerator<IAbility> GetEnumerator()
+    public IEnumerator<Ability> GetEnumerator()
     {
         return Abilities.GetEnumerator();
     }

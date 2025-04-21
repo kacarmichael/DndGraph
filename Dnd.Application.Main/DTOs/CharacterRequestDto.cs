@@ -1,5 +1,5 @@
-﻿using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Utils;
+﻿using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Utils;
 
 namespace Dnd.Application.Main.DTOs;
 
@@ -36,7 +36,7 @@ public class CharacterRequestDto : IDto
         Level = classes.Values.Sum();
     }
 
-    public CharacterRequestDto(ICharacter character)
+    public CharacterRequestDto(Character character)
     {
         var (abilities, skills, proficiencies) = character.Stats.GetStatsDictionary();
         Name = character.Name;

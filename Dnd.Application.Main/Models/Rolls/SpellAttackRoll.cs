@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Models.Dice;
+using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Models.Dice;
 
 namespace Dnd.Application.Main.Models.Rolls;
 
 public class SpellAttackRoll : DiceRollBase
 {
-    [NotMapped] public IClass ClassUsed { get; set; }
+    [NotMapped] public Class ClassUsed { get; set; }
 
     public string RollType => "spellAttack";
 
@@ -14,7 +14,7 @@ public class SpellAttackRoll : DiceRollBase
     {
     }
 
-    public SpellAttackRoll(ICharacter character, IClass classUsed, IDiceSet diceRolled)
+    public SpellAttackRoll(Character character, Class classUsed, DiceSet diceRolled)
     {
         Roller = character;
         ClassUsed = classUsed;

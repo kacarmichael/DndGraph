@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Dnd.Application.Auth.Infrastructure.Security;
-using Dnd.Core.Auth.Models;
 
 namespace Dnd.Application.Auth.Models;
 
 [Table("AuthUser", Schema = "public")]
-public class AuthUser : IAuthUser
+public class AuthUser
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }

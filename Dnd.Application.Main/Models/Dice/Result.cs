@@ -1,9 +1,8 @@
 ﻿using System.Text.Json.Serialization;
-using Dnd.Core.Main.Models.Dice;
 
 namespace Dnd.Application.Main.Models.Dice;
 
-public class SimResult : ISimResult
+public class SimResult
 {
     [JsonPropertyName("value")] public int Value { get; set; }
 

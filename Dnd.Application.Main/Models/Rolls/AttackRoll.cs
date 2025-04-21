@@ -1,6 +1,8 @@
-﻿using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Models.Characters.Stats;
-using Dnd.Core.Main.Models.Dice;
+﻿using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Models.Characters.Stats;
+using Dnd.Application.Main.Models.Dice;
+
+//using Dnd.Core.Main.Models.Characters.Stats;
 
 namespace Dnd.Application.Main.Models.Rolls;
 
@@ -12,7 +14,7 @@ public class MeleeAttackRoll : DiceRollBase
     {
     }
 
-    public MeleeAttackRoll(ICharacter character, IDiceSet diceRolled)
+    public MeleeAttackRoll(Character character, DiceSet diceRolled)
     {
         Roller = character;
         RollType = "attackRollMelee";
@@ -38,7 +40,7 @@ public class RangedAttackRoll : DiceRollBase
     {
     }
 
-    public RangedAttackRoll(ICharacter character, IDiceSet diceRolled)
+    public RangedAttackRoll(Character character, DiceSet diceRolled)
     {
         Roller = character;
         RollType = "attackRollRanged";

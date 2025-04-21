@@ -8,7 +8,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Dnd.Application.Auth\Dnd.Application.Auth.csproj"/>
-        <ProjectReference Include="..\Dnd.Core.Abstractions\Dnd.Core.Abstractions.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
 ﻿using Dnd.Application.Main.DTOs;
-using Dnd.Core.Main.Services;
+using Dnd.Application.Main.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dnd.API.Main.Controllers;
@@ -28,7 +28,7 @@ public class CharacterController : ControllerBase
     {
         var character = await _characterService.GetCharacterAsync(id);
         var dto = new CharacterResponseDto(character);
-        return character == null ? NotFound() : Ok((CharacterResponseDto)character);
+        return character == null ? NotFound() : Ok(dto);
     }
 
     [HttpPost]

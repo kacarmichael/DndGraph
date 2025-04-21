@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 using Dnd.Application.Main.Models.Dice;
-using Dnd.Core.Main.Utils;
+using Dnd.Application.Main.Utils;
 
 namespace Dnd.Application.Main.DTOs;
 

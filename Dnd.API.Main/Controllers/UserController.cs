@@ -1,6 +1,5 @@
-﻿using Dnd.Core.Abstractions;
-using Dnd.Core.Main.Models.Users;
-using Dnd.Core.Main.Services;
+﻿using Dnd.Application.Main.Models.Users;
+using Dnd.Application.Main.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dnd.API.Main.Controllers;
@@ -8,12 +7,12 @@ namespace Dnd.API.Main.Controllers;
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
-    private readonly IUserMapperService _userMapperService;
+    //private readonly IUserMapperService _userMapperService;
 
-    public UserController(IUserService userService, IUserMapperService userMapperService)
+    public UserController(IUserService userService)
     {
         _userService = userService;
-        _userMapperService = userMapperService;
+        //_userMapperService = userMapperService;
     }
 
     [HttpGet("{username}")]
@@ -26,11 +25,11 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetAllUsersAsync() => Ok(await _userService.GetAllUsersAsync());
 
     [HttpPost]
-    public async Task<IActionResult> AddUserAsync([FromBody] IDomainUser domainUser) =>
+    public async Task<IActionResult> AddUserAsync([FromBody] DomainUser domainUser) =>
         Ok(await _userService.AddUserAsync(domainUser));
 
     [HttpPut]
-    public async Task<IActionResult> UpdateUserAsync([FromBody] IDomainUser domainUser) =>
+    public async Task<IActionResult> UpdateUserAsync([FromBody] DomainUser domainUser) =>
         Ok(await _userService.UpdateUserAsync(domainUser));
 
     [HttpDelete("{id:int}")]

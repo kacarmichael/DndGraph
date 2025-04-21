@@ -1,6 +1,6 @@
 ﻿using Dnd.Application.Main.DTOs;
+using Dnd.Application.Main.Services.Interfaces;
 using Dnd.Core.Logging;
-using Dnd.Core.Main.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

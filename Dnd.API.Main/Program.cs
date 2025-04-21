@@ -7,15 +7,12 @@ using Dnd.Application.Main.Models.Characters;
 using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Application.Main.Models.Intermediate;
 using Dnd.Application.Main.Models.Rolls;
-using Dnd.Application.Main.Repositories;
-using Dnd.Application.Main.Services;
+using Dnd.Application.Main.Repositories.Implementations;
+using Dnd.Application.Main.Repositories.Interfaces;
+using Dnd.Application.Main.Services.Implementations;
+using Dnd.Application.Main.Services.Interfaces;
 using Dnd.Core.Caching;
 using Dnd.Core.Logging;
-using Dnd.Core.Main.Models.Characters.Stats;
-using Dnd.Core.Main.Models.Intermediate;
-using Dnd.Core.Main.Models.Rolls;
-using Dnd.Core.Main.Repositories;
-using Dnd.Core.Main.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -75,15 +72,15 @@ builder.Services.AddDbContext<DndDbContext>(options =>
 
 builder.Services.AddTransient<ICharacterRepository<Character, CharacterStats, CharacterClass>, CharacterRepository>();
 builder.Services.AddTransient<ICharacterService, CharacterService>(); //<>()
-builder.Services.AddTransient<IRollRepository<IDiceRoll>, RollRepository>();
+builder.Services.AddTransient<IRollRepository<DiceRollBase>, RollRepository>();
 builder.Services.AddTransient<IRollMapperService, RollMapperService>();
 builder.Services.AddTransient<IRollService, RollService>();
 builder.Services.AddTransient<IClassMapperService, ClassMapperService>();
-builder.Services.AddTransient<IDiceSimulationFactory, DiceSimulationFactory>();
+// builder.Services.AddTransient<IDiceSimulationFactory, DiceSimulationFactory>();
 builder.Services.AddTransient<IDiceRollCache, DiceRollCache>();
 builder.Services.AddTransient<IDiceSimulationCache, DiceSimulationCache>();
-builder.Services.AddTransient<IAbilityBlock, AbilityBlock>();
-builder.Services.AddTransient<ISkillBlock, SkillBlock>();
+// builder.Services.AddTransient<IAbilityBlock, AbilityBlock>();
+// builder.Services.AddTransient<ISkillBlock, SkillBlock>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 //builder.Services.Configure<JwksSettings>(builder.Configuration.GetSection("Jwks"));
@@ -245,7 +242,7 @@ using (var scope = app.Services.CreateScope())
             new List<int> { 10, 13, 12, 17, 19, 18 }
         )
     );
-    var cc = new List<ICharacterClass>
+    var cc = new List<CharacterClass>
     {
         new CharacterClass(
             classId: 11,

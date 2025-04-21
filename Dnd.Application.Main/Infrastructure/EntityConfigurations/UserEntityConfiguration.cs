@@ -14,11 +14,11 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<DomainUser>
         builder.HasKey(u => u.Id);
 
         builder.HasMany(u => u.Characters as IEnumerable<Character>)
-            .WithOne(c => (DomainUser)c.User)
+            .WithOne(c => c.User)
             .HasForeignKey(c => c.UserId);
 
         builder.HasMany(u => u.CampaignsPlayed)
-            .WithOne(ucc => (DomainUser)ucc._User)
+            .WithOne(ucc => ucc._User)
             .HasForeignKey(ucc => ucc.UserId);
 
         builder.HasMany(u => u.CampaignsOwned)
@@ -26,7 +26,7 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<DomainUser>
             .HasForeignKey(co => co.Id);
 
         builder.HasMany(u => u.CampaignsDmed)
-            .WithOne(cdm => (DomainUser)cdm.DungeonMaster)
+            .WithOne(cdm => cdm.DungeonMaster)
             .HasForeignKey(cdm => cdm.Id);
     }
 }

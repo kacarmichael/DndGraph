@@ -3,14 +3,11 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Application.Main.Models.Intermediate;
-using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Models.Characters.Stats;
-using Dnd.Core.Main.Models.Intermediate;
-using Dnd.Core.Main.Models.Users;
+using Dnd.Application.Main.Models.Users;
 
 namespace Dnd.Application.Main.Models.Characters;
 
-public class Character : ICharacter
+public class Character
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
@@ -19,27 +16,27 @@ public class Character : ICharacter
 
     //public int CharacterStatsId { get; set; }
 
-    [NotMapped] public virtual ICharacterStats Stats { get; set; }
+    [NotMapped] public virtual CharacterStats Stats { get; set; }
 
     public int UserId { get; set; }
 
-    [NotMapped] public virtual IDomainUser User { get; set; }
+    [NotMapped] public virtual DomainUser User { get; set; }
 
     [NotMapped] public virtual List<UserCharacterCampaign> Campaigns { get; set; }
 
-    [NotMapped] public virtual IEnumerable<ICharacterClass> Classes { get; set; }
+    [NotMapped] public virtual IEnumerable<CharacterClass> Classes { get; set; }
 
     public Character()
     {
     }
 
-    public Character(string name, ICharacterStats stats, Dictionary<string, int>? charClass)
+    public Character(string name, CharacterStats stats, Dictionary<string, int>? charClass)
     {
         Name = name;
         Stats = stats;
     }
 
-    public Character(int id, string name, ICharacterStats stats, Dictionary<string, int>? charClass)
+    public Character(int id, string name, CharacterStats stats, Dictionary<string, int>? charClass)
     {
         Id = id;
         Name = name;
@@ -47,7 +44,7 @@ public class Character : ICharacter
         //CharacterStatsId = stats.StatBlockId;
     }
 
-    public Character(int id, string name, ICharacterStats stats, Dictionary<int, int>? charClass, int userId)
+    public Character(int id, string name, CharacterStats stats, Dictionary<int, int>? charClass, int userId)
     {
         Id = id;
         Name = name;
@@ -57,7 +54,7 @@ public class Character : ICharacter
         UserId = userId;
     }
 
-    public Character(int id, string name, ICharacterStats stats, List<ICharacterClass> charClass, int userId)
+    public Character(int id, string name, CharacterStats stats, List<CharacterClass> charClass, int userId)
     {
         Id = id;
         Name = name;
@@ -75,14 +72,14 @@ public class Character : ICharacter
             new SkillBlock());
     }
 
-    public Character(int id, string name, int level, IAbilityBlock abilities)
+    public Character(int id, string name, int level, AbilityBlock abilities)
     {
         Id = id;
         Name = name;
         Stats = new CharacterStats(level, abilities);
     }
 
-    public bool Equals(ICharacter? other)
+    public bool Equals(Character? other)
     {
         if (other is null) return false;
         if (ReferenceEquals(this, other)) return true;
@@ -92,7 +89,7 @@ public class Character : ICharacter
                Stats.Equals(other.Stats);
     }
 
-    public static bool Compare(ICharacter character1, ICharacter character2)
+    public static bool Compare(Character character1, Character character2)
     {
         return character1.Equals(character2);
     }

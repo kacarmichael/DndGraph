@@ -1,5 +1,5 @@
-﻿using Dnd.Core.Main.Models.Campaigns;
-using Dnd.Core.Main.Services;
+﻿using Dnd.Application.Main.Models.Campaigns;
+using Dnd.Application.Main.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dnd.API.Main.Controllers;
@@ -19,11 +19,11 @@ public class CampaignController : ControllerBase
     public async Task<IActionResult> GetCampaign(int id) => Ok(await _campaignService.GetCampaignByIdAsync(id));
 
     [HttpPost]
-    public async Task<IActionResult> CreateCampaign([FromBody] ICampaign campaign) =>
+    public async Task<IActionResult> CreateCampaign([FromBody] Campaign campaign) =>
         Ok(await _campaignService.CreateCampaignAsync(campaign));
 
     [HttpPut]
-    public async Task<IActionResult> UpdateCampaign([FromBody] ICampaign campaign) =>
+    public async Task<IActionResult> UpdateCampaign([FromBody] Campaign campaign) =>
         Ok(await _campaignService.UpdateCampaignAsync(campaign));
 
     [HttpDelete("{id:int}")]
@@ -34,7 +34,7 @@ public class CampaignController : ControllerBase
         Ok(await _campaignService.GetCampaignSessionByIdAsync(id));
 
     [HttpPost("{id:int}/sessions")]
-    public async Task<IActionResult> CreateCampaignSession(int id, [FromBody] ICampaignSession campaignSession)
+    public async Task<IActionResult> CreateCampaignSession(int id, [FromBody] CampaignSession campaignSession)
     {
         return Ok(await _campaignService.CreateCampaignSessionAsync(campaignSession));
     }
@@ -45,6 +45,6 @@ public class CampaignController : ControllerBase
 
     [HttpPut("{id:int}/sessions/{sessionId:int}")]
     public async Task<IActionResult> UpdateCampaignSession(int id, int sessionId,
-        [FromBody] ICampaignSession campaignSession) =>
+        [FromBody] CampaignSession campaignSession) =>
         Ok(await _campaignService.UpdateCampaignSessionAsync(campaignSession));
 }

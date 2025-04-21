@@ -1,24 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Dnd.Application.Main.Models.Campaigns;
+using Dnd.Application.Main.Models.Characters;
 using Dnd.Application.Main.Models.Intermediate;
-using Dnd.Core.Auth.Models;
-using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Models.Users;
 
 namespace Dnd.Application.Main.Models.Users;
 
-public class DomainUser : IDomainUser
+public class DomainUser
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     public int AuthUserId { get; set; }
 
-    [ForeignKey("AuthUserId")] [NotMapped] public virtual IAuthUser AuthUser { get; set; }
+    //[ForeignKey("AuthUserId")] [NotMapped] public virtual AuthUser AuthUser { get; set; }
 
     public string Username { get; set; }
 
-    [NotMapped] public virtual List<ICharacter> Characters { get; set; }
+    [NotMapped] public virtual List<Character> Characters { get; set; }
 
     [NotMapped] public virtual List<UserCharacterCampaign> CampaignsPlayed { get; set; }
 
@@ -29,6 +27,6 @@ public class DomainUser : IDomainUser
     public DomainUser(string username)
     {
         Username = username;
-        Characters = new List<ICharacter>();
+        Characters = new List<Character>();
     }
 }

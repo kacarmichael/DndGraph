@@ -23,8 +23,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Dnd.Application.Main\Dnd.Application.Main.csproj"/>
-        <ProjectReference Include="..\Dnd.Core.Abstractions\Dnd.Core.Abstractions.csproj"/>
-        <ProjectReference Include="..\Dnd.Core.Auth\Dnd.Core.Auth.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

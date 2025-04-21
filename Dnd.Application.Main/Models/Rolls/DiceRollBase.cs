@@ -1,18 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Models.Dice;
-using Dnd.Core.Main.Models.Rolls;
+using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Models.Dice;
 
 namespace Dnd.Application.Main.Models.Rolls;
 
-public abstract class DiceRollBase : IDiceRoll
+public abstract class DiceRollBase
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
-    [NotMapped] public IDiceSet DiceRolled { get; set; }
+    [NotMapped] public DiceSet DiceRolled { get; set; }
 
-    [NotMapped] public ICharacter? Roller { get; set; }
+    [NotMapped] public Character? Roller { get; set; }
     public int Value { get; set; }
 
     public string RollType { get; set; }

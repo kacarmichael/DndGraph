@@ -1,14 +1,14 @@
-﻿using Dnd.Core.Main.Models.Dice;
+﻿using Dnd.Application.Main.Models.Dice;
 
 namespace Dnd.Core.Caching;
 
 public interface IDiceSimulationCache
 {
-    void AddDiceSimulation(IDiceSimulation diceSimulation);
+    void AddDiceSimulation(DiceSimulation diceSimulation);
 
-    List<IDiceSimulation> GetDiceSimulations();
+    List<DiceSimulation> GetDiceSimulations();
 
-    void RemoveDiceSimulation(IDiceSimulation diceSimulation);
+    void RemoveDiceSimulation(DiceSimulation diceSimulation);
 
     void ClearDiceSimulations();
 }

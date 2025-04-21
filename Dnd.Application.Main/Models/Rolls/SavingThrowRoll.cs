@@ -1,6 +1,6 @@
-﻿using Dnd.Application.Main.Utils;
-using Dnd.Core.Main.Models.Characters;
-using Dnd.Core.Main.Models.Dice;
+﻿using Dnd.Application.Main.Models.Characters;
+using Dnd.Application.Main.Models.Dice;
+using Dnd.Application.Main.Utils;
 
 namespace Dnd.Application.Main.Models.Rolls;
 
@@ -12,7 +12,7 @@ public class SavingThrowRoll : DiceRollBase
     {
     }
 
-    public SavingThrowRoll(string ability, ICharacter character, IDiceSet diceRolled)
+    public SavingThrowRoll(string ability, Character character, DiceSet diceRolled)
     {
         Ability = ability;
         Roller = character;
