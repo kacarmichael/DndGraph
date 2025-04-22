@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.UnitTests", "Dnd.UnitTests\Dnd.UnitTests.csproj", "{A2FBEB7A-EA63-4844-9AC4-12415DAE41BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Core.Caching", "Dnd.Core.Caching\Dnd.Core.Caching.csproj", "{A38E759D-D9CE-4899-A7B9-79763929054C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.API.Caching", "Dnd.API.Caching\Dnd.API.Caching.csproj", "{42CAB0FF-2AC8-458A-A3F0-657933CF2146}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.API.Main", "Dnd.API.Main\Dnd.API.Main.csproj", "{54A094AB-0BAE-4234-B5F5-254D05B00FE5}"
@@ -13,10 +11,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Application.Auth", "Dnd.Application.Auth\Dnd.Application.Auth.csproj", "{2ED70B82-83F2-4C8C-A0DB-A6BDC7B905BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.API.Auth", "Dnd.API.Auth\Dnd.API.Auth.csproj", "{EFAFBE99-F113-4A64-9420-69A3D19B7AAF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Application.Caching", "Dnd.Application.Caching\Dnd.Application.Caching.csproj", "{FCBFE2B1-943F-46B8-AF64-8007F48438AF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Core.Logging", "Dnd.Core.Logging\Dnd.Core.Logging.csproj", "{42F030B3-252B-44C8-A997-8FC1A980C1A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Application.Logging", "Dnd.Application.Logging\Dnd.Application.Logging.csproj", "{E57F1D4A-FE08-43A0-AE8F-FCD08777BCDC}"
 EndProject
@@ -34,10 +28,6 @@ Global
 		{A2FBEB7A-EA63-4844-9AC4-12415DAE41BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2FBEB7A-EA63-4844-9AC4-12415DAE41BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2FBEB7A-EA63-4844-9AC4-12415DAE41BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A38E759D-D9CE-4899-A7B9-79763929054C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A38E759D-D9CE-4899-A7B9-79763929054C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A38E759D-D9CE-4899-A7B9-79763929054C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A38E759D-D9CE-4899-A7B9-79763929054C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{42CAB0FF-2AC8-458A-A3F0-657933CF2146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{42CAB0FF-2AC8-458A-A3F0-657933CF2146}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42CAB0FF-2AC8-458A-A3F0-657933CF2146}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -58,14 +48,6 @@ Global
 		{EFAFBE99-F113-4A64-9420-69A3D19B7AAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFAFBE99-F113-4A64-9420-69A3D19B7AAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFAFBE99-F113-4A64-9420-69A3D19B7AAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FCBFE2B1-943F-46B8-AF64-8007F48438AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCBFE2B1-943F-46B8-AF64-8007F48438AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCBFE2B1-943F-46B8-AF64-8007F48438AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCBFE2B1-943F-46B8-AF64-8007F48438AF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{42F030B3-252B-44C8-A997-8FC1A980C1A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42F030B3-252B-44C8-A997-8FC1A980C1A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42F030B3-252B-44C8-A997-8FC1A980C1A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42F030B3-252B-44C8-A997-8FC1A980C1A8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E57F1D4A-FE08-43A0-AE8F-FCD08777BCDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E57F1D4A-FE08-43A0-AE8F-FCD08777BCDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E57F1D4A-FE08-43A0-AE8F-FCD08777BCDC}.Release|Any CPU.ActiveCfg = Release|Any CPU

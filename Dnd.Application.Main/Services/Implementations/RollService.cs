@@ -1,12 +1,14 @@
-﻿using Dnd.Application.Main.DTOs;
+﻿using Dnd.Application.Main.Caching.Implementations;
+using Dnd.Application.Main.Caching.Interfaces;
+using Dnd.Application.Main.DTOs;
 using Dnd.Application.Main.Models.Characters;
 using Dnd.Application.Main.Models.Dice;
 using Dnd.Application.Main.Models.Intermediate;
 using Dnd.Application.Main.Models.Rolls;
+using Dnd.Application.Main.Models.Simulations;
 using Dnd.Application.Main.Repositories.Interfaces;
 using Dnd.Application.Main.Services.Interfaces;
 using Dnd.Application.Main.Utils;
-using Dnd.Core.Caching;
 
 namespace Dnd.Application.Main.Services.Implementations;
 
@@ -15,13 +17,13 @@ public class RollService : IRollService
     private readonly ICharacterRepository<Character, CharacterStats, CharacterClass> _characterRepository;
     private readonly IRollRepository<DiceRollBase> _rollRepository;
     private readonly IRollMapperService _rollMapperService;
-    private readonly DiceSimulationFactory _diceSimulationFactory;
+    private readonly IDiceSimulationFactory _diceSimulationFactory;
     private readonly IDiceRollCache _diceRollCache;
     private readonly IDiceSimulationCache _diceSimulationCache;
 
     public RollService(ICharacterRepository<Character, CharacterStats, CharacterClass> characterRepository,
         IRollRepository<DiceRollBase> rollRepository,
-        IRollMapperService rollMapperService, DiceSimulationFactory diceSimulationFactory,
+        IRollMapperService rollMapperService, IDiceSimulationFactory diceSimulationFactory,
         IDiceRollCache diceRollCache, IDiceSimulationCache diceSimulationCache)
     {
         _characterRepository = characterRepository;

@@ -27,11 +27,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dnd.Application.Auth\Dnd.Application.Auth.csproj"/>
-        <ProjectReference Include="..\Dnd.Application.Caching\Dnd.Application.Caching.csproj"/>
-        <ProjectReference Include="..\Dnd.Application.Logging\Dnd.Application.Logging.csproj"/>
-        <ProjectReference Include="..\Dnd.Application.Main\Dnd.Application.Main.csproj"/>
-        <ProjectReference Include="..\Dnd.Core.Logging\Dnd.Core.Logging.csproj"/>
+      <ProjectReference Include="..\Dnd.Application.Auth\Dnd.Application.Auth.csproj" />
+      <ProjectReference Include="..\Dnd.Application.Logging\Dnd.Application.Logging.csproj" />
+      <ProjectReference Include="..\Dnd.Application.Main\Dnd.Application.Main.csproj" />
     </ItemGroup>
 
 </Project>

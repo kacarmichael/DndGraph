@@ -20,8 +20,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dnd.API.Main\Dnd.API.Main.csproj"/>
-        <ProjectReference Include="..\Dnd.Application.Main\Dnd.Application.Main.csproj"/>
     </ItemGroup>
 
 </Project>

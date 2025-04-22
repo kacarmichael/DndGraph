@@ -33,8 +33,11 @@ public class CharacterRepository : ICharacterRepository<Character, CharacterStat
     //     return classes;
     // }
 
-    public async Task<IEnumerable<Character>> GetAllCharactersAsync() =>
-        await _context.Characters.ToListAsync();
+    public async Task<IEnumerable<Character>> GetAllCharactersAsync()
+    {
+        return await _context.Characters.ToListAsync();
+    }
+        
 
 
     public async Task<Character> GetCharacterAsync(int characterId)
@@ -54,7 +57,10 @@ public class CharacterRepository : ICharacterRepository<Character, CharacterStat
         return Task.CompletedTask;
     }
 
-    public void UpdateCharacter(Character character) => _context.Characters.Update(character);
+    public Task<Character> UpdateCharacterAsync(Character character)
+    {
+        return Task.FromResult(_context.Characters.Update(character).Entity);
+    }
 
     public async Task<CharacterStats> AddStatBlock(CharacterStats stats)
     {

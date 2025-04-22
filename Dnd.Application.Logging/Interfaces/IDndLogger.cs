@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Dnd.Core.Logging;
+namespace Dnd.Application.Logging.Interfaces;
 
 public interface IDndLogger
 {

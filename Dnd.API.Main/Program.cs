@@ -1,18 +1,21 @@
 using Dnd.API.Main.Extensions;
 using Dnd.Application.Auth.Models;
-using Dnd.Application.Caching;
-using Dnd.Application.Logging;
+using Dnd.Application.Logging.Implementations;
+using Dnd.Application.Logging.Interfaces;
+using Dnd.Application.Main.Caching.Implementations;
+using Dnd.Application.Main.Caching.Interfaces;
 using Dnd.Application.Main.Infrastructure;
+using Dnd.Application.Main.Models.Campaigns;
 using Dnd.Application.Main.Models.Characters;
 using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Application.Main.Models.Intermediate;
 using Dnd.Application.Main.Models.Rolls;
+using Dnd.Application.Main.Models.Simulations;
+using Dnd.Application.Main.Models.Users;
 using Dnd.Application.Main.Repositories.Implementations;
 using Dnd.Application.Main.Repositories.Interfaces;
 using Dnd.Application.Main.Services.Implementations;
 using Dnd.Application.Main.Services.Interfaces;
-using Dnd.Core.Caching;
-using Dnd.Core.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -70,15 +73,30 @@ builder.Services.AddDbContext<DndDbContext>(options =>
 // builder.Services.AddDbContext<RollDbContext>(options =>
 //     options.UseInMemoryDatabase("RollDb"));
 
+builder.Services.AddTransient<ICampaignRepository<Campaign>, CampaignRepository>();
+builder.Services.AddTransient<ICampaignSessionRepository<CampaignSession>, CampaignSessionRepository>();
 builder.Services.AddTransient<ICharacterRepository<Character, CharacterStats, CharacterClass>, CharacterRepository>();
-builder.Services.AddTransient<ICharacterService, CharacterService>(); //<>()
 builder.Services.AddTransient<IRollRepository<DiceRollBase>, RollRepository>();
-builder.Services.AddTransient<IRollMapperService, RollMapperService>();
-builder.Services.AddTransient<IRollService, RollService>();
-builder.Services.AddTransient<IClassMapperService, ClassMapperService>();
-// builder.Services.AddTransient<IDiceSimulationFactory, DiceSimulationFactory>();
+builder.Services.AddTransient<IUserRepository<DomainUser>, UserRepository>(); 
+
+builder.Services.AddTransient<IDiceSimulationFactory, DiceSimulationFactory>();
 builder.Services.AddTransient<IDiceRollCache, DiceRollCache>();
 builder.Services.AddTransient<IDiceSimulationCache, DiceSimulationCache>();
+builder.Services.AddTransient<IClassMapperService, ClassMapperService>();
+
+
+builder.Services.AddTransient<ICampaignService, CampaignService>();
+builder.Services.AddTransient<ICharacterService, CharacterService>(); //<>()
+builder.Services.AddTransient<IRollMapperService, RollMapperService>();
+
+
+builder.Services.AddTransient<IRollService, RollService>();
+builder.Services.AddTransient<IUserService, UserService>();
+
+
+
+
+
 // builder.Services.AddTransient<IAbilityBlock, AbilityBlock>();
 // builder.Services.AddTransient<ISkillBlock, SkillBlock>();
 
@@ -230,39 +248,74 @@ app.Services.SaveSwaggerJson();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+// using (var scope = app.Services.CreateScope())
+// {
+//     var dbContext = scope.ServiceProvider.GetService<DndDbContext>();
+//     //dbContext.Database.Migrate();
+//     var stat_block = new CharacterStats(
+//         id: 1,
+//         characterId: 1,
+//         level: 7,
+//         new AbilityBlock(
+//             new List<int> { 10, 13, 12, 17, 19, 18 }
+//         )
+//     );
+//     var cc = new List<CharacterClass>
+//     {
+//         new CharacterClass(
+//             classId: 11,
+//             characterId: 1,
+//             levels: 6),
+//         new CharacterClass(
+//             classId: 12,
+//             characterId: 1,
+//             levels: 1)
+//     };
+//     var test_char = new Character(
+//         id: 1,
+//         name: "Theodred Venran",
+//         stats: stat_block,
+//         charClass: cc,
+//         userId: 1);
+//     dbContext.Characters.Add(test_char);
+//     dbContext.CharacterStats.Add(stat_block);
+//     dbContext.CharacterClasses.AddRange(cc.Select(cc => (CharacterClass)cc));
+//     dbContext.SaveChanges();
+// }
+
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetService<DndDbContext>();
-    //dbContext.Database.Migrate();
-    var stat_block = new CharacterStats(
+    var characterService = scope.ServiceProvider.GetService<ICharacterService>();
+    var userService = scope.ServiceProvider.GetService<IUserService>();
+    await userService.AddUserAsync(new DomainUser(
         id: 1,
-        characterId: 1,
-        level: 7,
-        new AbilityBlock(
-            new List<int> { 10, 13, 12, 17, 19, 18 }
-        )
-    );
-    var cc = new List<CharacterClass>
-    {
-        new CharacterClass(
-            classId: 11,
-            characterId: 1,
-            levels: 6),
-        new CharacterClass(
-            classId: 12,
-            characterId: 1,
-            levels: 1)
-    };
-    var test_char = new Character(
-        id: 1,
-        name: "Theodred Venran",
-        stats: stat_block,
-        charClass: cc,
-        userId: 1);
-    dbContext.Characters.Add(test_char);
-    dbContext.CharacterStats.Add(stat_block);
-    dbContext.CharacterClasses.AddRange(cc.Select(cc => (CharacterClass)cc));
-    dbContext.SaveChanges();
+        username: "admin"));
+    await characterService.AddCharacterAsync(
+        new Character()
+        {
+            Id = 1,
+            Name = "Theodred Venran",
+            Stats = new CharacterStats(
+                id: 1,
+                characterId: 1,
+                level: 7,
+                new AbilityBlock(
+                    new List<int> { 10, 13, 12, 17, 19, 18 }
+                )),
+            UserId = 1,
+            Classes = new List<CharacterClass>
+            {
+                new CharacterClass(
+                    classId: 11,
+                    characterId: 1,
+                    levels: 6),
+                new CharacterClass(
+                    classId: 12,
+                    characterId: 1,
+                    levels: 1)
+            },
+            
+        });
 }
 
 

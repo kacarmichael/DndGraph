@@ -1,7 +1,9 @@
-﻿using Dnd.Application.Main.Models.Dice;
-using Dnd.Core.Caching;
+﻿
 
-namespace Dnd.Application.Caching;
+using Dnd.Application.Main.Caching.Interfaces;
+using Dnd.Application.Main.Models.Dice;
+
+namespace Dnd.Application.Main.Caching.Implementations;
 
 public class DiceSimulationCache : IDiceSimulationCache
 {

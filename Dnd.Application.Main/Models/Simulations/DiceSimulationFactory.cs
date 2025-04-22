@@ -1,8 +1,8 @@
 ﻿using Dnd.Application.Main.Models.Dice;
 
-namespace Dnd.Application.Main.Models.Rolls;
+namespace Dnd.Application.Main.Models.Simulations;
 
-public class DiceSimulationFactory
+public class DiceSimulationFactory : IDiceSimulationFactory
 {
     public DiceSimulation CreateSimulation(DiceSet diceSet, int numTrials, int modifier = 0)
     {

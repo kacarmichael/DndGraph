@@ -18,6 +18,9 @@ namespace Dnd.Application.Main.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.3")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -27,8 +30,6 @@ namespace Dnd.Application.Main.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("DungeonMasterId")
                         .HasColumnType("integer");
@@ -42,7 +43,9 @@ namespace Dnd.Application.Main.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Campaigns", (string)null);
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("Campaigns");
                 });
 
             modelBuilder.Entity("Dnd.Application.Main.Models.Campaigns.CampaignSession", b =>
@@ -58,16 +61,13 @@ namespace Dnd.Application.Main.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CampaignSessions", (string)null);
+                    b.ToTable("CampaignSessions");
                 });
 
             modelBuilder.Entity("Dnd.Application.Main.Models.Characters.Character", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    b.Property<int>("CharacterStatsId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
@@ -79,7 +79,9 @@ namespace Dnd.Application.Main.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Characters", (string)null);
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Characters");
                 });
 
             modelBuilder.Entity("Dnd.Application.Main.Models.Characters.CharacterStats", b =>
@@ -139,7 +141,7 @@ namespace Dnd.Application.Main.Migrations
 
                     b.HasKey("ClassId");
 
-                    b.ToTable("Classes", (string)null);
+                    b.ToTable("Classes");
 
                     b.HasData(
                         new
@@ -251,8 +253,6 @@ namespace Dnd.Application.Main.Migrations
 
                     b.HasKey("UserId", "CharacterId", "CampaignId");
 
-                    b.HasIndex("CharacterId");
-
                     b.ToTable("UserCharacterCampaigns", (string)null);
                 });
 
@@ -274,7 +274,7 @@ namespace Dnd.Application.Main.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rolls", (string)null);
+                    b.ToTable("Rolls");
 
                     b.HasDiscriminator<string>("RollType").HasValue("DiceRollBase");
 
@@ -344,7 +344,7 @@ namespace Dnd.Application.Main.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.ToTable("Rolls", null, t =>
+                    b.ToTable("Rolls", t =>
                         {
                             t.Property("Ability")
                                 .HasColumnName("SavingThrowRoll_Ability");
@@ -360,6 +360,25 @@ namespace Dnd.Application.Main.Migrations
                     b.HasDiscriminator().HasValue("spellAttackRoll");
                 });
 
+            modelBuilder.Entity("Dnd.Application.Main.Models.Campaigns.Campaign", b =>
+                {
+                    b.HasOne("Dnd.Application.Main.Models.Users.DomainUser", "DungeonMaster")
+                        .WithMany("CampaignsDmed")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Dnd.Application.Main.Models.Users.DomainUser", "Owner")
+                        .WithMany("CampaignsOwned")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DungeonMaster");
+
+                    b.Navigation("Owner");
+                });
+
             modelBuilder.Entity("Dnd.Application.Main.Models.Characters.Character", b =>
                 {
                     b.HasOne("Dnd.Application.Main.Models.Characters.CharacterStats", "Stats")
@@ -368,42 +387,43 @@ namespace Dnd.Application.Main.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Stats");
-                });
-
-            modelBuilder.Entity("Dnd.Application.Main.Models.Intermediate.CharacterClass", b =>
-                {
-                    b.HasOne("Dnd.Application.Main.Models.Characters.Character", "_character")
-                        .WithMany("Classes")
-                        .HasForeignKey("CharacterId")
+                    b.HasOne("Dnd.Application.Main.Models.Users.DomainUser", "User")
+                        .WithMany("Characters")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("_character");
+                    b.Navigation("Stats");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Dnd.Application.Main.Models.Intermediate.UserCharacterCampaign", b =>
                 {
-                    b.HasOne("Dnd.Application.Main.Models.Characters.Character", "_Character")
-                        .WithMany("Campaigns")
-                        .HasForeignKey("CharacterId")
+                    b.HasOne("Dnd.Application.Main.Models.Users.DomainUser", "_User")
+                        .WithMany("CampaignsPlayed")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("_Character");
-                });
-
-            modelBuilder.Entity("Dnd.Application.Main.Models.Characters.Character", b =>
-                {
-                    b.Navigation("Campaigns");
-
-                    b.Navigation("Classes");
+                    b.Navigation("_User");
                 });
 
             modelBuilder.Entity("Dnd.Application.Main.Models.Characters.CharacterStats", b =>
                 {
                     b.Navigation("Character")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Dnd.Application.Main.Models.Users.DomainUser", b =>
+                {
+                    b.Navigation("CampaignsDmed");
+
+                    b.Navigation("CampaignsOwned");
+
+                    b.Navigation("CampaignsPlayed");
+
+                    b.Navigation("Characters");
                 });
 #pragma warning restore 612, 618
         }
