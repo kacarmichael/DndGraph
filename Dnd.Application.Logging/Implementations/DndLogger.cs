@@ -1,4 +1,4 @@
-﻿namespace Dnd.Application.Logging;
+﻿namespace Dnd.Application.Logging.Implementations;
 
 internal static class Logger
 {

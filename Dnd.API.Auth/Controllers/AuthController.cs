@@ -3,8 +3,8 @@ using Dnd.Application.Auth.Extensions;
 using Dnd.Application.Auth.Infrastructure.Security;
 using Dnd.Application.Auth.Models;
 using Dnd.Application.Auth.Services.Interfaces;
+using Dnd.Application.Logging.Interfaces;
 using Dnd.Application.Main.Services.Interfaces;
-using Dnd.Core.Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

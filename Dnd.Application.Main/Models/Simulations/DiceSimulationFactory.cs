@@ -1,6 +1,6 @@
 ﻿using Dnd.Application.Main.Models.Dice;
 
-namespace Dnd.Application.Main.Models.Rolls;
+namespace Dnd.Application.Main.Models.Simulations;
 
 public class DiceSimulationFactory : IDiceSimulationFactory
 {

@@ -14,20 +14,39 @@ public class UserRepository : IUserRepository<DomainUser>
         _context = context;
     }
 
-    public Task<DomainUser> GetUserByIdAsync(int userId) => Task.FromResult(_context.Users.Find(userId));
+    public async Task<DomainUser> GetUserByIdAsync(int userId)
+    {
+        return await Task.FromResult(_context.Users.Find(userId));
+    }
 
-    public Task<DomainUser> AddUserAsync(DomainUser domainUser) =>
-        Task.FromResult(_context.Users.Add(domainUser).Entity);
+    public async Task<DomainUser> AddUserAsync(DomainUser domainUser)
+    {
+        var res = _context.Users.Add(domainUser);
+        await _context.SaveChangesAsync();
+        return res.Entity;
+    }
 
-    public Task<DomainUser> UpdateUserAsync(DomainUser domainUser) =>
-        Task.FromResult(_context.Users.Update(domainUser).Entity);
+    public async Task<DomainUser> UpdateUserAsync(DomainUser domainUser)
+    {
+        var res = _context.Users.Update(domainUser);
+        await _context.SaveChangesAsync();
+        return res.Entity;
+    }
 
-    public Task<DomainUser> DeleteUserAsync(DomainUser domainUser) =>
-        Task.FromResult(_context.Users.Remove(domainUser).Entity);
+    public async Task<DomainUser> DeleteUserAsync(DomainUser domainUser)
+    {
+        var res = _context.Users.Remove(domainUser);
+        await _context.SaveChangesAsync();
+        return res.Entity;
+    }
 
-    public Task<List<DomainUser>> GetAllUsersAsync() =>
-        _context.Users.ToListAsync();
+    public async Task<List<DomainUser>> GetAllUsersAsync()
+    {
+        return await _context.Users.ToListAsync();
+    }
 
-    public Task<DomainUser> GetUserAsync(string username) =>
-        Task.FromResult(_context.Users.FirstOrDefault(x => x.Username == username));
+    public async Task<DomainUser> GetUserAsync(string username)
+    {
+        return await Task.FromResult(_context.Users.FirstOrDefault(x => x.Username == username));
+    }
 }

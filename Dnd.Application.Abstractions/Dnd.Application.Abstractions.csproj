@@ -7,7 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Dnd.Application.Auth\Dnd.Application.Auth.csproj"/>
+      <ProjectReference Include="..\Dnd.Application.Auth\Dnd.Application.Auth.csproj" />
+      <ProjectReference Include="..\Dnd.Application.Main\Dnd.Application.Main.csproj" />
     </ItemGroup>
 
 </Project>

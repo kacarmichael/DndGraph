@@ -1,7 +1,7 @@
-﻿using Dnd.Core.Logging;
+﻿using Dnd.Application.Logging.Interfaces;
 using Microsoft.Extensions.Logging;
 
-namespace Dnd.Application.Logging;
+namespace Dnd.Application.Logging.Implementations;
 
 public class LoggerConfig : ILoggerConfig
 {

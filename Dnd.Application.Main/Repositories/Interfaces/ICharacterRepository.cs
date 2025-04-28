@@ -1,4 +1,6 @@
-﻿namespace Dnd.Application.Main.Repositories.Interfaces;
+﻿using Dnd.Application.Main.Models.Characters;
+
+namespace Dnd.Application.Main.Repositories.Interfaces;
 
 public interface ICharacterRepository<TCharacter, TStats, TClass>
 {
@@ -8,7 +10,7 @@ public interface ICharacterRepository<TCharacter, TStats, TClass>
     Task<TCharacter> AddCharacterAsync(TCharacter character);
 
     //Task<ICharacter> AddCharacterAsync(ICharacter character, ICharacterStats stats, IEnumerable<ICharacterClass> classes);
-    void UpdateCharacter(TCharacter character);
+    Task<Character> UpdateCharacterAsync(TCharacter character);
     Task<Task> DeleteCharacterAsync(int id);
     Task<TStats> GetStatBlockByIdAsync(int id);
     Task<IEnumerable<TStats>> GetAllStatBlocksAsync();

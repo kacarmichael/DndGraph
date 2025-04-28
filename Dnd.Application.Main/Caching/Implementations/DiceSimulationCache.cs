@@ -1,4 +1,4 @@
-﻿using Dnd.Core.Caching;
+using Dnd.Core.Caching;
 using Dnd.Core.Main;
 
 namespace Dnd.Application.Caching;

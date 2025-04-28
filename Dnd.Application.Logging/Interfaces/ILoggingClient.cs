@@ -1,4 +1,4 @@
-﻿namespace Dnd.Core.Logging;
+﻿namespace Dnd.Application.Logging.Interfaces;
 
 public interface ILoggingClient
 {
