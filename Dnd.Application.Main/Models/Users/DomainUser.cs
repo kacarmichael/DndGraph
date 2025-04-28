@@ -29,4 +29,11 @@ public class DomainUser
         Username = username;
         Characters = new List<Character>();
     }
+
+    public DomainUser(string username, int id)
+    {
+        Username = username;
+        Id = id;
+        Characters = new List<Character>();
+    }
 }

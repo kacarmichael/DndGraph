@@ -2,7 +2,7 @@
 
 namespace Dnd.Application.Main.Models.Rolls;
 
-public class DiceSimulationFactory
+public class DiceSimulationFactory : IDiceSimulationFactory
 {
     public DiceSimulation CreateSimulation(DiceSet diceSet, int numTrials, int modifier = 0)
     {

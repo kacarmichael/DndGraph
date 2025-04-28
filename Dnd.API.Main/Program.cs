@@ -7,6 +7,7 @@ using Dnd.Application.Main.Models.Characters;
 using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Application.Main.Models.Intermediate;
 using Dnd.Application.Main.Models.Rolls;
+using Dnd.Application.Main.Models.Users;
 using Dnd.Application.Main.Repositories.Implementations;
 using Dnd.Application.Main.Repositories.Interfaces;
 using Dnd.Application.Main.Services.Implementations;
@@ -76,7 +77,7 @@ builder.Services.AddTransient<IRollRepository<DiceRollBase>, RollRepository>();
 builder.Services.AddTransient<IRollMapperService, RollMapperService>();
 builder.Services.AddTransient<IRollService, RollService>();
 builder.Services.AddTransient<IClassMapperService, ClassMapperService>();
-// builder.Services.AddTransient<IDiceSimulationFactory, DiceSimulationFactory>();
+builder.Services.AddTransient<IDiceSimulationFactory, DiceSimulationFactory>();
 builder.Services.AddTransient<IDiceRollCache, DiceRollCache>();
 builder.Services.AddTransient<IDiceSimulationCache, DiceSimulationCache>();
 // builder.Services.AddTransient<IAbilityBlock, AbilityBlock>();
@@ -230,48 +231,55 @@ app.Services.SaveSwaggerJson();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-using (var scope = app.Services.CreateScope())
+try
 {
-    var dbContext = scope.ServiceProvider.GetService<DndDbContext>();
-    //dbContext.Database.Migrate();
-    var stat_block = new CharacterStats(
-        id: 1,
-        characterId: 1,
-        level: 7,
-        new AbilityBlock(
-            new List<int> { 10, 13, 12, 17, 19, 18 }
-        )
-    );
-    var cc = new List<CharacterClass>
+    using (var scope = app.Services.CreateScope())
     {
-        new CharacterClass(
-            classId: 11,
+        var dbContext = scope.ServiceProvider.GetService<DndDbContext>();
+
+        var user = new DomainUser(
+            username: "TestUser",
+            id: 1
+        );
+
+        dbContext.Users.Add(user);
+
+        var stat_block = new CharacterStats(
+            id: 1,
             characterId: 1,
-            levels: 6),
-        new CharacterClass(
-            classId: 12,
-            characterId: 1,
-            levels: 1)
-    };
-    var test_char = new Character(
-        id: 1,
-        name: "Theodred Venran",
-        stats: stat_block,
-        charClass: cc,
-        userId: 1);
-    dbContext.Characters.Add(test_char);
-    dbContext.CharacterStats.Add(stat_block);
-    dbContext.CharacterClasses.AddRange(cc.Select(cc => (CharacterClass)cc));
-    dbContext.SaveChanges();
+            level: 7,
+            new AbilityBlock(
+                new List<int> { 10, 13, 12, 17, 19, 18 }
+            )
+        );
+        var cc = new List<CharacterClass>
+        {
+            new CharacterClass(
+                classId: 11,
+                characterId: 1,
+                levels: 6),
+            new CharacterClass(
+                classId: 12,
+                characterId: 1,
+                levels: 1)
+        };
+        var test_char = new Character(
+            id: 1,
+            name: "Theodred Venran",
+            stats: stat_block,
+            charClass: cc,
+            userId: 1);
+        dbContext.Characters.Add(test_char);
+        dbContext.CharacterStats.Add(stat_block);
+        dbContext.CharacterClasses.AddRange(cc.Select(cc => (CharacterClass)cc));
+        dbContext.SaveChanges();
+    }
 }
-
-
-// using (var scope = app.Services.CreateScope())
-// {
-// var dbContext = scope.ServiceProvider.GetService<DndDbContext>();
-// dbContext.Database.EnsureCreated();
-// dbContext.Populate();
-// }
-
-
-app.Run();
+catch (DbUpdateException e)
+{
+    Console.WriteLine("Seeded data already exists. Proceeding to startup");
+}
+finally
+{
+    app.Run();
+}

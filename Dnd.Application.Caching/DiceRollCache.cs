@@ -1,18 +1,18 @@
-﻿using Dnd.Application.Main.Models.Rolls;
-using Dnd.Core.Caching;
+﻿using Dnd.Core.Caching;
+using Dnd.Core.Main;
 
 namespace Dnd.Application.Caching;
 
 public class DiceRollCache : IDiceRollCache
 {
-    private readonly List<DiceRollBase> _rolls = new();
+    private readonly List<IDiceRoll> _rolls = new();
 
-    public void AddRoll(DiceRollBase roll)
+    public void AddRoll(IDiceRoll roll)
     {
         _rolls.Add(roll);
     }
 
-    public List<DiceRollBase> GetRolls()
+    public List<IDiceRoll> GetRolls()
     {
         return _rolls;
     }

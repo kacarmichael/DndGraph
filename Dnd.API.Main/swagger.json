@@ -29,17 +29,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ICampaign"
+                "$ref": "#/components/schemas/Campaign"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ICampaign"
+                "$ref": "#/components/schemas/Campaign"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ICampaign"
+                "$ref": "#/components/schemas/Campaign"
               }
             }
           }
@@ -58,17 +58,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ICampaign"
+                "$ref": "#/components/schemas/Campaign"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ICampaign"
+                "$ref": "#/components/schemas/Campaign"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ICampaign"
+                "$ref": "#/components/schemas/Campaign"
               }
             }
           }
@@ -165,17 +165,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ICampaignSession"
+                "$ref": "#/components/schemas/CampaignSession"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ICampaignSession"
+                "$ref": "#/components/schemas/CampaignSession"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ICampaignSession"
+                "$ref": "#/components/schemas/CampaignSession"
               }
             }
           }
@@ -245,17 +245,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ICampaignSession"
+                "$ref": "#/components/schemas/CampaignSession"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ICampaignSession"
+                "$ref": "#/components/schemas/CampaignSession"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ICampaignSession"
+                "$ref": "#/components/schemas/CampaignSession"
               }
             }
           }
@@ -700,6 +700,158 @@
   },
   "components": {
     "schemas": {
+      "Ability": {
+        "type": "object",
+        "properties": {
+          "score": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "modifier": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "proficient": {
+            "type": "boolean"
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Campaign": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "players": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DomainUser"
+            },
+            "nullable": true
+          },
+          "ownerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/DomainUser"
+          },
+          "dungeonMasterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dungeonMaster": {
+            "$ref": "#/components/schemas/DomainUser"
+          },
+          "userCharacters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserCharacterCampaign"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CampaignSession": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "campaign": {
+            "$ref": "#/components/schemas/Campaign"
+          },
+          "sessionDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Character": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "stats": {
+            "$ref": "#/components/schemas/CharacterStats"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "user": {
+            "$ref": "#/components/schemas/DomainUser"
+          },
+          "campaigns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserCharacterCampaign"
+            },
+            "nullable": true
+          },
+          "classes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CharacterClass"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CharacterClass": {
+        "type": "object",
+        "properties": {
+          "characterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "classId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "levels": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "_character": {
+            "$ref": "#/components/schemas/Character"
+          },
+          "_class": {
+            "$ref": "#/components/schemas/Class"
+          }
+        },
+        "additionalProperties": false
+      },
       "CharacterRequestDto": {
         "type": "object",
         "properties": {
@@ -785,6 +937,87 @@
               "type": "integer",
               "format": "int32"
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CharacterStats": {
+        "type": "object",
+        "properties": {
+          "statBlockId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "character": {
+            "$ref": "#/components/schemas/Character"
+          },
+          "characterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "abilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ability"
+            },
+            "nullable": true
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Skill"
+            },
+            "nullable": true
+          },
+          "proficiencyBonus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "strengthScore": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dexterityScore": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "constitutionScore": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "intelligenceScore": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wisdomScore": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "charismaScore": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Class": {
+        "type": "object",
+        "properties": {
+          "classId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "spellcastingAbility": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -1010,7 +1243,7 @@
         "type": "object",
         "properties": {
           "diceRolled": {
-            "$ref": "#/components/schemas/IDiceSet"
+            "$ref": "#/components/schemas/DiceSet"
           },
           "modifier": {
             "type": "integer",
@@ -1019,7 +1252,7 @@
           "results": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ISimResult"
+              "$ref": "#/components/schemas/SimResult"
             },
             "nullable": true
           },
@@ -1033,334 +1266,48 @@
         },
         "additionalProperties": false
       },
-      "IAbility": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "score": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "modifier": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "proficient": {
-            "type": "boolean"
-          },
-          "skills": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "IAuthUser": {
-        "type": "object",
-        "properties": {
-          "username": {
-            "type": "string",
-            "nullable": true
-          },
-          "currentSalt": {
-            "type": "string",
-            "nullable": true
-          },
-          "previousSalt": {
-            "type": "string",
-            "nullable": true
-          },
-          "hashedPassword": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "role": {
-            "type": "string",
-            "nullable": true
-          },
-          "created": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updated": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "lastLogin": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "failedLogins": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "locked": {
-            "type": "boolean"
-          },
-          "passwordResetToken": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ICampaign": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "players": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IDomainUser"
-            },
-            "nullable": true
-          },
-          "owner": {
-            "$ref": "#/components/schemas/IDomainUser"
-          },
-          "dungeonMaster": {
-            "$ref": "#/components/schemas/IDomainUser"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ICampaignSession": {
-        "type": "object",
-        "properties": {
-          "campaign": {
-            "$ref": "#/components/schemas/ICampaign"
-          },
-          "sessionDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ICharacter": {
+      "DomainUser": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
             "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "stats": {
-            "$ref": "#/components/schemas/ICharacterStats"
-          },
-          "userId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "user": {
-            "$ref": "#/components/schemas/IDomainUser"
-          },
-          "classes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ICharacterClass"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ICharacterClass": {
-        "type": "object",
-        "properties": {
-          "characterId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "_character": {
-            "$ref": "#/components/schemas/ICharacter"
-          },
-          "classId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "_class": {
-            "$ref": "#/components/schemas/IClass"
-          },
-          "levels": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ICharacterStats": {
-        "type": "object",
-        "properties": {
-          "statBlockId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "characterId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "level": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "abilities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IAbility"
-            },
-            "nullable": true
-          },
-          "skills": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ISkill"
-            },
-            "nullable": true
-          },
-          "proficiencyBonus": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "IClass": {
-        "type": "object",
-        "properties": {
-          "classId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "spellcastingAbility": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "IDiceSet": {
-        "type": "object",
-        "properties": {
-          "d4": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "d6": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "d8": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "d10": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "d12": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "d20": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "d100": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "IDomainUser": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
           },
           "authUserId": {
             "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "authUser": {
-            "$ref": "#/components/schemas/IAuthUser"
+            "format": "int32"
           },
           "username": {
             "type": "string",
-            "nullable": true,
-            "readOnly": true
+            "nullable": true
           },
           "characters": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ICharacter"
+              "$ref": "#/components/schemas/Character"
             },
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ISimResult": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "frequency": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ISkill": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
             "nullable": true
           },
-          "modifier": {
-            "type": "integer",
-            "format": "int32"
+          "campaignsPlayed": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserCharacterCampaign"
+            },
+            "nullable": true
           },
-          "proficient": {
-            "type": "boolean"
+          "campaignsOwned": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Campaign"
+            },
+            "nullable": true
+          },
+          "campaignsDmed": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Campaign"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1415,6 +1362,64 @@
           "characterName": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SimResult": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "frequency": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Skill": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifier": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "proficient": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserCharacterCampaign": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "characterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "campaignId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "_User": {
+            "$ref": "#/components/schemas/DomainUser"
+          },
+          "_Character": {
+            "$ref": "#/components/schemas/Character"
+          },
+          "_Campaign": {
+            "$ref": "#/components/schemas/Campaign"
           }
         },
         "additionalProperties": false

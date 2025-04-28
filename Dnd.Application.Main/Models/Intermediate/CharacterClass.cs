@@ -17,6 +17,15 @@ public class CharacterClass
     {
     }
 
+    public CharacterClass(Character character, Class cls, int levels)
+    {
+        _character = character;
+        _class = cls;
+        Levels = levels;
+        CharacterId = _character.Id;
+        ClassId = _class.ClassId;
+    }
+
     public CharacterClass(int classId, int characterId, int levels)
     {
         ClassId = classId;

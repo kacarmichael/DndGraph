@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Application.Abstraction
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleSandbox", "ConsoleSandbox\ConsoleSandbox.csproj", "{543F11C7-0C52-419D-A9FA-01040FF0AA97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnd.Core.Main", "Dnd.Core.Main\Dnd.Core.Main.csproj", "{53AD9AE6-8C14-41C4-8C14-A7B210349550}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,5 +80,9 @@ Global
 		{543F11C7-0C52-419D-A9FA-01040FF0AA97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{543F11C7-0C52-419D-A9FA-01040FF0AA97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{543F11C7-0C52-419D-A9FA-01040FF0AA97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53AD9AE6-8C14-41C4-8C14-A7B210349550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53AD9AE6-8C14-41C4-8C14-A7B210349550}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53AD9AE6-8C14-41C4-8C14-A7B210349550}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53AD9AE6-8C14-41C4-8C14-A7B210349550}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

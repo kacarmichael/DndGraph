@@ -15,13 +15,13 @@ public class RollService : IRollService
     private readonly ICharacterRepository<Character, CharacterStats, CharacterClass> _characterRepository;
     private readonly IRollRepository<DiceRollBase> _rollRepository;
     private readonly IRollMapperService _rollMapperService;
-    private readonly DiceSimulationFactory _diceSimulationFactory;
+    private readonly IDiceSimulationFactory _diceSimulationFactory;
     private readonly IDiceRollCache _diceRollCache;
     private readonly IDiceSimulationCache _diceSimulationCache;
 
     public RollService(ICharacterRepository<Character, CharacterStats, CharacterClass> characterRepository,
         IRollRepository<DiceRollBase> rollRepository,
-        IRollMapperService rollMapperService, DiceSimulationFactory diceSimulationFactory,
+        IRollMapperService rollMapperService, IDiceSimulationFactory diceSimulationFactory,
         IDiceRollCache diceRollCache, IDiceSimulationCache diceSimulationCache)
     {
         _characterRepository = characterRepository;
@@ -39,7 +39,7 @@ public class RollService : IRollService
             var character = await _characterRepository.GetCharacterAsync((int)req.CharacterId);
             var roll = await _rollMapperService.Map(req);
             await _rollRepository.AddRollAsync(roll);
-            _diceRollCache.AddRoll(roll);
+            //_diceRollCache.AddRoll(roll);
             var resp = _rollMapperService.Map(roll);
             return resp;
         }
@@ -52,7 +52,7 @@ public class RollService : IRollService
     public Task<DiceSimulation> Simulate(DiceSet set, int trials)
     {
         var sim = _diceSimulationFactory.CreateSimulation(set, trials, 0);
-        _diceSimulationCache.AddDiceSimulation(sim);
+        //_diceSimulationCache.AddDiceSimulation(sim);
         return Task.FromResult(sim);
     }
 
@@ -61,7 +61,7 @@ public class RollService : IRollService
         if (request is DiceSimulationRequestDto req)
         {
             var sim = _diceSimulationFactory.CreateSimulation(req.ToDiceSet(), req.Trials, req.Modifier);
-            _diceSimulationCache.AddDiceSimulation(sim);
+            //_diceSimulationCache.AddDiceSimulation(sim);
             return new DiceSimulationResponseDto(sim);
         }
         else
