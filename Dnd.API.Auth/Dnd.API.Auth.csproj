@@ -7,11 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-<<<<<<< HEAD
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4"/>
-=======
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
->>>>>>> origin/auth
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="9.0.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="9.0.4" />
@@ -21,24 +17,13 @@
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.4" />
-<<<<<<< HEAD
         <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="8.1.1"/>
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.1.1"/>
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.1"/>
-=======
-        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="8.0.0" />
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.0.0" />
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.0.0" />
->>>>>>> origin/auth
     </ItemGroup>
-
     <ItemGroup>
+        <ProjectReference Include="..\Dnd.Application.Abstractions\Dnd.Application.Abstractions.csproj"/>
       <ProjectReference Include="..\Dnd.Application.Auth\Dnd.Application.Auth.csproj" />
       <ProjectReference Include="..\Dnd.Application.Logging\Dnd.Application.Logging.csproj" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="8.1.1"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.1.1"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.1"/>
     </ItemGroup>
-
 </Project>

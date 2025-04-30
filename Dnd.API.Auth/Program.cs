@@ -1,17 +1,17 @@
-using Dnd.Application.Abstractions;
 using Dnd.Application.Auth.Infrastructure.Database;
 using Dnd.Application.Auth.Models;
 using Dnd.Application.Auth.Repositories.Implementations;
 using Dnd.Application.Auth.Repositories.Interfaces;
 using Dnd.Application.Auth.Services.Implementations;
 using Dnd.Application.Auth.Services.Interfaces;
-using Dnd.Application.Logging;
+using Dnd.Application.Logging.Implementations;
+using Dnd.Application.Logging.Interfaces;
+using Dnd.Application.Main.Infrastructure;
 using Dnd.Application.Main.Models.Users;
 using Dnd.Application.Main.Repositories.Implementations;
 using Dnd.Application.Main.Repositories.Interfaces;
 using Dnd.Application.Main.Services.Implementations;
 using Dnd.Application.Main.Services.Interfaces;
-using Dnd.Core.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 

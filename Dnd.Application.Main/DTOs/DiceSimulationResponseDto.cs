@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using Dnd.Application.Main.Models.Dice;
+﻿using Dnd.Application.Main.Models.Dice;
 using Dnd.Application.Main.Utils;
 using MathNet.Numerics.Statistics;
 
@@ -35,6 +34,11 @@ public class DiceSimulationResponseDto : IDto
 
     public override string ToString()
     {
-        return JsonSerializer.Serialize(this);
+        return "Simulation Results:\n" +
+               "dice rolled: " + DiceRolled + "\n" +
+               "modifier: " + Modifier + "\n" +
+               "results: " + Results + "\n" +
+               "trials: " + Trials + "\n";
+        //"stats: " + JsonSerializer.Serialize(Stats);
     }
 }

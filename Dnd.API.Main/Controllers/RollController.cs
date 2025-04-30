@@ -1,7 +1,6 @@
 ﻿using Dnd.Application.Logging.Interfaces;
 using Dnd.Application.Main.DTOs;
 using Dnd.Application.Main.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dnd.API.Main.Controllers;
@@ -24,7 +23,7 @@ public class RollController : ControllerBase
         _logger.LogInformation("Roll controller created");
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpPost]
     public async Task<ActionResult<RollResponseDto>> PostRoll([FromBody] RollRequestDto req)
     {
@@ -32,7 +31,7 @@ public class RollController : ControllerBase
         return Ok(response);
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpPost("dice")]
     public Task<ActionResult<DiceRollResponseDto>> PostDiceRoll([FromBody] DiceRollRequestDto req)
     {
@@ -51,7 +50,7 @@ public class RollController : ControllerBase
         }
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpPost("dice/simulate")]
     public Task<ActionResult<DiceSimulationResponseDto>> PostDiceSimulation([FromBody] DiceSimulationRequestDto req)
     {

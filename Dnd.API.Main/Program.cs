@@ -1,19 +1,21 @@
+using System.Text.Json.Serialization;
 using Dnd.API.Main.Extensions;
 using Dnd.Application.Auth.Models;
 using Dnd.Application.Caching;
-using Dnd.Application.Logging;
+using Dnd.Application.Logging.Implementations;
+using Dnd.Application.Logging.Interfaces;
 using Dnd.Application.Main.Infrastructure;
 using Dnd.Application.Main.Models.Characters;
 using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Application.Main.Models.Intermediate;
 using Dnd.Application.Main.Models.Rolls;
+using Dnd.Application.Main.Models.Simulations;
 using Dnd.Application.Main.Models.Users;
 using Dnd.Application.Main.Repositories.Implementations;
 using Dnd.Application.Main.Repositories.Interfaces;
 using Dnd.Application.Main.Services.Implementations;
 using Dnd.Application.Main.Services.Interfaces;
 using Dnd.Core.Caching;
-using Dnd.Core.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -52,7 +54,11 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals;
+    });
 // .AddJsonOptions(options =>
 // {
 //     options.JsonSerializerOptions.Converters.Add(new AbilitySerializer());
@@ -62,6 +68,7 @@ builder.Services.AddControllers();
 //     options.JsonSerializerOptions.Converters.Add(new CharacterStatsSerializer());
 //     options.JsonSerializerOptions.Converters.Add(new CharacterSerializer());
 // });
+
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 
@@ -209,7 +216,7 @@ builder.Services.AddCors(options =>
 // });
 
 builder.Services.AddSingleton<ILoggingClient>(
-    new LoggingClient(new LoggerConfig("Dnd.API.Main", null, LogLevel.Information)));
+    new LoggingClient(new LoggerConfig("Dnd.API.Main", null, minLogLevel: LogLevel.Information)));
 
 
 var app = builder.Build();
