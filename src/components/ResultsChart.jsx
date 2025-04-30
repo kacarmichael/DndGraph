@@ -34,7 +34,14 @@ export class ResultsChart extends Component {
             .domain([0, this.props.data.length > 0 ? d3.max(this.props.data, d => d.frequency) : 0])
             .range([height, 0]);
 
+        const numTicks = Math.min(10, this.props.data.length);
+        const tickValues = [];
+        for (let i = 0; i < numTicks; i++) {
+            tickValues.push(this.props.data[Math.floor(i * this.props.data.length / numTicks)].value);
+        }
+
         const xAxis = d3.axisBottom(xScale)
+            .tickValues(tickValues)
             .tickFormat(d => d);
 
         const yAxis = d3.axisLeft(yScale);
@@ -92,7 +99,17 @@ export class ResultsChart extends Component {
                 const heightValue = height - yScale(d.frequency);
                 return isNaN(heightValue) ? 0 : heightValue;
             })
-            .attr("fill", "orange")
+            .attr("fill", d => d.value >= this.props.dc ? "green" : "red");
+
+        svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`)
+            .append("line")
+            .attr("x1", xScale(this.props.dc))
+            .attr("y1", 0)
+            .attr("x2", xScale(this.props.dc))
+            .attr("y2", height)
+            .attr("stroke", "red")
+            .attr("stroke-width", 2);
 
     }
 
@@ -168,6 +185,7 @@ ResultsChart.propTypes = {
         value: PropTypes.number,
         frequency: PropTypes.number
     })),
+    dc: PropTypes.number
 }
 
 export default ResultsChart;

@@ -43,9 +43,12 @@ export class RollTable extends Component {
         }
 
         if (Object.values(diceState).every(value => value !== undefined)) {
+            const jwt = localStorage.getItem('jwt');
             fetch(import.meta.env.VITE_API_URL + '/api/roll/dice', {
+                mode: 'cors',
                 method: 'POST',
                 headers: {
+                    'Authorization': `Bearer ${jwt}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(diceState)
@@ -54,13 +57,20 @@ export class RollTable extends Component {
                     if (response.ok) {
                         return response.json()
                     } else {
-                        throw new Error('Network response was not ok.')
+                        const error = new Error(`Error ${response.status}: ${response.statusText} at ${response.url}`);
+                        error.response = response;
+                        throw error;
                     }
                 }
             ).then(
                 data => this.setState({rollResult: data.total})
-            ).catch(
-                error => console.log(error)
+            ).catch((error) => {
+                if (error.response) {
+                    console.error(`Error ${error.response.status}: ${error.response.statusText} at ${error.response.url}`);
+                } else {
+                    console.error(error)
+                }
+            }
             )
         } else {
             console.log('Missing dice');
@@ -69,7 +79,7 @@ export class RollTable extends Component {
 
     onClick_Simulate = () => {
         console.log(import.meta.env.VITE_API_URL + '/api/roll/dice/simulate');
-
+        const jwt = localStorage.getItem('jwt');
         const diceState = {
             d4: this.state.d4,
             d6: this.state.d6,
@@ -86,6 +96,7 @@ export class RollTable extends Component {
             fetch(import.meta.env.VITE_API_URL + '/api/roll/dice/simulate', {
                 method: 'POST',
                 headers: {
+                    'Authorization': `Bearer ${jwt}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(diceState)
@@ -189,7 +200,7 @@ export class RollTable extends Component {
                 {/*    )*/}
                 {/*}*/}
                 {this.state.simulationResult.results && (
-                    <ResultsChart data={this.state.simulationResult.results} />
+                    <ResultsChart data={this.state.simulationResult.results} dc={this.props.dc}/>
                 )}
 
             </div>
@@ -198,18 +209,19 @@ export class RollTable extends Component {
 }
 
 RollTable.propTypes = {
-    d4: PropTypes.number,
-    d6: PropTypes.number,
-    d8: PropTypes.number,
-    d10: PropTypes.number,
-    d12: PropTypes.number,
-    d20: PropTypes.number,
-    d100: PropTypes.number,
-    modifier: PropTypes.number,
-    rollResult: PropTypes.number,
-    simulationResult: PropTypes.shape({
-        Value: PropTypes.number,
-        Frequency: PropTypes.number
-    }),
-    trials: PropTypes.number
+    // d4: PropTypes.number,
+    // d6: PropTypes.number,
+    // d8: PropTypes.number,
+    // d10: PropTypes.number,
+    // d12: PropTypes.number,
+    // d20: PropTypes.number,
+    // d100: PropTypes.number,
+    // modifier: PropTypes.number,
+    // rollResult: PropTypes.number,
+    // simulationResult: PropTypes.shape({
+    //     Value: PropTypes.number,
+    //     Frequency: PropTypes.number
+    // }),
+    // trials: PropTypes.number,
+    dc: PropTypes.number
 }
