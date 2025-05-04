@@ -32,4 +32,13 @@
       <ProjectReference Include="..\Dnd.Application.Main\Dnd.Application.Main.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <Content Include="..\appsettings.*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Properties\launchSettings.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
 </Project>

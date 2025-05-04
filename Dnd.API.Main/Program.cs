@@ -16,11 +16,14 @@ using Dnd.Application.Main.Repositories.Interfaces;
 using Dnd.Application.Main.Services.Implementations;
 using Dnd.Application.Main.Services.Interfaces;
 using Dnd.Core.Caching;
+using Dnd.Core.Main.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Configuration.AddJsonFile("Properties/launchSettings.json", optional: true, reloadOnChange: true);
+//builder.Configuration.AddJsonFile("../appsettings.json", optional: true, reloadOnChange: true);
+builder.Configuration.AddConfiguration(AppConfigurationBuilder.Build(builder.Configuration));
 // Add services to the container.
 
 builder.Services.AddSwaggerGen(c =>
@@ -73,7 +76,8 @@ builder.Services.AddControllers()
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 
 builder.Services.AddDbContext<DndDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
+    //options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
+    options.UseNpgsql(AppConfigurationBuilder.GetConnectionString(builder.Configuration)));
 
 // builder.Services.AddDbContext<RollDbContext>(options =>
 //     options.UseInMemoryDatabase("RollDb"));
