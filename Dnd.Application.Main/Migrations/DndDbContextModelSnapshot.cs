@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Dnd.Application.Main.Migrations
 {
     [DbContext(typeof(DndDbContext))]
-    partial class CharacterDbContextModelSnapshot : ModelSnapshot
+    partial class DndDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

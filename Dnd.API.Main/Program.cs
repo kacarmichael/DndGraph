@@ -77,7 +77,7 @@ builder.Services.AddControllers()
 
 builder.Services.AddDbContext<DndDbContext>(options =>
     //options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
-    options.UseNpgsql(AppConfigurationBuilder.GetConnectionString(builder.Configuration)));
+    options.UseNpgsql(AppConfigurationBuilder.GetConnectionString((IConfigurationBuilder)builder.Configuration)));
 
 // builder.Services.AddDbContext<RollDbContext>(options =>
 //     options.UseInMemoryDatabase("RollDb"));

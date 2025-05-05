@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Dnd.Application.Main.Migrations
 {
     [DbContext(typeof(DndDbContext))]
-    [Migration("20250428065132_platform_migration_2")]
-    partial class platform_migration_2
+    [Migration("20250505052358_new_db")]
+    partial class new_db
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
