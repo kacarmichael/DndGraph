@@ -14,6 +14,9 @@ public static class AppConfigurationBuilder
             case "Local":
                 builder.AddJsonFile("appsettings.Local.json");
                 break;
+            case "Docker":
+                builder.AddJsonFile("appsettings.Docker.json");
+                break;
             case "Development":
                 builder.AddJsonFile("appsettings.Development.json");
                 break;
