@@ -18,9 +18,11 @@ export class RollTable extends Component {
             modifier: 0,
             rollResult: 0,
             simulationResult: {},
-            trials: 1
+            trials: 1,
+            dc: 0
         };
     }
+
 
     onDiceChange = (e) => {
         const value = e.target.value !== '' ? parseInt(e.target.value) : 0;
@@ -119,9 +121,15 @@ export class RollTable extends Component {
             console.log('Missing dice');
         }
     }
+
+    onDCChange = (e) => {
+        const value = e.target.value !== '' ? parseInt(e.target.value) : 0;
+        this.setState({dc: value});
+    }
+
     render() {
         return (
-            <div>
+            <div className={"RollTable"}>
                 <table>
                     <thead>
                     <tr>
@@ -186,23 +194,21 @@ export class RollTable extends Component {
                     </tr>
                     </tbody>
                 </table>
-                <button onClick={this.onClick_roll}>Roll</button>
-                <h1>ROLL RESULT:</h1>
-                <h2>{this.state.rollResult}</h2>
-                <button onClick={this.onClick_Simulate}> Simulate </button>
-                {/*<h1>SIMULATION RESULT:</h1>*/}
-                {/*{this.state.simulationResult.results && (*/}
-                {/*    <ul>*/}
-                {/*        {this.state.simulationResult.results.map((result) => (*/}
-                {/*            <li key={result.value}>{result.value}: {result.frequency}</li>*/}
-                {/*        ))}*/}
-                {/*    </ul>*/}
-                {/*    )*/}
-                {/*}*/}
-                {this.state.simulationResult.results && (
-                    <ResultsChart data={this.state.simulationResult.results} dc={this.props.dc}/>
-                )}
-
+                <div style={{display: 'flex', flexDirection: 'column', gap: '50px'}}>
+                    <div>
+                        <h3 style={{verticalAlign: 'bottom'}}>Set DC</h3>
+                        <input type="number" className={"dcInput"} id="dcInput" name="dc" onChange={this.onDCChange}/>
+                    </div>
+                    <div style={{display: 'flex', margin: 'auto', justifyContent: 'space-between', gap: '25px'}}>
+                        <button style={{margin: 'auto'}} onClick={this.onClick_roll}>Roll</button>
+                        <h3 style={{margin: 'auto'}}>RESULT:</h3>
+                        <h2 style={{margin: 'auto'}}>{this.state.rollResult}</h2>
+                    </div>
+                    <button style={{margin: 'auto'}} onClick={this.onClick_Simulate}> Simulate</button>
+                    {this.state.simulationResult.results && (
+                        <ResultsChart data={this.state.simulationResult.results} dc={this.state.dc}/>
+                    )}
+                </div>
             </div>
         )
     }

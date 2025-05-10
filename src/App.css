@@ -1,42 +1,36 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 #root {
   max-width: 1280px;
+  height: auto;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 21px;
+  letter-spacing: 2.8px;
+  word-spacing: 4.4px;
+  color: #ffffff;
+  font-weight: 400;
+  text-decoration: none solid rgb(255, 0, 0);
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: uppercase;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.RollTable {
+    display: flex;
+    flex-direction: column;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.dcInput {
+  max-width: 50%;
+  margin: 0 auto;
+  vertical-align: top;
 }

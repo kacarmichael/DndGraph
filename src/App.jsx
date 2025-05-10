@@ -18,21 +18,17 @@ function App() {
     setIsLoggedIn(true);
   };
 
-  const onDCChange = (e) => {
-    setDc(parseInt(e.target.value));
-  };
-
   return (
     <>
-      <div>
-          {/*{isLoggedIn ? (<RollTable/>) : (<LoginMenu onLoginSuccess={handleLoginSuccess}/>) }*/}
-          {/*{isLoggedIn ? (<CharacterCreationMenu/>) : (<LoginMenu onLoginSuccess={handleLoginSuccess}/>) }*/}
-          {/*<CharacterConfig/>*/}
-          <RollTable dc={dc}/>
-          <input type="number" id="dcInput" name="dc" onChange={onDCChange}/>
-          {/*<LoginMenu/>*/}
-          {/*<NewUserForm/>*/}
-      </div>
+        <div>
+            <h1>You Feeling Lucky?</h1>
+            {/*{isLoggedIn ? (<RollTable/>) : (<LoginMenu onLoginSuccess={handleLoginSuccess}/>) }*/}
+            {/*{isLoggedIn ? (<CharacterCreationMenu/>) : (<LoginMenu onLoginSuccess={handleLoginSuccess}/>) }*/}
+            {/*<CharacterConfig/>*/}
+            <RollTable/>
+            {/*<LoginMenu/>*/}
+            {/*<NewUserForm/>*/}
+        </div>
     </>
   )
 }

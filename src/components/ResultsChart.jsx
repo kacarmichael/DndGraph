@@ -22,8 +22,8 @@ export class ResultsChart extends Component {
 
     renderChart() {
         const margin = { top: 20, right: 20, bottom: 30, left: 40 };
-        const width = 500 - margin.left - margin.right;
-        const height = 300 - margin.top - margin.bottom;
+        const width = 1000 - margin.left - margin.right;
+        const height = 400 - margin.top - margin.bottom;
 
         const xScale = d3.scaleBand()
             .domain(this.props.data.map(d => d.value))
@@ -42,7 +42,9 @@ export class ResultsChart extends Component {
 
         const xAxis = d3.axisBottom(xScale)
             .tickValues(tickValues)
-            .tickFormat(d => d);
+            .tickFormat(d => d)
+            .tickSize(5);
+
 
         const yAxis = d3.axisLeft(yScale);
 
@@ -99,7 +101,7 @@ export class ResultsChart extends Component {
                 const heightValue = height - yScale(d.frequency);
                 return isNaN(heightValue) ? 0 : heightValue;
             })
-            .attr("fill", d => d.value >= this.props.dc ? "green" : "red");
+            .attr("fill", d => d.value >= this.props.dc ? "#6286B3" : "#F49D01");
 
         svg.append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`)
@@ -110,6 +112,9 @@ export class ResultsChart extends Component {
             .attr("y2", height)
             .attr("stroke", "red")
             .attr("stroke-width", 2);
+
+        svg.selectAll(".tick text")
+            .style("font-size", "20px");
 
     }
 
@@ -160,7 +165,7 @@ export class ResultsChart extends Component {
 
     render() {
         return (
-            <div ref={this.chartRef}></div>
+            <div style={{width: "100%", height: "100%"}} ref={this.chartRef}></div>
         )
     }
 }
