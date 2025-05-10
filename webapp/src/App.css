@@ -1,0 +1,36 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  max-width: 1280px;
+  height: auto;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 21px;
+  letter-spacing: 2.8px;
+  word-spacing: 4.4px;
+  color: #ffffff;
+  font-weight: 400;
+  text-decoration: none solid rgb(255, 0, 0);
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: uppercase;
+}
+
+.RollTable {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.dcInput {
+  max-width: 50%;
+  margin: 0 auto;
+  vertical-align: top;
+}
