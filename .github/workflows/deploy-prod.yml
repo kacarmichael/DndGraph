@@ -1,0 +1,50 @@
+name: Deploy to Production
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    deploy:
+        name: Build and Deploy
+        runs-on: ubuntu-latest
+        environment: production
+
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Log into GitHub Container Registry
+          run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+        # API Build/Push
+        - name: Build API Docker Image
+          run: docker build -t ghcr.io/${{ github.repository }}-api:latest ./api/API.Dockerfile
+
+        - name: Push API Docker Image
+          run: docker push ghcr.io/${{ github.repository }}-api:latest
+
+        # Frontend Build/Push
+        - name: Build Web Docker Image
+          run: docker build -t ghcr.io/${{ github.repository }}-web:latest ./webapp
+
+        - name: Push Web Docker Image
+          run: docker push ghcr.io/${{ github.repository }}-web:latest
+
+        # Nginx Build/Push
+        - name: Build Nginx Docker Image
+          run: docker build -t ghcr.io/${{ github.repository }}-nginx:latest ./nginx
+
+        - name: Push Nginx Docker Image
+          run: docker push ghcr.io/${{ github.repository }}-nginx:latest
+
+        - name: Deploy to Production Server
+          uses: appleboy/ssh-action@v1.0.0
+          with:
+            host: ${{ secrets.PROD_HOST }}
+            username: ${{ secrets.PROD_USER }}
+            key: ${{ secrets.PROD_SSH_KEY }}
+            script: |
+                docker login ghcr.io -u ${{ github.actor }} --password '${{ secrets.GITHUB_TOKEN }}'
+                docker compose pull
+                docker compose up -d
