@@ -1,6 +1,0 @@
-@Dnd.Caching.API_HostAddress = http://localhost:5063
-
-GET {{Dnd.Caching.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
