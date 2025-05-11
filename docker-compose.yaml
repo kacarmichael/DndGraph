@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  api:
+    build: ./api
+    ports:
+      - "5218:5218"
+    networks:
+      - dnd
+
+  web:
+    build: ./webapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    networks:
+      - dnd
+
+networks:
+  dnd:
+    driver: bridge
