@@ -8,6 +8,7 @@ ENV ASPNETCORE_URLS=http://+:5218
 
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG configuration=Release
+RUN apt-get update && apt-get install iputils-ping -y
 WORKDIR /app/src
 COPY . .
 # COPY ["Dnd.API.Main", "/app/server/Dnd.API.Main/"]

@@ -62,6 +62,8 @@ builder.Services.AddControllers()
     {
         options.JsonSerializerOptions.NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals;
     });
+
+
 // .AddJsonOptions(options =>
 // {
 //     options.JsonSerializerOptions.Converters.Add(new AbilitySerializer());
@@ -102,7 +104,16 @@ builder.Services.AddCors(options =>
         options.AddPolicy("AllowLocalhost",
             builder =>
             {
-                builder.WithOrigins("http://localhost:3002", "https://localhost:3002")
+                builder.WithOrigins("http://localhost:3000", "https://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+            });
+
+        options.AddPolicy("AllowWebContainer",
+            builder =>
+            {
+                builder.WithOrigins("http://dnd.aaronic.cc", "https://dnd.aaronic.cc")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
@@ -231,7 +242,17 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+// Used for migration container - app should not actually run
+if (args.Contains("--migrate"))
+{
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<DndDbContext>();
+    db.Database.Migrate();
+    return;
+}
+
 app.UseCors("AllowLocalhost");
+app.UseCors("AllowWebContainer");
 app.UseHttpsRedirection();
 app.UseRouting();
 //app.UseAuthentication();
