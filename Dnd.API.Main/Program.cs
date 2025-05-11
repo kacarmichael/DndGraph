@@ -101,22 +101,18 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"))
 
 builder.Services.AddCors(options =>
     {
-        options.AddPolicy("AllowLocalhost",
+        options.AddPolicy("HostWhitelist",
             builder =>
             {
-                builder.WithOrigins("http://localhost:3000", "https://localhost:3000")
+                builder.WithOrigins(
+                    "http://localhost:3000", 
+                    "https://localhost:3000",
+                    "http://dnd.aaronic.cc",
+                    "https://dnd.aaronic.cc"
+                    )
                     .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
-            });
-
-        options.AddPolicy("AllowWebContainer",
-            builder =>
-            {
-                builder.WithOrigins("http://dnd.aaronic.cc", "https://dnd.aaronic.cc")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
+                    .AllowAnyMethod();
+                    //.AllowCredentials();
             });
     }
 );
@@ -251,8 +247,7 @@ if (args.Contains("--migrate"))
     return;
 }
 
-app.UseCors("AllowLocalhost");
-app.UseCors("AllowWebContainer");
+app.UseCors("HostWhitelist");
 app.UseHttpsRedirection();
 app.UseRouting();
 //app.UseAuthentication();
