@@ -292,3 +292,4 @@ __pycache__/
 appsettings.*
 keys/*
 */swagger.json
+.env

@@ -1,21 +1,92 @@
 version: '3'
 
 services:
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Nginx.Dockerfile
+    container_name: nginx
+    restart: unless-stopped
+    depends_on:
+      - api
+      - web
+    ports:
+      - "8080:80"
+    networks:
+      - dnd
+
   api:
-    build: ./api
+    build: 
+      context: ./api
+      dockerfile: API.Dockerfile
     ports:
       - "5218:5218"
     networks:
       - dnd
+    platform: linux/arm64/v8
+    depends_on: 
+      db:
+        condition: service_healthy
 
   web:
-    build: ./webapp
+    build: 
+      context: ./webapp
+      dockerfile: Web.Dockerfile
     ports:
       - "3000:3000"
     depends_on:
       - api
     networks:
       - dnd
+    platform: linux/arm64/v8
+
+  db:
+    image: postgres:latest
+    container_name: dndgraph_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - dnd
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
+      interval: 10s
+      retries: 10
+      start_period: 10s
+      timeout: 10s
+
+  db-migrate:
+    build: 
+      context: ./api
+      dockerfile: Migrate.Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    command: dotnet /out/Dnd.API.Main.dll --migrate
+    networks:
+      - dnd
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    command: tunnel --no-autoupdate run --token $TUNNEL_TOKEN
+    networks:
+      - dnd
+    depends_on:
+      - nginx
+
+volumes:
+  postgres_data:
 
 networks:
   dnd:
