@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
       port: 3000,
       host: true,
-      allowedHosts: ['web', 'localhost']
+      allowedHosts: ['web', 'localhost', 'dnd.aaronic.cc']
   },
   env: {
     VITE_API_URL: 'http://api:5218'
