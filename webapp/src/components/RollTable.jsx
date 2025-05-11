@@ -23,6 +23,18 @@ export class RollTable extends Component {
         };
     }
 
+    const getHeaders = () => {
+        const jwt = localStorage.getItem('jwt');
+        h = {
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json'
+        }
+        if (process.env.NODE_ENV === 'development') {
+            h['CF-Access-Client-Id'] = import.meta.env.VITE_CF_ACCESS_ID;
+            h['CF-Access-Client-Secret'] = import.meta.env.VITE_CF_ACCESS_SECRET;
+        }
+    }
+
 
     onDiceChange = (e) => {
         const value = e.target.value !== '' ? parseInt(e.target.value) : 0;
@@ -45,14 +57,10 @@ export class RollTable extends Component {
         }
 
         if (Object.values(diceState).every(value => value !== undefined)) {
-            const jwt = localStorage.getItem('jwt');
             fetch(import.meta.env.VITE_API_URL + '/api/roll/dice', {
                 mode: 'cors',
                 method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${jwt}`,
-                    'Content-Type': 'application/json'
-                },
+                headers: getHeaders,
                 body: JSON.stringify(diceState)
             }).then(
                 response => {
@@ -81,7 +89,6 @@ export class RollTable extends Component {
 
     onClick_Simulate = () => {
         console.log(import.meta.env.VITE_API_URL + '/api/roll/dice/simulate');
-        const jwt = localStorage.getItem('jwt');
         const diceState = {
             d4: this.state.d4,
             d6: this.state.d6,
@@ -97,10 +104,7 @@ export class RollTable extends Component {
         if (Object.values(diceState).every(value => value !== undefined)) {
             fetch(import.meta.env.VITE_API_URL + '/api/roll/dice/simulate', {
                 method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${jwt}`,
-                    'Content-Type': 'application/json'
-                },
+                headers: getHeaders,
                 body: JSON.stringify(diceState)
             }).then(
                 response => {
