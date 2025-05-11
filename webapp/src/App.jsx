@@ -10,6 +10,7 @@ import {NewUserForm} from "./components/NewUserForm.jsx";
 import {CharacterCreationMenu} from "./components/CharacterCreationMenu.jsx";
 
 function App() {
+  console.log('VITE_API_URL:', import.meta.env.VITE_API_URL);
   const [count, setCount] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [dc, setDc] = useState(0);

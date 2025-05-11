@@ -107,8 +107,10 @@ builder.Services.AddCors(options =>
                 builder.WithOrigins(
                     "http://localhost:3000", 
                     "https://localhost:3000",
-                    "http://dnd.aaronic.cc",
-                    "https://dnd.aaronic.cc"
+                    "http://dnd.aaronic.cc:3000",
+                    "https://dnd.aaronic.cc:3000",
+		    "http://web:3000",
+		    "https://web:3000"
                     )
                     .AllowAnyHeader()
                     .AllowAnyMethod();
