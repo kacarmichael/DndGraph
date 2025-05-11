@@ -10,6 +10,6 @@ export default defineConfig({
       allowedHosts: ['web', 'localhost']
   },
   env: {
-    VITE_API_URL: 'http://localhost:5218'
+    VITE_API_URL: 'http://api:5218'
   }
 })
