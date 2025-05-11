@@ -6,7 +6,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
       port: 3000,
-      host: true
+      host: true,
+      allowedHosts: ['web', 'localhost']
   },
   env: {
     VITE_API_URL: 'http://localhost:5218'
