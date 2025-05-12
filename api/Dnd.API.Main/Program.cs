@@ -101,17 +101,22 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"))
 
 builder.Services.AddCors(options =>
     {
+        var origins = ["http://localhost:3000", "https://localhost:3000"];
+        switch (builder.Build()["Environment"])
+        {
+            case "Development":
+                origins = origins.Concat(["http://dnd-dev.aaronic.cc", "https://dnd-dev.aaronic.cc"]).ToArray();
+                break;
+            case "Production":
+                origins = origins.Concat(["https://dnd.aaronic.cc", "https://dnd-dev.aaronic.cc"]).ToArray();
+                break;
+            case _:
+                break;
+        }
         options.AddPolicy("HostWhitelist",
             builder =>
             {
-                builder.WithOrigins(
-                    "http://localhost:3000", 
-                    "https://localhost:3000",
-                    "http://dnd.aaronic.cc:3000",
-                    "https://dnd.aaronic.cc:3000",
-		    "http://web:3000",
-		    "https://web:3000"
-                    )
+                builder.WithOrigins(origins)
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                     //.AllowCredentials();
