@@ -5,6 +5,7 @@ using Dnd.Application.Caching;
 using Dnd.Application.Logging.Implementations;
 using Dnd.Application.Logging.Interfaces;
 using Dnd.Application.Main.Infrastructure;
+using Dnd.Application.Main.Infrastructure.Database;
 using Dnd.Application.Main.Models.Characters;
 using Dnd.Application.Main.Models.Characters.Stats;
 using Dnd.Application.Main.Models.Intermediate;
@@ -101,8 +102,8 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"))
 
 builder.Services.AddCors(options =>
     {
-        var origins = ["http://localhost:3000", "https://localhost:3000"];
-        switch (builder.Build()["Environment"])
+        string[] origins = ["http://localhost:3000", "https://localhost:3000"];
+        switch (AppConfigurationBuilder.Build(builder.Configuration)["Environment"])
         {
             case "Development":
                 origins = origins.Concat(["http://dnd-dev.aaronic.cc", "https://dnd-dev.aaronic.cc"]).ToArray();
@@ -110,13 +111,11 @@ builder.Services.AddCors(options =>
             case "Production":
                 origins = origins.Concat(["https://dnd.aaronic.cc", "https://dnd-dev.aaronic.cc"]).ToArray();
                 break;
-            case _:
-                break;
         }
         options.AddPolicy("HostWhitelist",
-            builder =>
+            b =>
             {
-                builder.WithOrigins(origins)
+                b.WithOrigins(origins)
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                     //.AllowCredentials();
@@ -270,6 +269,11 @@ try
     using (var scope = app.Services.CreateScope())
     {
         var dbContext = scope.ServiceProvider.GetService<DndDbContext>();
+        
+        if (dbContext is null)
+        {
+            throw new ArgumentNullException(nameof(dbContext));
+        }
 
         var user = new DomainUser(
             username: "TestUser",
@@ -278,7 +282,7 @@ try
 
         dbContext.Users.Add(user);
 
-        var stat_block = new CharacterStats(
+        var statBlock = new CharacterStats(
             id: 1,
             characterId: 1,
             level: 7,
@@ -297,19 +301,19 @@ try
                 characterId: 1,
                 levels: 1)
         };
-        var test_char = new Character(
+        var testChar = new Character(
             id: 1,
             name: "Theodred Venran",
-            stats: stat_block,
+            stats: statBlock,
             charClass: cc,
             userId: 1);
-        dbContext.Characters.Add(test_char);
-        dbContext.CharacterStats.Add(stat_block);
-        dbContext.CharacterClasses.AddRange(cc.Select(cc => (CharacterClass)cc));
+        dbContext.Characters.Add(testChar);
+        dbContext.CharacterStats.Add(statBlock);
+        dbContext.CharacterClasses.AddRange(cc.Select(cls => cls));
         dbContext.SaveChanges();
     }
 }
-catch (DbUpdateException e)
+catch (DbUpdateException)
 {
     Console.WriteLine("Seeded data already exists. Proceeding to startup");
 }

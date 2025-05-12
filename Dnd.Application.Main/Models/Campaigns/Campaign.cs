@@ -11,7 +11,8 @@ public class Campaign
 
     public string Name { get; set; }
 
-    [NotMapped] public virtual List<DomainUser> Players { get; set; }
+    [NotMapped] 
+    public virtual List<DomainUser> Players { get; set; }
 
     public int OwnerId { get; set; }
 
