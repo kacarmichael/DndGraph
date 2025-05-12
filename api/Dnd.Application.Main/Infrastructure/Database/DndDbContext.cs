@@ -7,7 +7,7 @@ using Dnd.Application.Main.Models.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace Dnd.Application.Main.Infrastructure;
+namespace Dnd.Application.Main.Infrastructure.Database;
 
 public class DndDbContext : DbContext
 {
