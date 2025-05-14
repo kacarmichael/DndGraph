@@ -34,3 +34,38 @@ body, html {
   margin: 0 auto;
   vertical-align: top;
 }
+
+.Title {
+  font-size: 84px;
+  font-weight: 700;
+}
+
+.ModeSelectorBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 100px;
+}
+
+.ModeSelectorButton {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.ModeSelectorButton.active {
+
+  background-color: #fff;
+  color: #333;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.ModeSelectorButton:hover {
+  background-color: #eee;
+  color: #333;
+}
+
