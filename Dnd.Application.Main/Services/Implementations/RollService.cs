@@ -87,7 +87,7 @@ public class RollService : IRollService
                 d20: req.D20,
                 d100: req.D100,
                 modifier: req.Modifier,
-                total: req.ToDiceSet().Roll());
+                total: req.ToDiceSet().Roll() + req.Modifier);
         }
 
         throw new ArgumentException();
