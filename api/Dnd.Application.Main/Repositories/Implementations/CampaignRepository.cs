@@ -1,4 +1,5 @@
 ﻿using Dnd.Application.Main.Infrastructure;
+using Dnd.Application.Main.Infrastructure.Database;
 using Dnd.Application.Main.Models.Campaigns;
 using Dnd.Application.Main.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
